@@ -46,7 +46,7 @@ public class Conexao {
             }
         return result;  
     }
-    
+    //comentario
      public void desconecta (){
         boolean result = true;
         try
