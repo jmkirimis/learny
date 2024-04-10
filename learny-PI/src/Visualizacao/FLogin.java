@@ -176,7 +176,7 @@ public class FLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
   
     private void btn_logarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logarActionPerformed
-        a.setUsuario(txt_usuario_entrar.getText());
+/*        a.setUsuario(txt_usuario_entrar.getText());
         a.setSenha(txt_senha_entrar.getText());
         if(a.logar().equals("logado")){
             new FInicio().setVisible(true);
@@ -184,6 +184,9 @@ public class FLogin extends javax.swing.JFrame {
         } else{
             JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos");
         }
+*/
+        new FInicio().setVisible(true);
+        dispose();
     }//GEN-LAST:event_btn_logarActionPerformed
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
