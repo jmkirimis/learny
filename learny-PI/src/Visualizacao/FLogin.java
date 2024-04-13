@@ -9,6 +9,7 @@ import Controle.Conexao;
 import Modelagem.Alunos;
 import java.awt.Color;
 import java.sql.*;
+import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -19,10 +20,10 @@ import javax.swing.table.DefaultTableModel;
  * @author João
  */
 public class FLogin extends javax.swing.JFrame {
-    
-    //Conexao conaluno = new Conexao();
-    //PreparedStatement pst = null;
-    //ResultSet rs = null;
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    Alunos a = new Alunos();
     
     Color vermelhoPastel = new Color(239,91,106);
     Color azulPastel = new Color(108,210,255);
@@ -34,8 +35,8 @@ public class FLogin extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         panelGradiente.addColor(new ModelColor(vermelhoPastel, 0f), new ModelColor(azulPastel, 1f));
+        conexao = Conexao.conecta();
     }
-    Alunos a = new Alunos();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -174,19 +175,26 @@ public class FLogin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-  
-    private void btn_logarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logarActionPerformed
-/*        a.setUsuario(txt_usuario_entrar.getText());
-        a.setSenha(txt_senha_entrar.getText());
-        if(a.logar().equals("logado")){
-            new FInicio().setVisible(true);
-            dispose();
-        } else{
-            JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos");
+    public void logar(){
+        String sql = "select * from alunos where usuario =? and senha =?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, txt_usuario_entrar.getText());
+            pst.setString(2, txt_senha_entrar.getText());
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                new FInicio().setVisible(true);
+                dispose();
+            } else{
+                JOptionPane.showMessageDialog(null,"usuário ou senha inválidos");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
         }
-*/
-        new FInicio().setVisible(true);
-        dispose();
+    }
+    private void btn_logarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logarActionPerformed
+        logar();
     }//GEN-LAST:event_btn_logarActionPerformed
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked

@@ -4,8 +4,6 @@ package Modelagem;
 import Controle.Conexao;
 import java.sql.*;
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Alunos {
@@ -16,7 +14,7 @@ public class Alunos {
     private String dataNasc;
     
     //importar classe conexao
-    Conexao conaluno = new Conexao();
+    Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
     
@@ -73,30 +71,27 @@ public class Alunos {
     public void setDataNasc(String dataNasc) {
         this.dataNasc = dataNasc;
     }
-    
+   
     public void cadastrar(){
+        conexao = Conexao.conecta();
         String sql;
         sql = "insert into alunos(nome, usuario, senha, email) values"
-                + "('" + getNome() + "', '" + getUsuario() + "', '" + getSenha() + "', '" + getEmail() + "')";
-        conaluno.executeSQL(sql);
-        JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-    }
-    
-     public String logar() {
-         
-        String sql = "select * from alunos where usuario = '"+ getUsuario() +"' and senha = '" + getSenha() + "' ";
-        rs = conaluno.RetornarResultset(sql);
+                + "(?,?,?,?)";
         try {
-            if(rs.next()){
-                return "logado";
-            }else{
-                return "invalido";
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, getNome());
+            pst.setString(2, getUsuario());
+            pst.setString(3, getSenha());
+            pst.setString(4, getEmail());
+            int linhasAfetadas = pst.executeUpdate();
+            
+            if (linhasAfetadas > 0) {
+                JOptionPane.showMessageDialog(null, "Dados inseridos com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Nenhum dado foi inserido.");
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
         }
-        
-        return "";
-     }
-    
+    }
 }

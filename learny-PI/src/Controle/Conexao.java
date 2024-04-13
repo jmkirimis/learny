@@ -19,18 +19,18 @@ import javax.swing.JOptionPane;
  */
 public class Conexao {
         
-    final private String driver = "com.mysql.jdbc.Driver";
+    static final String driver = "com.mysql.jdbc.Driver";
    
-    final private String url= "jdbc:mysql://127.0.0.1/learnybd";
+    static final String url= "jdbc:mysql://127.0.0.1/learnybd";
     
-    final private String usuario="root";
-    final private String senha="";
+    static final String usuario="root";
+    static final String senha="";
     private Connection conexao;// objeto que faz conexao com o banco
     public Statement statement;// objeto que abre caminho até o banco
     public ResultSet resultset;// objeto que armazena os comandos sql   
     
-    public boolean conecta() {  
-        boolean result = true;  
+    public static Connection conecta() {  
+        Connection conexao = null; 
   
         try {  
             Class.forName(driver);  
@@ -39,12 +39,11 @@ public class Conexao {
             
         } catch(ClassNotFoundException Driver){
                JOptionPane.showMessageDialog(null,"Driver nao localizado: "+Driver);
-               result = false;
+               return conexao;
         }catch(SQLException Fonte) {
                 JOptionPane.showMessageDialog(null,"Erro na conexão com a fonte de dados: "+Fonte);
-                result = false;
             }
-        return result;  
+        return conexao;  
     }
     //comentario
      public void desconecta (){
