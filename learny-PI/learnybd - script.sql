@@ -9,7 +9,8 @@ create table alunos(
     senha varchar(50),
     dataNasc date
 );
-
+select * from alunos;
+select * from alunos where usuario ="jao" and senha ="123";
 
 create table alunosXemails(
 	alunosEmailID int not null primary key,
