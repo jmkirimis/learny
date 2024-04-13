@@ -80,7 +80,7 @@ public class FPerfil extends javax.swing.JFrame {
 
         jButton7.setText("jButton1");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icone retornar.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon voltar.png"))); // NOI18N
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel3MouseClicked(evt);
