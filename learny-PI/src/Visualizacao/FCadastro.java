@@ -19,7 +19,6 @@ public class FCadastro extends javax.swing.JFrame {
     
     public FCadastro() {
         initComponents();
-        this.setLocationRelativeTo(null);
         panelGradiente.addColor(new ModelColor(vermelhoPastel, 0f), new ModelColor(azulPastel, 1f));
     }
     Alunos a = new Alunos();
@@ -174,6 +173,7 @@ public class FCadastro extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadastrarActionPerformed

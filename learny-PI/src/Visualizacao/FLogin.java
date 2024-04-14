@@ -33,7 +33,6 @@ public class FLogin extends javax.swing.JFrame {
      */
     public FLogin() {
         initComponents();
-        this.setLocationRelativeTo(null);
         panelGradiente.addColor(new ModelColor(vermelhoPastel, 0f), new ModelColor(azulPastel, 1f));
         conexao = Conexao.conecta();
     }
@@ -174,6 +173,7 @@ public class FLogin extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     public void logar(){
         String sql = "select * from alunos where usuario =? and senha =?";
@@ -184,7 +184,7 @@ public class FLogin extends javax.swing.JFrame {
             rs = pst.executeQuery();
             
             if(rs.next()){
-                new FInicio().setVisible(true);
+                new FHome().setVisible(true);
                 dispose();
             } else{
                 JOptionPane.showMessageDialog(null,"usuário ou senha inválidos");
