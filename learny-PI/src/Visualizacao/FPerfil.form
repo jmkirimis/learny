@@ -87,7 +87,7 @@
                   <Component id="panelRound5" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="panelRound6" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="115" max="32767" attributes="0"/>
+                  <EmptySpace pref="117" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
