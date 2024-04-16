@@ -57,6 +57,9 @@ public class FMundos extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         panelRound11 = new Visualizacao.PanelRound();
         jLabel11 = new javax.swing.JLabel();
+        panelSombra1 = new Visualizacao.PanelSombra();
+        panelSombra2 = new Visualizacao.PanelSombra();
+        panelSombra3 = new Visualizacao.PanelSombra();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -362,16 +365,71 @@ public class FMundos extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        panelSombra1.setBackground(new java.awt.Color(255, 255, 255));
+        panelSombra1.setShadowOpacity(0.3F);
+
+        javax.swing.GroupLayout panelSombra1Layout = new javax.swing.GroupLayout(panelSombra1);
+        panelSombra1.setLayout(panelSombra1Layout);
+        panelSombra1Layout.setHorizontalGroup(
+            panelSombra1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 135, Short.MAX_VALUE)
+        );
+        panelSombra1Layout.setVerticalGroup(
+            panelSombra1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+
+        panelSombra2.setBackground(new java.awt.Color(255, 255, 255));
+        panelSombra2.setShadowOpacity(0.3F);
+
+        javax.swing.GroupLayout panelSombra2Layout = new javax.swing.GroupLayout(panelSombra2);
+        panelSombra2.setLayout(panelSombra2Layout);
+        panelSombra2Layout.setHorizontalGroup(
+            panelSombra2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 135, Short.MAX_VALUE)
+        );
+        panelSombra2Layout.setVerticalGroup(
+            panelSombra2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+
+        panelSombra3.setBackground(new java.awt.Color(255, 255, 255));
+        panelSombra3.setShadowOpacity(0.3F);
+
+        javax.swing.GroupLayout panelSombra3Layout = new javax.swing.GroupLayout(panelSombra3);
+        panelSombra3.setLayout(panelSombra3Layout);
+        panelSombra3Layout.setHorizontalGroup(
+            panelSombra3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 135, Short.MAX_VALUE)
+        );
+        panelSombra3Layout.setVerticalGroup(
+            panelSombra3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout panelGradienteLayout = new javax.swing.GroupLayout(panelGradiente);
         panelGradiente.setLayout(panelGradienteLayout);
         panelGradienteLayout.setHorizontalGroup(
             panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelGradienteLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(panelSombra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(panelSombra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(panelSombra3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelGradienteLayout.setVerticalGroup(
             panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGradienteLayout.createSequentialGroup()
-                .addGap(0, 110, Short.MAX_VALUE)
+            .addGroup(panelGradienteLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelSombra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelSombra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelSombra3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -480,5 +538,8 @@ public class FMundos extends javax.swing.JFrame {
     private Visualizacao.PanelRound panelRound6;
     private Visualizacao.PanelRound panelRound8;
     private Visualizacao.PanelRound panelRound9;
+    private Visualizacao.PanelSombra panelSombra1;
+    private Visualizacao.PanelSombra panelSombra2;
+    private Visualizacao.PanelSombra panelSombra3;
     // End of variables declaration//GEN-END:variables
 }

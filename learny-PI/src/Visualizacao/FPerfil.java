@@ -31,6 +31,7 @@ public class FPerfil extends javax.swing.JFrame {
         panelRound1 = new Visualizacao.PanelRound();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         panelBtnPerfil1 = new Visualizacao.PanelBtnPerfil();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -46,7 +47,6 @@ public class FPerfil extends javax.swing.JFrame {
         panelBtnPerfil5 = new Visualizacao.PanelBtnPerfil();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         panelBtnPerfil6 = new Visualizacao.PanelBtnPerfil();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -78,12 +78,20 @@ public class FPerfil extends javax.swing.JFrame {
 
         jLabel2.setText("jLabel2");
 
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon voltar.png"))); // NOI18N
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel13MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel13MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel13MouseExited(evt);
+            }
+        });
+
         panelBtnPerfil1.setBackground(new java.awt.Color(255, 255, 255));
-        panelBtnPerfil1.setPreferredSize(new java.awt.Dimension(470, 91));
-        panelBtnPerfil1.setRoundBottomLeft(80);
-        panelBtnPerfil1.setRoundBottomRight(80);
-        panelBtnPerfil1.setRoundTopLeft(80);
-        panelBtnPerfil1.setRoundTopRight(80);
         panelBtnPerfil1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panelBtnPerfil1MouseEntered(evt);
@@ -112,21 +120,18 @@ public class FPerfil extends javax.swing.JFrame {
         );
         panelBtnPerfil1Layout.setVerticalGroup(
             panelBtnPerfil1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnPerfil1Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
+            .addGroup(panelBtnPerfil1Layout.createSequentialGroup()
                 .addGroup(panelBtnPerfil1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
                     .addGroup(panelBtnPerfil1Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel3))
+                    .addGroup(panelBtnPerfil1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
                         .addComponent(jLabel4)))
-                .addGap(20, 20, 20))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         panelBtnPerfil2.setBackground(new java.awt.Color(255, 255, 255));
-        panelBtnPerfil2.setRoundBottomLeft(80);
-        panelBtnPerfil2.setRoundBottomRight(80);
-        panelBtnPerfil2.setRoundTopLeft(80);
-        panelBtnPerfil2.setRoundTopRight(80);
         panelBtnPerfil2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panelBtnPerfil2MouseEntered(evt);
@@ -140,38 +145,33 @@ public class FPerfil extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel6.setText("Conexão Google");
+        jLabel6.setText("Conexao Google");
 
         javax.swing.GroupLayout panelBtnPerfil2Layout = new javax.swing.GroupLayout(panelBtnPerfil2);
         panelBtnPerfil2.setLayout(panelBtnPerfil2Layout);
         panelBtnPerfil2Layout.setHorizontalGroup(
             panelBtnPerfil2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBtnPerfil2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addContainerGap(173, Short.MAX_VALUE))
         );
         panelBtnPerfil2Layout.setVerticalGroup(
             panelBtnPerfil2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBtnPerfil2Layout.createSequentialGroup()
                 .addGroup(panelBtnPerfil2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBtnPerfil2Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel5))
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel6))
                     .addGroup(panelBtnPerfil2Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel6)))
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel5)))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
         panelBtnPerfil3.setBackground(new java.awt.Color(255, 255, 255));
-        panelBtnPerfil3.setPreferredSize(new java.awt.Dimension(234, 91));
-        panelBtnPerfil3.setRoundBottomLeft(80);
-        panelBtnPerfil3.setRoundBottomRight(80);
-        panelBtnPerfil3.setRoundTopLeft(80);
-        panelBtnPerfil3.setRoundTopRight(80);
         panelBtnPerfil3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panelBtnPerfil3MouseEntered(evt);
@@ -192,7 +192,7 @@ public class FPerfil extends javax.swing.JFrame {
         panelBtnPerfil3Layout.setHorizontalGroup(
             panelBtnPerfil3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBtnPerfil3Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
@@ -200,22 +200,18 @@ public class FPerfil extends javax.swing.JFrame {
         );
         panelBtnPerfil3Layout.setVerticalGroup(
             panelBtnPerfil3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnPerfil3Layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+            .addGroup(panelBtnPerfil3Layout.createSequentialGroup()
                 .addGroup(panelBtnPerfil3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
                     .addGroup(panelBtnPerfil3Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jLabel8)))
-                .addGap(23, 23, 23))
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel8))
+                    .addGroup(panelBtnPerfil3Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel7)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         panelBtnPerfil4.setBackground(new java.awt.Color(255, 255, 255));
-        panelBtnPerfil4.setPreferredSize(new java.awt.Dimension(228, 91));
-        panelBtnPerfil4.setRoundBottomLeft(80);
-        panelBtnPerfil4.setRoundBottomRight(80);
-        panelBtnPerfil4.setRoundTopLeft(80);
-        panelBtnPerfil4.setRoundTopRight(80);
         panelBtnPerfil4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panelBtnPerfil4MouseEntered(evt);
@@ -236,7 +232,7 @@ public class FPerfil extends javax.swing.JFrame {
         panelBtnPerfil4Layout.setHorizontalGroup(
             panelBtnPerfil4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBtnPerfil4Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel10)
@@ -247,27 +243,15 @@ public class FPerfil extends javax.swing.JFrame {
             .addGroup(panelBtnPerfil4Layout.createSequentialGroup()
                 .addGroup(panelBtnPerfil4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBtnPerfil4Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel9))
-                    .addGroup(panelBtnPerfil4Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addComponent(jLabel10)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                        .addComponent(jLabel10))
+                    .addGroup(panelBtnPerfil4Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel9)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         panelBtnPerfil5.setBackground(new java.awt.Color(255, 255, 255));
-        panelBtnPerfil5.setRoundBottomLeft(80);
-        panelBtnPerfil5.setRoundBottomRight(80);
-        panelBtnPerfil5.setRoundTopLeft(80);
-        panelBtnPerfil5.setRoundTopRight(80);
-        panelBtnPerfil5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panelBtnPerfil5MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                panelBtnPerfil5MouseExited(evt);
-            }
-        });
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon config.png"))); // NOI18N
 
@@ -280,7 +264,7 @@ public class FPerfil extends javax.swing.JFrame {
         panelBtnPerfil5Layout.setHorizontalGroup(
             panelBtnPerfil5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBtnPerfil5Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel11)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel12)
@@ -289,33 +273,17 @@ public class FPerfil extends javax.swing.JFrame {
         panelBtnPerfil5Layout.setVerticalGroup(
             panelBtnPerfil5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBtnPerfil5Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
                 .addGroup(panelBtnPerfil5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11)
                     .addGroup(panelBtnPerfil5Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jLabel12)))
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel12))
+                    .addGroup(panelBtnPerfil5Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel11)))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon voltar.png"))); // NOI18N
-        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel13MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel13MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel13MouseExited(evt);
-            }
-        });
-
         panelBtnPerfil6.setBackground(new java.awt.Color(255, 255, 255));
-        panelBtnPerfil6.setRoundBottomLeft(80);
-        panelBtnPerfil6.setRoundBottomRight(80);
-        panelBtnPerfil6.setRoundTopLeft(80);
-        panelBtnPerfil6.setRoundTopRight(80);
         panelBtnPerfil6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelBtnPerfil6MouseClicked(evt);
@@ -331,7 +299,7 @@ public class FPerfil extends javax.swing.JFrame {
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon sair.png"))); // NOI18N
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 102, 102));
+        jLabel15.setForeground(new java.awt.Color(102, 102, 102));
         jLabel15.setText("Sair");
 
         javax.swing.GroupLayout panelBtnPerfil6Layout = new javax.swing.GroupLayout(panelBtnPerfil6);
@@ -342,22 +310,17 @@ public class FPerfil extends javax.swing.JFrame {
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15)
-                .addGap(0, 30, Short.MAX_VALUE))
+                .addGap(0, 39, Short.MAX_VALUE))
         );
         panelBtnPerfil6Layout.setVerticalGroup(
             panelBtnPerfil6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jLabel14)
             .addGroup(panelBtnPerfil6Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jLabel15)
-                .addContainerGap())
+                .addComponent(jLabel15))
         );
 
         panelBtnPerfil7.setBackground(new java.awt.Color(255, 255, 255));
-        panelBtnPerfil7.setRoundBottomLeft(80);
-        panelBtnPerfil7.setRoundBottomRight(80);
-        panelBtnPerfil7.setRoundTopLeft(80);
-        panelBtnPerfil7.setRoundTopRight(80);
         panelBtnPerfil7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panelBtnPerfil7MouseEntered(evt);
@@ -370,7 +333,7 @@ public class FPerfil extends javax.swing.JFrame {
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon contato.png"))); // NOI18N
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(51, 204, 255));
+        jLabel17.setForeground(new java.awt.Color(102, 102, 102));
         jLabel17.setText("Contato");
 
         javax.swing.GroupLayout panelBtnPerfil7Layout = new javax.swing.GroupLayout(panelBtnPerfil7);
@@ -379,7 +342,7 @@ public class FPerfil extends javax.swing.JFrame {
             panelBtnPerfil7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBtnPerfil7Layout.createSequentialGroup()
                 .addComponent(jLabel16)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel17)
                 .addGap(0, 49, Short.MAX_VALUE))
         );
@@ -388,8 +351,10 @@ public class FPerfil extends javax.swing.JFrame {
             .addGroup(panelBtnPerfil7Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel17)
-                .addContainerGap(25, Short.MAX_VALUE))
-            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelBtnPerfil7Layout.createSequentialGroup()
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -398,33 +363,32 @@ public class FPerfil extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel13)
-                        .addGap(55, 55, 55))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(panelBtnPerfil4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-                            .addComponent(panelBtnPerfil3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-                            .addComponent(panelBtnPerfil2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelBtnPerfil1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-                            .addComponent(panelBtnPerfil5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(panelBtnPerfil6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(panelBtnPerfil7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                        .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel13))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(panelBtnPerfil2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelBtnPerfil3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelBtnPerfil4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelBtnPerfil5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelBtnPerfil1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(37, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(64, Short.MAX_VALUE)
+                .addComponent(panelBtnPerfil6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panelBtnPerfil7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -448,11 +412,11 @@ public class FPerfil extends javax.swing.JFrame {
                 .addComponent(panelBtnPerfil4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelBtnPerfil5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(panelBtnPerfil6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelBtnPerfil7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -470,23 +434,10 @@ public class FPerfil extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void panelBtnPerfil6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnPerfil6MouseClicked
-        new FLogin().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_panelBtnPerfil6MouseClicked
-
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
         new FHome().setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel13MouseClicked
-
-    private void panelBtnPerfil1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnPerfil1MouseEntered
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_panelBtnPerfil1MouseEntered
-
-    private void panelBtnPerfil1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnPerfil1MouseExited
-        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_panelBtnPerfil1MouseExited
 
     private void jLabel13MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseEntered
         setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -495,6 +446,19 @@ public class FPerfil extends javax.swing.JFrame {
     private void jLabel13MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseExited
         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_jLabel13MouseExited
+
+    private void panelBtnPerfil6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnPerfil6MouseClicked
+        new FLogin().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_panelBtnPerfil6MouseClicked
+
+    private void panelBtnPerfil1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnPerfil1MouseEntered
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_panelBtnPerfil1MouseEntered
+
+    private void panelBtnPerfil1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnPerfil1MouseExited
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_panelBtnPerfil1MouseExited
 
     private void panelBtnPerfil2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnPerfil2MouseEntered
         setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -519,14 +483,6 @@ public class FPerfil extends javax.swing.JFrame {
     private void panelBtnPerfil4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnPerfil4MouseExited
         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_panelBtnPerfil4MouseExited
-
-    private void panelBtnPerfil5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnPerfil5MouseEntered
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_panelBtnPerfil5MouseEntered
-
-    private void panelBtnPerfil5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnPerfil5MouseExited
-        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_panelBtnPerfil5MouseExited
 
     private void panelBtnPerfil6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnPerfil6MouseEntered
         setCursor(new Cursor(Cursor.HAND_CURSOR));

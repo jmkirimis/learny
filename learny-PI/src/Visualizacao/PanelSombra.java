@@ -5,11 +5,15 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 import java.awt.image.BufferedImage;
 import java.awt.Color;
 
-public class PanelBtnPerfil extends JPanel {
+public class PanelSombra extends JPanel {
     
+    //imagem
+    private ImageIcon img;
+
     //sombra
      public ShadowType getShadowType() {
         return shadowType;
@@ -48,17 +52,17 @@ public class PanelBtnPerfil extends JPanel {
     private float shadowOpacity = 0.5f;
     private Color shadowColor = Color.BLACK;
     
-
-    public PanelBtnPerfil() {
+    public PanelSombra() {
         setOpaque(false);
+        img = new ImageIcon();
     }
 
     @Override
     protected void paintComponent(Graphics grphcs) {
         createShadow(grphcs); // sombra
         super.paintComponent(grphcs);  
+        grphcs.drawImage(img.getImage(), 0, 0, this.getWidth(), this.getHeight(), this); // imagem
     }
-
     // sombra
     private void createShadow(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
@@ -94,11 +98,20 @@ public class PanelBtnPerfil extends JPanel {
         Graphics2D g = img.createGraphics();
         g.setColor(getBackground());
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g.fillRoundRect(0, 0, width, height, 70, 70);
+        g.fillRoundRect(0, 0, width, height, 30, 30);
         //g.fillOval(0, 0, width, width);
         //  Create Shadow
         ShadowRenderer render = new ShadowRenderer(shadowSize, shadowOpacity, shadowColor);
         g2.drawImage(render.createShadow(img), 0, 0, null);
         g2.drawImage(img, x, y, null);
+    }
+    
+    // imagem
+    public void setImg(ImageIcon img){
+        this.img = img;
+    }
+    
+    public ImageIcon getImg(){
+        return this.img;
     }
 }
