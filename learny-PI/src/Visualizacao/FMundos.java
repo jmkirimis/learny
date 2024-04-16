@@ -218,6 +218,11 @@ public class FMundos extends javax.swing.JFrame {
         panelRound8.setRoundBottomRight(100);
         panelRound8.setRoundTopLeft(100);
         panelRound8.setRoundTopRight(100);
+        panelRound8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelRound8MouseClicked(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -479,6 +484,11 @@ public class FMundos extends javax.swing.JFrame {
     private void jLabel8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseExited
         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_jLabel8MouseExited
+
+    private void panelRound8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound8MouseClicked
+        new FFase().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_panelRound8MouseClicked
 
     /**
      * @param args the command line arguments
