@@ -5,6 +5,7 @@
  */
 package Visualizacao;
 
+import Modelagem.AlunoLogado;
 import java.awt.Color;
 import java.awt.Cursor;
 
@@ -14,8 +15,11 @@ import java.awt.Cursor;
  */
 public class FPerfil extends javax.swing.JFrame {
 
+    AlunoLogado alunlog = new AlunoLogado();
+    
     public FPerfil() {
         initComponents();
+        lbl_nome_perfil.setText(alunlog.getNome());
     }
 
     /**
@@ -29,7 +33,7 @@ public class FPerfil extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         panelRound1 = new Visualizacao.PanelRound();
-        jLabel1 = new javax.swing.JLabel();
+        lbl_nome_perfil = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         panelBtnPerfil1 = new Visualizacao.PanelBtnPerfil();
@@ -74,9 +78,13 @@ public class FPerfil extends javax.swing.JFrame {
             .addGap(0, 140, Short.MAX_VALUE)
         );
 
-        jLabel1.setText("jLabel1");
+        lbl_nome_perfil.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_nome_perfil.setForeground(new java.awt.Color(102, 102, 102));
+        lbl_nome_perfil.setText("Nome");
 
-        jLabel2.setText("jLabel2");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel2.setText("Idade");
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon voltar.png"))); // NOI18N
         jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -368,14 +376,14 @@ public class FPerfil extends javax.swing.JFrame {
                         .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel13))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel13))))
+                                    .addComponent(lbl_nome_perfil))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(panelBtnPerfil2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(panelBtnPerfil3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -398,8 +406,8 @@ public class FPerfil extends javax.swing.JFrame {
                     .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel13)
-                        .addGap(9, 9, 9)
-                        .addComponent(jLabel1)
+                        .addGap(3, 3, 3)
+                        .addComponent(lbl_nome_perfil)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)))
                 .addGap(18, 18, 18)
@@ -536,7 +544,6 @@ public class FPerfil extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -554,6 +561,7 @@ public class FPerfil extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbl_nome_perfil;
     private Visualizacao.PanelBtnPerfil panelBtnPerfil1;
     private Visualizacao.PanelBtnPerfil panelBtnPerfil2;
     private Visualizacao.PanelBtnPerfil panelBtnPerfil3;

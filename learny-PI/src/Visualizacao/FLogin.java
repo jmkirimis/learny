@@ -195,8 +195,6 @@ public class FLogin extends javax.swing.JFrame {
             
             if(rs.next()){
                 alunlog.setNome((String) rs.getObject(2));
-                alunlog.setUsuario((String) rs.getObject(3));
-                alunlog.setEmail((String) rs.getObject(5));
                 System.out.println("Nome:" + alunlog.getNome());
                 new FMundos().setVisible(true);
                 dispose();
