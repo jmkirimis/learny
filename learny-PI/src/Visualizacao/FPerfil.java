@@ -5,9 +5,14 @@
  */
 package Visualizacao;
 
+import Controle.Conexao;
 import Modelagem.AlunoLogado;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,11 +20,28 @@ import java.awt.Cursor;
  */
 public class FPerfil extends javax.swing.JFrame {
 
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
     AlunoLogado alunlog = new AlunoLogado();
     
     public FPerfil() {
         initComponents();
-        lbl_nome_perfil.setText(alunlog.getNome());
+        conexao = Conexao.conecta();
+        String sql = "select * from alunoLogado where idAluno = 1";
+        try {
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                String nome = rs.getString(2);
+                int idade = Integer.parseInt(rs.getString(7));
+                lbl_nome_perfil.setText(nome);
+                lbl_idade_perfil.setText(Integer.toString(idade));
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
     }
 
     /**
@@ -34,7 +56,7 @@ public class FPerfil extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         panelRound1 = new Visualizacao.PanelRound();
         lbl_nome_perfil = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lbl_idade_perfil = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         panelBtnPerfil1 = new Visualizacao.PanelBtnPerfil();
         jLabel3 = new javax.swing.JLabel();
@@ -57,6 +79,7 @@ public class FPerfil extends javax.swing.JFrame {
         panelBtnPerfil7 = new Visualizacao.PanelBtnPerfil();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        lbl_anos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,9 +105,9 @@ public class FPerfil extends javax.swing.JFrame {
         lbl_nome_perfil.setForeground(new java.awt.Color(102, 102, 102));
         lbl_nome_perfil.setText("Nome");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel2.setText("Idade");
+        lbl_idade_perfil.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_idade_perfil.setForeground(new java.awt.Color(102, 102, 102));
+        lbl_idade_perfil.setText("Idade");
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon voltar.png"))); // NOI18N
         jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -365,6 +388,10 @@ public class FPerfil extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        lbl_anos.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_anos.setForeground(new java.awt.Color(102, 102, 102));
+        lbl_anos.setText("anos");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -380,9 +407,12 @@ public class FPerfil extends javax.swing.JFrame {
                                 .addComponent(jLabel13))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(43, 43, 43)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(lbl_nome_perfil))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_nome_perfil)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lbl_idade_perfil)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbl_anos)))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(panelBtnPerfil2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -409,7 +439,9 @@ public class FPerfil extends javax.swing.JFrame {
                         .addGap(3, 3, 3)
                         .addComponent(lbl_nome_perfil)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel2)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_idade_perfil)
+                            .addComponent(lbl_anos))))
                 .addGap(18, 18, 18)
                 .addComponent(panelBtnPerfil1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -552,7 +584,6 @@ public class FPerfil extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -561,6 +592,8 @@ public class FPerfil extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbl_anos;
+    private javax.swing.JLabel lbl_idade_perfil;
     private javax.swing.JLabel lbl_nome_perfil;
     private Visualizacao.PanelBtnPerfil panelBtnPerfil1;
     private Visualizacao.PanelBtnPerfil panelBtnPerfil2;

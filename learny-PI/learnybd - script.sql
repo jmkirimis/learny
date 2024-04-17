@@ -10,7 +10,18 @@ create table alunos(
     dataNasc date
 );
 insert into alunos(nome, email, usuario, senha, dataNasc) values
-("João Marcos", "joao.kirimis@gmail.com", "joao", "123", "2004-03-11");
+("Joao Marcos", "joao.kirimis@gmail.com", "joao", "123", "2004-03-11");
+ALTER TABLE alunos ADD COLUMN idade INT AS (TIMESTAMPDIFF(YEAR, dataNasc, CURDATE()));
+
+create table alunoLogado(
+	idAluno int auto_increment primary key,
+    nome varchar(50),
+    email varchar(100),
+    usuario varchar(50),
+    senha varchar(50),
+    dataNasc date,
+    idade int
+);
 
 create table mundos(
 	idMundo int auto_increment primary key,

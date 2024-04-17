@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Visualizacao;
-
+import java.awt.Color;
 /**
  *
  * @author fatec-dsm2

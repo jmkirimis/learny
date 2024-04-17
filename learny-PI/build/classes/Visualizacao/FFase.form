@@ -107,29 +107,29 @@
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="123" pref="123" max="-2" attributes="0"/>
+                          <Component id="lbl_cobra_dir" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lbl_cavalo" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_cavalo_dir" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="62" pref="62" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lbl_passaro" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_passaro_dir" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lbl_macaco_dir" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_macaco" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
                           <Component id="panelSombra2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                           <Component id="lbl_cobra" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="123" pref="123" max="-2" attributes="0"/>
-                          <Component id="lbl_cobra_dir" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbl_cavalo" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbl_cavalo_dir" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="62" pref="62" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbl_passaro" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbl_passaro_dir" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbl_macaco_dir" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbl_macaco" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="55" max="32767" attributes="0"/>
                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
