@@ -55,13 +55,13 @@ create table fasesConcluidas(
 	idFaseConcluida int auto_increment primary key,
     idFase int not null,
     idAluno int not null,
-    dataConclusao date,
-    pontos real(8,2)
+    pontos real(8,2),
+    tempoConclusao time,
+    porcentagemAcertos real(8,2)
 );
 alter table fasesConcluidas add constraint fk_fase foreign key(idFase) references fases(idFase);
 alter table fasesConcluidas add constraint fk_aluno_fase_concluida foreign key(idFase) references alunos(idAluno);
-insert into fasesConcluidas(idFase, idAluno, dataConclusao, pontos) values
-(1, 1, "2024-04-15", 10);
+select * from fasesConcluidas;
 
 create table conquistas(
 	idConquista int auto_increment primary key,

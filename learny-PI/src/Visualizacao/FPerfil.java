@@ -475,7 +475,7 @@ public class FPerfil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
-        new FHome().setVisible(true);
+        new FMundos().setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel13MouseClicked
 

@@ -5,6 +5,8 @@
  */
 package Visualizacao;
 
+import Controle.Conexao;
+import Modelagem.FaseConcluida;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -14,6 +16,9 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 
 /**
@@ -25,6 +30,10 @@ public class FFase extends javax.swing.JFrame {
     /**
      * Creates new form FFase
      */
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    
     Color minhaNovaCor = new Color(83, 194, 242);
     //icone cobra
     Icon iconCobraClick = new ImageIcon("src/Imagens/cobra-click.png");
@@ -54,15 +63,37 @@ public class FFase extends javax.swing.JFrame {
     private String macacoAcerto;
     
     private Timer timer;
+    private int minutes;
+    private int remainingSeconds;
     
-    
+    private int acertos;
+    private int idAluno;
+     
     public FFase() {
         this.cobraAcerto = "";
         this.cavaloAcerto = "";
         this.passaroAcerto = "";
         this.macacoAcerto = "";
         
+        this.acertos = 0;
+        
         initComponents();
+        
+        //faz a conexao com o banco
+        conexao = Conexao.conecta();
+        
+        //pega o id do aluno
+        String sql = "select * from alunoLogado where idAluno = 1";
+        try {
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                int idAluno = Integer.parseInt(rs.getString(1));
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
         
         // Adiciona um ouvinte de eventos ao rótulo lbl_cobra
         lbl_cobra.addMouseListener(new MouseAdapter() {
@@ -240,7 +271,10 @@ public class FFase extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 seconds++;
-                System.out.println("O JFrame está aberto há " + seconds + " segundos.");
+                minutes = seconds / 60;
+                remainingSeconds = seconds % 60;
+            
+                System.out.println("O JFrame está aberto há " + minutes + " minutos e " + remainingSeconds + " segundos.");
             }
         });
         
@@ -465,8 +499,31 @@ public class FFase extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jLabel2MouseClicked
 
+    FaseConcluida fase = new FaseConcluida();
+    
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        System.out.println(cobraAcerto);
+        if(cobraAcerto == "ok"){
+            acertos++;
+        }
+        if(cavaloAcerto == "ok"){
+            acertos++;
+        }
+        if(passaroAcerto == "ok"){
+            acertos++;
+        }
+        if(macacoAcerto == "ok"){
+            acertos++;
+        }
+        
+        double porcAcerto;
+        porcAcerto = ((double)acertos/4)*100;
+        
+        fase.setIdFase(1);
+        fase.setIdAluno(idAluno);
+        fase.setPontos(100);
+        fase.setTempoConclusao(minutes,remainingSeconds);
+        fase.setPorcAcertos(porcAcerto);
+        fase.cadastrar();
         new FFaseConcluida().setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
