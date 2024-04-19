@@ -300,7 +300,7 @@ public class FFaseConcluida extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        new FMundos().setVisible(true);
+        new FRegiao().setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel3MouseClicked
 

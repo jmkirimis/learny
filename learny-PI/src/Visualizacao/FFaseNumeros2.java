@@ -356,7 +356,7 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        new FMundos().setVisible(true);
+        new FRegiao().setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel2MouseClicked
 

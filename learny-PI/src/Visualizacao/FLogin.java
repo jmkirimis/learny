@@ -204,7 +204,7 @@ public class FLogin extends javax.swing.JFrame {
                 alunlog.setPontosTotais(rs.getDouble(8));
                 alunlog.setFasesConcluidas(rs.getInt(9));
                 alunlog.cadastrarLogin();
-                new FMundos().setVisible(true);
+                new FRegiao().setVisible(true);
                 dispose();
             } else{
                 JOptionPane.showMessageDialog(null,"usuário ou senha inválidos");
