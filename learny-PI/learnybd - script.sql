@@ -1,27 +1,35 @@
 create database learnybd;
+#drop database learnybd;
 use learnybd;
 
 create table alunos(
 	idAluno int auto_increment primary key,
     nome varchar(50),
-    email varchar(100),
     usuario varchar(50),
     senha varchar(50),
-    dataNasc date
+    email varchar(100),
+    dataNasc date,
+    idade INT AS (TIMESTAMPDIFF(YEAR, dataNasc, CURDATE())),
+    pontosTotais real(8,2),
+    fasesConcluidas int
 );
-insert into alunos(nome, email, usuario, senha, dataNasc) values
-("Joao Marcos", "joao.kirimis@gmail.com", "joao", "123", "2004-03-11");
-ALTER TABLE alunos ADD COLUMN idade INT AS (TIMESTAMPDIFF(YEAR, dataNasc, CURDATE()));
+insert into alunos(nome, email, usuario, senha, dataNasc, pontosTotais, fasesConcluidas) values
+("Joao Marcos", "joao.kirimis@gmail.com", "joao", "123", "2004-03-11", 0, 0);
+#select * from alunos;
 
 create table alunoLogado(
-	idAluno int auto_increment primary key,
+	idAlunoLogado int primary key,
+	idAluno int not null,
     nome varchar(50),
-    email varchar(100),
     usuario varchar(50),
     senha varchar(50),
+    email varchar(100),
     dataNasc date,
-    idade int
+    idade int,
+    pontosTotais real(8,2),
+    fasesConcluidas int
 );
+#select * from alunoLogado;
 
 create table mundos(
 	idMundo int auto_increment primary key,
@@ -55,13 +63,13 @@ create table fasesConcluidas(
 	idFaseConcluida int auto_increment primary key,
     idFase int not null,
     idAluno int not null,
-    pontos real(8,2),
+    pontos double(8,2),
     tempoConclusao time,
     porcentagemAcertos real(8,2)
 );
 alter table fasesConcluidas add constraint fk_fase foreign key(idFase) references fases(idFase);
-alter table fasesConcluidas add constraint fk_aluno_fase_concluida foreign key(idFase) references alunos(idAluno);
-select * from fasesConcluidas;
+alter table fasesConcluidas add constraint fk_aluno_fase_concluida foreign key(idAluno) references alunos(idAluno);
+#select * from fasesConcluidas;
 
 create table conquistas(
 	idConquista int auto_increment primary key,
@@ -79,6 +87,77 @@ alter table alunosXconquistas add constraint fk_conquista foreign key(idConquist
 alter table alunosXconquistas add constraint fk_aluno_conquista foreign key(idAluno) references alunos(idAluno);
 insert into alunosXconquistas(idConquista, idAluno) values
 (1,1);
+
+
+-- Criação do trigger para atualizar o número de fases concluídas
+DELIMITER //
+
+CREATE TRIGGER atualiza_num_fases_concluidas
+AFTER INSERT ON fasesConcluidas
+FOR EACH ROW
+BEGIN
+    UPDATE alunos
+    SET fasesConcluidas = (
+        SELECT COUNT(*) 
+        FROM fasesConcluidas 
+        WHERE idAluno = NEW.idAluno
+    )
+    WHERE idAluno = NEW.idAluno;
+END;
+//
+
+DELIMITER ;
+
+
+-- Criação do trigger para atualizar o número de pontos
+DELIMITER //
+
+CREATE TRIGGER atualiza_pontos
+AFTER INSERT ON fasesConcluidas
+FOR EACH ROW
+BEGIN
+    UPDATE alunos
+    SET pontosTotais = pontosTotais + NEW.pontos
+    WHERE idAluno = NEW.idAluno;
+END;
+//
+
+DELIMITER ;
+
+-- Criação do trigger para atualizar o número de fases concluídas no aluno logado
+DELIMITER //
+
+CREATE TRIGGER atualiza_fases_aluno_logado
+AFTER INSERT ON fasesConcluidas
+FOR EACH ROW
+BEGIN
+    UPDATE alunoLogado
+    SET fasesConcluidas = (
+        SELECT COUNT(*) 
+        FROM fasesConcluidas 
+        WHERE idAluno = NEW.idAluno
+    )
+    WHERE idAluno = NEW.idAluno;
+END;
+//
+
+DELIMITER ;
+
+
+-- Criação do trigger para atualizar o número de pontos no aluno logado
+DELIMITER //
+
+CREATE TRIGGER atualiza_pontos_aluno_logado
+AFTER INSERT ON fasesConcluidas
+FOR EACH ROW
+BEGIN
+    UPDATE alunoLogado
+    SET pontosTotais = pontosTotais + NEW.pontos
+    WHERE idAluno = NEW.idAluno;
+END;
+//
+
+DELIMITER ;
 
 
 

@@ -4,7 +4,15 @@
  * and open the template in the editor.
  */
 package Visualizacao;
+import Controle.Conexao;
+import Modelagem.AlunoLogado;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 /**
  *
  * @author fatec-dsm2
@@ -14,8 +22,53 @@ public class FFaseConcluida extends javax.swing.JFrame {
     /**
      * Creates new form FFaseConcluida
      */
+    
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    AlunoLogado alunlog = new AlunoLogado();
+    
+    int idAluno;
+    
     public FFaseConcluida() {
         initComponents();
+        
+        conexao = Conexao.conecta();
+        String sql = "select * from alunoLogado where idAlunoLogado = 1";
+        try {
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                this.idAluno = rs.getInt(2);
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+        
+        String sql2 = "select * from fasesConcluidas where idAluno = ? order by idFaseConcluida desc limit 1";
+        try {
+            pst = conexao.prepareStatement(sql2);
+            pst.setInt(1, idAluno);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                double pontos = rs.getDouble(4);
+                Time time = rs.getTime(5);
+                double porcAcertos = rs.getDouble(6);
+        
+                lbl_pontos.setText(Double.toString(pontos));
+                lbl_porc.setText(Double.toString(porcAcertos));
+
+                // Formatando o valor de tempo
+                SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
+                String tempoFormatado = sdf.format(time);
+
+                lbl_tempo.setText(tempoFormatado);
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
     }
 
     /**
@@ -33,15 +86,15 @@ public class FFaseConcluida extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lbl_pontos = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        lbl_porc = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        lbl_tempo = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -68,9 +121,9 @@ public class FFaseConcluida extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(0, 204, 51));
         jLabel4.setText("Total de");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel5.setText("100");
+        lbl_pontos.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lbl_pontos.setForeground(new java.awt.Color(102, 102, 102));
+        lbl_pontos.setText("100");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 204, 51));
@@ -85,7 +138,7 @@ public class FFaseConcluida extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jLabel5))
+                        .addComponent(lbl_pontos))
                     .addComponent(jLabel10)
                     .addComponent(jLabel4))
                 .addGap(25, 25, 25))
@@ -98,7 +151,7 @@ public class FFaseConcluida extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5)
+                .addComponent(lbl_pontos)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -109,9 +162,9 @@ public class FFaseConcluida extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(102, 204, 255));
         jLabel11.setText("Porcentagem");
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel12.setText("83%");
+        lbl_porc.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lbl_porc.setForeground(new java.awt.Color(102, 102, 102));
+        lbl_porc.setText("83%");
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(102, 204, 255));
@@ -131,7 +184,7 @@ public class FFaseConcluida extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addComponent(jLabel12)
+                .addComponent(lbl_porc)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -142,7 +195,7 @@ public class FFaseConcluida extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel12)
+                .addComponent(lbl_porc)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -153,9 +206,9 @@ public class FFaseConcluida extends javax.swing.JFrame {
         jLabel14.setForeground(new java.awt.Color(255, 204, 0));
         jLabel14.setText("Tempo de");
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel15.setText("1:50");
+        lbl_tempo.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lbl_tempo.setForeground(new java.awt.Color(102, 102, 102));
+        lbl_tempo.setText("1:50");
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 204, 0));
@@ -173,7 +226,7 @@ public class FFaseConcluida extends javax.swing.JFrame {
                 .addGap(25, 25, 25))
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addComponent(jLabel15)
+                .addComponent(lbl_tempo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -184,7 +237,7 @@ public class FFaseConcluida extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel15)
+                .addComponent(lbl_tempo)
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -290,18 +343,18 @@ public class FFaseConcluida extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JLabel lbl_pontos;
+    private javax.swing.JLabel lbl_porc;
+    private javax.swing.JLabel lbl_tempo;
     // End of variables declaration//GEN-END:variables
 }

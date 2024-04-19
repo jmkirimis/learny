@@ -5,10 +5,15 @@
  */
 package Visualizacao;
 
+import Controle.Conexao;
 import Modelagem.AlunoLogado;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +21,9 @@ import javax.swing.ImageIcon;
  */
 public class FMundos extends javax.swing.JFrame {
     
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
     Color vermelhoPastel = new Color(239,91,106);
     Color azulPastel = new Color(108,210,255);
     AlunoLogado alunlog = new AlunoLogado();
@@ -25,6 +33,21 @@ public class FMundos extends javax.swing.JFrame {
     public FMundos() {
         initComponents();
         panelGradiente.addColor(new ModelColor(vermelhoPastel, 0f), new ModelColor(azulPastel, 1f));
+        conexao = Conexao.conecta();
+        String sql = "select * from alunoLogado where idAlunoLogado = 1";
+        try {
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                double pontos = rs.getDouble(9);
+                int fasesConcluidas = rs.getInt(10);
+                lbl_pontos.setText(Double.toString(pontos));
+                lbl_fases_concluidas.setText(Integer.toString(fasesConcluidas));
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
     }
 
     /**
@@ -58,7 +81,9 @@ public class FMundos extends javax.swing.JFrame {
         panelRound11 = new Visualizacao.PanelRound();
         jLabel11 = new javax.swing.JLabel();
         panelSombra1 = new Visualizacao.PanelSombra();
+        lbl_pontos = new javax.swing.JLabel();
         panelSombra2 = new Visualizacao.PanelSombra();
+        lbl_fases_concluidas = new javax.swing.JLabel();
         panelSombra3 = new Visualizacao.PanelSombra();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -191,6 +216,11 @@ public class FMundos extends javax.swing.JFrame {
         panelRound6.setRoundBottomRight(100);
         panelRound6.setRoundTopLeft(100);
         panelRound6.setRoundTopRight(100);
+        panelRound6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelRound6MouseClicked(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -373,29 +403,47 @@ public class FMundos extends javax.swing.JFrame {
         panelSombra1.setBackground(new java.awt.Color(255, 255, 255));
         panelSombra1.setShadowOpacity(0.3F);
 
+        lbl_pontos.setForeground(new java.awt.Color(51, 51, 51));
+        lbl_pontos.setText("pontos");
+
         javax.swing.GroupLayout panelSombra1Layout = new javax.swing.GroupLayout(panelSombra1);
         panelSombra1.setLayout(panelSombra1Layout);
         panelSombra1Layout.setHorizontalGroup(
             panelSombra1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 135, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSombra1Layout.createSequentialGroup()
+                .addContainerGap(51, Short.MAX_VALUE)
+                .addComponent(lbl_pontos)
+                .addGap(44, 44, 44))
         );
         panelSombra1Layout.setVerticalGroup(
             panelSombra1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
+            .addGroup(panelSombra1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(lbl_pontos)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         panelSombra2.setBackground(new java.awt.Color(255, 255, 255));
         panelSombra2.setShadowOpacity(0.3F);
 
+        lbl_fases_concluidas.setForeground(new java.awt.Color(51, 51, 51));
+        lbl_fases_concluidas.setText("fases");
+
         javax.swing.GroupLayout panelSombra2Layout = new javax.swing.GroupLayout(panelSombra2);
         panelSombra2.setLayout(panelSombra2Layout);
         panelSombra2Layout.setHorizontalGroup(
             panelSombra2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 135, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSombra2Layout.createSequentialGroup()
+                .addContainerGap(52, Short.MAX_VALUE)
+                .addComponent(lbl_fases_concluidas)
+                .addGap(50, 50, 50))
         );
         panelSombra2Layout.setVerticalGroup(
             panelSombra2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSombra2Layout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addComponent(lbl_fases_concluidas)
+                .addGap(22, 22, 22))
         );
 
         panelSombra3.setBackground(new java.awt.Color(255, 255, 255));
@@ -405,7 +453,7 @@ public class FMundos extends javax.swing.JFrame {
         panelSombra3.setLayout(panelSombra3Layout);
         panelSombra3Layout.setHorizontalGroup(
             panelSombra3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 135, Short.MAX_VALUE)
+            .addGap(0, 128, Short.MAX_VALUE)
         );
         panelSombra3Layout.setVerticalGroup(
             panelSombra3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -418,11 +466,11 @@ public class FMundos extends javax.swing.JFrame {
             panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panelGradienteLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(51, 51, 51)
                 .addComponent(panelSombra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(panelSombra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(30, 30, 30)
                 .addComponent(panelSombra3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -486,9 +534,14 @@ public class FMundos extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel8MouseExited
 
     private void panelRound8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound8MouseClicked
-        new FFase().setVisible(true);
+        new FFaseLigar().setVisible(true);
         dispose();
     }//GEN-LAST:event_panelRound8MouseClicked
+
+    private void panelRound6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound6MouseClicked
+        new FFaseObservacao().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_panelRound6MouseClicked
 
     /**
      * @param args the command line arguments
@@ -540,6 +593,8 @@ public class FMundos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lbl_fases_concluidas;
+    private javax.swing.JLabel lbl_pontos;
     private Visualizacao.PanelGradiente panelGradiente;
     private Visualizacao.PanelRound panelRound1;
     private Visualizacao.PanelRound panelRound10;

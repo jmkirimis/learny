@@ -28,13 +28,13 @@ public class FPerfil extends javax.swing.JFrame {
     public FPerfil() {
         initComponents();
         conexao = Conexao.conecta();
-        String sql = "select * from alunoLogado where idAluno = 1";
+        String sql = "select * from alunoLogado where idAlunoLogado = 1";
         try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
             if (rs.next()) {
-                String nome = rs.getString(2);
-                int idade = Integer.parseInt(rs.getString(7));
+                String nome = rs.getString(3);
+                int idade = rs.getInt(8);
                 lbl_nome_perfil.setText(nome);
                 lbl_idade_perfil.setText(Integer.toString(idade));
             }
@@ -244,6 +244,9 @@ public class FPerfil extends javax.swing.JFrame {
 
         panelBtnPerfil4.setBackground(new java.awt.Color(255, 255, 255));
         panelBtnPerfil4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelBtnPerfil4MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panelBtnPerfil4MouseEntered(evt);
             }
@@ -488,6 +491,7 @@ public class FPerfil extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel13MouseExited
 
     private void panelBtnPerfil6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnPerfil6MouseClicked
+        alunlog.fecharLogin();
         new FLogin().setVisible(true);
         dispose();
     }//GEN-LAST:event_panelBtnPerfil6MouseClicked
@@ -539,6 +543,11 @@ public class FPerfil extends javax.swing.JFrame {
     private void panelBtnPerfil7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnPerfil7MouseExited
         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_panelBtnPerfil7MouseExited
+
+    private void panelBtnPerfil4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnPerfil4MouseClicked
+        new FEditarPerfil().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_panelBtnPerfil4MouseClicked
 
     /**
      * @param args the command line arguments

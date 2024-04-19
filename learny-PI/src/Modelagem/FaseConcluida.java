@@ -111,7 +111,8 @@ public class FaseConcluida {
             pst.executeUpdate();
            
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
+            e.printStackTrace(); // Isso imprimirá o stack trace completo do erro
+            JOptionPane.showMessageDialog(null,"Erro ao cadastrar: " + e.getMessage());
         }
     }
     

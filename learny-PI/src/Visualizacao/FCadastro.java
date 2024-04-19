@@ -7,6 +7,10 @@ package Visualizacao;
 
 import Modelagem.Alunos;
 import java.awt.Color;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -181,10 +185,24 @@ public class FCadastro extends javax.swing.JFrame {
         a.setUsuario(txt_usuario.getText());
         a.setSenha(txt_senha.getText());
         a.setEmail(txt_email.getText());
-        a.setDataNasc(txt_dataNasc.getText());
-        a.cadastrar();
-        new FLogin().setVisible(true);
-        dispose();
+        String dataNasc = txt_dataNasc.getText();
+        SimpleDateFormat sdfFormatada = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdfOriginal = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            // Convertendo a string da data para o formato original
+            Date dataOriginal = sdfFormatada.parse(dataNasc);
+    
+            String dataNascBanco = sdfOriginal.format(dataOriginal);
+    
+            a.setDataNasc(dataNascBanco);
+            a.cadastrar();
+            new FLogin().setVisible(true);
+            dispose();
+        } catch (ParseException e) {
+            // Tratamento de erro de formatação de data
+            JOptionPane.showMessageDialog(null, "Erro ao formatar a data: " + e.getMessage());
+        }
     }//GEN-LAST:event_btn_cadastrarActionPerformed
 
     private void lblEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEntrarMouseClicked

@@ -7,6 +7,7 @@ import java.util.Calendar;
 import javax.swing.JOptionPane;
 
 public class Alunos {
+    private int idAluno;
     private String nome;
     private String usuario;
     private String senha;
@@ -21,10 +22,11 @@ public class Alunos {
     Calendar c = Calendar.getInstance();
 
     public Alunos() {
-        this("","","","","");
+        this(0,"","","","","");
     }
 
-    public Alunos(String nome,String usuario, String senha, String email, String dataNasc) {
+    public Alunos(int idAluno, String nome,String usuario, String senha, String email, String dataNasc) {
+        this.idAluno = idAluno;
         this.nome = nome;
         this.usuario = usuario;
         this.senha = senha;
@@ -71,18 +73,29 @@ public class Alunos {
     public void setDataNasc(String dataNasc) {
         this.dataNasc = dataNasc;
     }
+    
+    public int getIdAluno() {
+        return idAluno;
+    }
+
+    public void setIdAluno(int idAluno) {
+        this.idAluno = idAluno;
+    }
    
     public void cadastrar(){
         conexao = Conexao.conecta();
         String sql;
-        sql = "insert into alunos(nome, usuario, senha, email) values"
-                + "(?,?,?,?)";
+        sql = "insert into alunos(nome, usuario, senha, email, dataNasc, pontosTotais, fasesConcluidas) values"
+                + "(?,?,?,?,?,?,?)";
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, getNome());
             pst.setString(2, getUsuario());
             pst.setString(3, getSenha());
             pst.setString(4, getEmail());
+            pst.setString(5, getDataNasc());
+            pst.setDouble(6, 0);
+            pst.setInt(7, 0);
             int linhasAfetadas = pst.executeUpdate();
             
             if (linhasAfetadas > 0) {
@@ -94,4 +107,29 @@ public class Alunos {
             JOptionPane.showMessageDialog(null,e);
         }
     }
+    
+    public void alterar(){
+        conexao = Conexao.conecta();
+        String sql;
+        sql = "update alunos set nome = ?, usuario = ?, senha = ?, email = ?, dataNasc = ? where idAluno = ?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, getNome());
+            pst.setString(2, getUsuario());
+            pst.setString(3, getSenha());
+            pst.setString(4, getEmail());
+            pst.setString(5, getDataNasc());
+            pst.setInt(6, getIdAluno());
+            int linhasAfetadas = pst.executeUpdate();
+            
+            if (linhasAfetadas > 0) {
+                JOptionPane.showMessageDialog(null, "Dados alterados com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Nenhum dado foi inserido.");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }
+    
 }

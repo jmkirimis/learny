@@ -194,13 +194,16 @@ public class FLogin extends javax.swing.JFrame {
             rs = pst.executeQuery();
             
             if(rs.next()){
+                alunlog.setIdAluno(rs.getInt(1));
                 alunlog.setNome(rs.getString(2));
                 alunlog.setUsuario(rs.getString(3));
                 alunlog.setSenha(rs.getString(4));
                 alunlog.setEmail(rs.getString(5));
                 alunlog.setDataNasc(rs.getString(6));
-                alunlog.setIdade(Integer.parseInt(rs.getString(7)));
-                alunlog.cadastrar();
+                alunlog.setIdade(rs.getInt(7));
+                alunlog.setPontosTotais(rs.getDouble(8));
+                alunlog.setFasesConcluidas(rs.getInt(9));
+                alunlog.cadastrarLogin();
                 new FMundos().setVisible(true);
                 dispose();
             } else{
