@@ -10,9 +10,10 @@ import java.awt.Color;
 public class PanelTesting extends javax.swing.JPanel {
 
   
-    public PanelTesting(String text, Color color) {
+    public PanelTesting(String text, String text2, Color color) {
         initComponents();
-        lb.setText(text);
+        lbl_mundo.setText(text);
+        lbl_tipo_mundo.setText(text2);
         setBackground(color);
     }
 
@@ -25,31 +26,57 @@ public class PanelTesting extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lb = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        lbl_mundo = new javax.swing.JLabel();
+        lbl_tipo_mundo = new javax.swing.JLabel();
 
-        lb.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        lb.setText("Slide 1");
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/mundo1-icon.png"))); // NOI18N
+
+        lbl_mundo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_mundo.setForeground(new java.awt.Color(102, 102, 102));
+        lbl_mundo.setText("Mundo 01");
+
+        lbl_tipo_mundo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_tipo_mundo.setForeground(new java.awt.Color(102, 102, 102));
+        lbl_tipo_mundo.setText("Mundo Selvagem");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(162, 162, 162)
-                .addComponent(lb)
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(131, 131, 131)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(lbl_mundo))
+                            .addComponent(lbl_tipo_mundo))))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(234, 234, 234)
-                .addComponent(lb)
-                .addContainerGap(269, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addComponent(lbl_mundo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbl_tipo_mundo)
+                .addGap(55, 55, 55)
+                .addComponent(jLabel2)
+                .addGap(32, 32, 32))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel lb;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lbl_mundo;
+    private javax.swing.JLabel lbl_tipo_mundo;
     // End of variables declaration//GEN-END:variables
 }
