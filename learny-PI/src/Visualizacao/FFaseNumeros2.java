@@ -5,7 +5,15 @@
  */
 package Visualizacao;
 
+import Controle.Conexao;
+import Modelagem.FaseConcluida;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -17,8 +25,53 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
      * Creates new form FFaseNumeros1
      */
     
-    public FFaseNumeros2() {
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    FaseConcluida fase = new FaseConcluida();
+    
+    private Timer timer;
+    private int seconds = 0;
+    private int minutes;
+    private int remainingSeconds;
+    private int idAluno;
+    private int acertos2;
+    private int seconds2 = 0;
+    
+    public FFaseNumeros2(int acertos, int seconds) {
         initComponents();
+        this.acertos2 = acertos;
+        this.seconds2 = seconds;
+        
+         //faz a conexao com o banco
+        conexao = Conexao.conecta();
+        
+        //pega o id do aluno
+        String sql = "select * from alunoLogado where idAluno = 1";
+        try {
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                this.idAluno = Integer.parseInt(rs.getString(1));
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+        
+        timer = new Timer(1000, new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                seconds2++;
+                minutes = seconds2 / 60;
+                remainingSeconds = seconds2 % 60;
+            
+                System.out.println("O JFrame está aberto há " + minutes + " minutos e " + remainingSeconds + " segundos.");
+            }
+        });
+        
+        timer.start();
     }
 
     /**
@@ -353,6 +406,7 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
@@ -365,8 +419,23 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
     }//GEN-LAST:event_panelSombra5MouseClicked
 
     private void panelSombra6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra6MouseClicked
-        JOptionPane.showMessageDialog(null, "Muito bem! vamos para a próxima conta");
-        new FFaseNumeros3().setVisible(true);
+        acertos2++;
+        
+        double porcAcerto;
+        porcAcerto = ((double)acertos2/2)*100;
+        
+        double pontos;
+        pontos = ((double) porcAcerto * 0.7) + ((int) seconds * 0.3);
+        
+        fase.setIdFase(3);
+        fase.setIdAluno(idAluno);
+        fase.setPontos(pontos);
+        fase.setTempoConclusao(minutes,remainingSeconds);
+        fase.setPorcAcertos(porcAcerto);
+        fase.cadastrar();
+        timer.stop();
+        JOptionPane.showMessageDialog(null, "Muito bem!");
+        new FFaseConcluida().setVisible(true);
         dispose();
     }//GEN-LAST:event_panelSombra6MouseClicked
 
@@ -405,7 +474,9 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FFaseNumeros2().setVisible(true);
+                int acertos = 0;
+                int seconds = 0;
+                new FFaseNumeros2(acertos, seconds).setVisible(true);
             }
         });
     }

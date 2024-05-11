@@ -61,6 +61,7 @@ public class FFaseLigar extends javax.swing.JFrame {
     private String cavaloAcerto;
     private String passaroAcerto;
     private String macacoAcerto;
+    private String ultimoIconeClicado = "";
     
     private Timer timer;
     private int seconds = 0;
@@ -104,20 +105,13 @@ public class FFaseLigar extends javax.swing.JFrame {
                     // Define o ícone de clique se ainda não foi clicado
                     lbl_cobra.setIcon(iconCobraClick);
                     cobraClicada = true;
-                    if (cobraClicadaDir) {
-                        cobraAcerto = "ok";
-                        //JOptionPane.showMessageDialog(null, "Relação estabelecida entre os cliques!");
-                    } else{
-                        cobraAcerto = "erro";
-                    }
                 } else {
-                    // Define o ícone padrão se já foi clicado
-                    cobraAcerto = "erro";
                     lbl_cobra.setIcon(iconCobra);
                     cobraClicada = false;
                 }
             }
         });
+        
         lbl_cobra_dir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -125,147 +119,15 @@ public class FFaseLigar extends javax.swing.JFrame {
                     // Define o ícone de clique se ainda não foi clicado
                     lbl_cobra_dir.setIcon(iconCobraClick);
                     cobraClicadaDir = true;
-                    if (cobraClicada) {
-                        cobraAcerto = "ok";
-                        //JOptionPane.showMessageDialog(null, "Relação estabelecida entre os cliques!");
-                    } else{
-                        cobraAcerto = "erro";
-                    }
                 } else {
                     // Define o ícone padrão se já foi clicado
-                    cobraAcerto = "erro";
                     lbl_cobra_dir.setIcon(iconCobra);
                     cobraClicadaDir = false;
                 }
             }
         });
-        lbl_cavalo.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (!cavaloClicado) {
-                    // Define o ícone de clique se ainda não foi clicado
-                    lbl_cavalo.setIcon(iconCavaloClick);
-                    cavaloClicado = true;
-                    if (cavaloClicadoDir) {
-                        cavaloAcerto = "ok";
-                        //JOptionPane.showMessageDialog(null, "Relação estabelecida entre os cliques!");
-                    } else{
-                        cavaloAcerto = "erro";
-                    }
-                } else {
-                    // Define o ícone padrão se já foi clicado
-                    cavaloAcerto = "erro";
-                    lbl_cavalo.setIcon(iconCavalo);
-                    cavaloClicado = false;
-                }
-            }
-        });
-        lbl_cavalo_dir.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (!cavaloClicadoDir) {
-                    // Define o ícone de clique se ainda não foi clicado
-                    lbl_cavalo_dir.setIcon(iconCavaloClick);
-                    cavaloClicadoDir = true;
-                    if (cavaloClicado) {
-                        cavaloAcerto = "ok";
-                        //JOptionPane.showMessageDialog(null, "Relação estabelecida entre os cliques!");
-                    } else{
-                        cavaloAcerto = "erro";
-                    }
-                } else {
-                    // Define o ícone padrão se já foi clicado
-                    cavaloAcerto = "erro";
-                    lbl_cavalo_dir.setIcon(iconCavalo);
-                    cavaloClicadoDir = false;
-                }
-            }
-        });
-        lbl_passaro.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (!passaroClicado) {
-                    // Define o ícone de clique se ainda não foi clicado
-                    lbl_passaro.setIcon(iconPassaroClick);
-                    passaroClicado = true;
-                    if (passaroClicadoDir) {
-                        passaroAcerto = "ok";
-                        //JOptionPane.showMessageDialog(null, "Relação estabelecida entre os cliques!");
-                    } else{
-                        passaroAcerto = "erro";
-                    }
-                } else {
-                    // Define o ícone padrão se já foi clicado
-                    passaroAcerto = "erro";
-                    lbl_passaro.setIcon(iconPassaro);
-                    passaroClicado = false;
-                }
-            }
-        });
-        lbl_passaro_dir.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (!passaroClicadoDir) {
-                    // Define o ícone de clique se ainda não foi clicado
-                    lbl_passaro_dir.setIcon(iconPassaroClick);
-                    passaroClicadoDir = true;
-                    if (passaroClicado) {
-                        passaroAcerto = "ok";
-                        //JOptionPane.showMessageDialog(null, "Relação estabelecida entre os cliques!");
-                    } else{
-                        passaroAcerto = "erro";
-                    }
-                } else {
-                    // Define o ícone padrão se já foi clicado
-                    passaroAcerto = "erro";
-                    lbl_passaro_dir.setIcon(iconPassaro);
-                    passaroClicadoDir = false;
-                }
-            }
-        });
-        lbl_macaco.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (!macacoClicado) {
-                    // Define o ícone de clique se ainda não foi clicado
-                    lbl_macaco.setIcon(iconMacacoClick);
-                    macacoClicado = true;
-                    if (macacoClicadoDir) {
-                        macacoAcerto = "ok";
-                        //JOptionPane.showMessageDialog(null, "Relação estabelecida entre os cliques!");
-                    } else{
-                        macacoAcerto = "erro";
-                    }
-                } else {
-                    // Define o ícone padrão se já foi clicado
-                    macacoAcerto = "erro";
-                    lbl_macaco.setIcon(iconMacaco);
-                    macacoClicado = false;
-                }
-            }
-        });
-        lbl_macaco_dir.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (!macacoClicadoDir) {
-                    // Define o ícone de clique se ainda não foi clicado
-                    lbl_macaco_dir.setIcon(iconMacacoClick);
-                    macacoClicadoDir = true;
-                    if (macacoClicado) {
-                        macacoAcerto = "ok";
-                        //JOptionPane.showMessageDialog(null, "Relação estabelecida entre os cliques!");
-                    } else{
-                        macacoAcerto = "erro";
-                    }
-                } else {
-                    // Define o ícone padrão se já foi clicado
-                    macacoAcerto = "erro";
-                    lbl_macaco_dir.setIcon(iconMacaco);
-                    macacoClicadoDir = false;
-                }
-            }
-        });
         
+ 
         timer = new Timer(1000, new ActionListener() {
 
             @Override
@@ -280,7 +142,7 @@ public class FFaseLigar extends javax.swing.JFrame {
         
         timer.start(); // Iniciar o timer
     }
-
+    
     public void dispose() {
         super.dispose();
         if (timer != null) {

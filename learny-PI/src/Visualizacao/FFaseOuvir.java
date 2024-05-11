@@ -5,6 +5,16 @@
  */
 package Visualizacao;
 
+import Controle.Conexao;
+import Modelagem.FaseConcluida;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author fatec-dsm2
@@ -14,10 +24,51 @@ public class FFaseOuvir extends javax.swing.JFrame {
     /**
      * Creates new form FFaseOuvir
      */
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    FaseConcluida fase = new FaseConcluida();
+    
+    private Timer timer;
+    private int seconds = 0;
+    private int minutes;
+    private int remainingSeconds;
+    private String acerto = "";
+    private int idAluno;
+    
     public FFaseOuvir() {
         initComponents();
-    }
+        
+        //faz a conexao com o banco
+        conexao = Conexao.conecta();
+        
+        //pega o id do aluno
+        String sql = "select * from alunoLogado where idAluno = 1";
+        try {
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                this.idAluno = Integer.parseInt(rs.getString(1));
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+        
+        timer = new Timer(1000, new ActionListener() {
 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                seconds++;
+                minutes = seconds / 60;
+                remainingSeconds = seconds % 60;
+            
+                System.out.println("O JFrame está aberto há " + minutes + " minutos e " + remainingSeconds + " segundos.");
+            }
+        });
+        
+        timer.start();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -174,6 +225,11 @@ public class FFaseOuvir extends javax.swing.JFrame {
         panelRound1.setRoundBottomRight(50);
         panelRound1.setRoundTopLeft(50);
         panelRound1.setRoundTopRight(50);
+        panelRound1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelRound1MouseClicked(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
@@ -200,6 +256,11 @@ public class FFaseOuvir extends javax.swing.JFrame {
         panelRound2.setRoundBottomRight(50);
         panelRound2.setRoundTopLeft(50);
         panelRound2.setRoundTopRight(50);
+        panelRound2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelRound2MouseClicked(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(102, 102, 102));
@@ -226,6 +287,11 @@ public class FFaseOuvir extends javax.swing.JFrame {
         panelRound3.setRoundBottomRight(50);
         panelRound3.setRoundTopLeft(50);
         panelRound3.setRoundTopRight(50);
+        panelRound3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelRound3MouseClicked(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 102, 102));
@@ -253,6 +319,11 @@ public class FFaseOuvir extends javax.swing.JFrame {
         panelRound4.setRoundBottomRight(50);
         panelRound4.setRoundTopLeft(50);
         panelRound4.setRoundTopRight(50);
+        panelRound4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelRound4MouseClicked(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
@@ -329,12 +400,12 @@ public class FFaseOuvir extends javax.swing.JFrame {
                 .addComponent(panelSombra3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelRound2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelRound2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelRound4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE))
+                    .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(73, 73, 73)
                 .addComponent(jLabel4)
                 .addContainerGap(41, Short.MAX_VALUE))
@@ -352,6 +423,7 @@ public class FFaseOuvir extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
@@ -360,6 +432,22 @@ public class FFaseOuvir extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        double porcAcerto, pontos;
+        porcAcerto = 0;
+        pontos = 0;
+        if(acerto.equals("ok")){
+            porcAcerto = 100;
+            pontos = 100;
+        } else{
+            porcAcerto = 0;
+            pontos = 0;
+        }
+        fase.setIdFase(3);
+        fase.setIdAluno(idAluno);
+        fase.setPontos(100);
+        fase.setTempoConclusao(minutes,remainingSeconds);
+        fase.setPorcAcertos(porcAcerto);
+        fase.cadastrar();
         new FFaseConcluida().setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
@@ -375,6 +463,22 @@ public class FFaseOuvir extends javax.swing.JFrame {
     private void panelBtnPerfil6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnPerfil6MouseExited
 
     }//GEN-LAST:event_panelBtnPerfil6MouseExited
+
+    private void panelRound1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound1MouseClicked
+        acerto = "ok";
+    }//GEN-LAST:event_panelRound1MouseClicked
+
+    private void panelRound2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelRound2MouseClicked
+
+    private void panelRound3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound3MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelRound3MouseClicked
+
+    private void panelRound4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound4MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelRound4MouseClicked
 
     /**
      * @param args the command line arguments

@@ -16,6 +16,7 @@ public class AlunoLogado {
     private int idade;
     private double pontosTotais;
     private int fasesConcluidas;
+    private String foto;
     
     //importar classe conexao
     private Connection conexao = null;
@@ -23,10 +24,10 @@ public class AlunoLogado {
     private ResultSet rs = null;
 
     public AlunoLogado() {
-        this(0,0,"","","","","",0,0.0,0);
+        this(0,0,"","","","","",0,0.0,0,"");
     }
 
-    public AlunoLogado(int idAlunoLogado, int idAluno, String nome, String usuario, String senha, String email, String dataNasc, int idade, double pontosTotais, int fasesConcluidas) {
+    public AlunoLogado(int idAlunoLogado, int idAluno, String nome, String usuario, String senha, String email, String dataNasc, int idade, double pontosTotais, int fasesConcluidas, String foto) {
         this.idAlunoLogado = idAlunoLogado;
         this.idAluno = idAluno;
         this.nome = nome;
@@ -37,6 +38,7 @@ public class AlunoLogado {
         this.idade = idade;
         this.pontosTotais = pontosTotais;
         this.fasesConcluidas = fasesConcluidas;
+        this.foto = foto;
         
     }
 
@@ -119,12 +121,19 @@ public class AlunoLogado {
     public void setFasesConcluidas(int fasesConcluidas) {
         this.fasesConcluidas = fasesConcluidas;
     }
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
     
     public void cadastrarLogin(){
         conexao = Conexao.conecta();
         String sql;
-        sql = "insert into alunoLogado(idAlunoLogado, idAluno, nome, usuario, senha, email, dataNasc, idade, pontosTotais, fasesConcluidas) values"
-                + "(?,?,?,?,?,?,?,?,?,?)";
+        sql = "insert into alunoLogado(idAlunoLogado, idAluno, nome, usuario, senha, email, dataNasc, idade, pontosTotais, fasesConcluidas, foto) values"
+                + "(?,?,?,?,?,?,?,?,?,?,?)";
         try {
             pst = conexao.prepareStatement(sql);
             pst.setInt(1, 1);
@@ -137,6 +146,7 @@ public class AlunoLogado {
             pst.setInt(8, getIdade());
             pst.setDouble(9, getPontosTotais());
             pst.setInt(10, getFasesConcluidas());
+            pst.setString(11, getFoto());
             pst.executeUpdate();
            
         } catch (Exception e) {

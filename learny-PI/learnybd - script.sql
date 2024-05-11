@@ -11,11 +11,13 @@ create table alunos(
     dataNasc date,
     idade INT AS (TIMESTAMPDIFF(YEAR, dataNasc, CURDATE())),
     pontosTotais real(8,2),
-    fasesConcluidas int
+    fasesConcluidas int,
+    foto varchar(50)
 );
-insert into alunos(nome, email, usuario, senha, dataNasc, pontosTotais, fasesConcluidas) values
-("Joao Marcos", "joao.kirimis@gmail.com", "joao", "123", "2004-03-11", 0, 0);
+insert into alunos(nome, email, usuario, senha, dataNasc, pontosTotais, fasesConcluidas, foto) values
+("Joao Marcos", "joao.kirimis@gmail.com", "joao", "123", "2004-03-11", 0, 0, "teste.png");
 #select * from alunos;
+#select * from alunos where usuario = "joao" and senha = 123;
 
 create table alunoLogado(
 	idAlunoLogado int primary key,
@@ -27,9 +29,11 @@ create table alunoLogado(
     dataNasc date,
     idade int,
     pontosTotais real(8,2),
-    fasesConcluidas int
+    fasesConcluidas int,
+    foto varchar(50)
 );
 #select * from alunoLogado;
+#delete from alunoLogado where idAlunoLogado = 1;
 
 create table mundos(
 	idMundo int auto_increment primary key,
@@ -57,7 +61,10 @@ create table fases(
 );
 alter table fases add constraint fk_regiao foreign key(idRegiao) references regioes(idRegiao);
 insert into fases(idRegiao, tipo, dificuldade) values
-(1, "Visual", "Fácil");
+(1, "Visual", "Fácil"),
+(1, "Números", "Médio"),
+(1, "Ouvir", "Médio");
+#select * from fases;
 
 create table fasesConcluidas(
 	idFaseConcluida int auto_increment primary key,

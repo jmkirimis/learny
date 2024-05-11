@@ -7,13 +7,12 @@ package Visualizacao;
 
 import Controle.Conexao;
 import Modelagem.AlunoLogado;
-import java.awt.Color;
-import java.awt.Cursor;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,9 +26,7 @@ public class FRegiao extends javax.swing.JFrame {
     Color vermelhoPastel = new Color(239,91,106);
     Color azulPastel = new Color(108,210,255);
     AlunoLogado alunlog = new AlunoLogado();
-    /**
-     * Creates new form FHome
-     */
+
     public FRegiao() {
         initComponents();
         panelGradiente.addColor(new ModelColor(vermelhoPastel, 0f), new ModelColor(azulPastel, 1f));
@@ -64,7 +61,7 @@ public class FRegiao extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        menuHamburguer = new javax.swing.JLabel();
         panelRound2 = new Visualizacao.PanelRound();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -121,16 +118,13 @@ public class FRegiao extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icone menu hamburguer.png"))); // NOI18N
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
-            }
+        menuHamburguer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icone menu hamburguer.png"))); // NOI18N
+        menuHamburguer.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel8MouseEntered(evt);
+                menuHamburguerMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel8MouseExited(evt);
+                menuHamburguerMouseExited(evt);
             }
         });
 
@@ -144,7 +138,7 @@ public class FRegiao extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addGap(118, 118, 118)
-                .addComponent(jLabel8)
+                .addComponent(menuHamburguer)
                 .addGap(49, 49, 49))
         );
         jPanel2Layout.setVerticalGroup(
@@ -152,7 +146,7 @@ public class FRegiao extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(menuHamburguer, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addContainerGap())
@@ -276,6 +270,11 @@ public class FRegiao extends javax.swing.JFrame {
         panelRound9.setRoundBottomRight(100);
         panelRound9.setRoundTopLeft(100);
         panelRound9.setRoundTopRight(100);
+        panelRound9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelRound9MouseClicked(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -303,6 +302,11 @@ public class FRegiao extends javax.swing.JFrame {
         panelRound10.setRoundBottomRight(100);
         panelRound10.setRoundTopLeft(100);
         panelRound10.setRoundTopRight(100);
+        panelRound10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelRound10MouseClicked(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -561,13 +565,13 @@ public class FRegiao extends javax.swing.JFrame {
         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_jLabel7MouseExited
 
-    private void jLabel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseEntered
+    private void menuHamburguerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuHamburguerMouseEntered
         setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_jLabel8MouseEntered
+    }//GEN-LAST:event_menuHamburguerMouseEntered
 
-    private void jLabel8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseExited
+    private void menuHamburguerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuHamburguerMouseExited
         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_jLabel8MouseExited
+    }//GEN-LAST:event_menuHamburguerMouseExited
 
     private void panelRound8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound8MouseClicked
         new FFaseLigar().setVisible(true);
@@ -584,9 +588,15 @@ public class FRegiao extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_panelRound2MouseClicked
 
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        
-    }//GEN-LAST:event_jLabel8MouseClicked
+    private void panelRound9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound9MouseClicked
+        new FFaseOuvir().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_panelRound9MouseClicked
+
+    private void panelRound10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound10MouseClicked
+        new FFaseNumeros1().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_panelRound10MouseClicked
 
     /**
      * @param args the command line arguments
@@ -640,12 +650,12 @@ public class FRegiao extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbl_fases_concluidas;
     private javax.swing.JLabel lbl_fases_concluidas1;
     private javax.swing.JLabel lbl_pontos;
+    private javax.swing.JLabel menuHamburguer;
     private Visualizacao.PanelGradiente panelGradiente;
     private Visualizacao.PanelRound panelRound1;
     private Visualizacao.PanelRound panelRound10;

@@ -5,7 +5,10 @@
  */
 package Visualizacao;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -17,13 +20,32 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
      * Creates new form FFaseNumeros1
      */
     
+    private Timer timer;
+    private int seconds = 0;
+    private int minutes;
+    private int remainingSeconds;
+    private int idAluno;
     private int acertos;
     
     public FFaseNumeros1() {
         initComponents();
         this.acertos = acertos;
-    }
+        
+        timer = new Timer(1000, new ActionListener() {
 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                seconds++;
+                minutes = seconds / 60;
+                remainingSeconds = seconds % 60;
+            
+                System.out.println("O JFrame está aberto há " + minutes + " minutos e " + remainingSeconds + " segundos.");
+            }
+        });
+        
+        timer.start();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -356,6 +378,7 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
@@ -365,8 +388,9 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
 
     private void panelSombra5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra5MouseClicked
         acertos++;
+        timer.stop();
         JOptionPane.showMessageDialog(null, "Muito bem! vamos para a próxima conta");
-        new FFaseNumeros2().setVisible(true);
+        new FFaseNumeros2(acertos, seconds).setVisible(true);
         dispose();
     }//GEN-LAST:event_panelSombra5MouseClicked
 

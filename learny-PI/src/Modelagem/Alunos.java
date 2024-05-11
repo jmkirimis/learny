@@ -13,6 +13,7 @@ public class Alunos {
     private String senha;
     private String email;
     private String dataNasc;
+    private String foto;
     
     //importar classe conexao
     Connection conexao = null;
@@ -22,16 +23,17 @@ public class Alunos {
     Calendar c = Calendar.getInstance();
 
     public Alunos() {
-        this(0,"","","","","");
+        this(0,"","","","","","");
     }
 
-    public Alunos(int idAluno, String nome,String usuario, String senha, String email, String dataNasc) {
+    public Alunos(int idAluno, String nome,String usuario, String senha, String email, String dataNasc, String foto) {
         this.idAluno = idAluno;
         this.nome = nome;
         this.usuario = usuario;
         this.senha = senha;
         this.email = email;
         this.dataNasc = dataNasc;
+        this.foto = foto;
     }
     
     public String getNome() {
@@ -81,12 +83,20 @@ public class Alunos {
     public void setIdAluno(int idAluno) {
         this.idAluno = idAluno;
     }
+    
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
    
     public void cadastrar(){
         conexao = Conexao.conecta();
         String sql;
-        sql = "insert into alunos(nome, usuario, senha, email, dataNasc, pontosTotais, fasesConcluidas) values"
-                + "(?,?,?,?,?,?,?)";
+        sql = "insert into alunos(nome, usuario, senha, email, dataNasc, pontosTotais, fasesConcluidas, foto) values"
+                + "(?,?,?,?,?,?,?,?)";
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, getNome());
@@ -96,6 +106,7 @@ public class Alunos {
             pst.setString(5, getDataNasc());
             pst.setDouble(6, 0);
             pst.setInt(7, 0);
+            pst.setString(8, getFoto());
             int linhasAfetadas = pst.executeUpdate();
             
             if (linhasAfetadas > 0) {

@@ -10,10 +10,15 @@ import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 public class PanelRound extends JPanel {
     
     //imagem
+    private BufferedImage image;
     private ImageIcon img;
     
     // borda arredondada
@@ -82,6 +87,11 @@ public class PanelRound extends JPanel {
         g2.dispose();
         super.paintComponent(grphcs);  
         grphcs.drawImage(img.getImage(), 0, 0, this.getWidth(), this.getHeight(), this); // imagem
+        if (image != null) {
+            int x = (getWidth() - image.getWidth()) / 2;
+            int y = (getHeight() - image.getHeight()) / 2;
+            grphcs.drawImage(image, x, y, this);
+        }
     }
 
     // borda arredondada
@@ -130,6 +140,15 @@ public class PanelRound extends JPanel {
     }
     
     // imagem
+    
+    public void setImagem(String path) {
+        try {
+            image = ImageIO.read(new File(path));
+            repaint(); // Redesenha o painel para exibir a nova imagem
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public void setImg(ImageIcon img){
         this.img = img;
     }
