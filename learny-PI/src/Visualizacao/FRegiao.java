@@ -120,6 +120,9 @@ public class FRegiao extends javax.swing.JFrame {
 
         menuHamburguer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icone menu hamburguer.png"))); // NOI18N
         menuHamburguer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuHamburguerMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 menuHamburguerMouseEntered(evt);
             }
@@ -598,6 +601,11 @@ public class FRegiao extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_panelRound10MouseClicked
 
+    private void menuHamburguerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuHamburguerMouseClicked
+
+    }//GEN-LAST:event_menuHamburguerMouseClicked
+
+    
     /**
      * @param args the command line arguments
      */
