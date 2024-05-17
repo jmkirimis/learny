@@ -7,6 +7,7 @@ package Visualizacao;
 
 import Controle.Conexao;
 import Modelagem.AlunoLogado;
+import Modelagem.WindowManager;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.sql.Connection;
@@ -33,6 +34,8 @@ public class FMundos extends javax.swing.JFrame {
      */
     public FMundos() {
         initComponents();
+        // Deleta o aluno logado ao sair pelo botão de fechar janela
+        WindowManager.register(this);
         panelGradiente.addColor(new ModelColor(vermelhoPastel, 0f), new ModelColor(azulPastel, 1f));
         panelSlide.init(new PanelMundos("Mundo 1", "Mundo Natural", new ImageIcon("src/Imagens/mundo-natureza2.png")), new PanelMundos("Mundo 2", "Mundo Congelado", new ImageIcon("src/Imagens/mundo-congelado.png")), new PanelMundos("Mundo 3", "Mundo Flamejante", new ImageIcon("src/Imagens/mundo-flamejante3.png")));
         panelSlide.setAnimate(5);

@@ -8,6 +8,7 @@ package Visualizacao;
 import Controle.Conexao;
 import Modelagem.AlunoLogado;
 import Modelagem.Alunos;
+import Modelagem.WindowManager;
 import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -41,6 +42,8 @@ public class FEditarPerfil extends javax.swing.JFrame {
     
     public FEditarPerfil() {
         initComponents();
+        // Deleta o aluno logado ao sair pelo botão de fechar janela
+        WindowManager.register(this);
         panelGradiente.addColor(new ModelColor(vermelhoPastel, 0f), new ModelColor(azulPastel, 1f));
         conexao = Conexao.conecta();
         String sql = "select * from alunoLogado where idAlunoLogado = 1";

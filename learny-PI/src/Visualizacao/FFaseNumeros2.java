@@ -7,6 +7,7 @@ package Visualizacao;
 
 import Controle.Conexao;
 import Modelagem.FaseConcluida;
+import Modelagem.WindowManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -39,7 +40,9 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
     private int seconds2 = 0;
     
     public FFaseNumeros2(int acertos, int seconds) {
-        initComponents();
+        initComponents();   
+        // Deleta o aluno logado ao sair pelo botão de fechar janela
+        WindowManager.register(this);
         this.acertos2 = acertos;
         this.seconds2 = seconds;
         

@@ -6,6 +6,7 @@
 package Visualizacao;
 import Controle.Conexao;
 import Modelagem.AlunoLogado;
+import Modelagem.WindowManager;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,8 +32,9 @@ public class FFaseConcluida extends javax.swing.JFrame {
     int idAluno;
     
     public FFaseConcluida() {
-        initComponents();
-        
+        initComponents();       
+        // Deleta o aluno logado ao sair pelo botão de fechar janela
+        WindowManager.register(this);
         conexao = Conexao.conecta();
         String sql = "select * from alunoLogado where idAlunoLogado = 1";
         try {

@@ -6,6 +6,7 @@
 package Visualizacao;
 
 import Modelagem.Alunos;
+import Modelagem.WindowManager;
 import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,6 +32,8 @@ public class FCadastro extends javax.swing.JFrame {
     
     public FCadastro() {
         initComponents();
+        // Deleta o aluno logado ao sair pelo botão de fechar janela
+        WindowManager.register(this);
         panelGradiente.addColor(new ModelColor(vermelhoPastel, 0f), new ModelColor(azulPastel, 1f));
     }
     Alunos a = new Alunos();

@@ -11,6 +11,7 @@ package Visualizacao;
  */
 
 import Controle.Conexao;
+import Modelagem.WindowManager;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
@@ -51,8 +52,9 @@ public class FFaseObservacao extends javax.swing.JFrame {
     private int idAluno;
     
     public FFaseObservacao() {
-        initComponents();
-        
+        initComponents();     
+        // Deleta o aluno logado ao sair pelo botão de fechar janela
+        WindowManager.register(this);
         //faz a conexao com o banco
         conexao = Conexao.conecta();
         

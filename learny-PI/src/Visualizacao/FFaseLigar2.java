@@ -7,6 +7,7 @@ package Visualizacao;
 
 import Controle.Conexao;
 import Modelagem.FaseConcluida;
+import Modelagem.WindowManager;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
@@ -37,10 +38,10 @@ public class FFaseLigar2 extends javax.swing.JFrame {
     private boolean cobraClicada = false;
     private boolean cobraClicadaDir = false;
      
-    public FFaseLigar2() {
-        
-        initComponents();
-        
+    public FFaseLigar2() {       
+        initComponents();    
+        // Deleta o aluno logado ao sair pelo botão de fechar janela
+        WindowManager.register(this);
         // Adicione uma label para desenhar a linha
         JLabel lineLabel = new JLabel();
         lineLabel.setBounds(0, 0, panel_cobra.getWidth(), panel_cobra.getHeight());

@@ -7,6 +7,7 @@ package Visualizacao;
 
 import Controle.Conexao;
 import Modelagem.AlunoLogado;
+import Modelagem.WindowManager;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.sql.Connection;
@@ -27,6 +28,8 @@ public class FPerfil extends javax.swing.JFrame {
     
     public FPerfil() {
         initComponents();
+        // Deleta o aluno logado ao sair pelo botão de fechar janela
+        WindowManager.register(this);
         conexao = Conexao.conecta();
         String sql = "select * from alunoLogado where idAlunoLogado = 1";
         try {

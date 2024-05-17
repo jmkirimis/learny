@@ -11,6 +11,7 @@ package Modelagem;
  */
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFrame;
 public class WindowManager {
     private static final List<JFrame> frames = new ArrayList<>();
 

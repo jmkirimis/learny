@@ -7,6 +7,7 @@ package Visualizacao;
 
 import Controle.Conexao;
 import Modelagem.FaseConcluida;
+import Modelagem.WindowManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,8 +38,9 @@ public class FFaseOuvir extends javax.swing.JFrame {
     private int idAluno;
     
     public FFaseOuvir() {
-        initComponents();
-        
+        initComponents();    
+        // Deleta o aluno logado ao sair pelo botão de fechar janela
+        WindowManager.register(this);
         //faz a conexao com o banco
         conexao = Conexao.conecta();
         
