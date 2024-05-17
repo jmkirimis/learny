@@ -83,7 +83,7 @@
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="botaoCustomizado1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                      <Component id="panelRound2" min="-2" pref="301" max="-2" attributes="0"/>
+                      <Component id="panel_foto_regiao" min="-2" pref="301" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="40" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
@@ -113,7 +113,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="panelRound2" min="-2" pref="116" max="-2" attributes="0"/>
+                          <Component id="panel_foto_regiao" min="-2" pref="116" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                               <Component id="botaoCustomizado1" min="-2" max="-2" attributes="0"/>
@@ -217,7 +217,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="Visualizacao.PanelRound" name="panelRound2">
+            <Container class="Visualizacao.PanelRound" name="panel_foto_regiao">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="99" red="99" type="rgb"/>
@@ -234,7 +234,7 @@
                 <Property name="roundTopRight" type="int" value="50"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="panelRound2MouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="panel_foto_regiaoMouseClicked"/>
               </Events>
 
               <Layout>

@@ -16,12 +16,13 @@ create table alunos(
 );
 insert into alunos(nome, email, usuario, senha, dataNasc, pontosTotais, fasesConcluidas, foto) values
 ("Joao Marcos", "joao.kirimis@gmail.com", "joao", "123", "2004-03-11", 0, 0, "teste.png");
-#select * from alunos;
+select * from alunos;
 #select * from alunos where usuario = "joao" and senha = 123;
+#delete from alunos where idAluno = 2;
 
 create table alunoLogado(
 	idAlunoLogado int primary key,
-	idAluno int not null,
+    idAluno int not null,
     nome varchar(50),
     usuario varchar(50),
     senha varchar(50),
@@ -30,7 +31,8 @@ create table alunoLogado(
     idade int,
     pontosTotais real(8,2),
     fasesConcluidas int,
-    foto varchar(50)
+    foto varchar(50),
+    constraint fk_aluno_logado foreign key(idAluno) references alunos(idAluno)
 );
 #select * from alunoLogado;
 #delete from alunoLogado where idAlunoLogado = 1;
@@ -47,9 +49,9 @@ insert into mundos(nivel, tema) values
 create table regioes(
 	idRegiao int auto_increment primary key,
     idMundo int not null,
-    nomeRegiao varchar(50)
+    nomeRegiao varchar(50),
+    constraint fk_mundo foreign key(idMundo) references mundos(idMundo)
 );
-alter table regioes add constraint fk_mundo foreign key(idMundo) references mundos(idMundo);
 insert into regioes(idMundo, nomeRegiao) values
 (1, "Floresta");
 
@@ -57,9 +59,9 @@ create table fases(
 	idFase int auto_increment primary key,
     idRegiao int not null,
     tipo varchar(50),
-    dificuldade varchar(50)
+    dificuldade varchar(50),
+    constraint fk_regiao foreign key(idRegiao) references regioes(idRegiao)
 );
-alter table fases add constraint fk_regiao foreign key(idRegiao) references regioes(idRegiao);
 insert into fases(idRegiao, tipo, dificuldade) values
 (1, "Visual", "Fácil"),
 (1, "Números", "Médio"),
@@ -72,10 +74,10 @@ create table fasesConcluidas(
     idAluno int not null,
     pontos double(8,2),
     tempoConclusao time,
-    porcentagemAcertos real(8,2)
+    porcentagemAcertos real(8,2),
+    constraint fk_fase foreign key(idFase) references fases(idFase),
+    constraint fk_aluno_fase_concluida foreign key(idAluno) references alunos(idAluno)
 );
-alter table fasesConcluidas add constraint fk_fase foreign key(idFase) references fases(idFase);
-alter table fasesConcluidas add constraint fk_aluno_fase_concluida foreign key(idAluno) references alunos(idAluno);
 #select * from fasesConcluidas;
 
 create table conquistas(
@@ -88,10 +90,10 @@ insert into conquistas(nomeConquista) values
 create table alunosXconquistas(
 	idAlunoConquista int auto_increment primary key,
     idConquista int not null,
-    idAluno int not null
+    idAluno int not null,
+    constraint fk_conquista foreign key(idConquista) references conquistas(idConquista),
+    constraint fk_aluno_conquista foreign key(idAluno) references alunos(idAluno)
 );
-alter table alunosXconquistas add constraint fk_conquista foreign key(idConquista) references conquistas(idConquista);
-alter table alunosXconquistas add constraint fk_aluno_conquista foreign key(idAluno) references alunos(idAluno);
 insert into alunosXconquistas(idConquista, idAluno) values
 (1,1);
 

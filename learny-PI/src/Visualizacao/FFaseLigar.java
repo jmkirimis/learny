@@ -7,7 +7,10 @@ package Visualizacao;
 
 import Controle.Conexao;
 import Modelagem.FaseConcluida;
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.Icon;
@@ -19,6 +22,8 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 
 /**
@@ -34,7 +39,10 @@ public class FFaseLigar extends javax.swing.JFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
     
-    Color minhaNovaCor = new Color(83, 194, 242);
+    Color azul = new Color(83, 194, 242);
+    Color verde = new Color(128,210,91);
+    Color vermelho = new Color(239,91,106);
+    Color amarelo = new Color(255,179,0);
     //icone cobra
     Icon iconCobraClick = new ImageIcon("src/Imagens/cobra-click.png");
     Icon iconCobra = new ImageIcon("src/Imagens/cobra.png");
@@ -57,12 +65,6 @@ public class FFaseLigar extends javax.swing.JFrame {
     private boolean macacoClicado = false;
     private boolean macacoClicadoDir = false;
     
-    private String cobraAcerto;
-    private String cavaloAcerto;
-    private String passaroAcerto;
-    private String macacoAcerto;
-    private String ultimoIconeClicado = "";
-    
     private Timer timer;
     private int seconds = 0;
     private int minutes;
@@ -70,12 +72,13 @@ public class FFaseLigar extends javax.swing.JFrame {
     
     private int acertos;
     private int idAluno;
+    
+    private boolean linhaVisivelCobra = false;
+    private boolean linhaVisivelCavalo = false;
+    private boolean linhaVisivelPassaro = false;
+    private boolean linhaVisivelMacaco = false;
      
     public FFaseLigar() {
-        this.cobraAcerto = "";
-        this.cavaloAcerto = "";
-        this.passaroAcerto = "";
-        this.macacoAcerto = "";
         
         this.acertos = 0;
         
@@ -97,6 +100,26 @@ public class FFaseLigar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,e);
         }
         
+        // Adiciona uma label para desenhar a linha para as cobras
+        JLabel lineLabelCobra = new JLabel();
+        lineLabelCobra.setBounds(0, 0, panel_cobra.getWidth(), panel_cobra.getHeight());
+        panel_cobra.add(lineLabelCobra);
+        
+        // Adiciona uma label para desenhar a linha para os cavalos
+        JLabel lineLabelCavalo = new JLabel();
+        lineLabelCavalo.setBounds(0, 0, panel_cavalo.getWidth(), panel_cavalo.getHeight());
+        panel_cavalo.add(lineLabelCavalo);
+        
+        // Adiciona uma label para desenhar a linha para os Passaros
+        JLabel lineLabelPassaro = new JLabel();
+        lineLabelPassaro.setBounds(0, 0, panel_passaro.getWidth(), panel_passaro.getHeight());
+        panel_passaro.add(lineLabelPassaro);
+        
+        // Adiciona uma label para desenhar a linha para as cobras
+        JLabel lineLabelMacaco = new JLabel();
+        lineLabelMacaco.setBounds(0, 0, panel_macaco.getWidth(), panel_macaco.getHeight());
+        panel_macaco.add(lineLabelMacaco);
+        
         // Adiciona um ouvinte de eventos ao rótulo lbl_cobra
         lbl_cobra.addMouseListener(new MouseAdapter() {
             @Override
@@ -108,6 +131,14 @@ public class FFaseLigar extends javax.swing.JFrame {
                 } else {
                     lbl_cobra.setIcon(iconCobra);
                     cobraClicada = false;
+                }
+                // Desenha a linha
+                if (cobraClicada && cobraClicadaDir) {
+                    desenharLinha(lbl_cobra, lbl_cobra_dir, panel_cobra, azul);
+                    linhaVisivelCobra = true;
+                } else {
+                    apagarLinha(panel_cobra); // Se não, apague a linha no painel correspondente
+                    linhaVisivelCobra = false;
                 }
             }
         });
@@ -124,10 +155,155 @@ public class FFaseLigar extends javax.swing.JFrame {
                     lbl_cobra_dir.setIcon(iconCobra);
                     cobraClicadaDir = false;
                 }
+                // Desenha a linha
+                if (cobraClicada && cobraClicadaDir) {
+                    desenharLinha(lbl_cobra, lbl_cobra_dir, panel_cobra, azul);
+                    linhaVisivelCobra = true;
+                } else {
+                    apagarLinha(panel_cobra); // Se não, apague a linha no painel correspondente
+                    linhaVisivelCobra = false;
+                }
+            }
+        });
+ 
+        lbl_cavalo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (!cavaloClicado) {
+                    // Define o ícone de clique se ainda não foi clicado
+                    lbl_cavalo.setIcon(iconCavaloClick);
+                    cavaloClicado = true;
+                } else {
+                    // Define o ícone padrão se já foi clicado
+                    lbl_cavalo.setIcon(iconCavalo);
+                    cavaloClicado = false;
+                }
+                // Desenha a linha
+                if (cavaloClicado && cavaloClicadoDir) {
+                    desenharLinha(lbl_cavalo, lbl_cavalo_dir, panel_cavalo, verde);
+                    linhaVisivelCavalo = true;
+                } else {
+                    apagarLinha(panel_cavalo); // Se não, apague a linha no painel correspondente
+                    linhaVisivelCavalo = false;
+                }
             }
         });
         
- 
+        lbl_cavalo_dir.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (!cavaloClicadoDir) {
+                    // Define o ícone de clique se ainda não foi clicado
+                    lbl_cavalo_dir.setIcon(iconCavaloClick);
+                    cavaloClicadoDir = true;
+                } else {
+                    // Define o ícone padrão se já foi clicado
+                    lbl_cavalo_dir.setIcon(iconCavalo);
+                    cavaloClicadoDir = false;
+                }
+                // Desenha a linha
+                if (cavaloClicado && cavaloClicadoDir) {
+                    desenharLinha(lbl_cavalo, lbl_cavalo_dir, panel_cavalo, verde);
+                    linhaVisivelCavalo = true;
+                } else {
+                    apagarLinha(panel_cavalo); // Se não, apague a linha no painel correspondente
+                    linhaVisivelCavalo = false;
+                }
+            }
+        });
+        
+        lbl_passaro.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (!passaroClicado) {
+                    // Define o ícone de clique se ainda não foi clicado
+                    lbl_passaro.setIcon(iconPassaroClick);
+                    passaroClicado = true;
+                } else {
+                    // Define o ícone padrão se já foi clicado
+                    lbl_passaro.setIcon(iconPassaro);
+                    passaroClicado = false;
+                }
+                // Desenha a linha
+                if (passaroClicado && passaroClicadoDir) {
+                    desenharLinha(lbl_passaro, lbl_passaro_dir, panel_passaro, vermelho);
+                    linhaVisivelPassaro = true;
+                } else {
+                    apagarLinha(panel_passaro); // Se não, apague a linha no painel correspondente
+                    linhaVisivelPassaro = false;
+                }
+            }
+        });
+        
+        lbl_passaro_dir.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (!passaroClicadoDir) {
+                    // Define o ícone de clique se ainda não foi clicado
+                    lbl_passaro_dir.setIcon(iconPassaroClick);
+                    passaroClicadoDir = true;
+                } else {
+                    // Define o ícone padrão se já foi clicado
+                    lbl_passaro_dir.setIcon(iconPassaro);
+                    passaroClicadoDir = false;
+                }
+                // Desenha a linha
+                if (passaroClicado && passaroClicadoDir) {
+                    desenharLinha(lbl_passaro, lbl_passaro_dir, panel_passaro, vermelho);
+                    linhaVisivelPassaro = true;
+                } else {
+                    apagarLinha(panel_passaro); // Se não, apague a linha no painel correspondente
+                    linhaVisivelPassaro = false;
+                }
+            }
+        });
+        
+        lbl_macaco.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (!macacoClicado) {
+                    // Define o ícone de clique se ainda não foi clicado
+                    lbl_macaco.setIcon(iconMacacoClick);
+                    macacoClicado = true;
+                } else {
+                    // Define o ícone padrão se já foi clicado
+                    lbl_macaco.setIcon(iconMacaco);
+                    macacoClicado = false;
+                }
+                // Desenha a linha
+                if (macacoClicado && macacoClicadoDir) {
+                    desenharLinha(lbl_macaco, lbl_macaco_dir, panel_macaco, amarelo);
+                    linhaVisivelMacaco = true;
+                } else {
+                    apagarLinha(panel_macaco); // Se não, apague a linha no painel correspondente
+                    linhaVisivelMacaco = false;
+                }
+            }
+        });
+        
+        lbl_macaco_dir.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (!macacoClicadoDir) {
+                    // Define o ícone de clique se ainda não foi clicado
+                    lbl_macaco_dir.setIcon(iconMacacoClick);
+                    macacoClicadoDir = true;
+                } else {
+                    lbl_macaco_dir.setIcon(iconMacaco);
+                    macacoClicadoDir = false;
+                }
+                // Desenha a linha
+                if (macacoClicado && macacoClicadoDir) {
+                    desenharLinha(lbl_macaco, lbl_macaco_dir, panel_macaco, amarelo);
+                    linhaVisivelMacaco = true;
+                } else {
+                    apagarLinha(panel_macaco); // Se não, apague a linha no painel correspondente
+                    linhaVisivelMacaco = false;
+                }
+            }
+        });
+        
+        // Configuranod o timer
         timer = new Timer(1000, new ActionListener() {
 
             @Override
@@ -141,6 +317,55 @@ public class FFaseLigar extends javax.swing.JFrame {
         });
         
         timer.start(); // Iniciar o timer
+        
+    }
+    
+    public void desenharLinha(JLabel lbl1, JLabel lbl2, JPanel panel, Color cor){
+        int panelCenterX = panel.getWidth() / 2;
+        int panelCenterY = panel.getHeight() / 2;
+
+        int startX = lbl1.getX() + lbl1.getWidth() / 2;
+        int startY = lbl1.getY() + lbl1.getHeight() / 2;
+        int endX = lbl2.getX() + lbl2.getWidth() / 2;
+        int endY = lbl2.getY() + lbl2.getHeight() / 2;
+
+        // Calcular o deslocamento necessário para centralizar a linha
+        int offsetX = panelCenterX - (startX + endX) / 2;
+        int offsetY = panelCenterY - (startY + endY) / 2;
+
+        startX += offsetX;
+        startY += offsetY;
+        endX += offsetX;
+        endY += offsetY;
+
+        // Obtenha o objeto Graphics2D
+        Graphics2D g2 = (Graphics2D) panel.getGraphics();
+
+        // Defina a cor e a espessura da linha com bordas arredondadas
+        g2.setColor(cor); // Defina a cor da linha
+        g2.setStroke(new BasicStroke(5));// Defina a espessura da linha e bordas arredondadas
+
+        // Desenhe a linha
+        g2.drawLine(startX, startY, endX, endY);
+    }
+    
+    public void apagarLinha(JPanel panel) {
+        panel.repaint();
+    }
+    
+    public void verificarAcertos() {
+        if(linhaVisivelCobra){
+            acertos++;
+        }
+        if(linhaVisivelCavalo){
+            acertos++;
+        }
+        if(linhaVisivelPassaro){
+            acertos++;
+        }
+        if(linhaVisivelMacaco){
+            acertos++;
+        }
     }
     
     public void dispose() {
@@ -165,16 +390,20 @@ public class FFaseLigar extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        lbl_cobra = new javax.swing.JLabel();
         lbl_cavalo = new javax.swing.JLabel();
         lbl_passaro = new javax.swing.JLabel();
         lbl_macaco = new javax.swing.JLabel();
-        lbl_cobra_dir = new javax.swing.JLabel();
         lbl_cavalo_dir = new javax.swing.JLabel();
         lbl_passaro_dir = new javax.swing.JLabel();
         lbl_macaco_dir = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        panel_cobra = new javax.swing.JPanel();
+        lbl_cobra_dir = new javax.swing.JLabel();
+        lbl_cobra = new javax.swing.JLabel();
+        panel_cavalo = new javax.swing.JPanel();
+        panel_passaro = new javax.swing.JPanel();
+        panel_macaco = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -243,15 +472,11 @@ public class FFaseLigar extends javax.swing.JFrame {
             }
         });
 
-        lbl_cobra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/cobra.png"))); // NOI18N
-
         lbl_cavalo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/cavalo.png"))); // NOI18N
 
         lbl_passaro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/passaro.png"))); // NOI18N
 
         lbl_macaco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/macaco.png"))); // NOI18N
-
-        lbl_cobra_dir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/cobra.png"))); // NOI18N
 
         lbl_cavalo_dir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/cavalo.png"))); // NOI18N
 
@@ -270,27 +495,71 @@ public class FFaseLigar extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(0, 204, 255));
         jLabel6.setText("Watch and");
 
+        panel_cobra.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panel_cobraLayout = new javax.swing.GroupLayout(panel_cobra);
+        panel_cobra.setLayout(panel_cobraLayout);
+        panel_cobraLayout.setHorizontalGroup(
+            panel_cobraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 205, Short.MAX_VALUE)
+        );
+        panel_cobraLayout.setVerticalGroup(
+            panel_cobraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 65, Short.MAX_VALUE)
+        );
+
+        lbl_cobra_dir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/cobra.png"))); // NOI18N
+
+        lbl_cobra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/cobra.png"))); // NOI18N
+
+        panel_cavalo.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panel_cavaloLayout = new javax.swing.GroupLayout(panel_cavalo);
+        panel_cavalo.setLayout(panel_cavaloLayout);
+        panel_cavaloLayout.setHorizontalGroup(
+            panel_cavaloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 205, Short.MAX_VALUE)
+        );
+        panel_cavaloLayout.setVerticalGroup(
+            panel_cavaloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 65, Short.MAX_VALUE)
+        );
+
+        panel_passaro.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panel_passaroLayout = new javax.swing.GroupLayout(panel_passaro);
+        panel_passaro.setLayout(panel_passaroLayout);
+        panel_passaroLayout.setHorizontalGroup(
+            panel_passaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 205, Short.MAX_VALUE)
+        );
+        panel_passaroLayout.setVerticalGroup(
+            panel_passaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 65, Short.MAX_VALUE)
+        );
+
+        panel_macaco.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panel_macacoLayout = new javax.swing.GroupLayout(panel_macaco);
+        panel_macaco.setLayout(panel_macacoLayout);
+        panel_macacoLayout.setHorizontalGroup(
+            panel_macacoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 205, Short.MAX_VALUE)
+        );
+        panel_macacoLayout.setVerticalGroup(
+            panel_macacoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 65, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_macaco)
-                            .addComponent(lbl_passaro)
-                            .addComponent(lbl_cavalo)
-                            .addComponent(lbl_cobra))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lbl_macaco_dir)
-                            .addComponent(lbl_passaro_dir, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbl_cavalo_dir, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbl_cobra_dir, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(12, 12, 12))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
                         .addComponent(panelSombra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,14 +568,48 @@ public class FFaseLigar extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel2))))
-                    .addComponent(panelSombra2, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE))
+                    .addComponent(panelSombra2, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lbl_passaro)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(panel_passaro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lbl_cavalo)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(panel_cavalo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_cavalo_dir)
+                                    .addComponent(lbl_passaro_dir))
+                                .addGap(8, 8, 8))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lbl_macaco)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(panel_macaco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbl_macaco_dir))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lbl_cobra)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(panel_cobra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbl_cobra_dir)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(12, 12, 12)))
                 .addGap(20, 20, 20))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(187, 187, 187)
                 .addComponent(jLabel4)
-                .addGap(191, 191, 191))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,27 +627,30 @@ public class FFaseLigar extends javax.swing.JFrame {
                     .addComponent(panelSombra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(panelSombra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
-                        .addComponent(lbl_cavalo)
-                        .addGap(62, 62, 62)
-                        .addComponent(lbl_passaro)
-                        .addGap(50, 50, 50)
-                        .addComponent(lbl_macaco))
-                    .addComponent(lbl_cobra)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lbl_cobra_dir)
-                        .addGap(53, 53, 53)
-                        .addComponent(lbl_cavalo_dir)
-                        .addGap(62, 62, 62)
+                    .addComponent(lbl_cobra_dir)
+                    .addComponent(panel_cobra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_cobra))
+                .addGap(62, 62, 62)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panel_cavalo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_cavalo)
+                    .addComponent(lbl_cavalo_dir))
+                .addGap(64, 64, 64)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_passaro)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(lbl_passaro_dir)
-                        .addGap(50, 50, 50)
-                        .addComponent(lbl_macaco_dir)))
+                        .addComponent(panel_passaro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(60, 60, 60)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_macaco)
+                    .addComponent(panel_macaco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_macaco_dir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addGap(35, 35, 35))
+                .addGap(39, 39, 39))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -370,19 +676,8 @@ public class FFaseLigar extends javax.swing.JFrame {
     FaseConcluida fase = new FaseConcluida();
     
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        if(cobraAcerto.equals("ok")){
-            acertos++;
-        }
-        if(cavaloAcerto.equals("ok")){
-            acertos++;
-        }
-        if(passaroAcerto.equals("ok")){
-            acertos++;
-        }
-        if(macacoAcerto.equals("ok")){
-            acertos++;
-        }
         
+        verificarAcertos();
         double porcAcerto;
         porcAcerto = ((double)acertos/4)*100;
         
@@ -453,5 +748,9 @@ public class FFaseLigar extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_passaro_dir;
     private Visualizacao.PanelSombra panelSombra1;
     private Visualizacao.PanelSombra panelSombra2;
+    private javax.swing.JPanel panel_cavalo;
+    private javax.swing.JPanel panel_cobra;
+    private javax.swing.JPanel panel_macaco;
+    private javax.swing.JPanel panel_passaro;
     // End of variables declaration//GEN-END:variables
 }

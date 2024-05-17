@@ -122,7 +122,7 @@ public class Alunos {
     public void alterar(){
         conexao = Conexao.conecta();
         String sql;
-        sql = "update alunos set nome = ?, usuario = ?, senha = ?, email = ?, dataNasc = ? where idAluno = ?";
+        sql = "update alunos set nome = ?, usuario = ?, senha = ?, email = ?, dataNasc = ?, foto = ? where idAluno = ?";
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, getNome());
@@ -130,7 +130,19 @@ public class Alunos {
             pst.setString(3, getSenha());
             pst.setString(4, getEmail());
             pst.setString(5, getDataNasc());
-            pst.setInt(6, getIdAluno());
+            pst.setString(6, getFoto());
+            pst.setInt(7, getIdAluno());
+            
+            // Debugging - Imprimindo valores
+        System.out.println("SQL: " + sql);
+        System.out.println("Nome: " + getNome());
+        System.out.println("Usuário: " + getUsuario());
+        System.out.println("Senha: " + getSenha());
+        System.out.println("Email: " + getEmail());
+        System.out.println("Data Nasc: " + getDataNasc());
+        System.out.println("Foto: " + getFoto());
+        System.out.println("ID Aluno: " + getIdAluno());
+        
             int linhasAfetadas = pst.executeUpdate();
             
             if (linhasAfetadas > 0) {

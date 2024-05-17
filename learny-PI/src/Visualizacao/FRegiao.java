@@ -62,7 +62,7 @@ public class FRegiao extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         menuHamburguer = new javax.swing.JLabel();
-        panelRound2 = new Visualizacao.PanelRound();
+        panel_foto_regiao = new Visualizacao.PanelRound();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -155,16 +155,16 @@ public class FRegiao extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        panelRound2.setBackground(new java.awt.Color(153, 153, 153));
-        panelRound2.setImg(new ImageIcon("src/Imagens/natureza.png"));
-        panelRound2.setPreferredSize(new java.awt.Dimension(466, 182));
-        panelRound2.setRoundBottomLeft(50);
-        panelRound2.setRoundBottomRight(50);
-        panelRound2.setRoundTopLeft(50);
-        panelRound2.setRoundTopRight(50);
-        panelRound2.addMouseListener(new java.awt.event.MouseAdapter() {
+        panel_foto_regiao.setBackground(new java.awt.Color(153, 153, 153));
+        panel_foto_regiao.setImg(new ImageIcon("src/Imagens/natureza.png"));
+        panel_foto_regiao.setPreferredSize(new java.awt.Dimension(466, 182));
+        panel_foto_regiao.setRoundBottomLeft(50);
+        panel_foto_regiao.setRoundBottomRight(50);
+        panel_foto_regiao.setRoundTopLeft(50);
+        panel_foto_regiao.setRoundTopRight(50);
+        panel_foto_regiao.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelRound2MouseClicked(evt);
+                panel_foto_regiaoMouseClicked(evt);
             }
         });
 
@@ -178,26 +178,26 @@ public class FRegiao extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon seta.png"))); // NOI18N
 
-        javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
-        panelRound2.setLayout(panelRound2Layout);
-        panelRound2Layout.setHorizontalGroup(
-            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound2Layout.createSequentialGroup()
+        javax.swing.GroupLayout panel_foto_regiaoLayout = new javax.swing.GroupLayout(panel_foto_regiao);
+        panel_foto_regiao.setLayout(panel_foto_regiaoLayout);
+        panel_foto_regiaoLayout.setHorizontalGroup(
+            panel_foto_regiaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_foto_regiaoLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panel_foto_regiaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(27, 27, 27))
         );
-        panelRound2Layout.setVerticalGroup(
-            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound2Layout.createSequentialGroup()
+        panel_foto_regiaoLayout.setVerticalGroup(
+            panel_foto_regiaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_foto_regiaoLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(panel_foto_regiaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
-                    .addGroup(panelRound2Layout.createSequentialGroup()
+                    .addGroup(panel_foto_regiaoLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(17, 17, 17)
                         .addComponent(jLabel2)))
@@ -372,7 +372,7 @@ public class FRegiao extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addComponent(botaoCustomizado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
-                .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panel_foto_regiao, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 40, Short.MAX_VALUE))
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addGap(134, 134, 134)
@@ -395,7 +395,7 @@ public class FRegiao extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panel_foto_regiao, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(botaoCustomizado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -586,10 +586,10 @@ public class FRegiao extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_panelRound6MouseClicked
 
-    private void panelRound2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound2MouseClicked
+    private void panel_foto_regiaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_foto_regiaoMouseClicked
         new FMundos().setVisible(true);
         dispose();
-    }//GEN-LAST:event_panelRound2MouseClicked
+    }//GEN-LAST:event_panel_foto_regiaoMouseClicked
 
     private void panelRound9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound9MouseClicked
         new FFaseOuvir().setVisible(true);
@@ -668,12 +668,12 @@ public class FRegiao extends javax.swing.JFrame {
     private Visualizacao.PanelRound panelRound1;
     private Visualizacao.PanelRound panelRound10;
     private Visualizacao.PanelRound panelRound11;
-    private Visualizacao.PanelRound panelRound2;
     private Visualizacao.PanelRound panelRound6;
     private Visualizacao.PanelRound panelRound8;
     private Visualizacao.PanelRound panelRound9;
     private Visualizacao.PanelSombra panelSombra1;
     private Visualizacao.PanelSombra panelSombra2;
     private Visualizacao.PanelSombra panelSombra4;
+    private Visualizacao.PanelRound panel_foto_regiao;
     // End of variables declaration//GEN-END:variables
 }
