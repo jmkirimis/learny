@@ -388,9 +388,11 @@ public class FPerfil extends javax.swing.JFrame {
         lbl_anos.setForeground(new java.awt.Color(102, 102, 102));
         lbl_anos.setText("Nível");
 
-        barra_nivel.setBackground(new java.awt.Color(204, 204, 204));
         barra_nivel.setBorder(null);
+        barra_nivel.setForeground(new java.awt.Color(204, 204, 204));
         barra_nivel.setValue(100);
+        barra_nivel.setColorString(new java.awt.Color(255, 255, 255));
+        barra_nivel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         panel_foto_perfil.setPreferredSize(new java.awt.Dimension(150, 140));
         panel_foto_perfil.setRoundBottomLeft(50);
