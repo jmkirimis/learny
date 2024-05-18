@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -27,6 +28,9 @@ public class FMundos extends javax.swing.JFrame {
     ResultSet rs = null;
     Color vermelhoPastel = new Color(239,91,106);
     Color azulPastel = new Color(108,210,255);
+    Color azul = new Color(83, 194, 242);
+    Color verde = new Color(128,210,91);
+    Color vermelho = new Color(239,91,106);
     AlunoLogado alunlog = new AlunoLogado();
     int mundo = 1;
     /**
@@ -55,7 +59,7 @@ public class FMundos extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e);
         }
-        btn_mundo1.setColor(new Color(102, 102, 102));
+        btn_mundo1.setColor(verde);
     }
 
     /**
@@ -74,10 +78,12 @@ public class FMundos extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         panelSlide = new Visualizacao.PanelSlide();
-        btn_mundo1 = new Visualizacao.BotaoCustomizado();
-        btn_mundo2 = new Visualizacao.BotaoCustomizado();
+        panelRound2 = new Visualizacao.PanelRound();
         btn_mundo3 = new Visualizacao.BotaoCustomizado();
-        botaoCustomizado4 = new Visualizacao.BotaoCustomizado();
+        btn_mundo2 = new Visualizacao.BotaoCustomizado();
+        btn_mundo1 = new Visualizacao.BotaoCustomizado();
+        panelSombra3 = new Visualizacao.PanelSombra();
+        jLabel1 = new javax.swing.JLabel();
         panelSombra1 = new Visualizacao.PanelSombra();
         lbl_pontos = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -166,30 +172,14 @@ public class FMundos extends javax.swing.JFrame {
             .addGap(0, 409, Short.MAX_VALUE)
         );
 
-        btn_mundo1.setBorderColor(new java.awt.Color(102, 102, 102));
-        btn_mundo1.setColorClick(new java.awt.Color(153, 153, 153));
-        btn_mundo1.setColorOver(new java.awt.Color(204, 204, 204));
-        btn_mundo1.setPreferredSize(new java.awt.Dimension(30, 40));
-        btn_mundo1.setRadius(100);
-        btn_mundo1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_mundo1ActionPerformed(evt);
-            }
-        });
-
-        btn_mundo2.setBorderColor(new java.awt.Color(102, 102, 102));
-        btn_mundo2.setColorClick(new java.awt.Color(153, 153, 153));
-        btn_mundo2.setColorOver(new java.awt.Color(204, 204, 204));
-        btn_mundo2.setPreferredSize(new java.awt.Dimension(30, 40));
-        btn_mundo2.setRadius(100);
-        btn_mundo2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_mundo2ActionPerformed(evt);
-            }
-        });
+        panelRound2.setBackground(new java.awt.Color(102, 102, 102));
+        panelRound2.setRoundBottomLeft(30);
+        panelRound2.setRoundBottomRight(30);
+        panelRound2.setRoundTopLeft(30);
+        panelRound2.setRoundTopRight(30);
 
         btn_mundo3.setBorderColor(new java.awt.Color(102, 102, 102));
-        btn_mundo3.setColorClick(new java.awt.Color(153, 153, 153));
+        btn_mundo3.setColorClick(new java.awt.Color(255, 255, 255));
         btn_mundo3.setColorOver(new java.awt.Color(204, 204, 204));
         btn_mundo3.setPreferredSize(new java.awt.Dimension(30, 40));
         btn_mundo3.setRadius(100);
@@ -199,16 +189,83 @@ public class FMundos extends javax.swing.JFrame {
             }
         });
 
-        botaoCustomizado4.setText("Entrar");
-        botaoCustomizado4.setBorderColor(new java.awt.Color(102, 102, 102));
-        botaoCustomizado4.setColorClick(new java.awt.Color(153, 153, 153));
-        botaoCustomizado4.setColorOver(new java.awt.Color(204, 204, 204));
-        botaoCustomizado4.setRadius(20);
-        botaoCustomizado4.addActionListener(new java.awt.event.ActionListener() {
+        btn_mundo2.setBorderColor(new java.awt.Color(102, 102, 102));
+        btn_mundo2.setColorClick(new java.awt.Color(255, 255, 255));
+        btn_mundo2.setColorOver(new java.awt.Color(204, 204, 204));
+        btn_mundo2.setPreferredSize(new java.awt.Dimension(30, 40));
+        btn_mundo2.setRadius(100);
+        btn_mundo2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoCustomizado4ActionPerformed(evt);
+                btn_mundo2ActionPerformed(evt);
             }
         });
+
+        btn_mundo1.setBorderColor(new java.awt.Color(102, 102, 102));
+        btn_mundo1.setColorClick(new java.awt.Color(255, 255, 255));
+        btn_mundo1.setColorOver(new java.awt.Color(204, 204, 204));
+        btn_mundo1.setPreferredSize(new java.awt.Dimension(30, 40));
+        btn_mundo1.setRadius(100);
+        btn_mundo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_mundo1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
+        panelRound2.setLayout(panelRound2Layout);
+        panelRound2Layout.setHorizontalGroup(
+            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound2Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(btn_mundo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(btn_mundo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addComponent(btn_mundo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
+        );
+        panelRound2Layout.setVerticalGroup(
+            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_mundo1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_mundo2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_mundo3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        panelSombra3.setBackground(new java.awt.Color(102, 102, 102));
+        panelSombra3.setPreferredSize(new java.awt.Dimension(195, 60));
+        panelSombra3.setShadowOpacity(0.2F);
+        panelSombra3.setShadowSize(3);
+        panelSombra3.setShadowType(Visualizacao.ShadowType.BOT_LEFT);
+        panelSombra3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelSombra3MouseClicked(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Entrar");
+
+        javax.swing.GroupLayout panelSombra3Layout = new javax.swing.GroupLayout(panelSombra3);
+        panelSombra3.setLayout(panelSombra3Layout);
+        panelSombra3Layout.setHorizontalGroup(
+            panelSombra3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSombra3Layout.createSequentialGroup()
+                .addContainerGap(62, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap(59, Short.MAX_VALUE))
+        );
+        panelSombra3Layout.setVerticalGroup(
+            panelSombra3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSombra3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
@@ -218,18 +275,14 @@ public class FMundos extends javax.swing.JFrame {
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(190, 190, 190)
-                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelRound1Layout.createSequentialGroup()
-                                .addComponent(btn_mundo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_mundo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_mundo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(botaoCustomizado4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(142, 142, 142)
+                        .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(44, 44, 44)
-                        .addComponent(panelSlide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(panelSlide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(panelSombra3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
@@ -237,14 +290,11 @@ public class FMundos extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
                 .addContainerGap(31, Short.MAX_VALUE)
                 .addComponent(panelSlide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(botaoCustomizado4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_mundo1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_mundo2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_mundo3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelSombra3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -358,7 +408,7 @@ public class FMundos extends javax.swing.JFrame {
                     .addComponent(panelSombra2, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
                     .addComponent(panelSombra4, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
                     .addComponent(panelSombra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -410,7 +460,7 @@ public class FMundos extends javax.swing.JFrame {
         panelSlide.show(0);
         mundo = 1;
         if(mundo == 1){
-            btn_mundo1.setColor(new Color(102, 102, 102));
+            btn_mundo1.setColor(verde);
             btn_mundo2.setColor(new Color(255, 255, 255));
             btn_mundo3.setColor(new Color(255, 255, 255));
         }
@@ -420,7 +470,7 @@ public class FMundos extends javax.swing.JFrame {
         panelSlide.show(1);
         mundo = 2;
         if(mundo == 2){
-            btn_mundo2.setColor(new Color(102, 102, 102));
+            btn_mundo2.setColor(azul);
             btn_mundo1.setColor(new Color(255, 255, 255));
             btn_mundo3.setColor(new Color(255, 255, 255));
         }
@@ -430,20 +480,20 @@ public class FMundos extends javax.swing.JFrame {
         panelSlide.show(2);
         mundo = 3;
         if(mundo == 3){
-            btn_mundo3.setColor(new Color(102, 102, 102));
+            btn_mundo3.setColor(vermelho);
             btn_mundo1.setColor(new Color(255, 255, 255));
             btn_mundo2.setColor(new Color(255, 255, 255));
         }
     }//GEN-LAST:event_btn_mundo3ActionPerformed
 
-    private void botaoCustomizado4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCustomizado4ActionPerformed
+    private void panelSombra3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra3MouseClicked
         if(mundo == 1){
             new FRegiao().setVisible(true);
             dispose();
         } else{
             JOptionPane.showMessageDialog(null,"Mundo em desenvolvimento");
         }
-    }//GEN-LAST:event_botaoCustomizado4ActionPerformed
+    }//GEN-LAST:event_panelSombra3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -488,10 +538,10 @@ public class FMundos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Visualizacao.BotaoCustomizado botaoCustomizado4;
     private Visualizacao.BotaoCustomizado btn_mundo1;
     private Visualizacao.BotaoCustomizado btn_mundo2;
     private Visualizacao.BotaoCustomizado btn_mundo3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel20;
@@ -504,9 +554,11 @@ public class FMundos extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_pontos;
     private Visualizacao.PanelGradiente panelGradiente;
     private Visualizacao.PanelRound panelRound1;
+    private Visualizacao.PanelRound panelRound2;
     private Visualizacao.PanelSlide panelSlide;
     private Visualizacao.PanelSombra panelSombra1;
     private Visualizacao.PanelSombra panelSombra2;
+    private Visualizacao.PanelSombra panelSombra3;
     private Visualizacao.PanelSombra panelSombra4;
     // End of variables declaration//GEN-END:variables
 }

@@ -357,6 +357,10 @@ public class FFaseLigar extends javax.swing.JFrame {
         panel.repaint();
     }
     
+    public void resetarIcone(){
+    
+    }
+    
     public void verificarAcertos() {
         if(linhaVisivelCobra){
             acertos++;
