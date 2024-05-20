@@ -34,7 +34,7 @@ create table alunoLogado(
     foto varchar(50),
     constraint fk_aluno_logado foreign key(idAluno) references alunos(idAluno)
 );
-#select * from alunoLogado;
+select * from alunoLogado;
 #delete from alunoLogado where idAlunoLogado = 1;
 
 create table mundos(
@@ -65,8 +65,9 @@ create table fases(
 insert into fases(idRegiao, tipo, dificuldade) values
 (1, "Visual", "Fácil"),
 (1, "Números", "Médio"),
-(1, "Ouvir", "Médio");
-#select * from fases;
+(1, "Ouvir", "Médio"),
+(1, "Observacao", "Fácil");
+select * from fases;
 
 create table fasesConcluidas(
 	idFaseConcluida int auto_increment primary key,
@@ -78,14 +79,16 @@ create table fasesConcluidas(
     constraint fk_fase foreign key(idFase) references fases(idFase),
     constraint fk_aluno_fase_concluida foreign key(idAluno) references alunos(idAluno)
 );
-#select * from fasesConcluidas;
+select * from fasesConcluidas;
 
 create table conquistas(
 	idConquista int auto_increment primary key,
     nomeConquista varchar(100)
 );
 insert into conquistas(nomeConquista) values
-("A todo vapor!");
+("Iniciando!"),
+("A todo vapor!"),
+("Mundo Concluído!");
 
 create table alunosXconquistas(
 	idAlunoConquista int auto_increment primary key,
@@ -94,9 +97,7 @@ create table alunosXconquistas(
     constraint fk_conquista foreign key(idConquista) references conquistas(idConquista),
     constraint fk_aluno_conquista foreign key(idAluno) references alunos(idAluno)
 );
-insert into alunosXconquistas(idConquista, idAluno) values
-(1,1);
-
+select * from alunosXconquistas;
 
 -- Criação do trigger para atualizar o número de fases concluídas
 DELIMITER //

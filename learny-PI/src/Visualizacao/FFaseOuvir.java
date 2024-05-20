@@ -8,6 +8,7 @@ package Visualizacao;
 import Controle.Conexao;
 import Modelagem.FaseConcluida;
 import Modelagem.WindowManager;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -71,6 +72,13 @@ public class FFaseOuvir extends javax.swing.JFrame {
         
         timer.start();
     }
+    
+    public void dispose() {
+        super.dispose();
+        if (timer != null) {
+            timer.stop();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -92,14 +100,14 @@ public class FFaseOuvir extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        panelRound1 = new Visualizacao.PanelRound();
-        jLabel8 = new javax.swing.JLabel();
-        panelRound2 = new Visualizacao.PanelRound();
-        jLabel10 = new javax.swing.JLabel();
-        panelRound3 = new Visualizacao.PanelRound();
-        jLabel9 = new javax.swing.JLabel();
-        panelRound4 = new Visualizacao.PanelRound();
-        jLabel11 = new javax.swing.JLabel();
+        panel_red = new Visualizacao.PanelRound();
+        lbl_red = new javax.swing.JLabel();
+        panel_head = new Visualizacao.PanelRound();
+        lbl_head = new javax.swing.JLabel();
+        panel_read = new Visualizacao.PanelRound();
+        lbl_read = new javax.swing.JLabel();
+        panel_heard = new Visualizacao.PanelRound();
+        lbl_heard = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -223,128 +231,128 @@ public class FFaseOuvir extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 102, 102));
         jLabel3.setText("choose");
 
-        panelRound1.setRoundBottomLeft(50);
-        panelRound1.setRoundBottomRight(50);
-        panelRound1.setRoundTopLeft(50);
-        panelRound1.setRoundTopRight(50);
-        panelRound1.addMouseListener(new java.awt.event.MouseAdapter() {
+        panel_red.setRoundBottomLeft(50);
+        panel_red.setRoundBottomRight(50);
+        panel_red.setRoundTopLeft(50);
+        panel_red.setRoundTopRight(50);
+        panel_red.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelRound1MouseClicked(evt);
+                panel_redMouseClicked(evt);
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel8.setText("RED");
+        lbl_red.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
+        lbl_red.setForeground(new java.awt.Color(102, 102, 102));
+        lbl_red.setText("RED");
 
-        javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
-        panelRound1.setLayout(panelRound1Layout);
-        panelRound1Layout.setHorizontalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panel_redLayout = new javax.swing.GroupLayout(panel_red);
+        panel_red.setLayout(panel_redLayout);
+        panel_redLayout.setHorizontalGroup(
+            panel_redLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_redLayout.createSequentialGroup()
                 .addContainerGap(59, Short.MAX_VALUE)
-                .addComponent(jLabel8)
+                .addComponent(lbl_red)
                 .addGap(55, 55, 55))
         );
-        panelRound1Layout.setVerticalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound1Layout.createSequentialGroup()
+        panel_redLayout.setVerticalGroup(
+            panel_redLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_redLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jLabel8)
+                .addComponent(lbl_red)
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        panelRound2.setRoundBottomLeft(50);
-        panelRound2.setRoundBottomRight(50);
-        panelRound2.setRoundTopLeft(50);
-        panelRound2.setRoundTopRight(50);
-        panelRound2.addMouseListener(new java.awt.event.MouseAdapter() {
+        panel_head.setRoundBottomLeft(50);
+        panel_head.setRoundBottomRight(50);
+        panel_head.setRoundTopLeft(50);
+        panel_head.setRoundTopRight(50);
+        panel_head.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelRound2MouseClicked(evt);
+                panel_headMouseClicked(evt);
             }
         });
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel10.setText("HEAD");
+        lbl_head.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
+        lbl_head.setForeground(new java.awt.Color(102, 102, 102));
+        lbl_head.setText("HEAD");
 
-        javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
-        panelRound2.setLayout(panelRound2Layout);
-        panelRound2Layout.setHorizontalGroup(
-            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
+        javax.swing.GroupLayout panel_headLayout = new javax.swing.GroupLayout(panel_head);
+        panel_head.setLayout(panel_headLayout);
+        panel_headLayout.setHorizontalGroup(
+            panel_headLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_headLayout.createSequentialGroup()
                 .addContainerGap(51, Short.MAX_VALUE)
-                .addComponent(jLabel10)
+                .addComponent(lbl_head)
                 .addGap(47, 47, 47))
         );
-        panelRound2Layout.setVerticalGroup(
-            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound2Layout.createSequentialGroup()
+        panel_headLayout.setVerticalGroup(
+            panel_headLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_headLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jLabel10)
+                .addComponent(lbl_head)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        panelRound3.setRoundBottomLeft(50);
-        panelRound3.setRoundBottomRight(50);
-        panelRound3.setRoundTopLeft(50);
-        panelRound3.setRoundTopRight(50);
-        panelRound3.addMouseListener(new java.awt.event.MouseAdapter() {
+        panel_read.setRoundBottomLeft(50);
+        panel_read.setRoundBottomRight(50);
+        panel_read.setRoundTopLeft(50);
+        panel_read.setRoundTopRight(50);
+        panel_read.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelRound3MouseClicked(evt);
+                panel_readMouseClicked(evt);
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel9.setText("READ");
+        lbl_read.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
+        lbl_read.setForeground(new java.awt.Color(102, 102, 102));
+        lbl_read.setText("READ");
 
-        javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
-        panelRound3.setLayout(panelRound3Layout);
-        panelRound3Layout.setHorizontalGroup(
-            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
+        javax.swing.GroupLayout panel_readLayout = new javax.swing.GroupLayout(panel_read);
+        panel_read.setLayout(panel_readLayout);
+        panel_readLayout.setHorizontalGroup(
+            panel_readLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_readLayout.createSequentialGroup()
                 .addContainerGap(52, Short.MAX_VALUE)
-                .addComponent(jLabel9)
+                .addComponent(lbl_read)
                 .addGap(47, 47, 47))
         );
-        panelRound3Layout.setVerticalGroup(
-            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
+        panel_readLayout.setVerticalGroup(
+            panel_readLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_readLayout.createSequentialGroup()
                 .addContainerGap(24, Short.MAX_VALUE)
-                .addComponent(jLabel9)
+                .addComponent(lbl_read)
                 .addGap(22, 22, 22))
         );
 
-        panelRound4.setPreferredSize(new java.awt.Dimension(161, 73));
-        panelRound4.setRoundBottomLeft(50);
-        panelRound4.setRoundBottomRight(50);
-        panelRound4.setRoundTopLeft(50);
-        panelRound4.setRoundTopRight(50);
-        panelRound4.addMouseListener(new java.awt.event.MouseAdapter() {
+        panel_heard.setPreferredSize(new java.awt.Dimension(161, 73));
+        panel_heard.setRoundBottomLeft(50);
+        panel_heard.setRoundBottomRight(50);
+        panel_heard.setRoundTopLeft(50);
+        panel_heard.setRoundTopRight(50);
+        panel_heard.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelRound4MouseClicked(evt);
+                panel_heardMouseClicked(evt);
             }
         });
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel11.setText("HEARD");
+        lbl_heard.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
+        lbl_heard.setForeground(new java.awt.Color(102, 102, 102));
+        lbl_heard.setText("HEARD");
 
-        javax.swing.GroupLayout panelRound4Layout = new javax.swing.GroupLayout(panelRound4);
-        panelRound4.setLayout(panelRound4Layout);
-        panelRound4Layout.setHorizontalGroup(
-            panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound4Layout.createSequentialGroup()
+        javax.swing.GroupLayout panel_heardLayout = new javax.swing.GroupLayout(panel_heard);
+        panel_heard.setLayout(panel_heardLayout);
+        panel_heardLayout.setHorizontalGroup(
+            panel_heardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_heardLayout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addComponent(jLabel11)
+                .addComponent(lbl_heard)
                 .addContainerGap(41, Short.MAX_VALUE))
         );
-        panelRound4Layout.setVerticalGroup(
-            panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound4Layout.createSequentialGroup()
+        panel_heardLayout.setVerticalGroup(
+            panel_heardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_heardLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jLabel11)
+                .addComponent(lbl_heard)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -372,12 +380,12 @@ public class FFaseOuvir extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(63, 63, 63)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(panel_red, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panel_read, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(29, 29, 29)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(panel_heard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panel_head, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 28, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(214, 214, 214)
@@ -402,12 +410,12 @@ public class FFaseOuvir extends javax.swing.JFrame {
                 .addComponent(panelSombra3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelRound2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panel_red, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panel_head, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelRound4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panel_heard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panel_read, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(73, 73, 73)
                 .addComponent(jLabel4)
                 .addContainerGap(41, Short.MAX_VALUE))
@@ -446,7 +454,7 @@ public class FFaseOuvir extends javax.swing.JFrame {
         }
         fase.setIdFase(3);
         fase.setIdAluno(idAluno);
-        fase.setPontos(100);
+        fase.setPontos(pontos);
         fase.setTempoConclusao(minutes,remainingSeconds);
         fase.setPorcAcertos(porcAcerto);
         fase.cadastrar();
@@ -466,21 +474,50 @@ public class FFaseOuvir extends javax.swing.JFrame {
 
     }//GEN-LAST:event_panelBtnPerfil6MouseExited
 
-    private void panelRound1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound1MouseClicked
+    private void panel_redMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_redMouseClicked
         acerto = "ok";
-    }//GEN-LAST:event_panelRound1MouseClicked
+        panel_red.setBackground(new Color(153,153,153));
+        lbl_red.setForeground(new Color(255, 255, 255));
+        panel_head.setBackground(new Color(240,240,240));
+        lbl_head.setForeground(new Color(102, 102, 102));
+        panel_read.setBackground(new Color(240,240,240));
+        lbl_read.setForeground(new Color(102, 102, 102));
+        panel_heard.setBackground(new Color(240,240,240));
+        lbl_heard.setForeground(new Color(102, 102, 102));
+    }//GEN-LAST:event_panel_redMouseClicked
 
-    private void panelRound2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelRound2MouseClicked
+    private void panel_headMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_headMouseClicked
+        panel_red.setBackground(new Color(240,240,240));
+        lbl_red.setForeground(new Color(102, 102, 102));
+        panel_head.setBackground(new Color(153,153,153));
+        lbl_head.setForeground(new Color(255, 255, 255));
+        panel_read.setBackground(new Color(240,240,240));
+        lbl_read.setForeground(new Color(102, 102, 102));
+        panel_heard.setBackground(new Color(240,240,240));
+        lbl_heard.setForeground(new Color(102, 102, 102));
+    }//GEN-LAST:event_panel_headMouseClicked
 
-    private void panelRound3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound3MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelRound3MouseClicked
+    private void panel_readMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_readMouseClicked
+        panel_red.setBackground(new Color(240,240,240));
+        lbl_red.setForeground(new Color(102, 102, 102));
+        panel_head.setBackground(new Color(240,240,240));
+        lbl_head.setForeground(new Color(102, 102, 102));
+        panel_read.setBackground(new Color(153,153,153));
+        lbl_read.setForeground(new Color(255, 255, 255));
+        panel_heard.setBackground(new Color(240,240,240));
+        lbl_heard.setForeground(new Color(102, 102, 102));
+    }//GEN-LAST:event_panel_readMouseClicked
 
-    private void panelRound4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound4MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelRound4MouseClicked
+    private void panel_heardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_heardMouseClicked
+        panel_red.setBackground(new Color(240,240,240));
+        lbl_red.setForeground(new Color(102, 102, 102));
+        panel_head.setBackground(new Color(240,240,240));
+        lbl_head.setForeground(new Color(102, 102, 102));
+        panel_read.setBackground(new Color(240,240,240));
+        lbl_read.setForeground(new Color(102, 102, 102));
+        panel_heard.setBackground(new Color(153,153,153));
+        lbl_heard.setForeground(new Color(255, 255, 255));
+    }//GEN-LAST:event_panel_heardMouseClicked
 
     /**
      * @param args the command line arguments
@@ -519,8 +556,6 @@ public class FFaseOuvir extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
@@ -528,15 +563,17 @@ public class FFaseOuvir extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbl_head;
+    private javax.swing.JLabel lbl_heard;
+    private javax.swing.JLabel lbl_read;
+    private javax.swing.JLabel lbl_red;
     private Visualizacao.PanelBtnPerfil panelBtnPerfil6;
-    private Visualizacao.PanelRound panelRound1;
-    private Visualizacao.PanelRound panelRound2;
-    private Visualizacao.PanelRound panelRound3;
-    private Visualizacao.PanelRound panelRound4;
     private Visualizacao.PanelSombra panelSombra1;
     private Visualizacao.PanelSombra panelSombra3;
+    private Visualizacao.PanelRound panel_head;
+    private Visualizacao.PanelRound panel_heard;
+    private Visualizacao.PanelRound panel_read;
+    private Visualizacao.PanelRound panel_red;
     // End of variables declaration//GEN-END:variables
 }

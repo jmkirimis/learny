@@ -430,7 +430,7 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
         double pontos;
         pontos = ((double) porcAcerto * 0.7) + ((int) seconds * 0.3);
         
-        fase.setIdFase(3);
+        fase.setIdFase(2);
         fase.setIdAluno(idAluno);
         fase.setPontos(pontos);
         fase.setTempoConclusao(minutes,remainingSeconds);

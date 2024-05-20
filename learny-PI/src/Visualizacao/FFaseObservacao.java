@@ -11,7 +11,10 @@ package Visualizacao;
  */
 
 import Controle.Conexao;
+import Modelagem.FaseConcluida;
 import Modelagem.WindowManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
@@ -20,6 +23,7 @@ import java.sql.ResultSet;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 
 public class FFaseObservacao extends javax.swing.JFrame {
@@ -48,6 +52,11 @@ public class FFaseObservacao extends javax.swing.JFrame {
     private boolean macacoClicado = false;
     private boolean formigaClicada = false;
     private boolean alpacaClicada = false;
+    
+    private Timer timer;
+    private int seconds = 0;
+    private int minutes;
+    private int remainingSeconds;
     
     private int idAluno;
     
@@ -128,6 +137,28 @@ public class FFaseObservacao extends javax.swing.JFrame {
                 }
             }
         });
+        
+         // Configuranod o timer
+        timer = new Timer(1000, new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                seconds++;
+                minutes = seconds / 60;
+                remainingSeconds = seconds % 60;
+            
+                System.out.println("O JFrame está aberto há " + minutes + " minutos e " + remainingSeconds + " segundos.");
+            }
+        });
+        
+        timer.start(); // Iniciar o timer
+    }
+    
+     public void dispose() {
+        super.dispose();
+        if (timer != null) {
+            timer.stop();
+        }
     }
 
     /**
@@ -159,6 +190,8 @@ public class FFaseObservacao extends javax.swing.JFrame {
         lbl_alpaca = new javax.swing.JLabel();
         panelRound5 = new Visualizacao.PanelRound();
         jLabel9 = new javax.swing.JLabel();
+        panelRoundBorda1 = new Visualizacao.PanelRoundBorda();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -323,6 +356,34 @@ public class FFaseObservacao extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 204, 0));
         jLabel9.setText("Alpaca");
 
+        panelRoundBorda1.setBackground(new java.awt.Color(255, 255, 255));
+        panelRoundBorda1.setBorderWidth(5);
+        panelRoundBorda1.setGradientEndColor(new java.awt.Color(128, 210, 91));
+        panelRoundBorda1.setGradientStartColor(new java.awt.Color(128, 210, 91));
+        panelRoundBorda1.setPreferredSize(new java.awt.Dimension(80, 80));
+        panelRoundBorda1.setRadius(100);
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(128, 210, 91));
+        jLabel10.setText("A");
+
+        javax.swing.GroupLayout panelRoundBorda1Layout = new javax.swing.GroupLayout(panelRoundBorda1);
+        panelRoundBorda1.setLayout(panelRoundBorda1Layout);
+        panelRoundBorda1Layout.setHorizontalGroup(
+            panelRoundBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda1Layout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addComponent(jLabel10)
+                .addGap(23, 23, 23))
+        );
+        panelRoundBorda1Layout.setVerticalGroup(
+            panelRoundBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda1Layout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addComponent(jLabel10)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -379,6 +440,10 @@ public class FFaseObservacao extends javax.swing.JFrame {
                                         .addComponent(jLabel9))))
                             .addComponent(panelSombra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 48, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(166, 166, 166)
+                .addComponent(panelRoundBorda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -395,7 +460,9 @@ public class FFaseObservacao extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(49, 49, 49)))
                 .addComponent(panelSombra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(145, 145, 145)
+                .addGap(26, 26, 26)
+                .addComponent(panelRoundBorda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
@@ -448,7 +515,15 @@ public class FFaseObservacao extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jLabel2MouseClicked
 
+    FaseConcluida fase = new FaseConcluida();
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+         
+        fase.setIdFase(4);
+        fase.setIdAluno(idAluno);
+        fase.setPontos(70);
+        fase.setTempoConclusao(minutes,remainingSeconds);
+        fase.setPorcAcertos(100);
+        fase.cadastrar();
         new FFaseConcluida().setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
@@ -491,6 +566,7 @@ public class FFaseObservacao extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -508,6 +584,7 @@ public class FFaseObservacao extends javax.swing.JFrame {
     private Visualizacao.PanelRound panelRound3;
     private Visualizacao.PanelRound panelRound4;
     private Visualizacao.PanelRound panelRound5;
+    private Visualizacao.PanelRoundBorda panelRoundBorda1;
     private Visualizacao.PanelSombra panelSombra1;
     private Visualizacao.PanelSombra panelSombra2;
     // End of variables declaration//GEN-END:variables

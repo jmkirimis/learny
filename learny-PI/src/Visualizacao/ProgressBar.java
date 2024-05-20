@@ -20,12 +20,11 @@ import javax.swing.JComponent;
 import javax.swing.JProgressBar;
 import javax.swing.plaf.basic.BasicProgressBarUI;
 
-
 public class ProgressBar extends JProgressBar {
 
     private Color colorString = new Color(200, 200, 200);
     Color azul = new Color(83, 194, 242);
-    Color vermelho = new Color(239,91,106);
+    Color vermelho = new Color(239, 91, 106);
 
     public ProgressBar() {
         setStringPainted(true);
@@ -33,6 +32,10 @@ public class ProgressBar extends JProgressBar {
         setBackground(new Color(255, 255, 255));
         setForeground(new Color(69, 124, 235));
         setUI(new RoundedProgressBarUI());
+
+        // Definir o intervalo personalizado de 0 a 300
+        setMinimum(0);
+        setMaximum(300);
     }
 
     public Color getColorString() {
@@ -43,11 +46,17 @@ public class ProgressBar extends JProgressBar {
         this.colorString = colorString;
     }
 
+    @Override
+    public String getString() {
+        // Retornar o valor atual com o prefixo "exp: "
+        return "exp: " + getValue();
+    }
+
     class RoundedProgressBarUI extends BasicProgressBarUI {
 
         @Override
         protected void paintIndeterminate(Graphics g, JComponent c) {
-            // Custom painting for indeterminate state if needed
+            // Pintura customizada para o estado indeterminado, se necessário
             super.paintIndeterminate(g, c);
         }
 
@@ -55,28 +64,28 @@ public class ProgressBar extends JProgressBar {
         protected void paintDeterminate(Graphics g, JComponent c) {
             Graphics2D g2d = (Graphics2D) g.create();
 
-            // Antialiasing for smoother graphics
+            // Antialiasing para gráficos mais suaves
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-            // Draw progress bar
+            // Desenhar a barra de progresso
             int width = c.getWidth();
             int height = c.getHeight();
-            int arc = height; // Adjust the arc to control the roundness
+            int arc = height; // Ajustar o arco para controlar o arredondamento
             Insets insets = progressBar.getInsets();
             int barRectWidth = width - (insets.left + insets.right);
             int barRectHeight = height - (insets.top + insets.bottom);
             int amountFull = getAmountFull(insets, barRectWidth, barRectHeight);
 
-            // Create gradient paint
+            // Criar o gradiente de pintura
             Color startColor = azul;
             Color endColor = vermelho;
             GradientPaint gradientPaint = new GradientPaint(0, 0, startColor, width, 0, endColor);
 
-            // Fill progress bar with gradient
+            // Preencher a barra de progresso com gradiente
             g2d.setPaint(gradientPaint);
             g2d.fillRoundRect(insets.left, insets.top, amountFull, barRectHeight, arc, arc);
 
-            // Draw the text on progress bar
+            // Desenhar o texto na barra de progresso
             if (progressBar.isStringPainted()) {
                 paintString(g2d, insets.left, insets.top, barRectWidth, barRectHeight, amountFull, insets);
             }
@@ -85,9 +94,26 @@ public class ProgressBar extends JProgressBar {
         }
 
         @Override
-        protected void paintString(Graphics grphcs, int i, int i1, int i2, int i3, int i4, Insets insets) {
-            grphcs.setColor(getColorString());
-            super.paintString(grphcs, i, i1, i2, i3, i4, insets);
+        protected void paintString(Graphics g, int x, int y, int width, int height, int amountFull, Insets b) {
+            if (!(g instanceof Graphics2D)) {
+                return;
+            }
+
+            Graphics2D g2d = (Graphics2D) g;
+            String progressString = progressBar.getString();
+            g2d.setFont(progressBar.getFont());
+
+            // Definir a cor da string
+            g2d.setColor(getColorString());
+
+            // Calcular a posição da string com espaçamento adicional
+            int stringWidth = g2d.getFontMetrics().stringWidth(progressString);
+            int stringHeight = g2d.getFontMetrics().getAscent();
+            int stringX = b.left + 15; // Aumentar a margem esquerda para 15 pixels
+            int stringY = (height - stringHeight) / 2 + stringHeight;
+
+            // Desenhar a string no canto esquerdo com mais espaçamento
+            g2d.drawString(progressString, stringX, stringY);
         }
     }
 }

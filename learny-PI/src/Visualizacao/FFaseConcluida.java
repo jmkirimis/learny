@@ -86,15 +86,15 @@ public class FFaseConcluida extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        panelRoundBorda1 = new Visualizacao.PanelRoundBorda();
+        lbl_porc = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        panelRoundBorda2 = new Visualizacao.PanelRoundBorda();
         jLabel4 = new javax.swing.JLabel();
         lbl_pontos = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        lbl_porc = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
+        panelRoundBorda3 = new Visualizacao.PanelRoundBorda();
         jLabel14 = new javax.swing.JLabel();
         lbl_tempo = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -116,11 +116,61 @@ public class FFaseConcluida extends javax.swing.JFrame {
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 51), 5, true));
+        panelRoundBorda1.setBackground(new java.awt.Color(255, 255, 255));
+        panelRoundBorda1.setBorderWidth(4);
+        panelRoundBorda1.setGradientStartColor(new java.awt.Color(83, 194, 242));
+        panelRoundBorda1.setRadius(40);
+
+        lbl_porc.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lbl_porc.setForeground(new java.awt.Color(102, 102, 102));
+        lbl_porc.setText("83%");
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(83, 194, 242));
+        jLabel11.setText("Porcentagem");
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(83, 194, 242));
+        jLabel13.setText("de acertos");
+
+        javax.swing.GroupLayout panelRoundBorda1Layout = new javax.swing.GroupLayout(panelRoundBorda1);
+        panelRoundBorda1.setLayout(panelRoundBorda1Layout);
+        panelRoundBorda1Layout.setHorizontalGroup(
+            panelRoundBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda1Layout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addGroup(panelRoundBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel11)
+                        .addGroup(panelRoundBorda1Layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(jLabel13)))
+                    .addGroup(panelRoundBorda1Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(lbl_porc)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(23, 23, 23))
+        );
+        panelRoundBorda1Layout.setVerticalGroup(
+            panelRoundBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda1Layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbl_porc)
+                .addContainerGap())
+        );
+
+        panelRoundBorda2.setBackground(new java.awt.Color(255, 255, 255));
+        panelRoundBorda2.setBorderWidth(4);
+        panelRoundBorda2.setGradientEndColor(new java.awt.Color(128, 210, 91));
+        panelRoundBorda2.setGradientStartColor(new java.awt.Color(128, 210, 91));
+        panelRoundBorda2.setRadius(40);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 204, 51));
+        jLabel4.setForeground(new java.awt.Color(128, 210, 91));
         jLabel4.setText("Total de");
 
         lbl_pontos.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -128,84 +178,43 @@ public class FFaseConcluida extends javax.swing.JFrame {
         lbl_pontos.setText("100");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 204, 51));
+        jLabel10.setForeground(new java.awt.Color(128, 210, 91));
         jLabel10.setText("pontos");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelRoundBorda2Layout = new javax.swing.GroupLayout(panelRoundBorda2);
+        panelRoundBorda2.setLayout(panelRoundBorda2Layout);
+        panelRoundBorda2Layout.setHorizontalGroup(
+            panelRoundBorda2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda2Layout.createSequentialGroup()
+                .addContainerGap(39, Short.MAX_VALUE)
+                .addGroup(panelRoundBorda2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRoundBorda2Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(lbl_pontos))
                     .addComponent(jLabel10)
                     .addComponent(jLabel4))
-                .addGap(25, 25, 25))
+                .addGap(33, 33, 33))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+        panelRoundBorda2Layout.setVerticalGroup(
+            panelRoundBorda2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbl_pontos)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 204, 255), 5, true));
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(102, 204, 255));
-        jLabel11.setText("Porcentagem");
-
-        lbl_porc.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        lbl_porc.setForeground(new java.awt.Color(102, 102, 102));
-        lbl_porc.setText("83%");
-
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(102, 204, 255));
-        jLabel13.setText("de acertos");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel13)))
-                .addGap(20, 20, 20))
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(lbl_porc)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbl_porc)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 204, 0), 5, true));
+        panelRoundBorda3.setBackground(new java.awt.Color(255, 255, 255));
+        panelRoundBorda3.setBorderWidth(4);
+        panelRoundBorda3.setGradientEndColor(new java.awt.Color(255, 179, 0));
+        panelRoundBorda3.setGradientStartColor(new java.awt.Color(255, 179, 0));
+        panelRoundBorda3.setRadius(40);
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 204, 0));
+        jLabel14.setForeground(new java.awt.Color(255, 179, 0));
         jLabel14.setText("Tempo de");
 
         lbl_tempo.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -213,34 +222,34 @@ public class FFaseConcluida extends javax.swing.JFrame {
         lbl_tempo.setText("1:50");
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 204, 0));
+        jLabel16.setForeground(new java.awt.Color(255, 179, 0));
         jLabel16.setText("conclusão");
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panelRoundBorda3Layout = new javax.swing.GroupLayout(panelRoundBorda3);
+        panelRoundBorda3.setLayout(panelRoundBorda3Layout);
+        panelRoundBorda3Layout.setHorizontalGroup(
+            panelRoundBorda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRoundBorda3Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(panelRoundBorda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel16)
-                    .addComponent(jLabel14))
-                .addGap(25, 25, 25))
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(lbl_tempo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel14)
+                    .addGroup(panelRoundBorda3Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(lbl_tempo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+        panelRoundBorda3Layout.setVerticalGroup(
+            panelRoundBorda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbl_tempo)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -255,19 +264,18 @@ public class FFaseConcluida extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addComponent(jLabel2))
                 .addGap(130, 130, 130))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 27, Short.MAX_VALUE)
+                .addComponent(panelRoundBorda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panelRoundBorda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panelRoundBorda3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(248, 248, 248)
-                        .addComponent(jLabel3)))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addGap(242, 242, 242)
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,14 +284,14 @@ public class FFaseConcluida extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(37, 37, 37)
                 .addComponent(jLabel2)
-                .addGap(90, 90, 90)
+                .addGap(105, 105, 105)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(82, 82, 82)
+                    .addComponent(panelRoundBorda1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelRoundBorda2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelRoundBorda3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addGap(73, 73, 73))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -352,11 +360,11 @@ public class FFaseConcluida extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel lbl_pontos;
     private javax.swing.JLabel lbl_porc;
     private javax.swing.JLabel lbl_tempo;
+    private Visualizacao.PanelRoundBorda panelRoundBorda1;
+    private Visualizacao.PanelRoundBorda panelRoundBorda2;
+    private Visualizacao.PanelRoundBorda panelRoundBorda3;
     // End of variables declaration//GEN-END:variables
 }
