@@ -11,24 +11,19 @@ import Modelagem.Alunos;
 import Modelagem.VerificadorFases;
 import Modelagem.WindowManager;
 import java.awt.Color;
-import java.awt.Cursor;
-import java.sql.*;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author João
+ * @author fatec-dsm2
  */
-public class FEstatistica extends javax.swing.JFrame {
+public class FEstatisticaScroll extends javax.swing.JFrame {
+
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
@@ -40,11 +35,7 @@ public class FEstatistica extends javax.swing.JFrame {
     Color azulPastel = new Color(108,210,255);
     private int idAlunoLogado = 0;
     private int idAluno = 0;
-
-    /**
-     * Creates new form FLogin
-     */
-    public FEstatistica() {
+    public FEstatisticaScroll() {
         initComponents();
         // Deleta o aluno logado ao sair pelo botão de fechar janela
         WindowManager.register(this);
@@ -120,8 +111,8 @@ public class FEstatistica extends javax.swing.JFrame {
         System.out.println("Fase Observacao: " + estadosFases[3]);
         
         //conquista1.setVisible(false);
-        
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -131,6 +122,7 @@ public class FEstatistica extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        customScrollPane1 = new Visualizacao.CustomScrollPane();
         panelGradiente = new Visualizacao.PanelGradiente();
         panelPretoOpac2 = new Visualizacao.PanelPretoOpac();
         jLabel1 = new javax.swing.JLabel();
@@ -170,6 +162,8 @@ public class FEstatistica extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        customScrollPane1.setBorder(null);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 28)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -659,15 +653,17 @@ public class FEstatistica extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        customScrollPane1.setViewportView(panelGradiente);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelGradiente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelGradiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE)
         );
 
         pack();
@@ -696,13 +692,13 @@ public class FEstatistica extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FEstatistica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FEstatisticaScroll.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FEstatistica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FEstatisticaScroll.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FEstatistica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FEstatisticaScroll.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FEstatistica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FEstatisticaScroll.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -710,7 +706,7 @@ public class FEstatistica extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FEstatistica().setVisible(true);
+                new FEstatisticaScroll().setVisible(true);
             }
         });
     }
@@ -720,6 +716,7 @@ public class FEstatistica extends javax.swing.JFrame {
     private Visualizacao.PanelRound conquista4;
     private Visualizacao.PanelRound conquista6;
     private Visualizacao.PanelRound conquista7;
+    private Visualizacao.CustomScrollPane customScrollPane1;
     private Visualizacao.CustomSeparator customSeparator1;
     private Visualizacao.CustomSeparator customSeparator2;
     private javax.swing.JLabel jLabel1;

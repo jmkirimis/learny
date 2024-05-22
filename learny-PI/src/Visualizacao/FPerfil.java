@@ -597,7 +597,7 @@ public class FPerfil extends javax.swing.JFrame {
     }//GEN-LAST:event_panelBtnPerfil4MouseClicked
 
     private void panelBtnPerfil1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnPerfil1MouseClicked
-        new FEstatistica().setVisible(true);
+        new FEstatisticaScroll().setVisible(true);
         dispose();
     }//GEN-LAST:event_panelBtnPerfil1MouseClicked
 
