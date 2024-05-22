@@ -92,12 +92,12 @@ public class FFaseLigar extends javax.swing.JFrame {
         conexao = Conexao.conecta();
         
         //pega o id do aluno
-        String sql = "select * from alunoLogado where idAluno = 1";
+        String sql = "select * from alunoLogado where idAlunoLogado = 1";
         try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
             if (rs.next()) {
-                this.idAluno = Integer.parseInt(rs.getString(1));
+                this.idAluno = Integer.parseInt(rs.getString(2));
             }
             
         } catch (Exception e) {
@@ -694,6 +694,7 @@ public class FFaseLigar extends javax.swing.JFrame {
         
         fase.setIdFase(1);
         fase.setIdAluno(idAluno);
+        System.out.println(idAluno);
         fase.setPontos(pontos);
         fase.setTempoConclusao(minutes,remainingSeconds);
         fase.setPorcAcertos(porcAcerto);

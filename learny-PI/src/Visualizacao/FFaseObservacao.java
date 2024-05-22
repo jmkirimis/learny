@@ -68,7 +68,7 @@ public class FFaseObservacao extends javax.swing.JFrame {
         conexao = Conexao.conecta();
         
         //pega o id do aluno
-        String sql = "select * from alunoLogado where idAluno = 1";
+        String sql = "select * from alunoLogado where idAlunoLogado = 1";
         try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
