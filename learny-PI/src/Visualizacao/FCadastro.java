@@ -52,7 +52,6 @@ public class FCadastro extends javax.swing.JFrame {
         lblEntrar = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         panelSombra1 = new Visualizacao.PanelSombra();
-        txt_dataNasc = new javax.swing.JTextField();
         txt_senha = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -66,6 +65,7 @@ public class FCadastro extends javax.swing.JFrame {
         panelRound1 = new Visualizacao.PanelRound();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        txt_dataNasc = new javax.swing.JFormattedTextField();
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -172,6 +172,8 @@ public class FCadastro extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        txt_dataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+
         javax.swing.GroupLayout panelSombra1Layout = new javax.swing.GroupLayout(panelSombra1);
         panelSombra1.setLayout(panelSombra1Layout);
         panelSombra1Layout.setHorizontalGroup(
@@ -224,9 +226,9 @@ public class FCadastro extends javax.swing.JFrame {
                 .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_dataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icone confirmar.png"))); // NOI18N
@@ -412,7 +414,7 @@ public class FCadastro extends javax.swing.JFrame {
     private Visualizacao.PanelRound panelRound1;
     private Visualizacao.PanelSombra panelSombra1;
     private Visualizacao.PanelRoundPerfil panel_foto_cadastro;
-    private javax.swing.JTextField txt_dataNasc;
+    private javax.swing.JFormattedTextField txt_dataNasc;
     private javax.swing.JTextField txt_email;
     private javax.swing.JTextField txt_nome;
     private javax.swing.JPasswordField txt_senha;

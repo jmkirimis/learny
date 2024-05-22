@@ -83,12 +83,13 @@ select * from fasesConcluidas;
 
 create table conquistas(
 	idConquista int auto_increment primary key,
-    nomeConquista varchar(100)
+    nomeConquista varchar(100),
+    descConquista varchar(100)
 );
-insert into conquistas(nomeConquista) values
-("Iniciando!"),
-("A todo vapor!"),
-("Mundo Concluído!");
+insert into conquistas(nomeConquista, descConquista) values
+("Iniciando!", "Terminou uma atividade"),
+("A todo vapor!", "Terminou quatro atividades"),
+("Mundo Concluído!", "Terminou um mundo");
 
 create table alunosXconquistas(
 	idAlunoConquista int auto_increment primary key,
@@ -98,6 +99,10 @@ create table alunosXconquistas(
     constraint fk_aluno_conquista foreign key(idAluno) references alunos(idAluno)
 );
 select * from alunosXconquistas;
+
+select c.nomeConquista, a.nome from alunosXconquistas axc 
+join conquistas c on c.idConquista = axc.idConquista 
+join alunos a on a.idAluno = axc.idAluno;
 
 -- Criação do trigger para atualizar o número de fases concluídas
 DELIMITER //

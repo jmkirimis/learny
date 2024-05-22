@@ -88,7 +88,7 @@ public class FRegiao extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        panelRoundBorda3 = new Visualizacao.PanelRoundBorda();
+        inicio = new Visualizacao.PanelRoundBorda();
         jLabel8 = new javax.swing.JLabel();
         panelSombra1 = new Visualizacao.PanelSombra();
         lbl_pontos = new javax.swing.JLabel();
@@ -357,24 +357,24 @@ public class FRegiao extends javax.swing.JFrame {
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        panelRoundBorda3.setBackground(new java.awt.Color(102, 102, 102));
-        panelRoundBorda3.setBorderWidth(5);
-        panelRoundBorda3.setRadius(100);
+        inicio.setBackground(new java.awt.Color(102, 102, 102));
+        inicio.setBorderWidth(5);
+        inicio.setRadius(100);
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-bandeira.png"))); // NOI18N
 
-        javax.swing.GroupLayout panelRoundBorda3Layout = new javax.swing.GroupLayout(panelRoundBorda3);
-        panelRoundBorda3.setLayout(panelRoundBorda3Layout);
-        panelRoundBorda3Layout.setHorizontalGroup(
-            panelRoundBorda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda3Layout.createSequentialGroup()
+        javax.swing.GroupLayout inicioLayout = new javax.swing.GroupLayout(inicio);
+        inicio.setLayout(inicioLayout);
+        inicioLayout.setHorizontalGroup(
+            inicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inicioLayout.createSequentialGroup()
                 .addContainerGap(29, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addGap(23, 23, 23))
         );
-        panelRoundBorda3Layout.setVerticalGroup(
-            panelRoundBorda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda3Layout.createSequentialGroup()
+        inicioLayout.setVerticalGroup(
+            inicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inicioLayout.createSequentialGroup()
                 .addContainerGap(27, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addGap(25, 25, 25))
@@ -396,7 +396,7 @@ public class FRegiao extends javax.swing.JFrame {
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
                         .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelRoundBorda3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelRound1Layout.createSequentialGroup()
                                 .addComponent(fase5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(35, 35, 35)
@@ -427,7 +427,7 @@ public class FRegiao extends javax.swing.JFrame {
                         .addGap(45, 45, 45)))
                 .addComponent(fase2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(panelRoundBorda3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -497,7 +497,8 @@ public class FRegiao extends javax.swing.JFrame {
         panelSombra4.setShadowOpacity(0.3F);
 
         lbl_fases_concluidas1.setForeground(new java.awt.Color(51, 51, 51));
-        lbl_fases_concluidas1.setText("fases");
+        lbl_fases_concluidas1.setText("ranking");
+        lbl_fases_concluidas1.setToolTipText("");
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-estrela.png"))); // NOI18N
 
@@ -509,7 +510,7 @@ public class FRegiao extends javax.swing.JFrame {
                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lbl_fases_concluidas1)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         panelSombra4Layout.setVerticalGroup(
             panelSombra4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -612,7 +613,8 @@ public class FRegiao extends javax.swing.JFrame {
     }//GEN-LAST:event_fase2MouseClicked
 
     private void menuHamburguerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuHamburguerMouseClicked
-
+        new FMenu().setVisible(true);
+        dispose();
     }//GEN-LAST:event_menuHamburguerMouseClicked
 
     private void panelRoundBorda2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRoundBorda2MouseClicked
@@ -664,6 +666,7 @@ public class FRegiao extends javax.swing.JFrame {
     private Visualizacao.PanelRound fase3;
     private Visualizacao.PanelRound fase4;
     private Visualizacao.PanelRound fase5;
+    private Visualizacao.PanelRoundBorda inicio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -686,7 +689,6 @@ public class FRegiao extends javax.swing.JFrame {
     private Visualizacao.PanelRound panelRound1;
     private Visualizacao.PanelRoundBorda panelRoundBorda1;
     private Visualizacao.PanelRoundBorda panelRoundBorda2;
-    private Visualizacao.PanelRoundBorda panelRoundBorda3;
     private Visualizacao.PanelSombra panelSombra1;
     private Visualizacao.PanelSombra panelSombra2;
     private Visualizacao.PanelSombra panelSombra4;

@@ -236,8 +236,7 @@ public class FFaseConcluida extends javax.swing.JFrame {
                     .addComponent(jLabel14)
                     .addGroup(panelRoundBorda3Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addComponent(lbl_tempo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lbl_tempo)))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         panelRoundBorda3Layout.setVerticalGroup(
@@ -271,7 +270,7 @@ public class FFaseConcluida extends javax.swing.JFrame {
                 .addComponent(panelRoundBorda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(panelRoundBorda3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+                .addContainerGap(29, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(242, 242, 242)
                 .addComponent(jLabel3)

@@ -14,9 +14,14 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.sql.*;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -34,6 +39,7 @@ public class FEstatistica extends javax.swing.JFrame {
     Color vermelhoPastel = new Color(239,91,106);
     Color azulPastel = new Color(108,210,255);
     private int idAlunoLogado = 0;
+    private int idAluno = 0;
 
     /**
      * Creates new form FLogin
@@ -43,6 +49,9 @@ public class FEstatistica extends javax.swing.JFrame {
         // Deleta o aluno logado ao sair pelo botão de fechar janela
         WindowManager.register(this);
         panelGradiente.addColor(new ModelColor(vermelhoPastel, 0f), new ModelColor(azulPastel, 1f));
+        panel_check1.setVisible(false);
+        panel_check2.setVisible(false);
+        panel_check3.setVisible(false);
         conexao = Conexao.conecta();
         String sql = "select * from alunoLogado where idAlunoLogado = 1";
         try {
@@ -50,6 +59,7 @@ public class FEstatistica extends javax.swing.JFrame {
             rs = pst.executeQuery();
             if (rs.next()) {
                 idAlunoLogado = rs.getInt(1);
+                idAluno = rs.getInt(2);
                 double pontos = rs.getDouble(9);
                 int nivel = (int)(pontos/100);
                 double progressoNivel = pontos % 100;
@@ -62,6 +72,45 @@ public class FEstatistica extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e);
         }
+        
+        String verConquistas = "select c.nomeConquista, c.descCOnquista from alunosXconquistas axc \n" +
+        "join conquistas c on c.idConquista = axc.idConquista \n" +
+        "join alunos a on a.idAluno = axc.idAluno \n" +
+        "where a.idAluno = ?;";
+        
+       // Lista para armazenar todas as conquistas
+        ArrayList<ArrayList<String>> conquistasTotais = new ArrayList<>();
+
+        try {
+            pst = conexao.prepareStatement(verConquistas);
+            pst.setInt(1, idAluno);
+            rs = pst.executeQuery();
+
+            // Iterar sobre o ResultSet para recuperar todos os resultados
+            while (rs.next()) {
+                String nomeConquista = rs.getString(1);
+                String descConquista = rs.getString(2);
+
+                // Lista para armazenar um par (nomeAluno, nomeConquista)
+                ArrayList<String> conquista = new ArrayList<>();
+                conquista.add(nomeConquista);
+                conquista.add(descConquista);
+
+                // Adicionar a lista de conquista na lista de conquistas totais
+                conquistasTotais.add(conquista);
+            }
+
+            // Exemplo de uso das conquistas totais para exibir nos JLabels
+            JPanel[] checkPanels = {panel_check1, panel_check2, panel_check3};
+
+            for (int i = 0; i < conquistasTotais.size() && i < checkPanels.length; i++) {
+                checkPanels[i].setVisible(true);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        
         VerificadorFases vfases = new VerificadorFases(conexao);
         String[] estadosFases = vfases.verificarFases(1, idAlunoLogado); // Verifica as fases da região 1
             
@@ -69,8 +118,10 @@ public class FEstatistica extends javax.swing.JFrame {
         System.out.println("Fase Números: " + estadosFases[1]);
         System.out.println("Fase Ouvir: " + estadosFases[2]);
         System.out.println("Fase Observacao: " + estadosFases[3]);
+        
+        //conquista1.setVisible(false);
+        
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -94,7 +145,29 @@ public class FEstatistica extends javax.swing.JFrame {
         panelRound3 = new Visualizacao.PanelRound();
         jLabel6 = new javax.swing.JLabel();
         panelRound4 = new Visualizacao.PanelRound();
+        jLabel14 = new javax.swing.JLabel();
+        customSeparator1 = new Visualizacao.CustomSeparator();
+        customSeparator2 = new Visualizacao.CustomSeparator();
+        panel_conquistas = new Visualizacao.PanelRound();
         jLabel7 = new javax.swing.JLabel();
+        conquista4 = new Visualizacao.PanelRound();
+        lbl_nome2 = new javax.swing.JLabel();
+        lbl_desc2 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        panel_check2 = new Visualizacao.PanelRound();
+        jLabel10 = new javax.swing.JLabel();
+        conquista6 = new Visualizacao.PanelRound();
+        lbl_nome1 = new javax.swing.JLabel();
+        lbl_desc1 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        panel_check1 = new Visualizacao.PanelRound();
+        jLabel8 = new javax.swing.JLabel();
+        conquista7 = new Visualizacao.PanelRound();
+        lbl_nome3 = new javax.swing.JLabel();
+        lbl_desc3 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        panel_check3 = new Visualizacao.PanelRound();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -194,82 +267,376 @@ public class FEstatistica extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel6.setText("Nível das atividades");
+        jLabel6.setText("Nível do mundo");
 
-        javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
-        panelRound3.setLayout(panelRound3Layout);
-        panelRound3Layout.setHorizontalGroup(
-            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(48, 48, 48))
-        );
-        panelRound3Layout.setVerticalGroup(
-            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound3Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel6)
-                .addContainerGap(80, Short.MAX_VALUE))
-        );
+        panelRound4.setBackground(new java.awt.Color(128, 210, 91));
+        panelRound4.setRoundBottomLeft(30);
+        panelRound4.setRoundBottomRight(30);
+        panelRound4.setRoundTopLeft(30);
+        panelRound4.setRoundTopRight(30);
 
-        panelRound4.setBackground(new java.awt.Color(255, 255, 255));
-        panelRound4.setRoundBottomLeft(40);
-        panelRound4.setRoundBottomRight(40);
-        panelRound4.setRoundTopLeft(40);
-        panelRound4.setRoundTopRight(40);
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel7.setText("Conquistas");
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 28)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("1");
 
         javax.swing.GroupLayout panelRound4Layout = new javax.swing.GroupLayout(panelRound4);
         panelRound4.setLayout(panelRound4Layout);
         panelRound4Layout.setHorizontalGroup(
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addGap(123, 123, 123))
+            .addGroup(panelRound4Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel14)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         panelRound4Layout.setVerticalGroup(
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel14)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        customSeparator1.setForeground(new java.awt.Color(255, 255, 255));
+        customSeparator1.setColor(new java.awt.Color(128, 210, 91));
+        customSeparator1.setDashed(true);
+        customSeparator1.setThickness(5);
+
+        customSeparator2.setForeground(new java.awt.Color(255, 255, 255));
+        customSeparator2.setColor(new java.awt.Color(128, 210, 91));
+        customSeparator2.setDashed(true);
+        customSeparator2.setThickness(5);
+
+        javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
+        panelRound3.setLayout(panelRound3Layout);
+        panelRound3Layout.setHorizontalGroup(
+            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound3Layout.createSequentialGroup()
+                .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRound3Layout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addComponent(jLabel6))
+                    .addGroup(panelRound3Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(customSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(customSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelRound3Layout.setVerticalGroup(
+            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound3Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelRound3Layout.createSequentialGroup()
+                            .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap())
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
+                            .addComponent(customSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(30, 30, 30)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
+                        .addComponent(customSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31))))
+        );
+
+        panel_conquistas.setBackground(new java.awt.Color(255, 255, 255));
+        panel_conquistas.setPreferredSize(new java.awt.Dimension(388, 333));
+        panel_conquistas.setRoundBottomLeft(40);
+        panel_conquistas.setRoundBottomRight(40);
+        panel_conquistas.setRoundTopLeft(40);
+        panel_conquistas.setRoundTopRight(40);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel7.setText("Conquistas");
+
+        conquista4.setBackground(new java.awt.Color(239, 91, 106));
+        conquista4.setRoundBottomLeft(40);
+        conquista4.setRoundBottomRight(40);
+        conquista4.setRoundTopLeft(40);
+        conquista4.setRoundTopRight(40);
+
+        lbl_nome2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lbl_nome2.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_nome2.setText("A todo o vapor!");
+
+        lbl_desc2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lbl_desc2.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_desc2.setText("Terminou quatro fases");
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-medalha2.png"))); // NOI18N
+
+        panel_check2.setBackground(new java.awt.Color(255, 255, 255));
+        panel_check2.setPreferredSize(new java.awt.Dimension(45, 45));
+        panel_check2.setRoundBottomLeft(100);
+        panel_check2.setRoundBottomRight(100);
+        panel_check2.setRoundTopLeft(100);
+        panel_check2.setRoundTopRight(100);
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-check-conquista.png"))); // NOI18N
+
+        javax.swing.GroupLayout panel_check2Layout = new javax.swing.GroupLayout(panel_check2);
+        panel_check2.setLayout(panel_check2Layout);
+        panel_check2Layout.setHorizontalGroup(
+            panel_check2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_check2Layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10))
+        );
+        panel_check2Layout.setVerticalGroup(
+            panel_check2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_check2Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(jLabel10)
+                .addGap(11, 11, 11))
+        );
+
+        javax.swing.GroupLayout conquista4Layout = new javax.swing.GroupLayout(conquista4);
+        conquista4.setLayout(conquista4Layout);
+        conquista4Layout.setHorizontalGroup(
+            conquista4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(conquista4Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel9)
+                .addGap(26, 26, 26)
+                .addGroup(conquista4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_desc2)
+                    .addComponent(lbl_nome2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(panel_check2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
+        );
+        conquista4Layout.setVerticalGroup(
+            conquista4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(conquista4Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(conquista4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addGroup(conquista4Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addGroup(conquista4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(panel_check2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(conquista4Layout.createSequentialGroup()
+                                .addComponent(lbl_nome2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lbl_desc2)))))
+                .addGap(11, 11, 11))
+        );
+
+        conquista6.setBackground(new java.awt.Color(128, 210, 91));
+        conquista6.setRoundBottomLeft(40);
+        conquista6.setRoundBottomRight(40);
+        conquista6.setRoundTopLeft(40);
+        conquista6.setRoundTopRight(40);
+
+        lbl_nome1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lbl_nome1.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_nome1.setText("Iniciando!");
+
+        lbl_desc1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lbl_desc1.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_desc1.setText("Terminou uma fase");
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-medalha2.png"))); // NOI18N
+
+        panel_check1.setBackground(new java.awt.Color(255, 255, 255));
+        panel_check1.setPreferredSize(new java.awt.Dimension(45, 45));
+        panel_check1.setRoundBottomLeft(100);
+        panel_check1.setRoundBottomRight(100);
+        panel_check1.setRoundTopLeft(100);
+        panel_check1.setRoundTopRight(100);
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-check-conquista.png"))); // NOI18N
+
+        javax.swing.GroupLayout panel_check1Layout = new javax.swing.GroupLayout(panel_check1);
+        panel_check1.setLayout(panel_check1Layout);
+        panel_check1Layout.setHorizontalGroup(
+            panel_check1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_check1Layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10))
+        );
+        panel_check1Layout.setVerticalGroup(
+            panel_check1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_check1Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(jLabel8)
+                .addGap(11, 11, 11))
+        );
+
+        javax.swing.GroupLayout conquista6Layout = new javax.swing.GroupLayout(conquista6);
+        conquista6.setLayout(conquista6Layout);
+        conquista6Layout.setHorizontalGroup(
+            conquista6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(conquista6Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel11)
+                .addGap(26, 26, 26)
+                .addGroup(conquista6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_nome1)
+                    .addComponent(lbl_desc1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panel_check1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
+        );
+        conquista6Layout.setVerticalGroup(
+            conquista6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(conquista6Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(conquista6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addGroup(conquista6Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addGroup(conquista6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(panel_check1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(conquista6Layout.createSequentialGroup()
+                                .addComponent(lbl_nome1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lbl_desc1)))))
+                .addGap(11, 11, 11))
+        );
+
+        conquista7.setBackground(new java.awt.Color(83, 194, 242));
+        conquista7.setRoundBottomLeft(40);
+        conquista7.setRoundBottomRight(40);
+        conquista7.setRoundTopLeft(40);
+        conquista7.setRoundTopRight(40);
+
+        lbl_nome3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lbl_nome3.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_nome3.setText("Mundo concluído!");
+
+        lbl_desc3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lbl_desc3.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_desc3.setText("Terminou um mundo");
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-medalha2.png"))); // NOI18N
+
+        panel_check3.setBackground(new java.awt.Color(255, 255, 255));
+        panel_check3.setPreferredSize(new java.awt.Dimension(45, 45));
+        panel_check3.setRoundBottomLeft(100);
+        panel_check3.setRoundBottomRight(100);
+        panel_check3.setRoundTopLeft(100);
+        panel_check3.setRoundTopRight(100);
+
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-check-conquista.png"))); // NOI18N
+
+        javax.swing.GroupLayout panel_check3Layout = new javax.swing.GroupLayout(panel_check3);
+        panel_check3.setLayout(panel_check3Layout);
+        panel_check3Layout.setHorizontalGroup(
+            panel_check3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_check3Layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10))
+        );
+        panel_check3Layout.setVerticalGroup(
+            panel_check3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_check3Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(jLabel13)
+                .addGap(11, 11, 11))
+        );
+
+        javax.swing.GroupLayout conquista7Layout = new javax.swing.GroupLayout(conquista7);
+        conquista7.setLayout(conquista7Layout);
+        conquista7Layout.setHorizontalGroup(
+            conquista7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(conquista7Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel12)
+                .addGap(26, 26, 26)
+                .addGroup(conquista7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_nome3)
+                    .addComponent(lbl_desc3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panel_check3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
+        );
+        conquista7Layout.setVerticalGroup(
+            conquista7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(conquista7Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(conquista7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12)
+                    .addGroup(conquista7Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addGroup(conquista7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panel_check3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(conquista7Layout.createSequentialGroup()
+                                .addComponent(lbl_nome3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lbl_desc3)))))
+                .addGap(11, 11, 11))
+        );
+
+        javax.swing.GroupLayout panel_conquistasLayout = new javax.swing.GroupLayout(panel_conquistas);
+        panel_conquistas.setLayout(panel_conquistasLayout);
+        panel_conquistasLayout.setHorizontalGroup(
+            panel_conquistasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_conquistasLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(panel_conquistasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_conquistasLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(133, 133, 133))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_conquistasLayout.createSequentialGroup()
+                        .addGroup(panel_conquistasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(conquista4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(conquista6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(conquista7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(25, 25, 25))))
+        );
+        panel_conquistasLayout.setVerticalGroup(
+            panel_conquistasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_conquistasLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel7)
-                .addContainerGap(282, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(conquista6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(conquista4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(conquista7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
         );
 
         javax.swing.GroupLayout panelPretoOpac2Layout = new javax.swing.GroupLayout(panelPretoOpac2);
         panelPretoOpac2.setLayout(panelPretoOpac2Layout);
         panelPretoOpac2Layout.setHorizontalGroup(
             panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addGroup(panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelRound4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                        .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(40, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPretoOpac2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPretoOpac2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(42, 42, 42))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPretoOpac2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(158, 158, 158))))
+                .addComponent(jLabel1)
+                .addGap(164, 164, 164))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPretoOpac2Layout.createSequentialGroup()
+                .addGroup(panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelPretoOpac2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2))
+                    .addGroup(panelPretoOpac2Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addGroup(panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelPretoOpac2Layout.createSequentialGroup()
+                                .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panel_conquistas, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(40, 40, 40))
         );
         panelPretoOpac2Layout.setVerticalGroup(
             panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addGap(57, 57, 57)
                 .addComponent(jLabel2)
-                .addGap(47, 47, 47)
+                .addGap(37, 37, 37)
                 .addComponent(jLabel1)
                 .addGap(49, 49, 49)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -278,8 +645,8 @@ public class FEstatistica extends javax.swing.JFrame {
                     .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addComponent(panel_conquistas, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelGradienteLayout = new javax.swing.GroupLayout(panelGradiente);
@@ -290,7 +657,9 @@ public class FEstatistica extends javax.swing.JFrame {
         );
         panelGradienteLayout.setVerticalGroup(
             panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPretoOpac2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(panelGradienteLayout.createSequentialGroup()
+                .addComponent(panelPretoOpac2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -351,19 +720,41 @@ public class FEstatistica extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Visualizacao.ProgressBar barra_xp;
+    private Visualizacao.PanelRound conquista4;
+    private Visualizacao.PanelRound conquista6;
+    private Visualizacao.PanelRound conquista7;
+    private Visualizacao.CustomSeparator customSeparator1;
+    private Visualizacao.CustomSeparator customSeparator2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lbl_desc1;
+    private javax.swing.JLabel lbl_desc2;
+    private javax.swing.JLabel lbl_desc3;
     private javax.swing.JLabel lbl_fases_concluidas;
+    private javax.swing.JLabel lbl_nome1;
+    private javax.swing.JLabel lbl_nome2;
+    private javax.swing.JLabel lbl_nome3;
     private Visualizacao.PanelGradiente panelGradiente;
     private Visualizacao.PanelPretoOpac panelPretoOpac2;
     private Visualizacao.PanelRound panelRound1;
     private Visualizacao.PanelRound panelRound2;
     private Visualizacao.PanelRound panelRound3;
     private Visualizacao.PanelRound panelRound4;
+    private Visualizacao.PanelRound panel_check1;
+    private Visualizacao.PanelRound panel_check2;
+    private Visualizacao.PanelRound panel_check3;
+    private Visualizacao.PanelRound panel_conquistas;
     // End of variables declaration//GEN-END:variables
 }

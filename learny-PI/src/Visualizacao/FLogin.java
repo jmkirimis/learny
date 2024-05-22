@@ -17,6 +17,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.File;
+import java.io.IOException;
 
 /**
  *
@@ -55,16 +60,16 @@ public class FLogin extends javax.swing.JFrame {
 
         panelGradiente = new Visualizacao.PanelGradiente();
         panelPretoOpac2 = new Visualizacao.PanelPretoOpac();
-        txt_usuario_entrar = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        txt_senha_entrar = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lbl_desc_login = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lbl_desc_login2 = new javax.swing.JLabel();
+        panelRound1 = new Visualizacao.PanelRound();
+        txt_usuario_entrar = new Visualizacao.PlaceholderTextField();
+        panelRound2 = new Visualizacao.PanelRound();
+        txt_senha_entrar = new Visualizacao.PlaceholderPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,10 +86,6 @@ public class FLogin extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Senha:");
-
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Não tem uma conta?");
@@ -98,53 +99,96 @@ public class FLogin extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Entre na sua conta Learny");
+        lbl_desc_login.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_desc_login.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_desc_login.setText("Entre na sua conta Learny");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/logo.png"))); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Faça login com suas informações de cadastro");
+        lbl_desc_login2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_desc_login2.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_desc_login2.setText("Faça login com suas informações de cadastro");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Usuário:");
+        panelRound1.setBackground(new java.awt.Color(255, 255, 255));
+        panelRound1.setRoundBottomLeft(40);
+        panelRound1.setRoundBottomRight(40);
+        panelRound1.setRoundTopLeft(40);
+        panelRound1.setRoundTopRight(40);
+
+        txt_usuario_entrar.setBorder(null);
+        txt_usuario_entrar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_usuario_entrar.setPlaceholder("Usuário");
+
+        javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
+        panelRound1.setLayout(panelRound1Layout);
+        panelRound1Layout.setHorizontalGroup(
+            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(txt_usuario_entrar, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+        panelRound1Layout.setVerticalGroup(
+            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(txt_usuario_entrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        panelRound2.setBackground(new java.awt.Color(255, 255, 255));
+        panelRound2.setRoundBottomLeft(40);
+        panelRound2.setRoundBottomRight(40);
+        panelRound2.setRoundTopLeft(40);
+        panelRound2.setRoundTopRight(40);
+
+        txt_senha_entrar.setBorder(null);
+        txt_senha_entrar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_senha_entrar.setPlaceholder("Senha");
+
+        javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
+        panelRound2.setLayout(panelRound2Layout);
+        panelRound2Layout.setHorizontalGroup(
+            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(txt_senha_entrar, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+        panelRound2Layout.setVerticalGroup(
+            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txt_senha_entrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout panelPretoOpac2Layout = new javax.swing.GroupLayout(panelPretoOpac2);
         panelPretoOpac2.setLayout(panelPretoOpac2Layout);
         panelPretoOpac2Layout.setHorizontalGroup(
             panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
                 .addGroup(panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGap(25, 25, 25)
+                        .addGroup(panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txt_usuario_entrar, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPretoOpac2Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_senha_entrar, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addGap(9, 9, 9)
-                                        .addComponent(jLabel7))))))
+                                .addGap(143, 143, 143)
+                                .addComponent(jLabel3))
+                            .addGroup(panelPretoOpac2Layout.createSequentialGroup()
+                                .addGap(97, 97, 97)
+                                .addComponent(lbl_desc_login))
+                            .addComponent(lbl_desc_login2)
+                            .addGroup(panelPretoOpac2Layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelPretoOpac2Layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                        .addGap(143, 143, 143)
-                        .addComponent(jLabel3))
-                    .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addComponent(jLabel2))
-                    .addComponent(jLabel4)
-                    .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                        .addGap(187, 187, 187)
-                        .addComponent(jLabel8)))
+                        .addGap(123, 123, 123)
+                        .addGroup(panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelPretoOpac2Layout.createSequentialGroup()
+                                .addGap(75, 75, 75)
+                                .addComponent(jLabel8))
+                            .addGroup(panelPretoOpac2Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(9, 9, 9)
+                                .addComponent(jLabel7)))))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
         panelPretoOpac2Layout.setVerticalGroup(
@@ -153,24 +197,20 @@ public class FLogin extends javax.swing.JFrame {
                 .addGap(188, 188, 188)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addComponent(lbl_desc_login)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addGap(28, 28, 28)
-                .addGroup(panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_usuario_entrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                .addComponent(lbl_desc_login2)
+                .addGap(46, 46, 46)
+                .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txt_senha_entrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
                 .addComponent(jLabel8)
-                .addGap(49, 49, 49)
+                .addGap(45, 45, 45)
                 .addGroup(panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addContainerGap(201, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelGradienteLayout = new javax.swing.GroupLayout(panelGradiente);
@@ -181,7 +221,7 @@ public class FLogin extends javax.swing.JFrame {
         );
         panelGradienteLayout.setVerticalGroup(
             panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPretoOpac2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelPretoOpac2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -282,17 +322,17 @@ public class FLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel lbl_desc_login;
+    private javax.swing.JLabel lbl_desc_login2;
     private Visualizacao.PanelGradiente panelGradiente;
     private Visualizacao.PanelPretoOpac panelPretoOpac2;
-    private javax.swing.JPasswordField txt_senha_entrar;
-    private javax.swing.JTextField txt_usuario_entrar;
+    private Visualizacao.PanelRound panelRound1;
+    private Visualizacao.PanelRound panelRound2;
+    private Visualizacao.PlaceholderPasswordField txt_senha_entrar;
+    private Visualizacao.PlaceholderTextField txt_usuario_entrar;
     // End of variables declaration//GEN-END:variables
 }
