@@ -347,6 +347,11 @@
                   </Layout>
                 </Container>
                 <Container class="Visualizacao.PanelGradiente" name="panelGradiente1">
+                  <Properties>
+                    <Property name="gradientDirection" type="Visualizacao.PanelGradiente$GradientDirection" editor="org.netbeans.modules.form.editors.EnumEditor">
+                      <Value id="VERTICAL"/>
+                    </Property>
+                  </Properties>
 
                   <Layout>
                     <DimensionLayout dim="0">

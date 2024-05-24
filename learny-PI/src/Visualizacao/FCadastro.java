@@ -70,6 +70,7 @@ public class FCadastro extends javax.swing.JFrame {
         customScrollPane1.setBorder(null);
 
         panelGradiente.setBackground(new java.awt.Color(204, 204, 204));
+        panelGradiente.setGradientDirection(Visualizacao.PanelGradiente.GradientDirection.VERTICAL);
         panelGradiente.setPreferredSize(new java.awt.Dimension(475, 834));
 
         panelPretoOpac1.setPreferredSize(new java.awt.Dimension(475, 834));

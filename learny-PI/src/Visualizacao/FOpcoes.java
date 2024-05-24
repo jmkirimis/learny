@@ -17,16 +17,16 @@ public class FOpcoes extends javax.swing.JFrame {
     /**
      * Creates new form FOpcoes
      */
-    Color preto = new Color(0,0,0,64);
+    Color pretoComOpacidade = new Color(0, 0, 0, 64);
+    Color pretoComOpacidade2 = new Color(0, 0, 0, 75);
     Color vermelhoPastel = new Color(239,91,106);
     Color azulPastel = new Color(108,210,255);
     public FOpcoes() {
         initComponents();
-        Color pretoComOpacidade = new Color(0, 0, 0, 64);
-        panel_sombra.setBackground(pretoComOpacidade);
-        panel_icon1.setBackground(pretoComOpacidade);
-        panel_icon2.setBackground(pretoComOpacidade);
-        panel_icon3.setBackground(pretoComOpacidade);
+        panel_sombra.setBackground(pretoComOpacidade2);
+        panel_icon1.setBackground(pretoComOpacidade2);
+        panel_icon2.setBackground(pretoComOpacidade2);
+        panel_icon3.setBackground(pretoComOpacidade2);
     }
 
     /**
@@ -39,7 +39,7 @@ public class FOpcoes extends javax.swing.JFrame {
     private void initComponents() {
 
         customScrollPane1 = new Visualizacao.CustomScrollPane();
-        panelGradienteHorizontal1 = new Visualizacao.PanelGradienteHorizontal();
+        panelGradienteHorizontal1 = new Visualizacao.PanelGradiente();
         panelPretoOpac1 = new Visualizacao.PanelPretoOpac();
         panelRound1 = new Visualizacao.PanelRound();
         jLabel1 = new javax.swing.JLabel();
@@ -47,7 +47,7 @@ public class FOpcoes extends javax.swing.JFrame {
         panelRound3 = new Visualizacao.PanelRound();
         placeholderTextField1 = new Visualizacao.PlaceholderTextField();
         jLabel2 = new javax.swing.JLabel();
-        panelGradienteHorizontal2 = new Visualizacao.PanelGradienteHorizontal();
+        panelGradienteHorizontal2 = new Visualizacao.PanelGradiente();
         panel_sombra = new Visualizacao.PanelRound();
         panel_icon1 = new Visualizacao.PanelSombra();
         panel_icon2 = new Visualizacao.PanelSombra();
@@ -115,6 +115,7 @@ public class FOpcoes extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        panelGradienteHorizontal2.setGradientDirection(Visualizacao.PanelGradiente.GradientDirection.DIAGONAL_DOWN);
         panelGradienteHorizontal2.setRadius(50);
 
         panel_sombra.setBackground(new java.awt.Color(204, 204, 204));
@@ -324,7 +325,7 @@ public class FOpcoes extends javax.swing.JFrame {
                 .addComponent(panelSombra3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(panelSombra4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelPretoOpac1Layout = new javax.swing.GroupLayout(panelPretoOpac1);
@@ -336,7 +337,7 @@ public class FOpcoes extends javax.swing.JFrame {
         panelPretoOpac1Layout.setVerticalGroup(
             panelPretoOpac1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPretoOpac1Layout.createSequentialGroup()
-                .addGap(0, 173, Short.MAX_VALUE)
+                .addGap(0, 81, Short.MAX_VALUE)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -422,8 +423,8 @@ public class FOpcoes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
-    private Visualizacao.PanelGradienteHorizontal panelGradienteHorizontal1;
-    private Visualizacao.PanelGradienteHorizontal panelGradienteHorizontal2;
+    private Visualizacao.PanelGradiente panelGradienteHorizontal1;
+    private Visualizacao.PanelGradiente panelGradienteHorizontal2;
     private Visualizacao.PanelPretoOpac panelPretoOpac1;
     private Visualizacao.PanelRound panelRound1;
     private Visualizacao.PanelRound panelRound3;

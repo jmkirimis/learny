@@ -250,6 +250,8 @@ public class FMundos extends javax.swing.JFrame {
             .addGap(0, 35, Short.MAX_VALUE)
         );
 
+        panelGradiente1.setGradientDirection(Visualizacao.PanelGradiente.GradientDirection.VERTICAL);
+
         panelRound4.setBackground(new java.awt.Color(255, 255, 255));
         panelRound4.setRoundBottomLeft(50);
         panelRound4.setRoundBottomRight(50);
