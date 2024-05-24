@@ -14,6 +14,7 @@ public class PlaceholderPasswordField extends JPasswordField implements FocusLis
     private String placeholder;
     private boolean showingPlaceholder;
     private Color placeholderColor;
+    Color cinza = new Color(72,72,72);
 
     public PlaceholderPasswordField() {
         this(""); // Construtor padrão com placeholder vazio
@@ -33,7 +34,7 @@ public class PlaceholderPasswordField extends JPasswordField implements FocusLis
     public void focusGained(FocusEvent e) {
         if (showingPlaceholder) {
             setText("");
-            setForeground(Color.BLACK);
+            setForeground(cinza);
             showingPlaceholder = false;
         }
         updateEchoChar();

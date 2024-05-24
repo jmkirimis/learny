@@ -142,9 +142,9 @@ public class FPerfil extends javax.swing.JFrame {
             .addGroup(panelBtnPerfil1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
-                .addContainerGap(209, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelBtnPerfil1Layout.setVerticalGroup(
             panelBtnPerfil1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,13 +154,16 @@ public class FPerfil extends javax.swing.JFrame {
                         .addGap(19, 19, 19)
                         .addComponent(jLabel3))
                     .addGroup(panelBtnPerfil1Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
+                        .addGap(32, 32, 32)
                         .addComponent(jLabel4)))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
         panelBtnPerfil2.setBackground(new java.awt.Color(255, 255, 255));
         panelBtnPerfil2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelBtnPerfil2MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panelBtnPerfil2MouseEntered(evt);
             }
@@ -173,7 +176,7 @@ public class FPerfil extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel6.setText("Conexao Google");
+        jLabel6.setText("Ranking");
 
         javax.swing.GroupLayout panelBtnPerfil2Layout = new javax.swing.GroupLayout(panelBtnPerfil2);
         panelBtnPerfil2.setLayout(panelBtnPerfil2Layout);
@@ -299,7 +302,7 @@ public class FPerfil extends javax.swing.JFrame {
                 .addComponent(jLabel11)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel12)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(189, Short.MAX_VALUE))
         );
         panelBtnPerfil5Layout.setVerticalGroup(
             panelBtnPerfil5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -592,14 +595,19 @@ public class FPerfil extends javax.swing.JFrame {
     }//GEN-LAST:event_panelBtnPerfil7MouseExited
 
     private void panelBtnPerfil4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnPerfil4MouseClicked
-        new FEditarPerfil().setVisible(true);
+        new FEditarPerfilScroll().setVisible(true);
         dispose();
     }//GEN-LAST:event_panelBtnPerfil4MouseClicked
 
     private void panelBtnPerfil1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnPerfil1MouseClicked
-        new FEstatisticaScroll().setVisible(true);
+        new FEstatistica().setVisible(true);
         dispose();
     }//GEN-LAST:event_panelBtnPerfil1MouseClicked
+
+    private void panelBtnPerfil2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnPerfil2MouseClicked
+        new FRanking().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_panelBtnPerfil2MouseClicked
 
     /**
      * @param args the command line arguments

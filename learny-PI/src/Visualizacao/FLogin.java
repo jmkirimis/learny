@@ -35,8 +35,6 @@ public class FLogin extends javax.swing.JFrame {
     AlunoLogado alunlog = new AlunoLogado();
     
     Color preto = new Color(0,0,0,64);
-    Color vermelhoPastel = new Color(239,91,106);
-    Color azulPastel = new Color(108,210,255);
 
     /**
      * Creates new form FLogin
@@ -45,7 +43,6 @@ public class FLogin extends javax.swing.JFrame {
         initComponents();
         // Deleta o aluno logado ao sair pelo botão de fechar janela
         WindowManager.register(this);
-        panelGradiente.addColor(new ModelColor(vermelhoPastel, 0f), new ModelColor(azulPastel, 1f));
         conexao = Conexao.conecta();
     }
 
@@ -86,11 +83,11 @@ public class FLogin extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Não tem uma conta?");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
         jLabel7.setText("Cadastre-se");
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -164,32 +161,29 @@ public class FLogin extends javax.swing.JFrame {
             .addGroup(panelPretoOpac2Layout.createSequentialGroup()
                 .addGroup(panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                                .addGap(143, 143, 143)
-                                .addComponent(jLabel3))
-                            .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                                .addGap(97, 97, 97)
-                                .addComponent(lbl_desc_login))
-                            .addComponent(lbl_desc_login2)
-                            .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(168, 168, 168)
+                        .addComponent(jLabel3))
                     .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                        .addGap(123, 123, 123)
-                        .addGroup(panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                                .addGap(75, 75, 75)
-                                .addComponent(jLabel8))
-                            .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(9, 9, 9)
-                                .addComponent(jLabel7)))))
-                .addContainerGap(43, Short.MAX_VALUE))
+                        .addGap(48, 48, 48)
+                        .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelPretoOpac2Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelPretoOpac2Layout.createSequentialGroup()
+                        .addGap(198, 198, 198)
+                        .addComponent(jLabel8))
+                    .addGroup(panelPretoOpac2Layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(jLabel6)
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabel7))
+                    .addGroup(panelPretoOpac2Layout.createSequentialGroup()
+                        .addGap(117, 117, 117)
+                        .addComponent(lbl_desc_login))
+                    .addGroup(panelPretoOpac2Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(lbl_desc_login2)))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         panelPretoOpac2Layout.setVerticalGroup(
             panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,11 +200,11 @@ public class FLogin extends javax.swing.JFrame {
                 .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70)
                 .addComponent(jLabel8)
-                .addGap(45, 45, 45)
+                .addGap(43, 43, 43)
                 .addGroup(panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addContainerGap(203, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelGradienteLayout = new javax.swing.GroupLayout(panelGradiente);

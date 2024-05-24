@@ -31,8 +31,6 @@ import java.sql.ResultSet;
  */
 public class FEditarPerfil extends javax.swing.JFrame {
 
-    Color vermelhoPastel = new Color(239,91,106);
-    Color azulPastel = new Color(108,210,255);
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
@@ -44,7 +42,6 @@ public class FEditarPerfil extends javax.swing.JFrame {
         initComponents();
         // Deleta o aluno logado ao sair pelo botão de fechar janela
         WindowManager.register(this);
-        panelGradiente.addColor(new ModelColor(vermelhoPastel, 0f), new ModelColor(azulPastel, 1f));
         conexao = Conexao.conecta();
         String sql = "select * from alunoLogado where idAlunoLogado = 1";
         try {
@@ -379,6 +376,7 @@ public class FEditarPerfil extends javax.swing.JFrame {
     
             a.setDataNasc(dataNascBanco);
             a.alterar();
+            alunlog.fecharLogin();
             new FLogin().setVisible(true);
             dispose();
         } catch (ParseException e) {

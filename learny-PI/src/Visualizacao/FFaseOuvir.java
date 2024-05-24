@@ -105,9 +105,9 @@ public class FFaseOuvir extends javax.swing.JFrame {
         panel_head = new Visualizacao.PanelRound();
         lbl_head = new javax.swing.JLabel();
         panel_read = new Visualizacao.PanelRound();
-        lbl_read = new javax.swing.JLabel();
+        lbl_blue = new javax.swing.JLabel();
         panel_heard = new Visualizacao.PanelRound();
-        lbl_heard = new javax.swing.JLabel();
+        lbl_green = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -303,9 +303,9 @@ public class FFaseOuvir extends javax.swing.JFrame {
             }
         });
 
-        lbl_read.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
-        lbl_read.setForeground(new java.awt.Color(102, 102, 102));
-        lbl_read.setText("READ");
+        lbl_blue.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
+        lbl_blue.setForeground(new java.awt.Color(102, 102, 102));
+        lbl_blue.setText("BLUE");
 
         javax.swing.GroupLayout panel_readLayout = new javax.swing.GroupLayout(panel_read);
         panel_read.setLayout(panel_readLayout);
@@ -313,14 +313,14 @@ public class FFaseOuvir extends javax.swing.JFrame {
             panel_readLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_readLayout.createSequentialGroup()
                 .addContainerGap(52, Short.MAX_VALUE)
-                .addComponent(lbl_read)
-                .addGap(47, 47, 47))
+                .addComponent(lbl_blue)
+                .addGap(51, 51, 51))
         );
         panel_readLayout.setVerticalGroup(
             panel_readLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_readLayout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addComponent(lbl_read)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbl_blue)
                 .addGap(22, 22, 22))
         );
 
@@ -335,9 +335,9 @@ public class FFaseOuvir extends javax.swing.JFrame {
             }
         });
 
-        lbl_heard.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
-        lbl_heard.setForeground(new java.awt.Color(102, 102, 102));
-        lbl_heard.setText("HEARD");
+        lbl_green.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
+        lbl_green.setForeground(new java.awt.Color(102, 102, 102));
+        lbl_green.setText("GREEN");
 
         javax.swing.GroupLayout panel_heardLayout = new javax.swing.GroupLayout(panel_heard);
         panel_heard.setLayout(panel_heardLayout);
@@ -345,15 +345,15 @@ public class FFaseOuvir extends javax.swing.JFrame {
             panel_heardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_heardLayout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addComponent(lbl_heard)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addComponent(lbl_green)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         panel_heardLayout.setVerticalGroup(
             panel_heardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_heardLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(lbl_heard)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lbl_green)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -481,9 +481,9 @@ public class FFaseOuvir extends javax.swing.JFrame {
         panel_head.setBackground(new Color(240,240,240));
         lbl_head.setForeground(new Color(102, 102, 102));
         panel_read.setBackground(new Color(240,240,240));
-        lbl_read.setForeground(new Color(102, 102, 102));
+        lbl_blue.setForeground(new Color(102, 102, 102));
         panel_heard.setBackground(new Color(240,240,240));
-        lbl_heard.setForeground(new Color(102, 102, 102));
+        lbl_green.setForeground(new Color(102, 102, 102));
     }//GEN-LAST:event_panel_redMouseClicked
 
     private void panel_headMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_headMouseClicked
@@ -492,9 +492,9 @@ public class FFaseOuvir extends javax.swing.JFrame {
         panel_head.setBackground(new Color(153,153,153));
         lbl_head.setForeground(new Color(255, 255, 255));
         panel_read.setBackground(new Color(240,240,240));
-        lbl_read.setForeground(new Color(102, 102, 102));
+        lbl_blue.setForeground(new Color(102, 102, 102));
         panel_heard.setBackground(new Color(240,240,240));
-        lbl_heard.setForeground(new Color(102, 102, 102));
+        lbl_green.setForeground(new Color(102, 102, 102));
     }//GEN-LAST:event_panel_headMouseClicked
 
     private void panel_readMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_readMouseClicked
@@ -503,9 +503,9 @@ public class FFaseOuvir extends javax.swing.JFrame {
         panel_head.setBackground(new Color(240,240,240));
         lbl_head.setForeground(new Color(102, 102, 102));
         panel_read.setBackground(new Color(153,153,153));
-        lbl_read.setForeground(new Color(255, 255, 255));
+        lbl_blue.setForeground(new Color(255, 255, 255));
         panel_heard.setBackground(new Color(240,240,240));
-        lbl_heard.setForeground(new Color(102, 102, 102));
+        lbl_green.setForeground(new Color(102, 102, 102));
     }//GEN-LAST:event_panel_readMouseClicked
 
     private void panel_heardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_heardMouseClicked
@@ -514,9 +514,9 @@ public class FFaseOuvir extends javax.swing.JFrame {
         panel_head.setBackground(new Color(240,240,240));
         lbl_head.setForeground(new Color(102, 102, 102));
         panel_read.setBackground(new Color(240,240,240));
-        lbl_read.setForeground(new Color(102, 102, 102));
+        lbl_blue.setForeground(new Color(102, 102, 102));
         panel_heard.setBackground(new Color(153,153,153));
-        lbl_heard.setForeground(new Color(255, 255, 255));
+        lbl_green.setForeground(new Color(255, 255, 255));
     }//GEN-LAST:event_panel_heardMouseClicked
 
     /**
@@ -564,9 +564,9 @@ public class FFaseOuvir extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbl_blue;
+    private javax.swing.JLabel lbl_green;
     private javax.swing.JLabel lbl_head;
-    private javax.swing.JLabel lbl_heard;
-    private javax.swing.JLabel lbl_read;
     private javax.swing.JLabel lbl_red;
     private Visualizacao.PanelBtnPerfil panelBtnPerfil6;
     private Visualizacao.PanelSombra panelSombra1;

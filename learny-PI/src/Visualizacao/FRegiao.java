@@ -25,8 +25,6 @@ public class FRegiao extends javax.swing.JFrame {
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    Color vermelhoPastel = new Color(239,91,106);
-    Color azulPastel = new Color(108,210,255);
     AlunoLogado alunlog = new AlunoLogado();
     private int idAlunoLogado = 0;
 
@@ -34,7 +32,6 @@ public class FRegiao extends javax.swing.JFrame {
         initComponents();
         // Deleta o aluno logado ao sair pelo botão de fechar janela
         WindowManager.register(this);
-        panelGradiente.addColor(new ModelColor(vermelhoPastel, 0f), new ModelColor(azulPastel, 1f));
         conexao = Conexao.conecta();
         String sql = "select * from alunoLogado where idAlunoLogado = 1";
         try {
@@ -87,7 +84,6 @@ public class FRegiao extends javax.swing.JFrame {
         panelRoundBorda2 = new Visualizacao.PanelRoundBorda();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         inicio = new Visualizacao.PanelRoundBorda();
         jLabel8 = new javax.swing.JLabel();
         panelSombra1 = new Visualizacao.PanelSombra();
@@ -329,8 +325,6 @@ public class FRegiao extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Região 01 - Floresta");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon seta.png"))); // NOI18N
-
         javax.swing.GroupLayout panelRoundBorda2Layout = new javax.swing.GroupLayout(panelRoundBorda2);
         panelRoundBorda2.setLayout(panelRoundBorda2Layout);
         panelRoundBorda2Layout.setHorizontalGroup(
@@ -340,20 +334,15 @@ public class FRegiao extends javax.swing.JFrame {
                 .addGroup(panelRoundBorda2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(26, 26, 26))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
         panelRoundBorda2Layout.setVerticalGroup(
             panelRoundBorda2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRoundBorda2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(panelRoundBorda2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addGroup(panelRoundBorda2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(17, 17, 17)
-                        .addComponent(jLabel2)))
+                .addComponent(jLabel1)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel2)
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
@@ -613,7 +602,7 @@ public class FRegiao extends javax.swing.JFrame {
     }//GEN-LAST:event_fase2MouseClicked
 
     private void menuHamburguerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuHamburguerMouseClicked
-        new FMenu().setVisible(true);
+        new FOpcoes().setVisible(true);
         dispose();
     }//GEN-LAST:event_menuHamburguerMouseClicked
 
@@ -674,7 +663,6 @@ public class FRegiao extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

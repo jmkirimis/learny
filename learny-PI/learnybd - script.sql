@@ -173,8 +173,3 @@ END;
 //
 
 DELIMITER ;
-
-
-
-
-

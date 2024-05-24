@@ -13,6 +13,7 @@ import java.awt.event.FocusListener;
 public class PlaceholderTextField extends JTextField implements FocusListener {
     private String placeholder;
     private boolean showingPlaceholder;
+    Color cinza = new Color(72,72,72);
 
     public PlaceholderTextField() {
         this(""); // Construtor padrão com placeholder vazio
@@ -30,7 +31,7 @@ public class PlaceholderTextField extends JTextField implements FocusListener {
     public void focusGained(FocusEvent e) {
         if (showingPlaceholder) {
             setText("");
-            setForeground(Color.BLACK);
+            setForeground(cinza);
             showingPlaceholder = false;
         }
     }

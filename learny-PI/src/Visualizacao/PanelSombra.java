@@ -15,7 +15,19 @@ public class PanelSombra extends JPanel {
     private ImageIcon img;
 
     //sombra
-     public ShadowType getShadowType() {
+    private ShadowType shadowType = ShadowType.CENTER;
+    private int shadowSize = 6;
+    private float shadowOpacity = 0.5f;
+    private Color shadowColor = Color.BLACK;
+    private int cornerRadius = 30; // Default corner radius
+
+    public PanelSombra() {
+        setOpaque(false);
+        img = new ImageIcon();
+    }
+
+    // Getters and setters for shadow properties
+    public ShadowType getShadowType() {
         return shadowType;
     }
 
@@ -47,14 +59,13 @@ public class PanelSombra extends JPanel {
         this.shadowColor = shadowColor;
     }
 
-    private ShadowType shadowType = ShadowType.CENTER;
-    private int shadowSize = 6;
-    private float shadowOpacity = 0.5f;
-    private Color shadowColor = Color.BLACK;
-    
-    public PanelSombra() {
-        setOpaque(false);
-        img = new ImageIcon();
+    public int getCornerRadius() {
+        return cornerRadius;
+    }
+
+    public void setCornerRadius(int cornerRadius) {
+        this.cornerRadius = cornerRadius;
+        repaint();
     }
 
     @Override
@@ -63,6 +74,7 @@ public class PanelSombra extends JPanel {
         super.paintComponent(grphcs);  
         grphcs.drawImage(img.getImage(), 0, 0, this.getWidth(), this.getHeight(), this); // imagem
     }
+
     // sombra
     private void createShadow(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
@@ -98,7 +110,7 @@ public class PanelSombra extends JPanel {
         Graphics2D g = img.createGraphics();
         g.setColor(getBackground());
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g.fillRoundRect(0, 0, width, height, 30, 30);
+        g.fillRoundRect(0, 0, width, height, cornerRadius, cornerRadius);
         //g.fillOval(0, 0, width, width);
         //  Create Shadow
         ShadowRenderer render = new ShadowRenderer(shadowSize, shadowOpacity, shadowColor);
