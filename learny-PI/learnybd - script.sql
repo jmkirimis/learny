@@ -100,9 +100,28 @@ create table alunosXconquistas(
 );
 select * from alunosXconquistas;
 
-select c.nomeConquista, a.nome from alunosXconquistas axc 
-join conquistas c on c.idConquista = axc.idConquista 
-join alunos a on a.idAluno = axc.idAluno;
+create table missoes(
+	idMissao int auto_increment primary key,
+    nomeMissao varchar(100),
+    descMissao varchar(200)
+);
+insert into missoes(nomeMissao, descMissao) values 
+("Atividades 1", "Faça 3 fases"),
+("Atividades 2", "Faça 5 fases"),
+("Observacao", "Faça a fase de observacao"),
+("Visual", "Faça a fase visual"),
+("Ouvir", "Faça a fase de escuta"),
+("Numeros", "Faça a fase de números"),
+("Mundo", "Conclua um mundo");
+
+create table missoesDiarias(
+	idMissaoDiaria int auto_increment primary key,
+    idMissao int not null,
+    descMissao varchar(200),
+    constraint fk_diaria_missao foreign key(idMissao) references missoes(idMissao)
+);
+
+select * from missoesDiarias;
 
 -- Criação do trigger para atualizar o número de fases concluídas
 DELIMITER //
@@ -173,3 +192,41 @@ END;
 //
 
 DELIMITER ;
+
+--  Criação de um evento para pegas as missões da tabela missões e inserir nas missões diárias a cada 24 horas
+DELIMITER //
+
+CREATE EVENT inserir_missao_diaria
+ON SCHEDULE EVERY 1 DAY
+STARTS CURRENT_TIMESTAMP
+DO
+BEGIN
+    DECLARE total_missao INT;
+    DECLARE id_missao_1, id_missao_2, id_missao_3, id_missao_4 INT;
+
+    -- Limpa a tabela missoesDiarias
+    DELETE FROM missoesDiarias;
+
+    -- Conta o total de missões existentes
+    SELECT COUNT(*) INTO total_missao FROM missoes;
+
+    -- Gera quatro números aleatórios distintos entre 1 e o total de missões
+    REPEAT
+        SET id_missao_1 = FLOOR(RAND() * total_missao) + 1;
+        SET id_missao_2 = FLOOR(RAND() * total_missao) + 1;
+        SET id_missao_3 = FLOOR(RAND() * total_missao) + 1;
+        SET id_missao_4 = FLOOR(RAND() * total_missao) + 1;
+	-- Garante que não sejam selecionadas missões repetidas
+    UNTIL id_missao_1 <> id_missao_2 AND id_missao_1 <> id_missao_3 AND id_missao_1 <> id_missao_4 AND id_missao_2 <> id_missao_3 AND id_missao_2 <> id_missao_4 AND id_missao_3 <> id_missao_4 END REPEAT;
+
+    -- Insere as quatro missões diárias com base nos números gerados
+    INSERT INTO missoesDiarias (idMissao, descMissao)
+    SELECT idMissao, descMissao FROM missoes WHERE idMissao IN (id_missao_1, id_missao_2, id_missao_3, id_missao_4);
+END //
+
+DELIMITER ;
+
+-- Query que todos os eventos sejam executados automaticamente
+SET GLOBAL event_scheduler=ON;
+-- Ativa o evento criado
+ALTER EVENT inserir_missao_diaria ENABLE;

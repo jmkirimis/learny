@@ -16,7 +16,7 @@ public class PanelGradiente extends JPanel {
 
     private int radius = 0; // Radius of the corners
     private GradientDirection gradientDirection = GradientDirection.HORIZONTAL;
-    private float diagonalProportion = 1.0f; // Proportion for diagonal gradient
+    private float verticalProportion = 0.5f; // Proportion for vertical gradient
     Color azulPastel = new Color(108, 210, 255);
     Color vermelhoPastel = new Color(239, 91, 106);
     private Color gradientStartColor = vermelhoPastel; // Start color of the gradient
@@ -44,12 +44,12 @@ public class PanelGradiente extends JPanel {
         repaint();
     }
 
-    public float getDiagonalProportion() {
-        return diagonalProportion;
+    public float getVerticalProportion() {
+        return verticalProportion;
     }
 
-    public void setDiagonalProportion(float diagonalProportion) {
-        this.diagonalProportion = diagonalProportion;
+    public void setVerticalProportion(float verticalProportion) {
+        this.verticalProportion = verticalProportion;
         repaint();
     }
 
@@ -103,10 +103,10 @@ public class PanelGradiente extends JPanel {
                 gradient = new GradientPaint(0, 0, gradientStartColor, 0, height, gradientEndColor);
                 break;
             case DIAGONAL_DOWN:
-                gradient = new GradientPaint(0, 0, gradientStartColor, width * diagonalProportion, height * diagonalProportion, gradientEndColor);
+                gradient = new GradientPaint(0, height * (1 - verticalProportion), gradientStartColor, width, height * verticalProportion, gradientEndColor);
                 break;
             case DIAGONAL_UP:
-                gradient = new GradientPaint(0, height, gradientStartColor, width * diagonalProportion, height * (1 - diagonalProportion), gradientEndColor);
+                gradient = new GradientPaint(0, height * verticalProportion, gradientStartColor, width, height * (1 - verticalProportion), gradientEndColor);
                 break;
             case HORIZONTAL:
             default:
