@@ -6,8 +6,9 @@
 package Visualizacao;
 
 import Controle.Conexao;
+import Modelagem.Aluno;
 import Modelagem.FaseConcluida;
-import Modelagem.WindowManager;
+import Modelagem.Session;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -39,6 +40,8 @@ public class FFaseLigar extends javax.swing.JFrame {
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
+    
+    private Aluno alunoLogado;
     
     Color azul = new Color(83, 194, 242);
     Color verde = new Color(128,210,91);
@@ -79,30 +82,18 @@ public class FFaseLigar extends javax.swing.JFrame {
     private boolean linhaVisivelPassaro = false;
     private boolean linhaVisivelMacaco = false;
      
-    public FFaseLigar() {
-        
+    public FFaseLigar() {  
+        initComponents();
+        alunoLogado = Session.getInstance().getAlunoLogado();
+        if (alunoLogado == null) {
+            // Se não houver aluno logado, redirecione para a tela de login
+            new FLogin().setVisible(true);
+            this.dispose();
+            return;
+        }
         this.acertos = 0;
         
-        initComponents();
-        
-        // Deleta o aluno logado ao sair pelo botão de fechar janela
-        WindowManager.register(this);
-        
-        //faz a conexao com o banco
-        conexao = Conexao.conecta();
-        
-        //pega o id do aluno
-        String sql = "select * from alunoLogado where idAlunoLogado = 1";
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-            if (rs.next()) {
-                this.idAluno = Integer.parseInt(rs.getString(2));
-            }
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
-        }
+        idAluno = alunoLogado.getIdAluno();
         
         // Adiciona uma label para desenhar a linha para as cobras
         JLabel lineLabelCobra = new JLabel();
@@ -694,7 +685,6 @@ public class FFaseLigar extends javax.swing.JFrame {
         
         fase.setIdFase(1);
         fase.setIdAluno(idAluno);
-        System.out.println(idAluno);
         fase.setPontos(pontos);
         fase.setTempoConclusao(minutes,remainingSeconds);
         fase.setPorcAcertos(porcAcerto);

@@ -6,8 +6,9 @@
 package Visualizacao;
 
 import Controle.Conexao;
+import Modelagem.Aluno;
 import Modelagem.FaseConcluida;
-import Modelagem.WindowManager;
+import Modelagem.Session;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -31,6 +32,7 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
     ResultSet rs = null;
     FaseConcluida fase = new FaseConcluida();
     
+    private Aluno alunoLogado;
     private Timer timer;
     private int seconds = 0;
     private int minutes;
@@ -40,27 +42,18 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
     private int seconds2 = 0;
     
     public FFaseNumeros2(int acertos, int seconds) {
-        initComponents();   
-        // Deleta o aluno logado ao sair pelo botão de fechar janela
-        WindowManager.register(this);
+        initComponents();
+        alunoLogado = Session.getInstance().getAlunoLogado();
+        if (alunoLogado == null) {
+            // Se não houver aluno logado, redirecione para a tela de login
+            new FLogin().setVisible(true);
+            this.dispose();
+            return;
+        }
         this.acertos2 = acertos;
         this.seconds2 = seconds;
         
-         //faz a conexao com o banco
-        conexao = Conexao.conecta();
-        
-        //pega o id do aluno
-        String sql = "select * from alunoLogado where idAlunoLogado = 1";
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-            if (rs.next()) {
-                this.idAluno = Integer.parseInt(rs.getString(1));
-            }
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
-        }
+        idAluno = alunoLogado.getIdAluno();
         
         timer = new Timer(1000, new ActionListener() {
 

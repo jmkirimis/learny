@@ -5,7 +5,6 @@
  */
 package Visualizacao;
 
-import Modelagem.WindowManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -25,15 +24,11 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
     private int seconds = 0;
     private int minutes;
     private int remainingSeconds;
-    private int idAluno;
     private int acertos;
     
     public FFaseNumeros1() {
         initComponents();    
-        // Deleta o aluno logado ao sair pelo botão de fechar janela
-        WindowManager.register(this);
-        this.acertos = acertos;
-        
+      
         timer = new Timer(1000, new ActionListener() {
 
             @Override

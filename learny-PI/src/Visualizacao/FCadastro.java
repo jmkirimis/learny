@@ -5,8 +5,7 @@
  */
 package Visualizacao;
 
-import Modelagem.Alunos;
-import Modelagem.WindowManager;
+import Modelagem.Aluno;
 import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,10 +29,8 @@ public class FCadastro extends javax.swing.JFrame {
     
     public FCadastro() {
         initComponents();
-        // Deleta o aluno logado ao sair pelo botão de fechar janela
-        WindowManager.register(this);
     }
-    Alunos a = new Alunos();
+    Aluno a = new Aluno();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

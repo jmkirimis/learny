@@ -6,8 +6,8 @@
 package Visualizacao;
 
 import Controle.Conexao;
-import Modelagem.AlunoLogado;
-import Modelagem.WindowManager;
+import Modelagem.Aluno;
+import Modelagem.Session;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -31,33 +31,28 @@ public class FMundos extends javax.swing.JFrame {
     Color azul = new Color(83, 194, 242);
     Color verde = new Color(128,210,91);
     Color vermelho = new Color(239,91,106);
-    AlunoLogado alunlog = new AlunoLogado();
+    private Aluno alunoLogado;
     int mundo = 1;
+    
     public FMundos() {
         initComponents();
-        // Deleta o aluno logado ao sair pelo botão de fechar janela
-        WindowManager.register(this);
+        alunoLogado = Session.getInstance().getAlunoLogado();
+        if (alunoLogado == null) {
+            // Se não houver aluno logado, redirecione para a tela de login
+            new FLogin().setVisible(true);
+            this.dispose();
+            return;
+        }
         panelSlide.init(new PanelMundos("Mundo 1", "Mundo Natural", new ImageIcon("src/Imagens/mundo-natureza2.png")), new PanelMundos("Mundo 2", "Mundo Congelado", new ImageIcon("src/Imagens/mundo-congelado.png")), new PanelMundos("Mundo 3", "Mundo Flamejante", new ImageIcon("src/Imagens/mundo-flamejante3.png")));
         panelSlide.setAnimate(5);
         this.setLayout(new BorderLayout());
         this.add(customScrollPane1, BorderLayout.CENTER);
         this.add(jPanel3, BorderLayout.SOUTH);
         
-        conexao = Conexao.conecta();
-        String sql = "select * from alunoLogado where idAlunoLogado = 1";
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-            if (rs.next()) {
-                double pontos = rs.getDouble(9);
-                int fasesConcluidas = rs.getInt(10);
-                lbl_pontos.setText(Double.toString(pontos));
-                lbl_fases_concluidas.setText(Integer.toString(fasesConcluidas));
-            }
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
-        }
+        double pontos = alunoLogado.getPontosTotais();
+        int fasesConcluidas = alunoLogado.getFasesConcluidas();
+        lbl_pontos.setText(Double.toString(pontos));
+        lbl_fases_concluidas.setText(Integer.toString(fasesConcluidas));
         btn_mundo1.setColor(verde);
     }
 

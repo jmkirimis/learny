@@ -6,9 +6,8 @@
 package Visualizacao;
 
 import Controle.Conexao;
-import Modelagem.AlunoLogado;
-import Modelagem.Alunos;
-import Modelagem.WindowManager;
+import Modelagem.Aluno;
+import Modelagem.Session;
 import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,25 +33,27 @@ public class FEditarPerfil extends javax.swing.JFrame {
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    AlunoLogado alunlog = new AlunoLogado();
+    private Aluno alunoLogado;
     private String foto;
     private int idAluno;
     
     public FEditarPerfil() {
         initComponents();
-        WindowManager.register(this);
-        conexao = Conexao.conecta();
-        String sql = "select * from alunoLogado where idAlunoLogado = 1";
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-            if (rs.next()) {
-                idAluno = rs.getInt(2);
-                String nome = rs.getString(3);
-                String usuario = rs.getString(4);
-                String senha = rs.getString(5);
-                String email = rs.getString(6);
-                String dataNasc = rs.getString(7);
+        alunoLogado = Session.getInstance().getAlunoLogado();
+        if (alunoLogado == null) {
+            // Se não houver aluno logado, redirecione para a tela de login
+            new FLogin().setVisible(true);
+            this.dispose();
+            return;
+        }
+                String dataNasc = alunoLogado.getDataNasc();
+                foto = alunoLogado.getFoto();
+                
+                txt_nome.setText(alunoLogado.getNome());
+                txt_usuario.setText(alunoLogado.getUsuario());
+                txt_senha.setText(alunoLogado.getSenha());
+                txt_email.setText(alunoLogado.getEmail());
+                panel_foto_editar.setImagem("src/Imagens/" + foto);
 
                 // Formato original da data recebida
                 SimpleDateFormat sdfOriginal = new SimpleDateFormat("yyyy-MM-dd");
@@ -70,20 +71,8 @@ public class FEditarPerfil extends javax.swing.JFrame {
                     e.printStackTrace();
                     // Você pode adicionar um código adicional aqui para lidar com a exceção, como mostrar uma mensagem de erro
                 }
-                foto = rs.getString(11);
-                
-                txt_nome.setText(nome);
-                txt_usuario.setText(usuario);
-                txt_senha.setText(senha);
-                txt_email.setText(email);
-                panel_foto_editar.setImagem("src/Imagens/" + foto);
-            }
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
-        }
     }
-    Alunos a = new Alunos();
+    Aluno a = new Aluno();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -398,7 +387,7 @@ public class FEditarPerfil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        a.setIdAluno(idAluno);
+        a.setIdAluno(alunoLogado.getIdAluno());
         a.setNome(txt_nome.getText());
         a.setUsuario(txt_usuario.getText());
         a.setSenha(txt_senha.getText());
@@ -416,7 +405,6 @@ public class FEditarPerfil extends javax.swing.JFrame {
     
             a.setDataNasc(dataNascBanco);
             a.alterar();
-            alunlog.fecharLogin();
             new FLogin().setVisible(true);
             dispose();
         } catch (ParseException e) {

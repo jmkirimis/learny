@@ -6,8 +6,8 @@
 package Visualizacao;
 
 import Controle.Conexao;
-import Modelagem.AlunoLogado;
-import Modelagem.WindowManager;
+import Modelagem.Aluno;
+import Modelagem.Session;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -26,16 +26,23 @@ public class FRanking extends javax.swing.JFrame {
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    AlunoLogado alunlog = new AlunoLogado();
+    
+    private Aluno alunoLogado;
 
     /**
      * Creates new form FRanking
      */
     public FRanking() {
         initComponents();
-        // Deleta o aluno logado ao sair pelo botão de fechar janela
-        WindowManager.register(this);
-        conexao = Conexao.conecta(); 
+        conexao = Conexao.conecta();
+        alunoLogado = Session.getInstance().getAlunoLogado();
+        if (alunoLogado == null) {
+            // Se não houver aluno logado, redirecione para a tela de login
+            new FLogin().setVisible(true);
+            this.dispose();
+            return;
+        }
+        
         Color pretoComOpacidade = new Color(0, 0, 0, 75);
         panel_ranking_opac.setBackground(pretoComOpacidade);
         this.setLayout(new BorderLayout());
@@ -43,38 +50,19 @@ public class FRanking extends javax.swing.JFrame {
         this.add(menu, BorderLayout.SOUTH);
         carregarDadosAlunoLogado();
         carregarRanking();
-        String sql = "select * from alunoLogado where idAlunoLogado = 1";
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-            if (rs.next()) {
-                double pontos = rs.getDouble(9);
-                int fasesConcluidas = rs.getInt(10);
-                lbl_pontos.setText(Double.toString(pontos));
-                lbl_fases_concluidas.setText(Integer.toString(fasesConcluidas));
-            }
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
-        }
+        double pontos = alunoLogado.getPontosTotais();
+        int fasesConcluidas = alunoLogado.getFasesConcluidas();
+        lbl_pontos.setText(Double.toString(pontos));
+        lbl_fases_concluidas.setText(Integer.toString(fasesConcluidas));
     }   
     
     private void carregarDadosAlunoLogado() {
-        String sql = "select * from alunoLogado where idAlunoLogado = 1";
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-            if (rs.next()) {
-                String nome = rs.getString(3);    
-                String foto = rs.getString(11);
-                double pontos = rs.getDouble(9);
-                lbl_pontos1.setText(Double.toString(pontos));
-                //lbl_nome_perfil1.setText(nome);
-                //panel_foto_perfil.setImagem("src/Imagens/" + foto);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
+        String nome = alunoLogado.getNome();    
+        String foto = alunoLogado.getFoto();
+        double pontos = alunoLogado.getPontosTotais();
+        lbl_pontos1.setText(Double.toString(pontos));
+        //lbl_nome_perfil1.setText(nome);
+        //panel_foto_perfil.setImagem("src/Imagens/" + foto);
     }
 
     private void carregarRanking() {

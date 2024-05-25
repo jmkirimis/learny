@@ -5,8 +5,8 @@
  */
 package Visualizacao;
 import Controle.Conexao;
-import Modelagem.AlunoLogado;
-import Modelagem.WindowManager;
+import Modelagem.Aluno;
+import Modelagem.Session;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,30 +27,25 @@ public class FFaseConcluida extends javax.swing.JFrame {
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    AlunoLogado alunlog = new AlunoLogado();
     
-    int idAluno;
+    private Aluno alunoLogado;
+    private int idAluno;
     
     public FFaseConcluida() {
-        initComponents();       
-        // Deleta o aluno logado ao sair pelo botão de fechar janela
-        WindowManager.register(this);
+        initComponents();
+        alunoLogado = Session.getInstance().getAlunoLogado();
+        if (alunoLogado == null) {
+            // Se não houver aluno logado, redirecione para a tela de login
+            new FLogin().setVisible(true);
+            this.dispose();
+            return;
+        }
+        idAluno = alunoLogado.getIdAluno();
+        
         conexao = Conexao.conecta();
-        String sql = "select * from alunoLogado where idAlunoLogado = 1";
+        String sql = "select * from fasesConcluidas where idAluno = ? order by idFaseConcluida desc limit 1";
         try {
             pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-            if (rs.next()) {
-                this.idAluno = rs.getInt(2);
-            }
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
-        }
-        
-        String sql2 = "select * from fasesConcluidas where idAluno = ? order by idFaseConcluida desc limit 1";
-        try {
-            pst = conexao.prepareStatement(sql2);
             pst.setInt(1, idAluno);
             rs = pst.executeQuery();
             if (rs.next()) {

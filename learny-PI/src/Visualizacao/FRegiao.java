@@ -6,9 +6,9 @@
 package Visualizacao;
 
 import Controle.Conexao;
-import Modelagem.AlunoLogado;
+import Modelagem.Aluno;
+import Modelagem.Session;
 import Modelagem.VerificadorFases;
-import Modelagem.WindowManager;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -25,31 +25,27 @@ public class FRegiao extends javax.swing.JFrame {
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    AlunoLogado alunlog = new AlunoLogado();
-    private int idAlunoLogado = 0;
+    private Aluno alunoLogado;
+    private int idAluno;
 
     public FRegiao() {
         initComponents();
-        // Deleta o aluno logado ao sair pelo botão de fechar janela
-        WindowManager.register(this);
         conexao = Conexao.conecta();
-        String sql = "select * from alunoLogado where idAlunoLogado = 1";
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-            if (rs.next()) {
-                idAlunoLogado = rs.getInt(1);
-                double pontos = rs.getDouble(9);
-                int fasesConcluidas = rs.getInt(10);
-                lbl_pontos.setText(Double.toString(pontos));
-                lbl_fases_concluidas.setText(Integer.toString(fasesConcluidas));
-            }
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
+        alunoLogado = Session.getInstance().getAlunoLogado();
+        if (alunoLogado == null) {
+            // Se não houver aluno logado, redirecione para a tela de login
+            new FLogin().setVisible(true);
+            this.dispose();
+            return;
         }
+        idAluno = alunoLogado.getIdAluno();
+        double pontos = alunoLogado.getPontosTotais();
+        int fasesConcluidas = alunoLogado.getFasesConcluidas();
+        lbl_pontos.setText(Double.toString(pontos));
+        lbl_fases_concluidas.setText(Integer.toString(fasesConcluidas));
+            
         VerificadorFases vfases = new VerificadorFases(conexao);
-        String[] estadosFases = vfases.verificarFases(1, idAlunoLogado); // Verifica as fases da região 1
+        String[] estadosFases = vfases.verificarFases(1, idAluno); // Verifica as fases da região 1
             
         System.out.println("Fase Visual: " + estadosFases[0]);
         System.out.println("Fase Números: " + estadosFases[1]);

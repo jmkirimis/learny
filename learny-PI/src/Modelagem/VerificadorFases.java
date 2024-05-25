@@ -17,9 +17,11 @@ import javax.swing.JOptionPane;
  */
 public class VerificadorFases {
     private Connection conexao;
+    private Aluno alunoLogado;
     
     public VerificadorFases(Connection conexao) {
         this.conexao = conexao;
+        alunoLogado = Session.getInstance().getAlunoLogado();
     }
     
     public String verificarFase(int idRegiao, String tipoFase, int idAlunoLogado) {
@@ -28,15 +30,14 @@ public class VerificadorFases {
                      "JOIN fases f ON fc.idFase = f.idFase " +
                      "JOIN regioes r ON f.idRegiao = r.idRegiao " +
                      "JOIN alunos a ON fc.idAluno = a.idAluno " +
-                     "JOIN alunoLogado al ON a.idAluno = al.idAluno " +
-                     "WHERE r.idRegiao = ? AND f.tipo = ? AND al.idAlunoLogado = ?;";
+                     "WHERE r.idRegiao = ? AND f.tipo = ? AND a.idAluno = ?;";
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
             pst = conexao.prepareStatement(sql);
             pst.setInt(1, idRegiao);
             pst.setString(2, tipoFase);
-            pst.setInt(3, idAlunoLogado);
+            pst.setInt(3, alunoLogado.getIdAluno());
             rs = pst.executeQuery();
             if (rs.next()) {
                 estadoFase = "ok";

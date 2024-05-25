@@ -6,8 +6,8 @@
 package Visualizacao;
 
 import Controle.Conexao;
-import Modelagem.AlunoLogado;
-import Modelagem.WindowManager;
+import Modelagem.Aluno;
+import Modelagem.Session;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.sql.Connection;
@@ -24,32 +24,26 @@ public class FPerfil extends javax.swing.JFrame {
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    AlunoLogado alunlog = new AlunoLogado();
+    private Aluno alunoLogado;
     
     public FPerfil() {
         initComponents();
-        // Deleta o aluno logado ao sair pelo botão de fechar janela
-        WindowManager.register(this);
-        conexao = Conexao.conecta();
-        String sql = "select * from alunoLogado where idAlunoLogado = 1";
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-            if (rs.next()) {
-                String nome = rs.getString(3);
-                double pontos = rs.getDouble(9);
+        alunoLogado = Session.getInstance().getAlunoLogado();
+        if (alunoLogado == null) {
+            // Se não houver aluno logado, redirecione para a tela de login
+            new FLogin().setVisible(true);
+            this.dispose();
+            return;
+        }
+                String nome = alunoLogado.getNome();
+                double pontos = alunoLogado.getPontosTotais();
                 int nivel = (int)(pontos/100);
                 double progressoNivel = pontos % 100;
-                String foto = rs.getString(11);
+                String foto = alunoLogado.getFoto();
                 barra_nivel.setValue((int) progressoNivel);
                 lbl_nome_perfil.setText(nome);
                 lbl_anos.setText(Integer.toString(nivel));
-                panel_foto_perfil.setImagem("src/Imagens/" + foto);
-            }
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
-        }
+                panel_foto_perfil.setImagem("src/Imagens/" + foto);     
     }
 
     /**
@@ -541,7 +535,6 @@ public class FPerfil extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel13MouseExited
 
     private void panelBtnPerfil6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnPerfil6MouseClicked
-        alunlog.fecharLogin();
         new FLogin().setVisible(true);
         dispose();
     }//GEN-LAST:event_panelBtnPerfil6MouseClicked

@@ -16,26 +16,6 @@ create table alunos(
 );
 insert into alunos(nome, email, usuario, senha, dataNasc, pontosTotais, fasesConcluidas, foto) values
 ("Joao Marcos", "joao.kirimis@gmail.com", "joao", "123", "2004-03-11", 0, 0, "teste.png");
-select * from alunos;
-#select * from alunos where usuario = "joao" and senha = 123;
-#delete from alunos where idAluno = 2;
-
-create table alunoLogado(
-	idAlunoLogado int primary key,
-    idAluno int not null,
-    nome varchar(50),
-    usuario varchar(50),
-    senha varchar(50),
-    email varchar(100),
-    dataNasc date,
-    idade int,
-    pontosTotais real(8,2),
-    fasesConcluidas int,
-    foto varchar(50),
-    constraint fk_aluno_logado foreign key(idAluno) references alunos(idAluno)
-);
-select * from alunoLogado;
-#delete from alunoLogado where idAlunoLogado = 1;
 
 create table mundos(
 	idMundo int auto_increment primary key,
@@ -67,7 +47,6 @@ insert into fases(idRegiao, tipo, dificuldade) values
 (1, "Números", "Médio"),
 (1, "Ouvir", "Médio"),
 (1, "Observacao", "Fácil");
-select * from fases;
 
 create table fasesConcluidas(
 	idFaseConcluida int auto_increment primary key,
@@ -79,7 +58,6 @@ create table fasesConcluidas(
     constraint fk_fase foreign key(idFase) references fases(idFase),
     constraint fk_aluno_fase_concluida foreign key(idAluno) references alunos(idAluno)
 );
-select * from fasesConcluidas;
 
 create table conquistas(
 	idConquista int auto_increment primary key,
@@ -98,7 +76,6 @@ create table alunosXconquistas(
     constraint fk_conquista foreign key(idConquista) references conquistas(idConquista),
     constraint fk_aluno_conquista foreign key(idAluno) references alunos(idAluno)
 );
-select * from alunosXconquistas;
 
 create table missoes(
 	idMissao int auto_increment primary key,
@@ -120,8 +97,18 @@ create table missoesDiarias(
     descMissao varchar(200),
     constraint fk_diaria_missao foreign key(idMissao) references missoes(idMissao)
 );
+insert into missoesDiarias(idMissao, descMissao) values 
+(1, "Faça 3 fases"),
+(3, "Faça a fase de observacao"),
+(7, "Conclua um mundo");
 
-select * from missoesDiarias;
+create table notificacoes(
+	idNotificacao int auto_increment primary key,
+    idAluno int not null,
+    notificacao varchar(100),
+    descNotificacao varchar(100),
+    constraint fk_aluno_notificacao foreign key(idALuno) references alunos(idALuno)
+);
 
 -- Criação do trigger para atualizar o número de fases concluídas
 DELIMITER //
@@ -158,41 +145,6 @@ END;
 
 DELIMITER ;
 
--- Criação do trigger para atualizar o número de fases concluídas no aluno logado
-DELIMITER //
-
-CREATE TRIGGER atualiza_fases_aluno_logado
-AFTER INSERT ON fasesConcluidas
-FOR EACH ROW
-BEGIN
-    UPDATE alunoLogado
-    SET fasesConcluidas = (
-        SELECT COUNT(*) 
-        FROM fasesConcluidas 
-        WHERE idAluno = NEW.idAluno
-    )
-    WHERE idAluno = NEW.idAluno;
-END;
-//
-
-DELIMITER ;
-
-
--- Criação do trigger para atualizar o número de pontos no aluno logado
-DELIMITER //
-
-CREATE TRIGGER atualiza_pontos_aluno_logado
-AFTER INSERT ON fasesConcluidas
-FOR EACH ROW
-BEGIN
-    UPDATE alunoLogado
-    SET pontosTotais = pontosTotais + NEW.pontos
-    WHERE idAluno = NEW.idAluno;
-END;
-//
-
-DELIMITER ;
-
 --  Criação de um evento para pegas as missões da tabela missões e inserir nas missões diárias a cada 24 horas
 DELIMITER //
 
@@ -202,7 +154,7 @@ STARTS CURRENT_TIMESTAMP
 DO
 BEGIN
     DECLARE total_missao INT;
-    DECLARE id_missao_1, id_missao_2, id_missao_3, id_missao_4 INT;
+    DECLARE id_missao_1, id_missao_2, id_missao_3 INT;
 
     -- Limpa a tabela missoesDiarias
     DELETE FROM missoesDiarias;
@@ -210,23 +162,22 @@ BEGIN
     -- Conta o total de missões existentes
     SELECT COUNT(*) INTO total_missao FROM missoes;
 
-    -- Gera quatro números aleatórios distintos entre 1 e o total de missões
+    -- Gera três números aleatórios distintos entre 1 e o total de missões
     REPEAT
         SET id_missao_1 = FLOOR(RAND() * total_missao) + 1;
         SET id_missao_2 = FLOOR(RAND() * total_missao) + 1;
         SET id_missao_3 = FLOOR(RAND() * total_missao) + 1;
-        SET id_missao_4 = FLOOR(RAND() * total_missao) + 1;
-	-- Garante que não sejam selecionadas missões repetidas
-    UNTIL id_missao_1 <> id_missao_2 AND id_missao_1 <> id_missao_3 AND id_missao_1 <> id_missao_4 AND id_missao_2 <> id_missao_3 AND id_missao_2 <> id_missao_4 AND id_missao_3 <> id_missao_4 END REPEAT;
+        -- Garante que não sejam selecionadas missões repetidas
+    UNTIL id_missao_1 <> id_missao_2 AND id_missao_1 <> id_missao_3 AND id_missao_2 <> id_missao_3 END REPEAT;
 
-    -- Insere as quatro missões diárias com base nos números gerados
+    -- Insere as três missões diárias com base nos números gerados
     INSERT INTO missoesDiarias (idMissao, descMissao)
-    SELECT idMissao, descMissao FROM missoes WHERE idMissao IN (id_missao_1, id_missao_2, id_missao_3, id_missao_4);
+    SELECT idMissao, descMissao FROM missoes WHERE idMissao IN (id_missao_1, id_missao_2, id_missao_3);
 END //
 
 DELIMITER ;
 
--- Query que todos os eventos sejam executados automaticamente
+-- Query que todos os eventos sejam executados automaticamente --
 SET GLOBAL event_scheduler=ON;
 -- Ativa o evento criado
 ALTER EVENT inserir_missao_diaria ENABLE;

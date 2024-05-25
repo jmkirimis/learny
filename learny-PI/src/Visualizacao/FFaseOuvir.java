@@ -6,8 +6,9 @@
 package Visualizacao;
 
 import Controle.Conexao;
+import Modelagem.Aluno;
 import Modelagem.FaseConcluida;
-import Modelagem.WindowManager;
+import Modelagem.Session;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -36,27 +37,21 @@ public class FFaseOuvir extends javax.swing.JFrame {
     private int minutes;
     private int remainingSeconds;
     private String acerto = "";
+    
+    private Aluno alunoLogado;
     private int idAluno;
     
     public FFaseOuvir() {
-        initComponents();    
-        // Deleta o aluno logado ao sair pelo botão de fechar janela
-        WindowManager.register(this);
-        //faz a conexao com o banco
-        conexao = Conexao.conecta();
-        
-        //pega o id do aluno
-        String sql = "select * from alunoLogado where idAlunoLogado = 1";
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-            if (rs.next()) {
-                this.idAluno = Integer.parseInt(rs.getString(1));
-            }
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
+        initComponents();
+        alunoLogado = Session.getInstance().getAlunoLogado();
+        if (alunoLogado == null) {
+            // Se não houver aluno logado, redirecione para a tela de login
+            new FLogin().setVisible(true);
+            this.dispose();
+            return;
         }
+        
+        idAluno = alunoLogado.getIdAluno();
         
         timer = new Timer(1000, new ActionListener() {
 

@@ -6,10 +6,9 @@
 package Visualizacao;
 
 import Controle.Conexao;
-import Modelagem.AlunoLogado;
-import Modelagem.Alunos;
+import Modelagem.Aluno;
+import Modelagem.Session;
 import Modelagem.VerificadorFases;
-import Modelagem.WindowManager;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,41 +27,37 @@ public class FEstatistica extends javax.swing.JFrame {
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    Alunos a = new Alunos();
-    AlunoLogado alunlog = new AlunoLogado();
+    Aluno a = new Aluno();
+    private Aluno alunoLogado;
+    private int idAluno;
     
     Color preto = new Color(0,0,0,64);
     Color vermelhoPastel = new Color(239,91,106);
     Color azulPastel = new Color(108,210,255);
-    private int idAlunoLogado = 0;
-    private int idAluno = 0;
+    
     public FEstatistica() {
         initComponents();
-        // Deleta o aluno logado ao sair pelo botão de fechar janela
-        WindowManager.register(this);
+        conexao = Conexao.conecta();
+        alunoLogado = Session.getInstance().getAlunoLogado();
+        if (alunoLogado == null) {
+            // Se não houver aluno logado, redirecione para a tela de login
+            new FLogin().setVisible(true);
+            this.dispose();
+            return;
+        }
+        
         panel_check1.setVisible(false);
         panel_check2.setVisible(false);
         panel_check3.setVisible(false);
-        conexao = Conexao.conecta();
-        String sql = "select * from alunoLogado where idAlunoLogado = 1";
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-            if (rs.next()) {
-                idAlunoLogado = rs.getInt(1);
-                idAluno = rs.getInt(2);
-                double pontos = rs.getDouble(9);
-                int nivel = (int)(pontos/100);
-                double progressoNivel = pontos % 100;
-                String foto = rs.getString(11);
-                barra_xp.setValue((int) progressoNivel);
-                int fasesConcluidas = rs.getInt(10);
-                lbl_fases_concluidas.setText(Integer.toString(fasesConcluidas));
-            }
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
-        }
+        
+        idAluno = alunoLogado.getIdAluno();
+        double pontos = alunoLogado.getPontosTotais();
+        int nivel = (int)(pontos/100);
+        double progressoNivel = pontos % 100;
+        String foto = alunoLogado.getFoto();
+        barra_xp.setValue((int) progressoNivel);
+        int fasesConcluidas = alunoLogado.getFasesConcluidas();
+        lbl_fases_concluidas.setText(Integer.toString(fasesConcluidas));
         
          String verConquistas = "select c.nomeConquista, c.descCOnquista from alunosXconquistas axc \n" +
         "join conquistas c on c.idConquista = axc.idConquista \n" +
@@ -103,7 +98,7 @@ public class FEstatistica extends javax.swing.JFrame {
         }
         
         VerificadorFases vfases = new VerificadorFases(conexao);
-        String[] estadosFases = vfases.verificarFases(1, idAlunoLogado); // Verifica as fases da região 1
+        String[] estadosFases = vfases.verificarFases(1, idAluno); // Verifica as fases da região 1
             
         System.out.println("Fase Visual: " + estadosFases[0]);
         System.out.println("Fase Números: " + estadosFases[1]);

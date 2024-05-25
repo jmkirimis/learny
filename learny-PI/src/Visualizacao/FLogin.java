@@ -6,9 +6,8 @@
 package Visualizacao;
 
 import Controle.Conexao;
-import Modelagem.AlunoLogado;
-import Modelagem.Alunos;
-import Modelagem.WindowManager;
+import Modelagem.Aluno;
+import Modelagem.Session;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.sql.*;
@@ -31,9 +30,7 @@ public class FLogin extends javax.swing.JFrame {
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    Alunos a = new Alunos();
-    AlunoLogado alunlog = new AlunoLogado();
-    
+    Aluno a = new Aluno();
     Color preto = new Color(0,0,0,64);
 
     /**
@@ -41,8 +38,6 @@ public class FLogin extends javax.swing.JFrame {
      */
     public FLogin() {
         initComponents();
-        // Deleta o aluno logado ao sair pelo botão de fechar janela
-        WindowManager.register(this);
         conexao = Conexao.conecta();
     }
 
@@ -249,38 +244,50 @@ public class FLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel8MouseEntered
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        logar();
+        autenticar();
     }//GEN-LAST:event_jLabel8MouseClicked
-    public void logar(){
+    
+    private void autenticar() {
+        String usuarioLogin = txt_usuario_entrar.getText();
+        String senhaLogin = txt_senha_entrar.getText();
+
+        Aluno aluno = autenticarNoBanco(usuarioLogin, senhaLogin);
+        if (aluno != null) {
+            Session.getInstance().setAlunoLogado(aluno);
+            new FMundos().setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Usuário ou senha inválidos", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public Aluno autenticarNoBanco(String usuarioLogin, String senhaLogin){
         String sql = "select * from alunos where usuario =? and senha =?";
         try {
             pst = conexao.prepareStatement(sql);
-            pst.setString(1, txt_usuario_entrar.getText());
-            pst.setString(2, txt_senha_entrar.getText());
+            pst.setString(1, usuarioLogin);
+            pst.setString(2, senhaLogin);
             rs = pst.executeQuery();
             
             if(rs.next()){
-                alunlog.setIdAluno(rs.getInt(1));
-                alunlog.setNome(rs.getString(2));
-                alunlog.setUsuario(rs.getString(3));
-                alunlog.setSenha(rs.getString(4));
-                alunlog.setEmail(rs.getString(5));
-                alunlog.setDataNasc(rs.getString(6));
-                alunlog.setIdade(rs.getInt(7));
-                alunlog.setPontosTotais(rs.getDouble(8));
-                alunlog.setFasesConcluidas(rs.getInt(9));
-                alunlog.setFoto(rs.getString(10));
-                alunlog.cadastrarLogin();
-                new FMundos().setVisible(true);
-                dispose();
+                int idAluno = rs.getInt(1);
+                String nome = rs.getString(2);
+                String usuario = rs.getString(3);
+                String senha = rs.getString(4);
+                String email = rs.getString(5);
+                String dataNasc = rs.getString(6);
+                int idade = rs.getInt(7);
+                double pontosTotais = rs.getDouble(8);
+                int fasesConcluidas = rs.getInt(9);
+                String foto = rs.getString(10);
+                return new Aluno(idAluno, nome, usuario, senha, email, dataNasc, idade, pontosTotais, fasesConcluidas, foto);
             } else{
-                new FMundos().setVisible(true);
-                dispose();
-                //JOptionPane.showMessageDialog(null,"usuário ou senha inválidos");
+                JOptionPane.showMessageDialog(null, "Erro");
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
+        return null;
     }
     /**
      * @param args the command line arguments
