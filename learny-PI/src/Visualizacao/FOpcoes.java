@@ -134,6 +134,11 @@ public class FOpcoes extends javax.swing.JFrame {
         panel_icon1.setShadowOpacity(0.3F);
         panel_icon1.setShadowSize(3);
         panel_icon1.setShadowType(Visualizacao.ShadowType.BOT);
+        panel_icon1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_icon1MouseClicked(evt);
+            }
+        });
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-notificacao.png"))); // NOI18N
         jLabel3.setToolTipText("");
@@ -161,6 +166,11 @@ public class FOpcoes extends javax.swing.JFrame {
         panel_icon2.setShadowOpacity(0.3F);
         panel_icon2.setShadowSize(3);
         panel_icon2.setShadowType(Visualizacao.ShadowType.BOT);
+        panel_icon2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_icon2MouseClicked(evt);
+            }
+        });
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-sair-branco.png"))); // NOI18N
 
@@ -489,6 +499,16 @@ public class FOpcoes extends javax.swing.JFrame {
     private void jLabel13MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseExited
         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_jLabel13MouseExited
+
+    private void panel_icon1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_icon1MouseClicked
+       new FNotificacao().setVisible(true);
+       dispose();
+    }//GEN-LAST:event_panel_icon1MouseClicked
+
+    private void panel_icon2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_icon2MouseClicked
+        new FOpcoes().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_panel_icon2MouseClicked
 
     /**
      * @param args the command line arguments

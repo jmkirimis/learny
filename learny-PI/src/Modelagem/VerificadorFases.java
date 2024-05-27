@@ -94,6 +94,7 @@ public class VerificadorFases {
             pst = conexao.prepareStatement(sqlConquista);
             pst.setInt(1, idAluno);
             pst.setString(2, nomeConquista);
+            inserirNotificacao(nomeConquista);
             pst.executeUpdate();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -132,5 +133,23 @@ public class VerificadorFases {
             }
         }
         return false;
+    }
+    
+     private void inserirNotificacao(String nomeConquista){
+        String sql = "insert into notificacoes(idAluno, notificacao, descNotificacao, iconNotificacao) values"
+                + "(?,?,?,?)";
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setInt(1, alunoLogado.getIdAluno());
+            pst.setString(2, "Conquista Desbloqueada");
+            pst.setString(3, "Voce desbolqueou a conquista " + nomeConquista);
+            pst.setString(4, "icon-trofeu.png");
+            pst.executeUpdate();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
     }
 }

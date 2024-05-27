@@ -257,7 +257,7 @@ public class FLogin extends javax.swing.JFrame {
             new FMundos().setVisible(true);
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "Usuário ou senha inválidos", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos");
         }
     }
     

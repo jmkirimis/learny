@@ -109,11 +109,9 @@ create table notificacoes(
     idAluno int not null,
     notificacao varchar(100),
     descNotificacao varchar(100),
+    iconNotificacao varchar(100),
     constraint fk_aluno_notificacao foreign key(idALuno) references alunos(idALuno)
 );
-insert into notificacoes(idALuno, notificacao, descNotificacao) values
-(1, "Teste", ""),
-(1, "Fase Concluida", "");
 
 -- Criação do trigger para atualizar o número de fases concluídas
 DELIMITER //

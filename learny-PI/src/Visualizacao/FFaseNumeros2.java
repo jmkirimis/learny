@@ -43,6 +43,7 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
     
     public FFaseNumeros2(int acertos, int seconds) {
         initComponents();
+        conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
         if (alunoLogado == null) {
             // Se não houver aluno logado, redirecione para a tela de login
@@ -412,11 +413,20 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
 
     private void panelSombra5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra5MouseClicked
         JOptionPane.showMessageDialog(null, "Que pena! A resposta era 13");
+        calcularPontos();
     }//GEN-LAST:event_panelSombra5MouseClicked
 
     private void panelSombra6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra6MouseClicked
         acertos2++;
-        
+        calcularPontos();
+    }//GEN-LAST:event_panelSombra6MouseClicked
+    
+    private void panelSombra7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra7MouseClicked
+        JOptionPane.showMessageDialog(null, "Que pena! A resposta era 13");
+        calcularPontos();
+    }//GEN-LAST:event_panelSombra7MouseClicked
+
+    private void calcularPontos(){
         double porcAcerto;
         porcAcerto = ((double)acertos2/2)*100;
         
@@ -431,14 +441,27 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
         fase.cadastrar();
         timer.stop();
         JOptionPane.showMessageDialog(null, "Muito bem!");
+        inserirNotificacao();
         new FFaseConcluida().setVisible(true);
         dispose();
-    }//GEN-LAST:event_panelSombra6MouseClicked
-
-    private void panelSombra7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra7MouseClicked
-        JOptionPane.showMessageDialog(null, "Que pena! A resposta era 13");
-    }//GEN-LAST:event_panelSombra7MouseClicked
-
+    }
+    
+    private void inserirNotificacao(){
+        String sql;
+        sql = "insert into notificacoes(idAluno, notificacao, descNotificacao, iconNotificacao) values"
+                + "(?,?,?,?)";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setInt(1, alunoLogado.getIdAluno());
+            pst.setString(2, "Fase Concluida");
+            pst.setString(3, "Voce concluiu a fase de numeros!");
+            pst.setString(4, "icon-trofeu.png");
+            pst.executeUpdate();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }
     /**
      * @param args the command line arguments
      */

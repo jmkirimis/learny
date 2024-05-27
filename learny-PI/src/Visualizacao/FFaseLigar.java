@@ -85,6 +85,7 @@ public class FFaseLigar extends javax.swing.JFrame {
     public FFaseLigar() {  
         initComponents();
         alunoLogado = Session.getInstance().getAlunoLogado();
+        conexao = Conexao.conecta();
         if (alunoLogado == null) {
             // Se não houver aluno logado, redirecione para a tela de login
             new FLogin().setVisible(true);
@@ -689,10 +690,27 @@ public class FFaseLigar extends javax.swing.JFrame {
         fase.setTempoConclusao(minutes,remainingSeconds);
         fase.setPorcAcertos(porcAcerto);
         fase.cadastrar();
+        inserirNotificacao();
         new FFaseConcluida().setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
 
+    private void inserirNotificacao(){
+        String sql;
+        sql = "insert into notificacoes(idAluno, notificacao, descNotificacao, iconNotificacao) values"
+                + "(?,?,?,?)";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setInt(1, alunoLogado.getIdAluno());
+            pst.setString(2, "Fase Concluida");
+            pst.setString(3, "Voce concluiu a fase visual!");
+            pst.setString(4, "icon-trofeu.png");
+            pst.executeUpdate();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }
     /**
      * @param args the command line arguments
      */

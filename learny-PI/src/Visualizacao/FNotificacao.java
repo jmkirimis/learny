@@ -13,6 +13,8 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -60,17 +62,51 @@ public class FNotificacao extends javax.swing.JFrame {
         painelNotificacoes.setLayout(new BoxLayout(painelNotificacoes, BoxLayout.Y_AXIS));
         carregarNotificacoes();
         carregarMissoes();
-        // Suponha que você tenha um ID de notificação
-        int idNotificacao = 1; // O ID da notificação que você deseja buscar
+        
+        int maxId = getUltimoIdNotificacao(); // Obtenha o último ID de notificação
+        int idNotificacao = 0; // O ID da notificação que você deseja buscar
+        
+         // Obtenha o painel correspondente
+        while(idNotificacao <= maxId){
+            PanelSombra painel = getPainelNotificacao(idNotificacao);
 
-        // Obtenha o painel correspondente
-        PanelSombra painel = getPainelNotificacao(idNotificacao);
+            if (painel != null) {
+                // Adiciona um MouseListener ao painel
+                //System.out.println("Painel encontrado para a notificação com ID: " + idNotificacao);
+                int finalIdNotificacao = idNotificacao; // variável final para uso no listener
+                painel.addMouseListener(new MouseAdapter() {
+                    public void mouseClicked(MouseEvent e) {
+                        // Aqui você pode adicionar o código que deseja executar ao clicar no painel
+                        String sql = "select * from notificacoes where idNotificacao = ?"; // Ajuste a consulta conforme necessário
+                        try {
+                            pst = conexao.prepareStatement(sql);
+                            pst.setInt(1, finalIdNotificacao);
+                            rs = pst.executeQuery();
 
-        if (painel != null) {
-            // Faça algo com o painel específico
-            System.out.println("Painel encontrado para a notificação com ID: " + idNotificacao);
-        } else {
-            System.out.println("Nenhum painel encontrado para a notificação com ID: " + idNotificacao);
+                            if (rs.next()) {
+                                String descNotificacao = rs.getString(4);
+                                JOptionPane.showMessageDialog(null, descNotificacao);
+                            }
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(null, ex);
+                        }
+                        
+                        String sql2 = "delete from notificacoes where idNotificacao = ?";
+                        try {
+                            pst = conexao.prepareStatement(sql2);
+                            pst.setInt(1, finalIdNotificacao);
+
+                            int rowsAffected = pst.executeUpdate();
+                            System.out.println("Linhas afetadas: " + rowsAffected);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                });
+            } else {
+                //System.out.println("Nenhum painel encontrado para a notificação com ID: " + idNotificacao);
+            }
+            idNotificacao++;
         }
     }
 
@@ -132,6 +168,21 @@ public class FNotificacao extends javax.swing.JFrame {
     
     public PanelSombra getPainelNotificacao(int id) {
         return notificacoesMap.get(id);
+    }
+    
+    private int getUltimoIdNotificacao() {
+        String sql = "select max(idNotificacao) as max_id from notificacoes";
+        int maxId = -1;
+        try {
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                maxId = rs.getInt("max_id");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return maxId;
     }
     
     private void carregarMissoes(){

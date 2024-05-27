@@ -61,6 +61,9 @@ public class FFaseConcluida extends javax.swing.JFrame {
                 String tempoFormatado = sdf.format(time);
 
                 lbl_tempo.setText(tempoFormatado);
+                
+                alunoLogado.setPontosTotais(alunoLogado.getPontosTotais() + pontos);
+                alunoLogado.setFasesConcluidas(alunoLogado.getFasesConcluidas() + 1);
             }
             
         } catch (Exception e) {
