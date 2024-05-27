@@ -80,27 +80,29 @@ create table alunosXconquistas(
 create table missoes(
 	idMissao int auto_increment primary key,
     nomeMissao varchar(100),
-    descMissao varchar(200)
+    descMissao varchar(200),
+    iconMissao varchar(100)
 );
-insert into missoes(nomeMissao, descMissao) values 
-("Atividades 1", "Faça 3 fases"),
-("Atividades 2", "Faça 5 fases"),
-("Observacao", "Faça a fase de observacao"),
-("Visual", "Faça a fase visual"),
-("Ouvir", "Faça a fase de escuta"),
-("Numeros", "Faça a fase de números"),
-("Mundo", "Conclua um mundo");
+insert into missoes(nomeMissao, descMissao, iconMissao) values 
+("Atividades 1", "Conclua 3 fases", "icon-diaria-vermelho.png"),
+("Atividades 2", "Conclua 5 fases", ""),
+("Observacao", "Conclua a fase observacao", "icon-diaria-observ.png"),
+("Visual", "Conclua a fase visual", ""),
+("Ouvir", "Conclua a fase de escuta", ""),
+("Numeros", "Conclua a fase de números", ""),
+("Mundo", "Conclua um mundo", "icon-diaria-mundo.png");
 
 create table missoesDiarias(
 	idMissaoDiaria int auto_increment primary key,
     idMissao int not null,
     descMissao varchar(200),
+    iconMissao varchar(100),
     constraint fk_diaria_missao foreign key(idMissao) references missoes(idMissao)
 );
-insert into missoesDiarias(idMissao, descMissao) values 
-(1, "Faça 3 fases"),
-(3, "Faça a fase de observacao"),
-(7, "Conclua um mundo");
+insert into missoesDiarias(idMissao, descMissao, iconMissao) values 
+(1, "Conclua 3 fases", "icon-diaria-vermelho.png"),
+(3, "Conclua a fase observacao", "icon-diaria-observ.png"),
+(7, "Conclua um mundo", "icon-diaria-mundo.png");
 
 create table notificacoes(
 	idNotificacao int auto_increment primary key,
@@ -109,6 +111,9 @@ create table notificacoes(
     descNotificacao varchar(100),
     constraint fk_aluno_notificacao foreign key(idALuno) references alunos(idALuno)
 );
+insert into notificacoes(idALuno, notificacao, descNotificacao) values
+(1, "Teste", ""),
+(1, "Fase Concluida", "");
 
 -- Criação do trigger para atualizar o número de fases concluídas
 DELIMITER //

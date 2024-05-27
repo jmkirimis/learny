@@ -198,6 +198,9 @@ public class FPerfil extends javax.swing.JFrame {
 
         panelBtnPerfil3.setBackground(new java.awt.Color(255, 255, 255));
         panelBtnPerfil3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelBtnPerfil3MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panelBtnPerfil3MouseEntered(evt);
             }
@@ -226,14 +229,13 @@ public class FPerfil extends javax.swing.JFrame {
         panelBtnPerfil3Layout.setVerticalGroup(
             panelBtnPerfil3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBtnPerfil3Layout.createSequentialGroup()
-                .addGroup(panelBtnPerfil3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelBtnPerfil3Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel8))
-                    .addGroup(panelBtnPerfil3Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel7)))
+                .addGap(25, 25, 25)
+                .addComponent(jLabel7)
                 .addContainerGap(25, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnPerfil3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addGap(35, 35, 35))
         );
 
         panelBtnPerfil4.setBackground(new java.awt.Color(255, 255, 255));
@@ -601,6 +603,11 @@ public class FPerfil extends javax.swing.JFrame {
         new FRanking().setVisible(true);
         dispose();
     }//GEN-LAST:event_panelBtnPerfil2MouseClicked
+
+    private void panelBtnPerfil3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnPerfil3MouseClicked
+        new FNotificacao().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_panelBtnPerfil3MouseClicked
 
     /**
      * @param args the command line arguments

@@ -47,7 +47,7 @@ public class FMundos extends javax.swing.JFrame {
         panelSlide.setAnimate(5);
         this.setLayout(new BorderLayout());
         this.add(customScrollPane1, BorderLayout.CENTER);
-        this.add(jPanel3, BorderLayout.SOUTH);
+        this.add(menu, BorderLayout.SOUTH);
         
         double pontos = alunoLogado.getPontosTotais();
         int fasesConcluidas = alunoLogado.getFasesConcluidas();
@@ -65,6 +65,10 @@ public class FMundos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        menu = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         customScrollPane1 = new Visualizacao.CustomScrollPane();
         panelGradiente = new Visualizacao.PanelGradiente();
         panelRound1 = new Visualizacao.PanelRound();
@@ -109,10 +113,65 @@ public class FMundos extends javax.swing.JFrame {
         panelSombra4 = new Visualizacao.PanelSombra();
         lbl_fases_concluidas1 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+
+        menu.setBackground(new java.awt.Color(76, 76, 76));
+
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icone perfil.png"))); // NOI18N
+        jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6jLabel1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel6MouseExited(evt);
+            }
+        });
+
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icone home.png"))); // NOI18N
+        jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel7MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel7MouseExited(evt);
+            }
+        });
+
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icone menu hamburguer.png"))); // NOI18N
+        jLabel19.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel8MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel8MouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
+        menu.setLayout(menuLayout);
+        menuLayout.setHorizontalGroup(
+            menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuLayout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addComponent(jLabel18)
+                .addGap(89, 89, 89)
+                .addComponent(jLabel19)
+                .addGap(61, 61, 61))
+        );
+        menuLayout.setVerticalGroup(
+            menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18))
+                .addContainerGap())
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -786,84 +845,15 @@ public class FMundos extends javax.swing.JFrame {
 
         customScrollPane1.setViewportView(panelGradiente);
 
-        jPanel3.setBackground(new java.awt.Color(76, 76, 76));
-
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icone perfil.png"))); // NOI18N
-        jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel6jLabel1MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel6MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel6MouseExited(evt);
-            }
-        });
-
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icone home.png"))); // NOI18N
-        jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel7MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel7MouseExited(evt);
-            }
-        });
-
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icone menu hamburguer.png"))); // NOI18N
-        jLabel19.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel8MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel8MouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(jLabel17)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
-                .addComponent(jLabel18)
-                .addGap(89, 89, 89)
-                .addComponent(jLabel19)
-                .addGap(61, 61, 61))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18))
-                .addContainerGap())
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(5, 5, 5)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(5, 5, 5)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(374, 374, 374)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(374, Short.MAX_VALUE)))
         );
 
         pack();
@@ -996,10 +986,10 @@ public class FMundos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lbl_fases_concluidas;
     private javax.swing.JLabel lbl_fases_concluidas1;
     private javax.swing.JLabel lbl_pontos;
+    private javax.swing.JPanel menu;
     private Visualizacao.PanelGradiente panelGradiente;
     private Visualizacao.PanelGradiente panelGradiente1;
     private Visualizacao.PanelRound panelRound1;
