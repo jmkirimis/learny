@@ -455,7 +455,7 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
             pst.setInt(1, alunoLogado.getIdAluno());
             pst.setString(2, "Fase Concluida");
             pst.setString(3, "Voce concluiu a fase de numeros!");
-            pst.setString(4, "icon-trofeu.png");
+            pst.setString(4, "icon-medalha-notificacao.png");
             pst.executeUpdate();
             
         } catch (Exception e) {

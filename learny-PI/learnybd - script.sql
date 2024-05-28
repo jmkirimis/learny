@@ -55,9 +55,11 @@ create table fasesConcluidas(
     pontos double(8,2),
     tempoConclusao time,
     porcentagemAcertos real(8,2),
+    dataConclusao date,
     constraint fk_fase foreign key(idFase) references fases(idFase),
     constraint fk_aluno_fase_concluida foreign key(idAluno) references alunos(idAluno)
 );
+-- select count(*) from fasesConcluidas where dataConclusao = '2024-05-28';
 
 create table conquistas(
 	idConquista int auto_increment primary key,
@@ -85,24 +87,20 @@ create table missoes(
 );
 insert into missoes(nomeMissao, descMissao, iconMissao) values 
 ("Atividades 1", "Conclua 3 fases", "icon-diaria-vermelho.png"),
-("Atividades 2", "Conclua 5 fases", ""),
+("Atividades 2", "Conclua 5 fases", "icon-diaria-vermelho.png"),
 ("Observacao", "Conclua a fase observacao", "icon-diaria-observ.png"),
-("Visual", "Conclua a fase visual", ""),
-("Ouvir", "Conclua a fase de escuta", ""),
-("Numeros", "Conclua a fase de números", ""),
+("Visual", "Conclua a fase visual", "icon-diaria-observ.png"),
+("Ouvir", "Conclua a fase de escuta", "icon-diaria-observ.png"),
+("Numeros", "Conclua a fase de numeros", "icon-diaria-mundo.png"),
 ("Mundo", "Conclua um mundo", "icon-diaria-mundo.png");
 
 create table missoesDiarias(
 	idMissaoDiaria int auto_increment primary key,
     idMissao int not null,
-    descMissao varchar(200),
-    iconMissao varchar(100),
+    dataInsercao date,
     constraint fk_diaria_missao foreign key(idMissao) references missoes(idMissao)
 );
-insert into missoesDiarias(idMissao, descMissao, iconMissao) values 
-(1, "Conclua 3 fases", "icon-diaria-vermelho.png"),
-(3, "Conclua a fase observacao", "icon-diaria-observ.png"),
-(7, "Conclua um mundo", "icon-diaria-mundo.png");
+-- select * from missoesDiarias join missoes using(idMissao);
 
 create table notificacoes(
 	idNotificacao int auto_increment primary key,
@@ -174,8 +172,8 @@ BEGIN
     UNTIL id_missao_1 <> id_missao_2 AND id_missao_1 <> id_missao_3 AND id_missao_2 <> id_missao_3 END REPEAT;
 
     -- Insere as três missões diárias com base nos números gerados
-    INSERT INTO missoesDiarias (idMissao, descMissao)
-    SELECT idMissao, descMissao FROM missoes WHERE idMissao IN (id_missao_1, id_missao_2, id_missao_3);
+    INSERT INTO missoesDiarias (idMissao, dataInsercao)
+    SELECT idMissao, NOW() FROM missoes WHERE idMissao IN (id_missao_1, id_missao_2, id_missao_3);
 END //
 
 DELIMITER ;

@@ -41,11 +41,16 @@ public class FNotificacao extends javax.swing.JFrame {
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    
+
     private Map<Integer, PanelSombra> notificacoesMap; // Mapa para armazenar os painéis de notificação
     private Aluno alunoLogado;
     private int idAluno;
     
+    Color azul = new Color(83, 194, 242);
+    Color verde = new Color(128,210,91);
+    Color vermelho = new Color(239,91,106);
+    Color amarelo = new Color(255,179,0);
+
     public FNotificacao() {
         initComponents();
         conexao = Conexao.conecta();
@@ -62,22 +67,43 @@ public class FNotificacao extends javax.swing.JFrame {
         painelNotificacoes.setLayout(new BoxLayout(painelNotificacoes, BoxLayout.Y_AXIS));
         carregarNotificacoes();
         carregarMissoes();
-        
+
         int maxId = getUltimoIdNotificacao(); // Obtenha o último ID de notificação
         int idNotificacao = 0; // O ID da notificação que você deseja buscar
-        
-         // Obtenha o painel correspondente
-        while(idNotificacao <= maxId){
+
+        // Obtenha o painel correspondente
+        while (idNotificacao <= maxId) {
             PanelSombra painel = getPainelNotificacao(idNotificacao);
+
+            String sql = "select * from notificacoes where idNotificacao = ?";
+            try {
+                pst = conexao.prepareStatement(sql);
+                pst.setInt(1, idNotificacao);
+                rs = pst.executeQuery();
+                // muda as cores conforme o tipo da notificação
+                if (rs.next()) {
+                    String descNotificacao = rs.getString(4);
+                    if (descNotificacao != null && descNotificacao.contains("visual")) {
+                        painel.setBackground(azul);
+                    } else if (descNotificacao != null && descNotificacao.contains("numeros")) {
+                        painel.setBackground(amarelo);
+                    } else if (descNotificacao != null && descNotificacao.contains("observacao")) {
+                        painel.setBackground(verde);
+                    } else if (descNotificacao != null && descNotificacao.contains("escuta")) {
+                        painel.setBackground(vermelho);
+                    }
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex);
+            }
 
             if (painel != null) {
                 // Adiciona um MouseListener ao painel
-                //System.out.println("Painel encontrado para a notificação com ID: " + idNotificacao);
                 int finalIdNotificacao = idNotificacao; // variável final para uso no listener
                 painel.addMouseListener(new MouseAdapter() {
                     public void mouseClicked(MouseEvent e) {
                         // Aqui você pode adicionar o código que deseja executar ao clicar no painel
-                        String sql = "select * from notificacoes where idNotificacao = ?"; // Ajuste a consulta conforme necessário
+                        String sql = "select * from notificacoes where idNotificacao = ?";
                         try {
                             pst = conexao.prepareStatement(sql);
                             pst.setInt(1, finalIdNotificacao);
@@ -90,7 +116,7 @@ public class FNotificacao extends javax.swing.JFrame {
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(null, ex);
                         }
-                        
+
                         String sql2 = "delete from notificacoes where idNotificacao = ?";
                         try {
                             pst = conexao.prepareStatement(sql2);
@@ -103,8 +129,6 @@ public class FNotificacao extends javax.swing.JFrame {
                         }
                     }
                 });
-            } else {
-                //System.out.println("Nenhum painel encontrado para a notificação com ID: " + idNotificacao);
             }
             idNotificacao++;
         }
@@ -124,12 +148,12 @@ public class FNotificacao extends javax.swing.JFrame {
                 String caminhoIcone = rs.getString("iconNotificacao");
 
                 JPanel painelNotificacao = criarPainelNotificacao(descricao, caminhoIcone);
-                painelNotificacoes.add(painelNotificacao);    
-                
+                painelNotificacoes.add(painelNotificacao);
+
                 painelNotificacoes.add(Box.createRigidArea(new Dimension(0, 15)));
 
                 painelNotificacoes.add(painelNotificacao);
-                
+
                 // Armazena o painel no mapa com o ID da notificação
                 notificacoesMap.put(id, (PanelSombra) painelNotificacao);
             }
@@ -160,16 +184,16 @@ public class FNotificacao extends javax.swing.JFrame {
         painel.add(lblDescricao, BorderLayout.CENTER);
 
         // Ajuste o estilo do painel conforme necessário (cores, bordas, etc.)
-        Color verde = new Color(0,204,51);
+        Color verde = new Color(0, 204, 51);
         painel.setBackground(verde); // Exemplo de cor de fundo
 
         return painel;
     }
-    
+
     public PanelSombra getPainelNotificacao(int id) {
         return notificacoesMap.get(id);
     }
-    
+
     private int getUltimoIdNotificacao() {
         String sql = "select max(idNotificacao) as max_id from notificacoes";
         int maxId = -1;
@@ -184,9 +208,9 @@ public class FNotificacao extends javax.swing.JFrame {
         }
         return maxId;
     }
-    
-    private void carregarMissoes(){
-        String sql = "select * from missoesDiarias"; 
+
+    private void carregarMissoes() {
+        String sql = "select * from missoesDiarias join missoes using(idMissao)";
         try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -194,20 +218,20 @@ public class FNotificacao extends javax.swing.JFrame {
             JLabel[] lblsMissoes = {lbl_missao1, lbl_missao2, lbl_missao3};
             JLabel[] lblsIcons = {icon_missao1, icon_misssao2, icon_missao3};
             int cont = 0;
-            
-            while(rs.next()){
-                String descMissao = rs.getString(3);
-                String iconMissao = rs.getString(4);
+
+            while (rs.next()) {
+                String descMissao = rs.getString("descMissao");
+                String iconMissao = rs.getString("iconMissao");
                 lblsMissoes[cont].setText(descMissao);
                 ImageIcon icon = new ImageIcon("src/Imagens/" + iconMissao);
                 lblsIcons[cont].setIcon(icon);
                 cont++;
-            } 
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

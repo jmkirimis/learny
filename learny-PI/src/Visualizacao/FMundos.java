@@ -32,6 +32,9 @@ public class FMundos extends javax.swing.JFrame {
     Color verde = new Color(128,210,91);
     Color vermelho = new Color(239,91,106);
     private Aluno alunoLogado;
+    private boolean naturalClicado = false;
+    private boolean geloClicado = false;
+    private boolean fogoClicado = false;
     int mundo = 1;
     
     public FMundos() {
@@ -1177,18 +1180,42 @@ public class FMundos extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel19MouseClicked
 
     private void panel_naturalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_naturalMouseClicked
-        panel_natural_grande.setVisible(true);
-        linha_verde.setVisible(true);
+        if (!naturalClicado) {
+            // Define o ícone de clique se ainda não foi clicado
+            panel_natural_grande.setVisible(true);
+            linha_verde.setVisible(true);
+            naturalClicado = true;
+        } else {
+            panel_natural_grande.setVisible(false);
+            linha_verde.setVisible(false);
+            naturalClicado = false;
+        }
     }//GEN-LAST:event_panel_naturalMouseClicked
 
     private void panel_geloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_geloMouseClicked
-        panel_gelo_grande.setVisible(true);
-        linha_azul.setVisible(true);
+        if (!geloClicado) {
+            // Define o ícone de clique se ainda não foi clicado
+            panel_gelo_grande.setVisible(true);
+            linha_azul.setVisible(true);
+            geloClicado = true;
+        } else {
+            panel_gelo_grande.setVisible(false);
+            linha_azul.setVisible(false);
+            geloClicado = false;
+        }
     }//GEN-LAST:event_panel_geloMouseClicked
 
     private void panel_fogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_fogoMouseClicked
-        panel_fogo_grande.setVisible(true);
-        linha_vermelha.setVisible(true);
+        if (!fogoClicado) {
+            // Define o ícone de clique se ainda não foi clicado
+            panel_fogo_grande.setVisible(true);
+            linha_vermelha.setVisible(true);
+            fogoClicado = true;
+        } else {
+            panel_fogo_grande.setVisible(false);
+            linha_vermelha.setVisible(false);
+            fogoClicado = false;
+        }
     }//GEN-LAST:event_panel_fogoMouseClicked
 
     /**
