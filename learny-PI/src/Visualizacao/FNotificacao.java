@@ -68,6 +68,9 @@ public class FNotificacao extends javax.swing.JFrame {
         notificacoesMap = new HashMap<>();
         idAluno = alunoLogado.getIdAluno();
         painelNotificacoes.setLayout(new BoxLayout(painelNotificacoes, BoxLayout.Y_AXIS));
+        panel_diaria1.setVisible(false);
+        panel_diaria2.setVisible(false);
+        panel_diaria3.setVisible(false);
         carregarNotificacoes();
         carregarMissoes();
 
@@ -225,6 +228,7 @@ public class FNotificacao extends javax.swing.JFrame {
             while (rs.next()) {
                 String descMissao = rs.getString("descMissao");
                 String iconMissao = rs.getString("iconMissao");
+                panelsDiarias[cont].setVisible(true);
                 lblsMissoes[cont].setText(descMissao);
                 ImageIcon icon = new ImageIcon("src/Imagens/" + iconMissao);
                 lblsIcons[cont].setIcon(icon);

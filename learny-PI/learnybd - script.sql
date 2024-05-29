@@ -59,10 +59,6 @@ create table fasesConcluidas(
     constraint fk_fase foreign key(idFase) references fases(idFase),
     constraint fk_aluno_fase_concluida foreign key(idAluno) references alunos(idAluno)
 );
-select count(*), tipo from fasesConcluidas join fases using(idFase) where dataConclusao = curdate();
-select * from fasesConcluidas;
--- select * from fasesConcluidas fc join fases using(idFase) where fc.dataConclusao = curdate() and idALuno = 1;
--- select count(*) from fasesConcluidas where dataConclusao = '2024-05-28';
 
 create table conquistas(
 	idConquista int auto_increment primary key,
@@ -97,18 +93,16 @@ insert into missoes(nomeMissao, descMissao, iconMissao) values
 ("Numeros", "Conclua a fase de numeros", "icon-diaria-mundo.png"),
 ("Mundo", "Conclua um mundo", "icon-diaria-mundo.png");
 
-select * from missoes;
-
 create table missoesDiarias(
 	idMissaoDiaria int auto_increment primary key,
     idMissao int not null,
     dataInsercao date,
     constraint fk_diaria_missao foreign key(idMissao) references missoes(idMissao)
 );
-/*insert into missoesDiarias(idMIssao, dataInsercao) values 
+insert into missoesDiarias(idMIssao, dataInsercao) values 
 (1,curdate()),
 (3,curdate()),
-(7,curdate());*/
+(2,curdate());
 -- select * from missoesDiarias join missoes using(idMissao);
 
 create table notificacoes(
@@ -155,7 +149,7 @@ END;
 
 DELIMITER ;
 
---  Criação de um evento para pegas as missões da tabela missões e inserir nas missões diárias a cada 24 horas
+/*  Criação de um evento para pegas as missões da tabela missões e inserir nas missões diárias a cada 24 horas
 DELIMITER //
 
 CREATE EVENT inserir_missao_diaria
@@ -190,4 +184,4 @@ DELIMITER ;
 -- Query que todos os eventos sejam executados automaticamente --
 SET GLOBAL event_scheduler=ON;
 -- Ativa o evento criado
-ALTER EVENT inserir_missao_diaria ENABLE;
+ALTER EVENT inserir_missao_diaria ENABLE;*/

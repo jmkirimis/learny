@@ -7,6 +7,7 @@ package Visualizacao;
 import Controle.Conexao;
 import Modelagem.Aluno;
 import Modelagem.Session;
+import Modelagem.VerificadorDiarias;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,6 +32,8 @@ public class FFaseConcluida extends javax.swing.JFrame {
     private Aluno alunoLogado;
     private int idAluno;
     
+    VerificadorDiarias verifDiaria = new VerificadorDiarias();
+    
     public FFaseConcluida() {
         initComponents();
         alunoLogado = Session.getInstance().getAlunoLogado();
@@ -41,6 +44,8 @@ public class FFaseConcluida extends javax.swing.JFrame {
             return;
         }
         idAluno = alunoLogado.getIdAluno();
+        
+        verifDiaria.verificarDiarias();
         
         conexao = Conexao.conecta();
         String sql = "select * from fasesConcluidas where idAluno = ? order by idFaseConcluida desc limit 1";
