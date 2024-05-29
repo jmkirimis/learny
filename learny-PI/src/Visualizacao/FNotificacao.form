@@ -155,9 +155,9 @@
                                       <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="panelRoundBorda1" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="panelRoundBorda2" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="panelRoundBorda3" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="panel_diaria1" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="panel_diaria2" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="panel_diaria3" alignment="0" max="32767" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
@@ -198,11 +198,11 @@
                               <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="panelRoundBorda1" min="-2" max="-2" attributes="0"/>
+                              <Component id="panel_diaria1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="panelRoundBorda2" min="-2" max="-2" attributes="0"/>
+                              <Component id="panel_diaria2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="panelRoundBorda3" min="-2" max="-2" attributes="0"/>
+                              <Component id="panel_diaria3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="83" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -275,7 +275,7 @@
                         <Property name="text" type="java.lang.String" value="Novos"/>
                       </Properties>
                     </Component>
-                    <Container class="Visualizacao.PanelRoundBorda" name="panelRoundBorda1">
+                    <Container class="Visualizacao.PanelRoundBorda" name="panel_diaria1">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -326,7 +326,6 @@
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="48" green="48" red="48" type="rgb"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Conclua 03 fases"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="icon_missao1">
@@ -338,7 +337,7 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Container class="Visualizacao.PanelRoundBorda" name="panelRoundBorda2">
+                    <Container class="Visualizacao.PanelRoundBorda" name="panel_diaria2">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -384,7 +383,6 @@
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="48" green="48" red="48" type="rgb"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Conclua a fase observacao"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="icon_misssao2">
@@ -396,7 +394,7 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Container class="Visualizacao.PanelRoundBorda" name="panelRoundBorda3">
+                    <Container class="Visualizacao.PanelRoundBorda" name="panel_diaria3">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -450,7 +448,6 @@
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="48" green="48" red="48" type="rgb"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Conclua um mundo"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="icon_missao3">

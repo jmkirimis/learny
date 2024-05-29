@@ -8,6 +8,7 @@ package Visualizacao;
 import Controle.Conexao;
 import Modelagem.Aluno;
 import Modelagem.Session;
+import Modelagem.VerificadorDiarias;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -41,6 +42,8 @@ public class FNotificacao extends javax.swing.JFrame {
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
+    
+    VerificadorDiarias verifDiaria = new VerificadorDiarias();
 
     private Map<Integer, PanelSombra> notificacoesMap; // Mapa para armazenar os painéis de notificação
     private Aluno alunoLogado;
@@ -217,8 +220,8 @@ public class FNotificacao extends javax.swing.JFrame {
             // Lista de labels para fácil acesso no loop
             JLabel[] lblsMissoes = {lbl_missao1, lbl_missao2, lbl_missao3};
             JLabel[] lblsIcons = {icon_missao1, icon_misssao2, icon_missao3};
+            JPanel[] panelsDiarias = {panel_diaria1, panel_diaria2, panel_diaria3};
             int cont = 0;
-
             while (rs.next()) {
                 String descMissao = rs.getString("descMissao");
                 String iconMissao = rs.getString("iconMissao");
@@ -253,13 +256,13 @@ public class FNotificacao extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         customSeparator1 = new Visualizacao.CustomSeparator();
         jLabel6 = new javax.swing.JLabel();
-        panelRoundBorda1 = new Visualizacao.PanelRoundBorda();
+        panel_diaria1 = new Visualizacao.PanelRoundBorda();
         lbl_missao1 = new javax.swing.JLabel();
         icon_missao1 = new javax.swing.JLabel();
-        panelRoundBorda2 = new Visualizacao.PanelRoundBorda();
+        panel_diaria2 = new Visualizacao.PanelRoundBorda();
         lbl_missao2 = new javax.swing.JLabel();
         icon_misssao2 = new javax.swing.JLabel();
-        panelRoundBorda3 = new Visualizacao.PanelRoundBorda();
+        panel_diaria3 = new Visualizacao.PanelRoundBorda();
         lbl_missao3 = new javax.swing.JLabel();
         icon_missao3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -320,104 +323,101 @@ public class FNotificacao extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(153, 153, 153));
         jLabel6.setText("Novos");
 
-        panelRoundBorda1.setBackground(new java.awt.Color(255, 255, 255));
-        panelRoundBorda1.setBorderWidth(5);
-        panelRoundBorda1.setGradientEndColor(new java.awt.Color(239, 91, 106));
-        panelRoundBorda1.setRadius(50);
+        panel_diaria1.setBackground(new java.awt.Color(255, 255, 255));
+        panel_diaria1.setBorderWidth(5);
+        panel_diaria1.setGradientEndColor(new java.awt.Color(239, 91, 106));
+        panel_diaria1.setRadius(50);
 
         lbl_missao1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lbl_missao1.setForeground(new java.awt.Color(72, 72, 72));
-        lbl_missao1.setText("Conclua 03 fases");
 
         icon_missao1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-diaria-vermelho.png"))); // NOI18N
 
-        javax.swing.GroupLayout panelRoundBorda1Layout = new javax.swing.GroupLayout(panelRoundBorda1);
-        panelRoundBorda1.setLayout(panelRoundBorda1Layout);
-        panelRoundBorda1Layout.setHorizontalGroup(
-            panelRoundBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRoundBorda1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panel_diaria1Layout = new javax.swing.GroupLayout(panel_diaria1);
+        panel_diaria1.setLayout(panel_diaria1Layout);
+        panel_diaria1Layout.setHorizontalGroup(
+            panel_diaria1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_diaria1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(lbl_missao1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(icon_missao1)
                 .addGap(16, 16, 16))
         );
-        panelRoundBorda1Layout.setVerticalGroup(
-            panelRoundBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRoundBorda1Layout.createSequentialGroup()
-                .addGroup(panelRoundBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRoundBorda1Layout.createSequentialGroup()
+        panel_diaria1Layout.setVerticalGroup(
+            panel_diaria1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_diaria1Layout.createSequentialGroup()
+                .addGroup(panel_diaria1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_diaria1Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(lbl_missao1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRoundBorda1Layout.createSequentialGroup()
+                    .addGroup(panel_diaria1Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addComponent(icon_missao1)))
                 .addGap(21, 21, 21))
         );
 
-        panelRoundBorda2.setBackground(new java.awt.Color(255, 255, 255));
-        panelRoundBorda2.setBorderWidth(5);
-        panelRoundBorda2.setGradientStartColor(new java.awt.Color(83, 194, 242));
-        panelRoundBorda2.setRadius(50);
+        panel_diaria2.setBackground(new java.awt.Color(255, 255, 255));
+        panel_diaria2.setBorderWidth(5);
+        panel_diaria2.setGradientStartColor(new java.awt.Color(83, 194, 242));
+        panel_diaria2.setRadius(50);
 
         lbl_missao2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lbl_missao2.setForeground(new java.awt.Color(72, 72, 72));
-        lbl_missao2.setText("Conclua a fase observacao");
 
         icon_misssao2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-diaria-observ.png"))); // NOI18N
 
-        javax.swing.GroupLayout panelRoundBorda2Layout = new javax.swing.GroupLayout(panelRoundBorda2);
-        panelRoundBorda2.setLayout(panelRoundBorda2Layout);
-        panelRoundBorda2Layout.setHorizontalGroup(
-            panelRoundBorda2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRoundBorda2Layout.createSequentialGroup()
+        javax.swing.GroupLayout panel_diaria2Layout = new javax.swing.GroupLayout(panel_diaria2);
+        panel_diaria2.setLayout(panel_diaria2Layout);
+        panel_diaria2Layout.setHorizontalGroup(
+            panel_diaria2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_diaria2Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(lbl_missao2, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(icon_misssao2)
                 .addGap(19, 19, 19))
         );
-        panelRoundBorda2Layout.setVerticalGroup(
-            panelRoundBorda2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRoundBorda2Layout.createSequentialGroup()
+        panel_diaria2Layout.setVerticalGroup(
+            panel_diaria2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_diaria2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(panelRoundBorda2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(panel_diaria2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(icon_misssao2)
                     .addComponent(lbl_missao2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21))
         );
 
-        panelRoundBorda3.setBackground(new java.awt.Color(255, 255, 255));
-        panelRoundBorda3.setBorderWidth(5);
-        panelRoundBorda3.setGradientEndColor(new java.awt.Color(128, 210, 91));
-        panelRoundBorda3.setGradientStartColor(new java.awt.Color(128, 210, 91));
-        panelRoundBorda3.setRadius(50);
+        panel_diaria3.setBackground(new java.awt.Color(255, 255, 255));
+        panel_diaria3.setBorderWidth(5);
+        panel_diaria3.setGradientEndColor(new java.awt.Color(128, 210, 91));
+        panel_diaria3.setGradientStartColor(new java.awt.Color(128, 210, 91));
+        panel_diaria3.setRadius(50);
 
         lbl_missao3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lbl_missao3.setForeground(new java.awt.Color(72, 72, 72));
-        lbl_missao3.setText("Conclua um mundo");
 
         icon_missao3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-diaria-mundo.png"))); // NOI18N
 
-        javax.swing.GroupLayout panelRoundBorda3Layout = new javax.swing.GroupLayout(panelRoundBorda3);
-        panelRoundBorda3.setLayout(panelRoundBorda3Layout);
-        panelRoundBorda3Layout.setHorizontalGroup(
-            panelRoundBorda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRoundBorda3Layout.createSequentialGroup()
+        javax.swing.GroupLayout panel_diaria3Layout = new javax.swing.GroupLayout(panel_diaria3);
+        panel_diaria3.setLayout(panel_diaria3Layout);
+        panel_diaria3Layout.setHorizontalGroup(
+            panel_diaria3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_diaria3Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(lbl_missao3, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(icon_missao3)
                 .addGap(16, 16, 16))
         );
-        panelRoundBorda3Layout.setVerticalGroup(
-            panelRoundBorda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRoundBorda3Layout.createSequentialGroup()
-                .addGroup(panelRoundBorda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRoundBorda3Layout.createSequentialGroup()
+        panel_diaria3Layout.setVerticalGroup(
+            panel_diaria3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_diaria3Layout.createSequentialGroup()
+                .addGroup(panel_diaria3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_diaria3Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(lbl_missao3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRoundBorda3Layout.createSequentialGroup()
+                    .addGroup(panel_diaria3Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addComponent(icon_missao3)))
                 .addGap(21, 21, 21))
@@ -453,9 +453,9 @@ public class FNotificacao extends javax.swing.JFrame {
                         .addGap(40, 40, 40)
                         .addGroup(panelSombra1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelSombra1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(panelRoundBorda1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(panelRoundBorda2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(panelRoundBorda3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(panel_diaria1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(panel_diaria2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(panel_diaria3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(panelSombra1Layout.createSequentialGroup()
                                 .addGap(86, 86, 86)
                                 .addComponent(jLabel7))
@@ -488,11 +488,11 @@ public class FNotificacao extends javax.swing.JFrame {
                 .addGap(63, 63, 63)
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
-                .addComponent(panelRoundBorda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panel_diaria1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(panelRoundBorda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panel_diaria2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(panelRoundBorda3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panel_diaria3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(83, Short.MAX_VALUE))
         );
 
@@ -622,9 +622,9 @@ public class FNotificacao extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_missao3;
     private javax.swing.JPanel painelNotificacoes;
     private Visualizacao.PanelRound panelRound1;
-    private Visualizacao.PanelRoundBorda panelRoundBorda1;
-    private Visualizacao.PanelRoundBorda panelRoundBorda2;
-    private Visualizacao.PanelRoundBorda panelRoundBorda3;
     private Visualizacao.PanelSombra panelSombra1;
+    private Visualizacao.PanelRoundBorda panel_diaria1;
+    private Visualizacao.PanelRoundBorda panel_diaria2;
+    private Visualizacao.PanelRoundBorda panel_diaria3;
     // End of variables declaration//GEN-END:variables
 }
