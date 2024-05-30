@@ -42,18 +42,6 @@ public class FLogin extends javax.swing.JFrame {
     public FLogin() {
         initComponents();
         conexao = Conexao.conecta();
-        setLayout(new GridBagLayout());  // Define o layout do JFrame
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.weightx = 1;
-        gbc.weighty = 1;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.fill = GridBagConstraints.NONE;
-
-        // Adiciona o painel geral ao JFrame
-        add(panelGradienteGeral, gbc);
-        getContentPane().setBackground(new Color(173, 216, 230)); // Azul claro
     }
 
     /**
@@ -65,7 +53,8 @@ public class FLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelGradienteGeral = new Visualizacao.PanelGradiente();
+        customScrollPane1 = new Visualizacao.CustomScrollPane();
+        panelGradiente1 = new Visualizacao.PanelGradiente();
         panelPretoOpac2 = new Visualizacao.PanelPretoOpac();
         jLabel8 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -80,7 +69,10 @@ public class FLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panelGradienteGeral.setGradientDirection(Visualizacao.PanelGradiente.GradientDirection.VERTICAL);
+        customScrollPane1.setBorder(null);
+        customScrollPane1.setPreferredSize(new java.awt.Dimension(485, 834));
+
+        panelGradiente1.setGradientDirection(Visualizacao.PanelGradiente.GradientDirection.VERTICAL);
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icone confirmar.png"))); // NOI18N
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -171,36 +163,35 @@ public class FLogin extends javax.swing.JFrame {
         panelPretoOpac2Layout.setHorizontalGroup(
             panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPretoOpac2Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
                 .addGroup(panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                        .addGap(168, 168, 168)
+                        .addGap(135, 135, 135)
                         .addComponent(jLabel3))
                     .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
+                        .addGap(15, 15, 15)
                         .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
+                        .addGap(15, 15, 15)
                         .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                        .addGap(198, 198, 198)
+                        .addGap(165, 165, 165)
                         .addComponent(jLabel8))
                     .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
+                        .addGap(59, 59, 59)
                         .addComponent(jLabel6)
                         .addGap(9, 9, 9)
                         .addComponent(jLabel7))
                     .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                        .addGap(117, 117, 117)
+                        .addGap(84, 84, 84)
                         .addComponent(lbl_desc_login))
-                    .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(lbl_desc_login2)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                    .addComponent(lbl_desc_login2))
+                .addGap(30, 30, 30))
         );
         panelPretoOpac2Layout.setVerticalGroup(
             panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelPretoOpac2Layout.createSequentialGroup()
-                .addGap(188, 188, 188)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPretoOpac2Layout.createSequentialGroup()
+                .addGap(165, 165, 165)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(lbl_desc_login)
@@ -216,29 +207,31 @@ public class FLogin extends javax.swing.JFrame {
                 .addGroup(panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
-                .addContainerGap(203, Short.MAX_VALUE))
+                .addGap(120, 120, 120))
         );
 
-        javax.swing.GroupLayout panelGradienteGeralLayout = new javax.swing.GroupLayout(panelGradienteGeral);
-        panelGradienteGeral.setLayout(panelGradienteGeralLayout);
-        panelGradienteGeralLayout.setHorizontalGroup(
-            panelGradienteGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panelGradiente1Layout = new javax.swing.GroupLayout(panelGradiente1);
+        panelGradiente1.setLayout(panelGradiente1Layout);
+        panelGradiente1Layout.setHorizontalGroup(
+            panelGradiente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelPretoOpac2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        panelGradienteGeralLayout.setVerticalGroup(
-            panelGradienteGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPretoOpac2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        panelGradiente1Layout.setVerticalGroup(
+            panelGradiente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelPretoOpac2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        customScrollPane1.setViewportView(panelGradiente1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelGradienteGeral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelGradienteGeral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE)
         );
 
         pack();
@@ -340,13 +333,14 @@ public class FLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private Visualizacao.CustomScrollPane customScrollPane1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel lbl_desc_login;
     private javax.swing.JLabel lbl_desc_login2;
-    private Visualizacao.PanelGradiente panelGradienteGeral;
+    private Visualizacao.PanelGradiente panelGradiente1;
     private Visualizacao.PanelPretoOpac panelPretoOpac2;
     private Visualizacao.PanelRound panelRound1;
     private Visualizacao.PanelRound panelRound2;

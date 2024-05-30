@@ -67,6 +67,7 @@ public class FCadastro extends javax.swing.JFrame {
         setBackground(new java.awt.Color(204, 204, 204));
 
         panelScrollCadastro.setBorder(null);
+        panelScrollCadastro.setPreferredSize(new java.awt.Dimension(485, 834));
 
         panelGradiente.setBackground(new java.awt.Color(204, 204, 204));
         panelGradiente.setGradientDirection(Visualizacao.PanelGradiente.GradientDirection.VERTICAL);
@@ -353,7 +354,7 @@ public class FCadastro extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(panelScrollCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+                .addComponent(panelScrollCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
