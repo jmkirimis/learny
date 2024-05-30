@@ -42,6 +42,8 @@ public class VerificadorFases {
                 estadoFase = "ok";
                 if (!verificarConquista(idAlunoLogado, "Iniciando!")) {
                     inserirConquista(idAlunoLogado, "Iniciando!");
+                    alunoLogado.setMedalhaAtiva("Iniciando!");
+                    alunoLogado.salvarMedalha();
                 }
             }
         } catch (Exception e) {

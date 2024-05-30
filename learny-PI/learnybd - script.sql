@@ -12,10 +12,12 @@ create table alunos(
     idade INT AS (TIMESTAMPDIFF(YEAR, dataNasc, CURDATE())),
     pontosTotais real(8,2),
     fasesConcluidas int,
-    foto varchar(50)
+    foto varchar(50),
+    medalha varchar(100)
 );
-insert into alunos(nome, email, usuario, senha, dataNasc, pontosTotais, fasesConcluidas, foto) values
-("Joao Marcos", "joao.kirimis@gmail.com", "joao", "123", "2004-03-11", 0, 0, "teste.png");
+insert into alunos(nome, email, usuario, senha, dataNasc, pontosTotais, fasesConcluidas, foto, medalha) values
+("Joao Marcos", "joao.kirimis@gmail.com", "joao", "123", "2004-03-11", 0, 0, "teste.png", "");
+select * from alunos;
 
 create table mundos(
 	idMundo int auto_increment primary key,
@@ -63,12 +65,14 @@ create table fasesConcluidas(
 create table conquistas(
 	idConquista int auto_increment primary key,
     nomeConquista varchar(100),
-    descConquista varchar(100)
+    descConquista varchar(100),
+    iconMedalha varchar(50)
 );
-insert into conquistas(nomeConquista, descConquista) values
-("Iniciando!", "Terminou uma atividade"),
-("A todo vapor!", "Terminou quatro atividades"),
-("Mundo Concluído!", "Terminou um mundo");
+insert into conquistas(nomeConquista, descConquista, iconMedalha) values
+("Iniciando!", "Terminou uma atividade", "icon-medalha-verde.png"),
+("A todo vapor!", "Terminou quatro atividades", "icon-medalha-vermelha.png"),
+("Mundo Concluido!", "Terminou um mundo", "icon-medalha-azul.png");
+-- select * from conquistas;
 
 create table alunosXconquistas(
 	idAlunoConquista int auto_increment primary key,
@@ -77,6 +81,11 @@ create table alunosXconquistas(
     constraint fk_conquista foreign key(idConquista) references conquistas(idConquista),
     constraint fk_aluno_conquista foreign key(idAluno) references alunos(idAluno)
 );
+/*insert into alunosXconquistas(idConquista, idAluno) values 
+(1,1),
+(2,1),
+(3,1);*/
+-- select c.nomeConquista, c.descConquista from alunosXconquistas join conquistas c using(idConquista) join alunos using(idAluno) where idAluno = 1;
 
 create table missoes(
 	idMissao int auto_increment primary key,
@@ -85,12 +94,12 @@ create table missoes(
     iconMissao varchar(100)
 );
 insert into missoes(nomeMissao, descMissao, iconMissao) values 
-("Atividades 1", "Conclua 3 fases", "icon-diaria-vermelho.png"),
-("Atividades 2", "Conclua 5 fases", "icon-diaria-vermelho.png"),
+("Atividades 1", "Conclua 3 fases", "icon-diaria-fases.png"),
+("Atividades 2", "Conclua 5 fases", "icon-diaria-fases.png"),
 ("Observacao", "Conclua a fase observacao", "icon-diaria-observ.png"),
-("Visual", "Conclua a fase visual", "icon-diaria-observ.png"),
-("Ouvir", "Conclua a fase de escuta", "icon-diaria-observ.png"),
-("Numeros", "Conclua a fase de numeros", "icon-diaria-mundo.png"),
+("Visual", "Conclua a fase visual", "icon-diaria-visualizar.png"),
+("Ouvir", "Conclua a fase de escuta", "icon-diaria-escuta.png"),
+("Numeros", "Conclua a fase de numeros", "icon-diaria-numeros.png"),
 ("Mundo", "Conclua um mundo", "icon-diaria-mundo.png");
 
 create table missoesDiarias(
@@ -99,10 +108,6 @@ create table missoesDiarias(
     dataInsercao date,
     constraint fk_diaria_missao foreign key(idMissao) references missoes(idMissao)
 );
-insert into missoesDiarias(idMIssao, dataInsercao) values 
-(1,curdate()),
-(3,curdate()),
-(2,curdate());
 -- select * from missoesDiarias join missoes using(idMissao);
 
 create table notificacoes(
@@ -149,7 +154,7 @@ END;
 
 DELIMITER ;
 
-/*  Criação de um evento para pegas as missões da tabela missões e inserir nas missões diárias a cada 24 horas
+-- Criação de um evento para pegas as missões da tabela missões e inserir nas missões diárias a cada 24 horas
 DELIMITER //
 
 CREATE EVENT inserir_missao_diaria
@@ -181,7 +186,6 @@ END //
 
 DELIMITER ;
 
--- Query que todos os eventos sejam executados automaticamente --
 SET GLOBAL event_scheduler=ON;
 -- Ativa o evento criado
-ALTER EVENT inserir_missao_diaria ENABLE;*/
+ALTER EVENT inserir_missao_diaria ENABLE;

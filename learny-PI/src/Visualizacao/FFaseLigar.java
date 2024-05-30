@@ -95,26 +95,7 @@ public class FFaseLigar extends javax.swing.JFrame {
         this.acertos = 0;
         
         idAluno = alunoLogado.getIdAluno();
-        
-        // Adiciona uma label para desenhar a linha para as cobras
-        JLabel lineLabelCobra = new JLabel();
-        lineLabelCobra.setBounds(0, 0, panel_cobra.getWidth(), panel_cobra.getHeight());
-        panel_cobra.add(lineLabelCobra);
-        
-        // Adiciona uma label para desenhar a linha para os cavalos
-        JLabel lineLabelCavalo = new JLabel();
-        lineLabelCavalo.setBounds(0, 0, panel_cavalo.getWidth(), panel_cavalo.getHeight());
-        panel_cavalo.add(lineLabelCavalo);
-        
-        // Adiciona uma label para desenhar a linha para os Passaros
-        JLabel lineLabelPassaro = new JLabel();
-        lineLabelPassaro.setBounds(0, 0, panel_passaro.getWidth(), panel_passaro.getHeight());
-        panel_passaro.add(lineLabelPassaro);
-        
-        // Adiciona uma label para desenhar a linha para as cobras
-        JLabel lineLabelMacaco = new JLabel();
-        lineLabelMacaco.setBounds(0, 0, panel_macaco.getWidth(), panel_macaco.getHeight());
-        panel_macaco.add(lineLabelMacaco);
+        linha_bonus.setColor(Color.white);
         
         // Adiciona um ouvinte de eventos ao rótulo lbl_cobra
         lbl_cobra.addMouseListener(new MouseAdapter() {
@@ -299,6 +280,17 @@ public class FFaseLigar extends javax.swing.JFrame {
             }
         });
         
+        String medalha = alunoLogado.getMedalhaAtiva();
+        System.out.println(medalha);
+        if(medalha.equals("Mundo Concluido!")){
+            lbl_macaco.setIcon(iconMacacoClick);
+            lbl_macaco.removeMouseListener(lbl_macaco.getMouseListeners()[0]);
+            lbl_macaco_dir.setIcon(iconMacacoClick);
+            lbl_macaco_dir.removeMouseListener(lbl_macaco_dir.getMouseListeners()[0]);
+            linha_bonus.setColor(amarelo);
+            acertos++;
+        }
+        
         // Configuranod o timer
         timer = new Timer(1000, new ActionListener() {
 
@@ -404,6 +396,7 @@ public class FFaseLigar extends javax.swing.JFrame {
         panel_cavalo = new javax.swing.JPanel();
         panel_passaro = new javax.swing.JPanel();
         panel_macaco = new javax.swing.JPanel();
+        linha_bonus = new Visualizacao.CustomSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -540,15 +533,21 @@ public class FFaseLigar extends javax.swing.JFrame {
 
         panel_macaco.setBackground(new java.awt.Color(255, 255, 255));
 
+        linha_bonus.setColor(new java.awt.Color(255, 179, 0));
+        linha_bonus.setThickness(5);
+
         javax.swing.GroupLayout panel_macacoLayout = new javax.swing.GroupLayout(panel_macaco);
         panel_macaco.setLayout(panel_macacoLayout);
         panel_macacoLayout.setHorizontalGroup(
             panel_macacoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 205, Short.MAX_VALUE)
+            .addComponent(linha_bonus, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
         );
         panel_macacoLayout.setVerticalGroup(
             panel_macacoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 65, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_macacoLayout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addComponent(linha_bonus, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -573,41 +572,41 @@ public class FFaseLigar extends javax.swing.JFrame {
                     .addComponent(panelSombra2, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(lbl_cobra)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panel_cobra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl_cobra_dir)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(lbl_passaro)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(panel_passaro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(lbl_cavalo)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(panel_cavalo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_cavalo_dir)
-                                    .addComponent(lbl_passaro_dir))
-                                .addGap(8, 8, 8))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(lbl_macaco)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(panel_macaco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(lbl_macaco_dir))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(lbl_cobra)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(lbl_passaro)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(panel_passaro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(lbl_cavalo)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(panel_cavalo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(panel_cobra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lbl_cobra_dir)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lbl_cavalo_dir)
+                                            .addComponent(lbl_passaro_dir))))
+                                .addGap(8, 8, 8)))
                         .addGap(12, 12, 12)))
                 .addGap(20, 20, 20))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(187, 187, 187)
+                .addGap(186, 186, 186)
                 .addComponent(jLabel4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -637,20 +636,20 @@ public class FFaseLigar extends javax.swing.JFrame {
                     .addComponent(panel_cavalo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_cavalo)
                     .addComponent(lbl_cavalo_dir))
-                .addGap(64, 64, 64)
+                .addGap(62, 62, 62)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panel_passaro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_passaro)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(lbl_passaro_dir)
-                        .addComponent(panel_passaro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(60, 60, 60)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_macaco)
-                    .addComponent(panel_macaco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_macaco_dir))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                    .addComponent(lbl_passaro_dir))
+                .addGap(62, 62, 62)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lbl_macaco)
+                        .addComponent(lbl_macaco_dir))
+                    .addComponent(panel_macaco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47)
                 .addComponent(jLabel4)
-                .addGap(39, 39, 39))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -683,6 +682,15 @@ public class FFaseLigar extends javax.swing.JFrame {
         
         double pontos;
         pontos = ((double) porcAcerto * 0.7) + ((int) seconds * 0.3);
+        String medalha = alunoLogado.getMedalhaAtiva();
+        System.out.println(medalha);
+        if(medalha.equals("Iniciando!")){
+            pontos = pontos + 50;
+            System.out.println(pontos);
+        } else if(medalha.equals("A todo vapor!")){
+            pontos = pontos * 2;
+            System.out.println(pontos);
+        }
         
         fase.setIdFase(1);
         fase.setIdAluno(idAluno);
@@ -763,6 +771,7 @@ public class FFaseLigar extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_macaco_dir;
     private javax.swing.JLabel lbl_passaro;
     private javax.swing.JLabel lbl_passaro_dir;
+    private Visualizacao.CustomSeparator linha_bonus;
     private Visualizacao.PanelSombra panelSombra1;
     private Visualizacao.PanelSombra panelSombra2;
     private javax.swing.JPanel panel_cavalo;

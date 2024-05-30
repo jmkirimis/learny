@@ -76,7 +76,7 @@
                                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                                   <Component id="panelSombra6" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                  <Component id="panelSombra7" min="-2" max="-2" attributes="0"/>
+                                  <Component id="panel_num3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -119,7 +119,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="panelSombra5" min="-2" max="-2" attributes="0"/>
                       <Component id="panelSombra6" min="-2" max="-2" attributes="0"/>
-                      <Component id="panelSombra7" min="-2" max="-2" attributes="0"/>
+                      <Component id="panel_num3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
               </Group>
@@ -451,7 +451,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="Visualizacao.PanelSombra" name="panelSombra7">
+        <Container class="Visualizacao.PanelSombra" name="panel_num3">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="cc" red="0" type="rgb"/>
@@ -466,7 +466,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="panelSombra7MouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="panel_num3MouseClicked"/>
           </Events>
 
           <Layout>

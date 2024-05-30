@@ -5,6 +5,8 @@
  */
 package Visualizacao;
 
+import Modelagem.Aluno;
+import Modelagem.Session;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -25,10 +27,23 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
     private int minutes;
     private int remainingSeconds;
     private int acertos;
+    private Aluno alunoLogado;
     
     public FFaseNumeros1() {
         initComponents();    
-      
+        alunoLogado = Session.getInstance().getAlunoLogado();
+        if (alunoLogado == null) {
+            // Se não houver aluno logado, redirecione para a tela de login
+            new FLogin().setVisible(true);
+            this.dispose();
+            return;
+        }
+        String medalha = alunoLogado.getMedalhaAtiva();
+        System.out.println(medalha);
+        if(medalha.equals("Mundo Concluido!")){
+            panel_num3.setVisible(false);
+        }
+        
         timer = new Timer(1000, new ActionListener() {
 
             @Override
@@ -69,7 +84,7 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         panelSombra6 = new Visualizacao.PanelSombra();
         jLabel9 = new javax.swing.JLabel();
-        panelSombra7 = new Visualizacao.PanelSombra();
+        panel_num3 = new Visualizacao.PanelSombra();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
 
@@ -260,14 +275,14 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        panelSombra7.setBackground(new java.awt.Color(0, 204, 51));
-        panelSombra7.setPreferredSize(new java.awt.Dimension(104, 104));
-        panelSombra7.setShadowOpacity(0.3F);
-        panelSombra7.setShadowSize(3);
-        panelSombra7.setShadowType(Visualizacao.ShadowType.BOT_RIGHT);
-        panelSombra7.addMouseListener(new java.awt.event.MouseAdapter() {
+        panel_num3.setBackground(new java.awt.Color(0, 204, 51));
+        panel_num3.setPreferredSize(new java.awt.Dimension(104, 104));
+        panel_num3.setShadowOpacity(0.3F);
+        panel_num3.setShadowSize(3);
+        panel_num3.setShadowType(Visualizacao.ShadowType.BOT_RIGHT);
+        panel_num3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelSombra7MouseClicked(evt);
+                panel_num3MouseClicked(evt);
             }
         });
 
@@ -275,18 +290,18 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("8");
 
-        javax.swing.GroupLayout panelSombra7Layout = new javax.swing.GroupLayout(panelSombra7);
-        panelSombra7.setLayout(panelSombra7Layout);
-        panelSombra7Layout.setHorizontalGroup(
-            panelSombra7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSombra7Layout.createSequentialGroup()
+        javax.swing.GroupLayout panel_num3Layout = new javax.swing.GroupLayout(panel_num3);
+        panel_num3.setLayout(panel_num3Layout);
+        panel_num3Layout.setHorizontalGroup(
+            panel_num3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_num3Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jLabel10)
                 .addContainerGap(36, Short.MAX_VALUE))
         );
-        panelSombra7Layout.setVerticalGroup(
-            panelSombra7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSombra7Layout.createSequentialGroup()
+        panel_num3Layout.setVerticalGroup(
+            panel_num3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_num3Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel10)
                 .addContainerGap(24, Short.MAX_VALUE))
@@ -329,7 +344,7 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
                                 .addGap(26, 26, 26)
                                 .addComponent(panelSombra6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
-                                .addComponent(panelSombra7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(panel_num3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -360,7 +375,7 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelSombra5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelSombra6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelSombra7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panel_num3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(62, 62, 62))
         );
 
@@ -396,9 +411,9 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Que pena! A resposta era 10");
     }//GEN-LAST:event_panelSombra6MouseClicked
 
-    private void panelSombra7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra7MouseClicked
+    private void panel_num3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_num3MouseClicked
         JOptionPane.showMessageDialog(null, "Que pena! A resposta era 10");
-    }//GEN-LAST:event_panelSombra7MouseClicked
+    }//GEN-LAST:event_panel_num3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -454,6 +469,6 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
     private Visualizacao.PanelSombra panelSombra4;
     private Visualizacao.PanelSombra panelSombra5;
     private Visualizacao.PanelSombra panelSombra6;
-    private Visualizacao.PanelSombra panelSombra7;
+    private Visualizacao.PanelSombra panel_num3;
     // End of variables declaration//GEN-END:variables
 }

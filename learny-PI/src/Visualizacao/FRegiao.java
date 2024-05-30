@@ -49,6 +49,7 @@ public class FRegiao extends javax.swing.JFrame {
         panel_sombra_diarias.setBackground(pretoComOpacidade);
         panelRoundBorda2.setBackground(Opacidade);
         panel_fixo.setBackground(Color.WHITE);
+        
         // Define o layout como GridBagLayout
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -73,6 +74,7 @@ public class FRegiao extends javax.swing.JFrame {
             
         VerificadorFases vfases = new VerificadorFases(conexao);
         String[] estadosFases = vfases.verificarFases(1, idAluno); // Verifica as fases da região 1
+        verPrimeiraMedalha();
             
        /* System.out.println("Fase Visual: " + estadosFases[0]);
         System.out.println("Fase Números: " + estadosFases[1]);
@@ -409,23 +411,22 @@ public class FRegiao extends javax.swing.JFrame {
         });
 
         itemLabel.setForeground(new java.awt.Color(255, 255, 255));
-        itemLabel.setText("Item 1");
 
         javax.swing.GroupLayout panelSelecionarLayout = new javax.swing.GroupLayout(panelSelecionar);
         panelSelecionar.setLayout(panelSelecionarLayout);
         panelSelecionarLayout.setHorizontalGroup(
             panelSelecionarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSelecionarLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(itemLabel)
-                .addContainerGap(32, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSelecionarLayout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addComponent(itemLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
         panelSelecionarLayout.setVerticalGroup(
             panelSelecionarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSelecionarLayout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
-                .addComponent(itemLabel)
-                .addGap(36, 36, 36))
+            .addGroup(panelSelecionarLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(itemLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         inicio.setBackground(new java.awt.Color(72, 72, 72));
@@ -454,6 +455,7 @@ public class FRegiao extends javax.swing.JFrame {
 
         panelRoundBorda2.setBackground(new java.awt.Color(72, 72, 72));
         panelRoundBorda2.setBorderWidth(6);
+        panelRoundBorda2.setImg(null);
         panelRoundBorda2.setRadius(30);
         panelRoundBorda2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -518,28 +520,31 @@ public class FRegiao extends javax.swing.JFrame {
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(panelSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(panelRoundBorda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                            .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(inicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(panelRound1Layout.createSequentialGroup()
-                                    .addGap(124, 124, 124)
-                                    .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(fase4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(fase2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGap(61, 61, 61))
-                        .addComponent(fase3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(fase5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(84, 84, 84))
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(inicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panelRound1Layout.createSequentialGroup()
+                                        .addGap(124, 124, 124)
+                                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(fase4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(fase2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(61, 61, 61))
+                            .addComponent(fase3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(84, 84, 84))
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addComponent(fase5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(76, 76, 76))))
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(panelSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelRoundBorda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -657,7 +662,7 @@ public class FRegiao extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(panelSombra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -665,7 +670,7 @@ public class FRegiao extends javax.swing.JFrame {
                 .addComponent(panelSombra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
                 .addComponent(panelSombra4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -759,35 +764,91 @@ public class FRegiao extends javax.swing.JFrame {
         openItemSelectionDialog();
     }//GEN-LAST:event_panelSelecionarMouseClicked
 
+    private void verPrimeiraMedalha(){
+        String verConquistas = "select c.iconMedalha from alunosXconquistas axc " +
+                "join conquistas c using(idConquista) " +
+                "join alunos a using(idAluno) " +
+                "where a.idAluno = ? and nomeConquista = ?;";
+        try {
+            pst = conexao.prepareStatement(verConquistas);
+            pst.setInt(1, idAluno);
+            pst.setString(2, alunoLogado.getMedalhaAtiva());
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                String caminhoMedalha = rs.getString(1);
+                Icon iconMedalha = new ImageIcon("src/Imagens/" + caminhoMedalha);
+
+                itemLabel.setIcon(iconMedalha);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
     private void openItemSelectionDialog() {
         // Crie o diálogo de seleção de itens
-        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Selecionar Item", true);
-        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(itemLabel), "Selecionar Item", true);
+        //dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.setUndecorated(true); // Remover decorações da janela 
+        dialog.setBackground(new Color(0, 0, 0, 0)); // Fundo transparente
+        dialog.getContentPane().setBackground(new Color(0, 0, 0, 0)); // Fundo transparente do contentPane
 
-        // Adicione itens de exemplo ao diálogo (você pode substituir por seus próprios itens)
-        JPanel itemSelectionPanel = new JPanel();
-        itemSelectionPanel.setLayout(new FlowLayout());
+        // Painel para adicionar itens de exemplo ao diálogo
+        PanelRoundBorda itemSelectionPanel = new PanelRoundBorda();
+        itemSelectionPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 15));
+        itemSelectionPanel.setRadius(40);
+        itemSelectionPanel.setBorderWidth(3);
+        itemSelectionPanel.setBackground(Color.WHITE);
+        itemSelectionPanel.setPreferredSize(new Dimension(170, 80));
 
-        for (int i = 1; i <= 5; i++) {
-            JLabel item = new JLabel("Item " + i);
-            item.addMouseListener(new MouseAdapter() {
-                public void mouseClicked(MouseEvent e) {
-                    // Quando um item é selecionado, atualize o item no painel principal
-                    itemLabel.setText(item.getText());
-                    itemLabel.setForeground(Color.WHITE);
-                    dialog.dispose(); // Feche o diálogo
-                }
-            });
-            itemSelectionPanel.add(item);
+        String verConquistas = "select c.nomeConquista, c.iconMedalha from alunosXconquistas axc " +
+                "join conquistas c using(idConquista) " +
+                "join alunos a using(idAluno) " +
+                "where a.idAluno = ?;";
+        boolean temItems = false;
+        try {
+            pst = conexao.prepareStatement(verConquistas);
+            pst.setInt(1, idAluno);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                String nomeConquista = rs.getString(1);
+                String caminhoMedalha = rs.getString(2);
+                Icon iconMedalha = new ImageIcon("src/Imagens/" + caminhoMedalha);
+
+                JLabel item = new JLabel();
+                item.setIcon(iconMedalha);
+
+                item.addMouseListener(new MouseAdapter() {
+                    public void mouseClicked(MouseEvent e) {
+                        // Quando um item é selecionado, atualize o item no painel principal
+                        alunoLogado.setMedalhaAtiva(nomeConquista);
+                        alunoLogado.salvarMedalha();
+                        itemLabel.setIcon(iconMedalha);
+                        dialog.dispose(); // Feche o diálogo
+                    }
+                });
+
+                itemSelectionPanel.add(item);
+                temItems = true;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
         }
 
-        // Adicione o painel de seleção de itens ao diálogo
-        dialog.add(new JScrollPane(itemSelectionPanel));
-        
-        // Defina o tamanho e torne o diálogo visível
-        dialog.pack();
-        dialog.setLocationRelativeTo(this);
-        dialog.setVisible(true);
+        if (temItems) {
+            // Adicione o painel de seleção de itens ao diálogo
+            dialog.add(itemSelectionPanel);
+
+            // Defina o tamanho e torne o diálogo visível
+            dialog.pack();
+            dialog.setLocationRelativeTo(itemLabel);
+            dialog.setVisible(true);
+        } else {
+            // Exibe uma mensagem caso não existam conquistas
+            JOptionPane.showMessageDialog(null, "Você ainda não possui medalhas.", "Nenhuma Medalha", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
     
     /**

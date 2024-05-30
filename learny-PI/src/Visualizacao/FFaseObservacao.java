@@ -512,10 +512,19 @@ public class FFaseObservacao extends javax.swing.JFrame {
 
     FaseConcluida fase = new FaseConcluida();
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-         
+        int pontos; 
+        String medalha = alunoLogado.getMedalhaAtiva();
+        if(medalha.equals("Iniciando!")){
+            pontos = 70 + 50;
+        } else if(medalha.equals("A todo vapor!")){
+            pontos = 70 * 2;
+        }
+        else{
+            pontos = 70;
+        } 
         fase.setIdFase(4);
         fase.setIdAluno(idAluno);
-        fase.setPontos(70);
+        fase.setPontos(pontos);
         fase.setTempoConclusao(minutes,remainingSeconds);
         fase.setPorcAcertos(100);
         fase.cadastrar();

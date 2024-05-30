@@ -49,7 +49,7 @@ public class FMundos extends javax.swing.JFrame {
         panelSlide.init(new PanelMundos("Mundo 1", "Mundo Natural", new ImageIcon("src/Imagens/mundo-natureza2.png")), new PanelMundos("Mundo 2", "Mundo Congelado", new ImageIcon("src/Imagens/mundo-congelado.png")), new PanelMundos("Mundo 3", "Mundo Flamejante", new ImageIcon("src/Imagens/mundo-flamejante3.png")));
         panelSlide.setAnimate(5);
         this.setLayout(new BorderLayout());
-        this.add(customScrollPane1, BorderLayout.CENTER);
+        this.add(panelScrollMundos, BorderLayout.CENTER);
         this.add(menu, BorderLayout.SOUTH);
         panel_natural_grande.setVisible(false);
         linha_verde.setVisible(false);
@@ -78,7 +78,7 @@ public class FMundos extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        customScrollPane1 = new Visualizacao.CustomScrollPane();
+        panelScrollMundos = new Visualizacao.CustomScrollPane();
         panelGradiente = new Visualizacao.PanelGradiente();
         panelRound1 = new Visualizacao.PanelRound();
         panelSlide = new Visualizacao.PanelSlide();
@@ -199,7 +199,7 @@ public class FMundos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        customScrollPane1.setBorder(null);
+        panelScrollMundos.setBorder(null);
 
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
         panelRound1.setRoundTopLeft(50);
@@ -1089,17 +1089,17 @@ public class FMundos extends javax.swing.JFrame {
                 .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        customScrollPane1.setViewportView(panelGradiente);
+        panelScrollMundos.setViewportView(panelGradiente);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+            .addComponent(panelScrollMundos, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE)
+            .addComponent(panelScrollMundos, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE)
         );
 
         pack();
@@ -1258,7 +1258,6 @@ public class FMundos extends javax.swing.JFrame {
     private Visualizacao.BotaoCustomizado btn_mundo1;
     private Visualizacao.BotaoCustomizado btn_mundo2;
     private Visualizacao.BotaoCustomizado btn_mundo3;
-    private Visualizacao.CustomScrollPane customScrollPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1304,6 +1303,7 @@ public class FMundos extends javax.swing.JFrame {
     private Visualizacao.PanelRoundBorda panelRoundBorda5;
     private Visualizacao.PanelRoundBorda panelRoundBorda6;
     private Visualizacao.PanelRoundBorda panelRoundBorda7;
+    private Visualizacao.CustomScrollPane panelScrollMundos;
     private Visualizacao.PanelSlide panelSlide;
     private Visualizacao.PanelSombra panelSombra1;
     private Visualizacao.PanelSombra panelSombra2;

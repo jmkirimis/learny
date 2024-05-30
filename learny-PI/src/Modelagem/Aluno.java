@@ -16,6 +16,7 @@ public class Aluno {
     private double pontosTotais;
     private int fasesConcluidas;
     private String foto;
+    private String medalhaAtiva;
     
     //importar classe conexao
     Connection conexao = null;
@@ -23,10 +24,10 @@ public class Aluno {
     ResultSet rs = null;
 
     public Aluno() {
-        this(0,"","","","","",0,0.0,0,"");
+        this(0,"","","","","",0,0.0,0,"","");
     }
 
-    public Aluno(int idAluno, String nome,String usuario, String senha, String email, String dataNasc, int idade, double pontosTotais, int fasesConcluidas, String foto) {
+    public Aluno(int idAluno, String nome,String usuario, String senha, String email, String dataNasc, int idade, double pontosTotais, int fasesConcluidas, String foto, String medalhaAtiva) {
         this.idAluno = idAluno;
         this.nome = nome;
         this.usuario = usuario;
@@ -37,6 +38,7 @@ public class Aluno {
         this.pontosTotais = pontosTotais;
         this.fasesConcluidas = fasesConcluidas;
         this.foto = foto;
+        this.medalhaAtiva = medalhaAtiva;
     }
     
     public int getIdAluno() {
@@ -118,12 +120,20 @@ public class Aluno {
     public void setFoto(String foto) {
         this.foto = foto;
     }
+    
+    public String getMedalhaAtiva() {
+        return medalhaAtiva;
+    }
+
+    public void setMedalhaAtiva(String medalhaAtiva) {
+        this.medalhaAtiva = medalhaAtiva;
+    }
    
     public void cadastrar(){
         conexao = Conexao.conecta();
         String sql;
-        sql = "insert into alunos(nome, usuario, senha, email, dataNasc, pontosTotais, fasesConcluidas, foto) values"
-                + "(?,?,?,?,?,?,?,?)";
+        sql = "insert into alunos(nome, usuario, senha, email, dataNasc, pontosTotais, fasesConcluidas, foto, medalha) values"
+                + "(?,?,?,?,?,?,?,?,?)";
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, getNome());
@@ -134,6 +144,7 @@ public class Aluno {
             pst.setDouble(6, 0);
             pst.setInt(7, 0);
             pst.setString(8, getFoto());
+            pst.setString(9, "");
             int linhasAfetadas = pst.executeUpdate();
             
             if (linhasAfetadas > 0) {
@@ -177,6 +188,21 @@ public class Aluno {
             } else {
                 JOptionPane.showMessageDialog(null, "Nenhum dado foi inserido.");
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }
+    
+    public void salvarMedalha(){
+        conexao = Conexao.conecta();
+        String sql;
+        sql = "update alunos set medalha = ? where idAluno = ?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, getMedalhaAtiva());
+            pst.setInt(2, getIdAluno());
+        
+            pst.executeUpdate();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e);
         }

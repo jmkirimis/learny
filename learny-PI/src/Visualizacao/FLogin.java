@@ -8,6 +8,7 @@ package Visualizacao;
 import Controle.Conexao;
 import Modelagem.Aluno;
 import Modelagem.Session;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.sql.*;
@@ -19,6 +20,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.io.File;
 import java.io.IOException;
 
@@ -39,6 +42,18 @@ public class FLogin extends javax.swing.JFrame {
     public FLogin() {
         initComponents();
         conexao = Conexao.conecta();
+        setLayout(new GridBagLayout());  // Define o layout do JFrame
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.NONE;
+
+        // Adiciona o painel geral ao JFrame
+        add(panelGradienteGeral, gbc);
+        getContentPane().setBackground(new Color(173, 216, 230)); // Azul claro
     }
 
     /**
@@ -50,7 +65,7 @@ public class FLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelGradiente = new Visualizacao.PanelGradiente();
+        panelGradienteGeral = new Visualizacao.PanelGradiente();
         panelPretoOpac2 = new Visualizacao.PanelPretoOpac();
         jLabel8 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -65,7 +80,7 @@ public class FLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panelGradiente.setGradientDirection(Visualizacao.PanelGradiente.GradientDirection.VERTICAL);
+        panelGradienteGeral.setGradientDirection(Visualizacao.PanelGradiente.GradientDirection.VERTICAL);
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icone confirmar.png"))); // NOI18N
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -204,14 +219,14 @@ public class FLogin extends javax.swing.JFrame {
                 .addContainerGap(203, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout panelGradienteLayout = new javax.swing.GroupLayout(panelGradiente);
-        panelGradiente.setLayout(panelGradienteLayout);
-        panelGradienteLayout.setHorizontalGroup(
-            panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panelGradienteGeralLayout = new javax.swing.GroupLayout(panelGradienteGeral);
+        panelGradienteGeral.setLayout(panelGradienteGeralLayout);
+        panelGradienteGeralLayout.setHorizontalGroup(
+            panelGradienteGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelPretoOpac2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        panelGradienteLayout.setVerticalGroup(
-            panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelGradienteGeralLayout.setVerticalGroup(
+            panelGradienteGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelPretoOpac2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
@@ -219,11 +234,11 @@ public class FLogin extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelGradiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelGradienteGeral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelGradiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelGradienteGeral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -280,7 +295,7 @@ public class FLogin extends javax.swing.JFrame {
                 double pontosTotais = rs.getDouble(8);
                 int fasesConcluidas = rs.getInt(9);
                 String foto = rs.getString(10);
-                return new Aluno(idAluno, nome, usuario, senha, email, dataNasc, idade, pontosTotais, fasesConcluidas, foto);
+                return new Aluno(idAluno, nome, usuario, senha, email, dataNasc, idade, pontosTotais, fasesConcluidas, foto, "");
             } else{
                 JOptionPane.showMessageDialog(null, "Erro");
             }
@@ -331,7 +346,7 @@ public class FLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel lbl_desc_login;
     private javax.swing.JLabel lbl_desc_login2;
-    private Visualizacao.PanelGradiente panelGradiente;
+    private Visualizacao.PanelGradiente panelGradienteGeral;
     private Visualizacao.PanelPretoOpac panelPretoOpac2;
     private Visualizacao.PanelRound panelRound1;
     private Visualizacao.PanelRound panelRound2;

@@ -7,6 +7,8 @@ package Visualizacao;
 
 import Modelagem.Aluno;
 import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -40,7 +42,7 @@ public class FCadastro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        customScrollPane1 = new Visualizacao.CustomScrollPane();
+        panelScrollCadastro = new Visualizacao.CustomScrollPane();
         panelGradiente = new Visualizacao.PanelGradiente();
         panelPretoOpac1 = new Visualizacao.PanelPretoOpac();
         jLabel7 = new javax.swing.JLabel();
@@ -64,7 +66,7 @@ public class FCadastro extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
 
-        customScrollPane1.setBorder(null);
+        panelScrollCadastro.setBorder(null);
 
         panelGradiente.setBackground(new java.awt.Color(204, 204, 204));
         panelGradiente.setGradientDirection(Visualizacao.PanelGradiente.GradientDirection.VERTICAL);
@@ -344,19 +346,19 @@ public class FCadastro extends javax.swing.JFrame {
             .addComponent(panelPretoOpac1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        customScrollPane1.setViewportView(panelGradiente);
+        panelScrollCadastro.setViewportView(panelGradiente);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+                .addComponent(panelScrollCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelScrollCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -455,7 +457,6 @@ public class FCadastro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Visualizacao.CustomScrollPane customScrollPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -469,6 +470,7 @@ public class FCadastro extends javax.swing.JFrame {
     private Visualizacao.PanelRound panelRound4;
     private Visualizacao.PanelRound panelRound5;
     private Visualizacao.PanelRound panelRound6;
+    private Visualizacao.CustomScrollPane panelScrollCadastro;
     private Visualizacao.PanelRoundPerfil panel_foto_cadastro;
     private Visualizacao.PlaceholderTextField txt_dataNasc;
     private Visualizacao.PlaceholderTextField txt_email;

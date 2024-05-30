@@ -23,17 +23,17 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panelGradiente" min="-2" max="-2" attributes="0"/>
+          <Component id="panelGradienteGeral" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panelGradiente" min="-2" max="-2" attributes="0"/>
+          <Component id="panelGradienteGeral" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="Visualizacao.PanelGradiente" name="panelGradiente">
+    <Container class="Visualizacao.PanelGradiente" name="panelGradienteGeral">
       <Properties>
         <Property name="gradientDirection" type="Visualizacao.PanelGradiente$GradientDirection" editor="org.netbeans.modules.form.editors.EnumEditor">
           <Value id="VERTICAL"/>
