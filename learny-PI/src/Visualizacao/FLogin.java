@@ -24,6 +24,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.io.File;
 import java.io.IOException;
+import javax.swing.UIManager;
 
 /**
  *
@@ -265,7 +266,9 @@ public class FLogin extends javax.swing.JFrame {
             new FMundos().setVisible(true);
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos");
+            //JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos");
+            CustomAlert alert = new CustomAlert(this);
+            alert.setVisible(true);
         }
     }
     
@@ -289,8 +292,6 @@ public class FLogin extends javax.swing.JFrame {
                 int fasesConcluidas = rs.getInt(9);
                 String foto = rs.getString(10);
                 return new Aluno(idAluno, nome, usuario, senha, email, dataNasc, idade, pontosTotais, fasesConcluidas, foto, "");
-            } else{
-                JOptionPane.showMessageDialog(null, "Erro");
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
