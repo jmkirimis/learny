@@ -7,6 +7,7 @@ package Visualizacao;
 
 import Controle.Conexao;
 import Modelagem.Aluno;
+import Modelagem.Config;
 import Modelagem.FaseConcluida;
 import Modelagem.Session;
 import java.awt.BasicStroke;
@@ -26,6 +27,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 /**
@@ -117,6 +125,8 @@ public class FFaseLigar extends javax.swing.JFrame {
                     apagarLinha(panel_cobra); // Se não, apague a linha no painel correspondente
                     linhaVisivelCobra = false;
                 }
+                // Toca o áudio
+                tocarAudio("src/audios/snake.wav");
             }
         });
         
@@ -140,6 +150,8 @@ public class FFaseLigar extends javax.swing.JFrame {
                     apagarLinha(panel_cobra); // Se não, apague a linha no painel correspondente
                     linhaVisivelCobra = false;
                 }
+                // Toca o áudio
+                tocarAudio("src/audios/snake.wav");
             }
         });
  
@@ -163,6 +175,8 @@ public class FFaseLigar extends javax.swing.JFrame {
                     apagarLinha(panel_cavalo); // Se não, apague a linha no painel correspondente
                     linhaVisivelCavalo = false;
                 }
+                // Toca o áudio
+                tocarAudio("src/audios/horse.wav");
             }
         });
         
@@ -186,6 +200,8 @@ public class FFaseLigar extends javax.swing.JFrame {
                     apagarLinha(panel_cavalo); // Se não, apague a linha no painel correspondente
                     linhaVisivelCavalo = false;
                 }
+                // Toca o áudio
+                tocarAudio("src/audios/horse.wav");
             }
         });
         
@@ -209,6 +225,8 @@ public class FFaseLigar extends javax.swing.JFrame {
                     apagarLinha(panel_passaro); // Se não, apague a linha no painel correspondente
                     linhaVisivelPassaro = false;
                 }
+                // Toca o áudio
+                tocarAudio("src/audios/bird.wav");
             }
         });
         
@@ -232,6 +250,8 @@ public class FFaseLigar extends javax.swing.JFrame {
                     apagarLinha(panel_passaro); // Se não, apague a linha no painel correspondente
                     linhaVisivelPassaro = false;
                 }
+                // Toca o áudio
+                tocarAudio("src/audios/bird.wav");
             }
         });
         
@@ -255,6 +275,8 @@ public class FFaseLigar extends javax.swing.JFrame {
                     apagarLinha(panel_macaco); // Se não, apague a linha no painel correspondente
                     linhaVisivelMacaco = false;
                 }
+                // Toca o áudio
+                tocarAudio("src/audios/monkey.wav");
             }
         });
         
@@ -277,6 +299,8 @@ public class FFaseLigar extends javax.swing.JFrame {
                     apagarLinha(panel_macaco); // Se não, apague a linha no painel correspondente
                     linhaVisivelMacaco = false;
                 }
+                // Toca o áudio
+                tocarAudio("src/audios/monkey.wav");
             }
         });
         
@@ -306,6 +330,20 @@ public class FFaseLigar extends javax.swing.JFrame {
         
         timer.start(); // Iniciar o timer
         
+    }
+    
+    public void tocarAudio(String caminhoDoArquivo) {
+        if (!Config.audioAtivado) {
+            return;
+        }
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(caminhoDoArquivo));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
     }
     
     public void desenharLinha(JLabel lbl1, JLabel lbl2, JPanel panel, Color cor){

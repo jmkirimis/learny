@@ -136,6 +136,11 @@ public class FPerfil extends javax.swing.JFrame {
         panelSombra5.setBackground(new java.awt.Color(255, 255, 255));
         panelSombra5.setCornerRadius(70);
         panelSombra5.setPreferredSize(new java.awt.Dimension(406, 90));
+        panelSombra5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelSombra5MouseClicked(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(102, 102, 102));
@@ -486,11 +491,11 @@ public class FPerfil extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelScrollGeral, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+            .addComponent(panelScrollGeral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelScrollGeral, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE)
+            .addComponent(panelScrollGeral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -534,6 +539,10 @@ public class FPerfil extends javax.swing.JFrame {
         new FLogin().setVisible(true);
         dispose();
     }//GEN-LAST:event_panelSombra6MouseClicked
+
+    private void panelSombra5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra5MouseClicked
+        new FConfiguracoes().setVisible(true);
+    }//GEN-LAST:event_panelSombra5MouseClicked
 
     /**
      * @param args the command line arguments

@@ -99,13 +99,6 @@ public class FEstatistica extends javax.swing.JFrame {
         
         VerificadorFases vfases = new VerificadorFases(conexao);
         String[] estadosFases = vfases.verificarFases(1, idAluno); // Verifica as fases da região 1
-            
-        System.out.println("Fase Visual: " + estadosFases[0]);
-        System.out.println("Fase Números: " + estadosFases[1]);
-        System.out.println("Fase Ouvir: " + estadosFases[2]);
-        System.out.println("Fase Observacao: " + estadosFases[3]);
-        
-        //conquista1.setVisible(false);
         
     }
 

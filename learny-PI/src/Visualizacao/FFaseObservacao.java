@@ -12,6 +12,7 @@ package Visualizacao;
 
 import Controle.Conexao;
 import Modelagem.Aluno;
+import Modelagem.Config;
 import Modelagem.FaseConcluida;
 import Modelagem.Session;
 import java.awt.event.ActionEvent;
@@ -25,6 +26,13 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 public class FFaseObservacao extends javax.swing.JFrame {
@@ -88,6 +96,8 @@ public class FFaseObservacao extends javax.swing.JFrame {
                     lbl_jacare.setIcon(fotoJacare);
                     jacareClicado = false;
                 }
+                // Toca o áudio
+                tocarAudio("src/audios/alligator.wav");
             }
         });
         lbl_macaco.addMouseListener(new MouseAdapter() {
@@ -102,6 +112,8 @@ public class FFaseObservacao extends javax.swing.JFrame {
                     lbl_macaco.setIcon(fotoMacaco);
                     macacoClicado = false;
                 }
+                // Toca o áudio
+                tocarAudio("src/audios/ape.wav");
             }
         });
         lbl_formiga.addMouseListener(new MouseAdapter() {
@@ -116,6 +128,8 @@ public class FFaseObservacao extends javax.swing.JFrame {
                     lbl_formiga.setIcon(fotoFormiga);
                     formigaClicada = false;
                 }
+                // Toca o áudio
+                tocarAudio("src/audios/ant.wav");
             }
         });
         lbl_alpaca.addMouseListener(new MouseAdapter() {
@@ -130,6 +144,8 @@ public class FFaseObservacao extends javax.swing.JFrame {
                     lbl_alpaca.setIcon(fotoAlpaca);
                     alpacaClicada = false;
                 }
+                // Toca o áudio
+                tocarAudio("src/audios/alpaca.wav");
             }
         });
         
@@ -153,6 +169,20 @@ public class FFaseObservacao extends javax.swing.JFrame {
         super.dispose();
         if (timer != null) {
             timer.stop();
+        }
+    }
+     
+    public void tocarAudio(String caminhoDoArquivo) {
+        if (!Config.audioAtivado) {
+            return;
+        }
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(caminhoDoArquivo));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
         }
     }
 

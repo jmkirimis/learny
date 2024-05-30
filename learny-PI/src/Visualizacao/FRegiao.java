@@ -201,6 +201,11 @@ public class FRegiao extends javax.swing.JFrame {
         panel_sombra_diarias.setRoundBottomRight(25);
         panel_sombra_diarias.setRoundTopLeft(25);
         panel_sombra_diarias.setRoundTopRight(25);
+        panel_sombra_diarias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_sombra_diariasMouseClicked(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -760,6 +765,10 @@ public class FRegiao extends javax.swing.JFrame {
     private void panelSelecionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSelecionarMouseClicked
         openItemSelectionDialog();
     }//GEN-LAST:event_panelSelecionarMouseClicked
+
+    private void panel_sombra_diariasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_sombra_diariasMouseClicked
+        new FMissoesDiarias().setVisible(true);
+    }//GEN-LAST:event_panel_sombra_diariasMouseClicked
 
     private void verPrimeiraMedalha(){
         String verConquistas = "select c.iconMedalha from alunosXconquistas axc " +

@@ -258,6 +258,11 @@ public class FOpcoes extends javax.swing.JFrame {
         panelSombra1.setShadowOpacity(0.3F);
         panelSombra1.setShadowSize(3);
         panelSombra1.setShadowType(Visualizacao.ShadowType.BOT_LEFT);
+        panelSombra1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelSombra1MouseClicked(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -510,6 +515,10 @@ public class FOpcoes extends javax.swing.JFrame {
         new FOpcoes().setVisible(true);
         dispose();
     }//GEN-LAST:event_panel_icon2MouseClicked
+
+    private void panelSombra1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra1MouseClicked
+        new FMissoesDiarias().setVisible(true);
+    }//GEN-LAST:event_panelSombra1MouseClicked
 
     /**
      * @param args the command line arguments

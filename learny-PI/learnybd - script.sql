@@ -17,7 +17,7 @@ create table alunos(
 );
 insert into alunos(nome, email, usuario, senha, dataNasc, pontosTotais, fasesConcluidas, foto, medalha) values
 ("Joao Marcos", "joao.kirimis@gmail.com", "joao", "123", "2004-03-11", 0, 0, "teste.png", "");
-select * from alunos;
+#select * from alunos;
 
 create table mundos(
 	idMundo int auto_increment primary key,
@@ -96,7 +96,7 @@ create table missoes(
 insert into missoes(nomeMissao, descMissao, iconMissao) values 
 ("Atividades 1", "Conclua 3 fases", "icon-diaria-fases.png"),
 ("Atividades 2", "Conclua 5 fases", "icon-diaria-fases.png"),
-("Observacao", "Conclua a fase observacao", "icon-diaria-observ.png"),
+("Observacao", "Conclua a fase observacao", "icon-diaria-observacao.png"),
 ("Visual", "Conclua a fase visual", "icon-diaria-visualizar.png"),
 ("Ouvir", "Conclua a fase de escuta", "icon-diaria-escuta.png"),
 ("Numeros", "Conclua a fase de numeros", "icon-diaria-numeros.png"),

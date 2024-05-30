@@ -136,6 +136,9 @@
                 <Property name="roundTopLeft" type="int" value="25"/>
                 <Property name="roundTopRight" type="int" value="25"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="panel_sombra_diariasMouseClicked"/>
+              </Events>
 
               <Layout>
                 <DimensionLayout dim="0">

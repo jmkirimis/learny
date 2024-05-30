@@ -7,6 +7,7 @@ package Visualizacao;
 
 import Controle.Conexao;
 import Modelagem.Aluno;
+import Modelagem.Config;
 import Modelagem.FaseConcluida;
 import Modelagem.Session;
 import java.awt.Color;
@@ -17,6 +18,15 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
@@ -54,6 +64,14 @@ public class FFaseOuvir extends javax.swing.JFrame {
         
         idAluno = alunoLogado.getIdAluno();
         
+        lbl_tocar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Toca o áudio
+                tocarAudio("src/audios/red.wav");
+            }
+        });
+        
         String medalha = alunoLogado.getMedalhaAtiva();
         System.out.println(medalha);
         if(medalha.equals("Mundo Concluido!")){
@@ -81,6 +99,20 @@ public class FFaseOuvir extends javax.swing.JFrame {
             timer.stop();
         }
     }
+    
+    public void tocarAudio(String caminhoDoArquivo) {
+        if (!Config.audioAtivado) {
+            return;
+        }
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(caminhoDoArquivo));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -100,7 +132,7 @@ public class FFaseOuvir extends javax.swing.JFrame {
         panelSombra3 = new Visualizacao.PanelSombra();
         jLabel6 = new javax.swing.JLabel();
         panelSombra2 = new Visualizacao.PanelSombra();
-        jLabel14 = new javax.swing.JLabel();
+        lbl_tocar = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         panel_red = new Visualizacao.PanelRound();
@@ -176,7 +208,7 @@ public class FFaseOuvir extends javax.swing.JFrame {
         panelSombra2.setCornerRadius(70);
         panelSombra2.setPreferredSize(new java.awt.Dimension(373, 77));
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icone audio.png"))); // NOI18N
+        lbl_tocar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icone audio.png"))); // NOI18N
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(102, 102, 102));
@@ -187,7 +219,7 @@ public class FFaseOuvir extends javax.swing.JFrame {
         panelSombra2Layout.setHorizontalGroup(
             panelSombra2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSombra2Layout.createSequentialGroup()
-                .addComponent(jLabel14)
+                .addComponent(lbl_tocar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel15)
                 .addGap(0, 46, Short.MAX_VALUE))
@@ -196,7 +228,7 @@ public class FFaseOuvir extends javax.swing.JFrame {
             panelSombra2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSombra2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel14))
+                .addComponent(lbl_tocar))
             .addGroup(panelSombra2Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel15)
@@ -371,9 +403,7 @@ public class FFaseOuvir extends javax.swing.JFrame {
                                     .addComponent(jLabel1)
                                     .addGap(60, 60, 60)
                                     .addComponent(jLabel2))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(153, 153, 153))))
+                                .addComponent(jLabel3)))
                         .addComponent(panelSombra3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(182, 182, 182)
@@ -422,11 +452,11 @@ public class FFaseOuvir extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+            .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE)
+            .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -566,7 +596,6 @@ public class FFaseOuvir extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Visualizacao.CustomScrollPane customScrollPane1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -578,6 +607,7 @@ public class FFaseOuvir extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_green;
     private javax.swing.JLabel lbl_head;
     private javax.swing.JLabel lbl_red;
+    private javax.swing.JLabel lbl_tocar;
     private Visualizacao.PanelSombra panelSombra1;
     private Visualizacao.PanelSombra panelSombra2;
     private Visualizacao.PanelSombra panelSombra3;
