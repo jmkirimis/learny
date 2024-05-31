@@ -26,7 +26,7 @@ create table mundos(
 );
 
 insert into mundos(nivel, tema) values
-(1, "Natureza");
+(1, "Mundo Natural");
 
 create table regioes(
 	idRegiao int auto_increment primary key,
@@ -45,10 +45,10 @@ create table fases(
     constraint fk_regiao foreign key(idRegiao) references regioes(idRegiao)
 );
 insert into fases(idRegiao, tipo, dificuldade) values
-(1, "Visual", "Fácil"),
-(1, "Números", "Médio"),
-(1, "Ouvir", "Médio"),
-(1, "Observacao", "Fácil");
+(1, "Visual", "Medio"),
+(1, "Números", "Medio"),
+(1, "Ouvir", "Medio"),
+(1, "Observacao", "Facil");
 
 create table fasesConcluidas(
 	idFaseConcluida int auto_increment primary key,
@@ -72,7 +72,6 @@ insert into conquistas(nomeConquista, descConquista, iconMedalha) values
 ("Iniciando!", "Terminou uma atividade", "icon-medalha-verde.png"),
 ("A todo vapor!", "Terminou quatro atividades", "icon-medalha-vermelha.png"),
 ("Mundo Concluido!", "Terminou um mundo", "icon-medalha-azul.png");
--- select * from conquistas;
 
 create table alunosXconquistas(
 	idAlunoConquista int auto_increment primary key,
@@ -81,11 +80,6 @@ create table alunosXconquistas(
     constraint fk_conquista foreign key(idConquista) references conquistas(idConquista),
     constraint fk_aluno_conquista foreign key(idAluno) references alunos(idAluno)
 );
-/*insert into alunosXconquistas(idConquista, idAluno) values 
-(1,1),
-(2,1),
-(3,1);*/
--- select c.nomeConquista, c.descConquista from alunosXconquistas join conquistas c using(idConquista) join alunos using(idAluno) where idAluno = 1;
 
 create table missoes(
 	idMissao int auto_increment primary key,
@@ -108,7 +102,6 @@ create table missoesDiarias(
     dataInsercao date,
     constraint fk_diaria_missao foreign key(idMissao) references missoes(idMissao)
 );
--- select * from missoesDiarias join missoes using(idMissao);
 
 create table notificacoes(
 	idNotificacao int auto_increment primary key,
