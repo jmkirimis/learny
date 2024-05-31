@@ -291,7 +291,9 @@ public class FLogin extends javax.swing.JFrame {
                 double pontosTotais = rs.getDouble(8);
                 int fasesConcluidas = rs.getInt(9);
                 String foto = rs.getString(10);
-                return new Aluno(idAluno, nome, usuario, senha, email, dataNasc, idade, pontosTotais, fasesConcluidas, foto, "");
+                String medalha = rs.getString(11);
+                String ranque = rs.getString(12);
+                return new Aluno(idAluno, nome, usuario, senha, email, dataNasc, idade, pontosTotais, fasesConcluidas, foto, medalha, ranque);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);

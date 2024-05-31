@@ -17,6 +17,7 @@ public class Aluno {
     private int fasesConcluidas;
     private String foto;
     private String medalhaAtiva;
+    private String ranque;
     
     //importar classe conexao
     Connection conexao = null;
@@ -24,10 +25,10 @@ public class Aluno {
     ResultSet rs = null;
 
     public Aluno() {
-        this(0,"","","","","",0,0.0,0,"","");
+        this(0,"","","","","",0,0.0,0,"","","");
     }
 
-    public Aluno(int idAluno, String nome,String usuario, String senha, String email, String dataNasc, int idade, double pontosTotais, int fasesConcluidas, String foto, String medalhaAtiva) {
+    public Aluno(int idAluno, String nome,String usuario, String senha, String email, String dataNasc, int idade, double pontosTotais, int fasesConcluidas, String foto, String medalhaAtiva, String ranque) {
         this.idAluno = idAluno;
         this.nome = nome;
         this.usuario = usuario;
@@ -39,6 +40,7 @@ public class Aluno {
         this.fasesConcluidas = fasesConcluidas;
         this.foto = foto;
         this.medalhaAtiva = medalhaAtiva;
+        this.ranque = ranque;
     }
     
     public int getIdAluno() {
@@ -128,12 +130,20 @@ public class Aluno {
     public void setMedalhaAtiva(String medalhaAtiva) {
         this.medalhaAtiva = medalhaAtiva;
     }
+    
+    public String getRanque() {
+        return ranque;
+    }
+
+    public void setRanque(String ranque) {
+        this.ranque = ranque;
+    }
    
     public void cadastrar(){
         conexao = Conexao.conecta();
         String sql;
-        sql = "insert into alunos(nome, usuario, senha, email, dataNasc, pontosTotais, fasesConcluidas, foto, medalha) values"
-                + "(?,?,?,?,?,?,?,?,?)";
+        sql = "insert into alunos(nome, usuario, senha, email, dataNasc, pontosTotais, fasesConcluidas, foto, medalha, ranque) values"
+                + "(?,?,?,?,?,?,?,?,?,?)";
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, getNome());
@@ -145,6 +155,7 @@ public class Aluno {
             pst.setInt(7, 0);
             pst.setString(8, getFoto());
             pst.setString(9, "");
+            pst.setString(10, "");
             int linhasAfetadas = pst.executeUpdate();
             
             if (linhasAfetadas > 0) {
@@ -170,16 +181,6 @@ public class Aluno {
             pst.setString(5, getDataNasc());
             pst.setString(6, getFoto());
             pst.setInt(7, getIdAluno());
-            
-            // Debugging - Imprimindo valores
-        System.out.println("SQL: " + sql);
-        System.out.println("Nome: " + getNome());
-        System.out.println("Usuário: " + getUsuario());
-        System.out.println("Senha: " + getSenha());
-        System.out.println("Email: " + getEmail());
-        System.out.println("Data Nasc: " + getDataNasc());
-        System.out.println("Foto: " + getFoto());
-        System.out.println("ID Aluno: " + getIdAluno());
         
             int linhasAfetadas = pst.executeUpdate();
             

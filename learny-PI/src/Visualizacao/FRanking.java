@@ -30,6 +30,7 @@ public class FRanking extends javax.swing.JFrame {
     ResultSet rs = null;
     
     private Aluno alunoLogado;
+    private int idAluno;
     ArrayList<Double> pontosAlunos = new ArrayList<Double>();
 
     /**
@@ -45,6 +46,26 @@ public class FRanking extends javax.swing.JFrame {
             this.dispose();
             return;
         }
+        idAluno = alunoLogado.getIdAluno();
+        double pontos = alunoLogado.getPontosTotais();
+        String ranque = alunoLogado.getRanque();
+        
+        lbl_pontos.setText(Double.toString(pontos));
+        lbl_ranque.setText(ranque+"º");
+        
+        String verConquistas = "select count(*) from alunosXconquistas where idAluno = ?";
+        try {
+            pst = conexao.prepareStatement(verConquistas);
+            pst.setInt(1, idAluno);
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                int qtdMedalhas = rs.getInt(1);
+                lbl_medalhas.setText(Integer.toString(qtdMedalhas));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
         
         Color pretoComOpacidade = new Color(0, 0, 0, 75);
         panel_ranking_opac.setBackground(pretoComOpacidade);
@@ -54,10 +75,6 @@ public class FRanking extends javax.swing.JFrame {
         carregarPontos();
         ordenarPontos();
         exibirPontosOrdenados();
-        double pontos = alunoLogado.getPontosTotais();
-        int fasesConcluidas = alunoLogado.getFasesConcluidas();
-        lbl_pontos.setText(Double.toString(pontos));
-        lbl_fases_concluidas.setText(Integer.toString(fasesConcluidas));
     }   
 
     private void carregarPontos() {
@@ -75,7 +92,7 @@ public class FRanking extends javax.swing.JFrame {
         }
     }
     
-     private void merge(ArrayList<Double> v, int inicio, int meio, int fim) {
+    private void merge(ArrayList<Double> v, int inicio, int meio, int fim) {
         ArrayList<Double> aux = new ArrayList<>(v.subList(inicio, fim + 1));
 
         int i = 0;
@@ -127,19 +144,36 @@ public class FRanking extends javax.swing.JFrame {
         PanelRoundBorda[] panelsFotos = {panel_foto1, panel_foto2, panel_foto3};
         int i  = 0;
         for (double ponto : pontosAlunos) {
-            System.out.println(ponto);
-            String sql = "SELECT nome, pontosTotais, foto FROM alunos where pontosTotais = ?";
+            if (i >= lblsNomes.length) {
+                break; // Interrompe o loop após preencher todas as labels disponíveis
+            }
+            String sql = "SELECT idAluno, nome, pontosTotais, foto FROM alunos where pontosTotais = ?";
             try {
                 pst = conexao.prepareStatement(sql);
                 pst.setDouble(1,  ponto);
                 rs = pst.executeQuery();
 
                 while (rs.next()) {
+                    int idAluno = rs.getInt("idAluno");
                     String nomeAluno = rs.getString("nome");
                     String fotoAluno = rs.getString("foto");
                     lblsNomes[i].setText(nomeAluno);
                     lblsPontos[i].setText(String.valueOf(ponto));
-                    panelsFotos[i].setImg(new ImageIcon("src/Imagens/" + fotoAluno));
+                    if (i < panelsFotos.length) {
+                        panelsFotos[i].setImg(new ImageIcon("src/Imagens/" + fotoAluno));
+                    }
+                    String alteraRank;
+                    alteraRank = "update alunos set ranque = ? where idAluno = ?";
+                    try {
+                        pst = conexao.prepareStatement(alteraRank);
+                        pst.setInt(1, i+1);
+                        pst.setInt(2, idAluno);
+                        alunoLogado.setRanque(String.valueOf(i+1));
+
+                        pst.executeUpdate();
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null,e);
+                    }
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
@@ -209,15 +243,15 @@ public class FRanking extends javax.swing.JFrame {
         lbl_pontos7 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         panelRoundBorda17 = new Visualizacao.PanelRoundBorda();
-        panelSombra2 = new Visualizacao.PanelSombra();
-        lbl_fases_concluidas = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        panelSombra4 = new Visualizacao.PanelSombra();
-        lbl_fases_concluidas1 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        panelSombra1 = new Visualizacao.PanelSombra();
+        panelSombra6 = new Visualizacao.PanelSombra();
+        lbl_ranque = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        panelSombra7 = new Visualizacao.PanelSombra();
         lbl_pontos = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        panelSombra5 = new Visualizacao.PanelSombra();
+        lbl_medalhas = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
 
         menu.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -652,7 +686,7 @@ public class FRanking extends javax.swing.JFrame {
         panel_ranking_opacLayout.setHorizontalGroup(
             panel_ranking_opacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_ranking_opacLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(33, Short.MAX_VALUE)
                 .addGroup(panel_ranking_opacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelRoundBorda7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelRoundBorda15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -823,116 +857,120 @@ public class FRanking extends javax.swing.JFrame {
                 .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        panelSombra2.setBackground(new java.awt.Color(255, 255, 255));
-        panelSombra2.setPreferredSize(new java.awt.Dimension(131, 47));
-        panelSombra2.setShadowOpacity(0.3F);
+        panelSombra6.setBackground(new java.awt.Color(255, 255, 255));
+        panelSombra6.setPreferredSize(new java.awt.Dimension(131, 47));
+        panelSombra6.setShadowOpacity(0.3F);
 
-        lbl_fases_concluidas.setForeground(new java.awt.Color(51, 51, 51));
-        lbl_fases_concluidas.setText("fases");
+        lbl_ranque.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_ranque.setForeground(new java.awt.Color(72, 72, 72));
+        lbl_ranque.setText("1");
+        lbl_ranque.setToolTipText("");
 
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-moeda.png"))); // NOI18N
+        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-estrela.png"))); // NOI18N
 
-        javax.swing.GroupLayout panelSombra2Layout = new javax.swing.GroupLayout(panelSombra2);
-        panelSombra2.setLayout(panelSombra2Layout);
-        panelSombra2Layout.setHorizontalGroup(
-            panelSombra2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSombra2Layout.createSequentialGroup()
-                .addComponent(jLabel13)
-                .addGap(18, 18, 18)
-                .addComponent(lbl_fases_concluidas)
-                .addContainerGap(35, Short.MAX_VALUE))
+        javax.swing.GroupLayout panelSombra6Layout = new javax.swing.GroupLayout(panelSombra6);
+        panelSombra6.setLayout(panelSombra6Layout);
+        panelSombra6Layout.setHorizontalGroup(
+            panelSombra6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSombra6Layout.createSequentialGroup()
+                .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addComponent(lbl_ranque)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
-        panelSombra2Layout.setVerticalGroup(
-            panelSombra2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSombra2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(lbl_fases_concluidas)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(panelSombra2Layout.createSequentialGroup()
-                .addComponent(jLabel13)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        panelSombra4.setBackground(new java.awt.Color(255, 255, 255));
-        panelSombra4.setPreferredSize(new java.awt.Dimension(131, 47));
-        panelSombra4.setShadowOpacity(0.3F);
-
-        lbl_fases_concluidas1.setForeground(new java.awt.Color(51, 51, 51));
-        lbl_fases_concluidas1.setText("fases");
-
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-estrela.png"))); // NOI18N
-
-        javax.swing.GroupLayout panelSombra4Layout = new javax.swing.GroupLayout(panelSombra4);
-        panelSombra4.setLayout(panelSombra4Layout);
-        panelSombra4Layout.setHorizontalGroup(
-            panelSombra4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSombra4Layout.createSequentialGroup()
-                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lbl_fases_concluidas1)
-                .addContainerGap(42, Short.MAX_VALUE))
-        );
-        panelSombra4Layout.setVerticalGroup(
-            panelSombra4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(panelSombra4Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(lbl_fases_concluidas1)
+        panelSombra6Layout.setVerticalGroup(
+            panelSombra6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelSombra6Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(lbl_ranque)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelSombra1.setBackground(new java.awt.Color(255, 255, 255));
-        panelSombra1.setPreferredSize(new java.awt.Dimension(131, 54));
-        panelSombra1.setShadowOpacity(0.3F);
+        panelSombra7.setBackground(new java.awt.Color(255, 255, 255));
+        panelSombra7.setPreferredSize(new java.awt.Dimension(131, 54));
+        panelSombra7.setShadowOpacity(0.3F);
 
-        lbl_pontos.setForeground(new java.awt.Color(51, 51, 51));
-        lbl_pontos.setText("pontos");
+        lbl_pontos.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_pontos.setForeground(new java.awt.Color(72, 72, 72));
+        lbl_pontos.setText("100");
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-fogo.png"))); // NOI18N
+        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-fogo.png"))); // NOI18N
 
-        javax.swing.GroupLayout panelSombra1Layout = new javax.swing.GroupLayout(panelSombra1);
-        panelSombra1.setLayout(panelSombra1Layout);
-        panelSombra1Layout.setHorizontalGroup(
-            panelSombra1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSombra1Layout.createSequentialGroup()
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout panelSombra7Layout = new javax.swing.GroupLayout(panelSombra7);
+        panelSombra7.setLayout(panelSombra7Layout);
+        panelSombra7Layout.setHorizontalGroup(
+            panelSombra7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSombra7Layout.createSequentialGroup()
+                .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_pontos)
                 .addContainerGap(41, Short.MAX_VALUE))
         );
-        panelSombra1Layout.setVerticalGroup(
-            panelSombra1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSombra1Layout.createSequentialGroup()
-                .addComponent(jLabel12)
+        panelSombra7Layout.setVerticalGroup(
+            panelSombra7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSombra7Layout.createSequentialGroup()
+                .addComponent(jLabel28)
                 .addGap(0, 6, Short.MAX_VALUE))
-            .addGroup(panelSombra1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+            .addGroup(panelSombra7Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
                 .addComponent(lbl_pontos)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        panelSombra5.setBackground(new java.awt.Color(255, 255, 255));
+        panelSombra5.setPreferredSize(new java.awt.Dimension(131, 47));
+        panelSombra5.setShadowOpacity(0.3F);
+
+        lbl_medalhas.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_medalhas.setForeground(new java.awt.Color(72, 72, 72));
+        lbl_medalhas.setText("10");
+
+        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-moeda.png"))); // NOI18N
+
+        javax.swing.GroupLayout panelSombra5Layout = new javax.swing.GroupLayout(panelSombra5);
+        panelSombra5.setLayout(panelSombra5Layout);
+        panelSombra5Layout.setHorizontalGroup(
+            panelSombra5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSombra5Layout.createSequentialGroup()
+                .addComponent(jLabel26)
+                .addGap(18, 18, 18)
+                .addComponent(lbl_medalhas)
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+        panelSombra5Layout.setVerticalGroup(
+            panelSombra5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSombra5Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(lbl_medalhas)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelSombra5Layout.createSequentialGroup()
+                .addComponent(jLabel26)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panel_principalLayout = new javax.swing.GroupLayout(panel_principal);
         panel_principal.setLayout(panel_principalLayout);
         panel_principalLayout.setHorizontalGroup(
             panel_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panel_principalLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(panelSombra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelSombra7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
-                .addComponent(panelSombra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelSombra5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
-                .addComponent(panelSombra4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
-            .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelSombra6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel_principalLayout.setVerticalGroup(
             panel_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_principalLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addContainerGap(33, Short.MAX_VALUE)
                 .addGroup(panel_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelSombra2, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
-                    .addComponent(panelSombra4, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
-                    .addComponent(panelSombra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelSombra5, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                    .addComponent(panelSombra6, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                    .addComponent(panelSombra7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1053,8 +1091,6 @@ public class FRanking extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -1062,17 +1098,18 @@ public class FRanking extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel lbl_fases_concluidas;
-    private javax.swing.JLabel lbl_fases_concluidas1;
+    private javax.swing.JLabel lbl_medalhas;
     private javax.swing.JLabel lbl_nome1;
     private javax.swing.JLabel lbl_nome2;
     private javax.swing.JLabel lbl_nome3;
@@ -1088,6 +1125,7 @@ public class FRanking extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_pontos5;
     private javax.swing.JLabel lbl_pontos6;
     private javax.swing.JLabel lbl_pontos7;
+    private javax.swing.JLabel lbl_ranque;
     private javax.swing.JPanel menu;
     private javax.swing.JLabel menuHamburguer;
     private Visualizacao.PanelRound panelRound1;
@@ -1099,9 +1137,9 @@ public class FRanking extends javax.swing.JFrame {
     private Visualizacao.PanelRoundBorda panelRoundBorda17;
     private Visualizacao.PanelRoundBorda panelRoundBorda3;
     private Visualizacao.PanelRoundBorda panelRoundBorda7;
-    private Visualizacao.PanelSombra panelSombra1;
-    private Visualizacao.PanelSombra panelSombra2;
-    private Visualizacao.PanelSombra panelSombra4;
+    private Visualizacao.PanelSombra panelSombra5;
+    private Visualizacao.PanelSombra panelSombra6;
+    private Visualizacao.PanelSombra panelSombra7;
     private Visualizacao.PanelRoundBorda panel_foto1;
     private Visualizacao.PanelRoundBorda panel_foto2;
     private Visualizacao.PanelRoundBorda panel_foto3;

@@ -12,12 +12,14 @@ create table alunos(
     idade INT AS (TIMESTAMPDIFF(YEAR, dataNasc, CURDATE())),
     pontosTotais real(8,2),
     fasesConcluidas int,
-    foto varchar(50),
-    medalha varchar(100)
+    foto varchar(100),
+    medalha varchar(100),
+    ranque varchar(50)
 );
-insert into alunos(nome, email, usuario, senha, dataNasc, pontosTotais, fasesConcluidas, foto, medalha) values
-("Joao Marcos", "joao.kirimis@gmail.com", "joao", "123", "2004-03-11", 0, 0, "teste.png", "");
-#select * from alunos;
+#Tirar esse insert
+insert into alunos(nome, email, usuario, senha, dataNasc, pontosTotais, fasesConcluidas, foto, medalha, ranque) values
+("Joao Marcos", "joao.kirimis@gmail.com", "joao", "123", "2004-03-11", 0, 0, "teste.png", "", "");
+-- select * from alunos;
 
 create table mundos(
 	idMundo int auto_increment primary key,
@@ -80,7 +82,7 @@ create table alunosXconquistas(
     constraint fk_conquista foreign key(idConquista) references conquistas(idConquista),
     constraint fk_aluno_conquista foreign key(idAluno) references alunos(idAluno)
 );
-
+select count(*) from alunosXconquistas where idAluno = 1;
 create table missoes(
 	idMissao int auto_increment primary key,
     nomeMissao varchar(100),

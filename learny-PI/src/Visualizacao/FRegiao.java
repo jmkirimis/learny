@@ -38,11 +38,27 @@ public class FRegiao extends javax.swing.JFrame {
             this.dispose();
             return;
         }
+        
         idAluno = alunoLogado.getIdAluno();
         double pontos = alunoLogado.getPontosTotais();
-        int fasesConcluidas = alunoLogado.getFasesConcluidas();
+        String ranque = alunoLogado.getRanque();
+        
         lbl_pontos.setText(Double.toString(pontos));
-        lbl_fases_concluidas.setText(Integer.toString(fasesConcluidas));
+        lbl_ranque.setText(ranque+"º");
+        
+        String verConquistas = "select count(*) from alunosXconquistas where idAluno = ?";
+        try {
+            pst = conexao.prepareStatement(verConquistas);
+            pst.setInt(1, idAluno);
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                int qtdMedalhas = rs.getInt(1);
+                lbl_medalhas.setText(Integer.toString(qtdMedalhas));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
         
         Color pretoComOpacidade = new Color(0, 0, 0, 55);
         Color Opacidade = new Color(0, 0, 0, 0);
@@ -123,10 +139,10 @@ public class FRegiao extends javax.swing.JFrame {
         lbl_pontos = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         panelSombra2 = new Visualizacao.PanelSombra();
-        lbl_fases_concluidas = new javax.swing.JLabel();
+        lbl_medalhas = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         panelSombra4 = new Visualizacao.PanelSombra();
-        lbl_fases_concluidas1 = new javax.swing.JLabel();
+        lbl_ranque = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
 
         menu.setBackground(new java.awt.Color(102, 102, 102));
@@ -575,8 +591,9 @@ public class FRegiao extends javax.swing.JFrame {
         panelSombra1.setPreferredSize(new java.awt.Dimension(131, 54));
         panelSombra1.setShadowOpacity(0.3F);
 
-        lbl_pontos.setForeground(new java.awt.Color(51, 51, 51));
-        lbl_pontos.setText("pontos");
+        lbl_pontos.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_pontos.setForeground(new java.awt.Color(72, 72, 72));
+        lbl_pontos.setText("100");
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-fogo.png"))); // NOI18N
 
@@ -596,7 +613,7 @@ public class FRegiao extends javax.swing.JFrame {
                 .addComponent(jLabel12)
                 .addGap(0, 6, Short.MAX_VALUE))
             .addGroup(panelSombra1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(16, 16, 16)
                 .addComponent(lbl_pontos)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -605,8 +622,9 @@ public class FRegiao extends javax.swing.JFrame {
         panelSombra2.setPreferredSize(new java.awt.Dimension(131, 47));
         panelSombra2.setShadowOpacity(0.3F);
 
-        lbl_fases_concluidas.setForeground(new java.awt.Color(51, 51, 51));
-        lbl_fases_concluidas.setText("fases");
+        lbl_medalhas.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_medalhas.setForeground(new java.awt.Color(72, 72, 72));
+        lbl_medalhas.setText("10");
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-moeda.png"))); // NOI18N
 
@@ -617,14 +635,14 @@ public class FRegiao extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSombra2Layout.createSequentialGroup()
                 .addComponent(jLabel13)
                 .addGap(18, 18, 18)
-                .addComponent(lbl_fases_concluidas)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addComponent(lbl_medalhas)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         panelSombra2Layout.setVerticalGroup(
             panelSombra2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSombra2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(lbl_fases_concluidas)
+                .addGap(16, 16, 16)
+                .addComponent(lbl_medalhas)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(panelSombra2Layout.createSequentialGroup()
                 .addComponent(jLabel13)
@@ -635,9 +653,10 @@ public class FRegiao extends javax.swing.JFrame {
         panelSombra4.setPreferredSize(new java.awt.Dimension(131, 47));
         panelSombra4.setShadowOpacity(0.3F);
 
-        lbl_fases_concluidas1.setForeground(new java.awt.Color(51, 51, 51));
-        lbl_fases_concluidas1.setText("ranking");
-        lbl_fases_concluidas1.setToolTipText("");
+        lbl_ranque.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_ranque.setForeground(new java.awt.Color(72, 72, 72));
+        lbl_ranque.setText("1");
+        lbl_ranque.setToolTipText("");
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-estrela.png"))); // NOI18N
 
@@ -647,16 +666,16 @@ public class FRegiao extends javax.swing.JFrame {
             panelSombra4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSombra4Layout.createSequentialGroup()
                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lbl_fases_concluidas1)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGap(25, 25, 25)
+                .addComponent(lbl_ranque)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         panelSombra4Layout.setVerticalGroup(
             panelSombra4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panelSombra4Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(lbl_fases_concluidas1)
+                .addGap(16, 16, 16)
+                .addComponent(lbl_ranque)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -918,9 +937,9 @@ public class FRegiao extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lbl_fases_concluidas;
-    private javax.swing.JLabel lbl_fases_concluidas1;
+    private javax.swing.JLabel lbl_medalhas;
     private javax.swing.JLabel lbl_pontos;
+    private javax.swing.JLabel lbl_ranque;
     private javax.swing.JPanel menu;
     private javax.swing.JLabel menuHamburguer;
     private Visualizacao.PanelRound panelRound1;

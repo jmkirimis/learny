@@ -1,15 +1,10 @@
 
 package Visualizacao;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
-import javax.swing.JPanel;
-import javax.swing.ImageIcon;
+import java.awt.image.BufferedImage;
+import javax.swing.*;
 
 public class PanelRoundBorda extends JPanel {
 
@@ -84,17 +79,22 @@ public class PanelRoundBorda extends JPanel {
         g2.setStroke(new BasicStroke(borderWidth));
         g2.draw(new RoundRectangle2D.Double(borderWidth / 2.0, borderWidth / 2.0, width - borderWidth, height - borderWidth, arcWidth, arcHeight));
 
-        g2.dispose();
-        super.paintComponent(grphcs);
+        // Clip to the rounded area
+        Shape clip = new RoundRectangle2D.Double(borderWidth, borderWidth, width - 2 * borderWidth, height - 2 * borderWidth, arcWidth, arcHeight);
+        g2.setClip(clip);
 
         // Draw the image
-        if (img != null) {
-            grphcs.drawImage(img.getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+        if (img != null && img.getImage() != null) {
+            g2.drawImage(img.getImage(), borderWidth, borderWidth, width - 2 * borderWidth, height - 2 * borderWidth, this);
         }
+
+        g2.dispose();
+        super.paintComponent(grphcs);
     }
 
     public void setImg(ImageIcon img) {
         this.img = img;
+        repaint();
     }
 
     public ImageIcon getImg() {
