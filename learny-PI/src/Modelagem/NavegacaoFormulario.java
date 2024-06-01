@@ -5,18 +5,28 @@
  */
 package Modelagem;
 
+import Visualizacao.FOpcoes;
+import Visualizacao.FPerfil;
 import javax.swing.JFrame;
 
 public class NavegacaoFormulario extends JFrame {
-    private JFrame telaDeOrigem;
 
-    public NavegacaoFormulario(JFrame telaDeOrigem) {
+    public enum TelaOrigem {
+        PERFIL,
+        OPCOES
+    }
+
+    private JFrame telaDeOrigem;
+    private TelaOrigem telaOrigemEnum;
+
+    public NavegacaoFormulario(JFrame telaDeOrigem, TelaOrigem telaOrigemEnum) {
         this.telaDeOrigem = telaDeOrigem;
+        this.telaOrigemEnum = telaOrigemEnum;
         initComponentsComuns();
     }
 
     private void initComponentsComuns() {
-        // Inicialize seus componentes comuns aqui
+        // Inicialize componentes comuns a todos os formulários que estendem essa classe
     }
 
     // Método para retornar à tela de origem
@@ -25,7 +35,6 @@ public class NavegacaoFormulario extends JFrame {
             telaDeOrigem.setVisible(true);
             this.dispose();
         } else {
-            // Lógica caso não haja uma tela de origem definida
             System.out.println("Nenhuma tela de origem definida.");
         }
     }

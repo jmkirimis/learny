@@ -32,7 +32,7 @@ public class FPerfil extends NavegacaoFormulario {
     private Aluno alunoLogado;
 
     public FPerfil(JFrame telaDeOrigem) {
-        super(telaDeOrigem);
+        super(telaDeOrigem, TelaOrigem.PERFIL);
         initComponents();
         alunoLogado = Session.getInstance().getAlunoLogado();
         if (alunoLogado == null) {
@@ -52,6 +52,11 @@ public class FPerfil extends NavegacaoFormulario {
         panel_foto_perfil.setImagem("src/Imagens/" + foto);
     }
 
+    private void abrirNotificacoes() {
+        FNotificacao notificacoes = new FNotificacao(this);
+        notificacoes.setVisible(true);
+        this.setVisible(false);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -575,8 +580,7 @@ public class FPerfil extends NavegacaoFormulario {
     }//GEN-LAST:event_panelSombra2MouseClicked
 
     private void panelSombra3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra3MouseClicked
-        new FNotificacao(this).setVisible(true);
-        dispose();
+        abrirNotificacoes();
     }//GEN-LAST:event_panelSombra3MouseClicked
 
     private void panelSombra4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra4MouseClicked

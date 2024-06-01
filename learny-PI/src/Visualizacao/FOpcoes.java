@@ -40,7 +40,7 @@ public class FOpcoes extends NavegacaoFormulario {
 
 
     public FOpcoes(JFrame telaDeOrigem) {
-        super(telaDeOrigem);
+        super(telaDeOrigem, TelaOrigem.OPCOES);
         initComponents();
         conexao = Conexao.conecta();
         panel_sombra.setBackground(pretoComOpacidade);
@@ -99,6 +99,11 @@ public class FOpcoes extends NavegacaoFormulario {
         }
     }
 
+    private void abrirNotificacoes() {
+        FNotificacao notificacoes = new FNotificacao(this);
+        notificacoes.setVisible(true);
+        this.setVisible(false);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -194,7 +199,7 @@ public class FOpcoes extends NavegacaoFormulario {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         panelRound3Layout.setVerticalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,6 +234,11 @@ public class FOpcoes extends NavegacaoFormulario {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-notificacao.png"))); // NOI18N
         jLabel3.setToolTipText("");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel_icon1Layout = new javax.swing.GroupLayout(panel_icon1);
         panel_icon1.setLayout(panel_icon1Layout);
@@ -714,8 +724,7 @@ public class FOpcoes extends NavegacaoFormulario {
     }//GEN-LAST:event_jLabel13MouseExited
 
     private void panel_icon1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_icon1MouseClicked
-        new FNotificacao(null).setVisible(true);
-        dispose();
+        abrirNotificacoes();
     }//GEN-LAST:event_panel_icon1MouseClicked
 
     private void panel_icon2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_icon2MouseClicked
@@ -742,6 +751,10 @@ public class FOpcoes extends NavegacaoFormulario {
         new FFasesRecentes(this).setVisible(true);
         dispose();
     }//GEN-LAST:event_panelSombra7MouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        abrirNotificacoes();
+    }//GEN-LAST:event_jLabel3MouseClicked
 
     /**
      * @param args the command line arguments

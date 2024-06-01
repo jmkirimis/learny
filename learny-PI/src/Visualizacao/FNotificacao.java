@@ -7,6 +7,7 @@ package Visualizacao;
 
 import Controle.Conexao;
 import Modelagem.Aluno;
+import Modelagem.NavegacaoFormulario;
 import Modelagem.Session;
 import Modelagem.VerificadorDiarias;
 import java.awt.BorderLayout;
@@ -54,10 +55,10 @@ public class FNotificacao extends javax.swing.JFrame {
     Color vermelho = new Color(239,91,106);
     Color amarelo = new Color(255,179,0);
     
-    private FPerfil telaDePerfil;
+    private NavegacaoFormulario telaDeOrigem;
 
-    public FNotificacao(FPerfil telaDePerfil) {
-        this.telaDePerfil = telaDePerfil;
+    public FNotificacao(NavegacaoFormulario telaDeOrigem) {
+        this.telaDeOrigem = telaDeOrigem;
         initComponents();
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
@@ -263,10 +264,10 @@ public class FNotificacao extends javax.swing.JFrame {
         }
     }
     
-    // Método para retornar à tela de perfil
-    public void voltarParaPerfil() {
-        if (telaDePerfil != null) {
-            telaDePerfil.setVisible(true);
+    // Método para retornar à tela de origem
+    private void voltarParaOrigem() {
+        if (telaDeOrigem != null) {
+            telaDeOrigem.setVisible(true);
             this.dispose();
         }
     }
@@ -595,7 +596,7 @@ public class FNotificacao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
-        voltarParaPerfil();
+        voltarParaOrigem();
     }//GEN-LAST:event_jLabel13MouseClicked
 
     private void jLabel13MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseEntered
