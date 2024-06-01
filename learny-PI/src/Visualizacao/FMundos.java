@@ -55,7 +55,7 @@ public class FMundos extends javax.swing.JFrame {
         String ranque = alunoLogado.getRanque();
         
         lbl_pontos.setText(Double.toString(pontos));
-        lbl_ranque.setText(ranque+"º");
+        lbl_ranque.setText(ranque);
         
         String verConquistas = "select count(*) from alunosXconquistas where idAluno = ?";
         try {
@@ -1194,12 +1194,12 @@ public class FMundos extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel6MouseEntered
 
     private void jLabel6jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6jLabel1MouseClicked
-        new FPerfil().setVisible(true);
+        new FPerfil(this).setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel6jLabel1MouseClicked
 
     private void jLabel19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseClicked
-        new FOpcoes().setVisible(true);
+        new FOpcoes(this).setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel19MouseClicked
 

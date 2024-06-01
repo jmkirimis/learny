@@ -44,7 +44,7 @@ public class FRegiao extends javax.swing.JFrame {
         String ranque = alunoLogado.getRanque();
         
         lbl_pontos.setText(Double.toString(pontos));
-        lbl_ranque.setText(ranque+"º");
+        lbl_ranque.setText(ranque);
         
         String verConquistas = "select count(*) from alunosXconquistas where idAluno = ?";
         try {
@@ -723,7 +723,7 @@ public class FRegiao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel6jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6jLabel1MouseClicked
-        new FPerfil().setVisible(true);
+        new FPerfil(this).setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel6jLabel1MouseClicked
 
@@ -772,7 +772,7 @@ public class FRegiao extends javax.swing.JFrame {
     }//GEN-LAST:event_fase2MouseClicked
 
     private void menuHamburguerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuHamburguerMouseClicked
-        new FOpcoes().setVisible(true);
+        new FOpcoes(this).setVisible(true);
         dispose();
     }//GEN-LAST:event_menuHamburguerMouseClicked
 
@@ -786,7 +786,8 @@ public class FRegiao extends javax.swing.JFrame {
     }//GEN-LAST:event_panelSelecionarMouseClicked
 
     private void panel_sombra_diariasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_sombra_diariasMouseClicked
-        new FMissoesDiarias().setVisible(true);
+        new FOpcoes(this).setVisible(true);
+        dispose();
     }//GEN-LAST:event_panel_sombra_diariasMouseClicked
 
     private void verPrimeiraMedalha(){

@@ -53,8 +53,11 @@ public class FNotificacao extends javax.swing.JFrame {
     Color verde = new Color(128,210,91);
     Color vermelho = new Color(239,91,106);
     Color amarelo = new Color(255,179,0);
+    
+    private FPerfil telaDePerfil;
 
-    public FNotificacao() {
+    public FNotificacao(FPerfil telaDePerfil) {
+        this.telaDePerfil = telaDePerfil;
         initComponents();
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
@@ -257,6 +260,14 @@ public class FNotificacao extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    // Método para retornar à tela de perfil
+    public void voltarParaPerfil() {
+        if (telaDePerfil != null) {
+            telaDePerfil.setVisible(true);
+            this.dispose();
         }
     }
 
@@ -584,8 +595,7 @@ public class FNotificacao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
-        new FPerfil().setVisible(true);
-        dispose();
+        voltarParaPerfil();
     }//GEN-LAST:event_jLabel13MouseClicked
 
     private void jLabel13MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseEntered
@@ -626,7 +636,7 @@ public class FNotificacao extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FNotificacao().setVisible(true);
+                //new FNotificacao().setVisible(true);
             }
         });
     }

@@ -19,7 +19,7 @@ create table alunos(
 #Tirar esse insert
 insert into alunos(nome, email, usuario, senha, dataNasc, pontosTotais, fasesConcluidas, foto, medalha, ranque) values
 ("Joao Marcos", "joao.kirimis@gmail.com", "joao", "123", "2004-03-11", 0, 0, "teste.png", "", "");
--- select * from alunos;
+select * from alunos;
 
 create table mundos(
 	idMundo int auto_increment primary key,
@@ -48,7 +48,7 @@ create table fases(
 );
 insert into fases(idRegiao, tipo, dificuldade) values
 (1, "Visual", "Medio"),
-(1, "Números", "Medio"),
+(1, "Numeros", "Medio"),
 (1, "Ouvir", "Medio"),
 (1, "Observacao", "Facil");
 
@@ -63,6 +63,7 @@ create table fasesConcluidas(
     constraint fk_fase foreign key(idFase) references fases(idFase),
     constraint fk_aluno_fase_concluida foreign key(idAluno) references alunos(idAluno)
 );
+select * from fasesConcluidas;
 
 create table conquistas(
 	idConquista int auto_increment primary key,

@@ -7,6 +7,7 @@ package Visualizacao;
 
 import Controle.Conexao;
 import Modelagem.Aluno;
+import Modelagem.Ranking;
 import Modelagem.Session;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -32,6 +33,8 @@ public class FRanking extends javax.swing.JFrame {
     private Aluno alunoLogado;
     private int idAluno;
     ArrayList<Double> pontosAlunos = new ArrayList<Double>();
+    
+    Ranking r = new Ranking();
 
     /**
      * Creates new form FRanking
@@ -51,7 +54,7 @@ public class FRanking extends javax.swing.JFrame {
         String ranque = alunoLogado.getRanque();
         
         lbl_pontos.setText(Double.toString(pontos));
-        lbl_ranque.setText(ranque+"º");
+        lbl_ranque.setText(ranque);
         
         String verConquistas = "select count(*) from alunosXconquistas where idAluno = ?";
         try {
@@ -72,115 +75,16 @@ public class FRanking extends javax.swing.JFrame {
         this.setLayout(new BorderLayout());
         this.add(customScrollPane1, BorderLayout.CENTER);
         this.add(menu, BorderLayout.SOUTH);
-        carregarPontos();
-        ordenarPontos();
-        exibirPontosOrdenados();
-    }   
-
-    private void carregarPontos() {
-        String sql = "SELECT nome, pontosTotais FROM alunos";
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-            
-            while (rs.next()) {
-                double pontosTotais = rs.getDouble("pontosTotais");
-                pontosAlunos.add(pontosTotais);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
-    
-    private void merge(ArrayList<Double> v, int inicio, int meio, int fim) {
-        ArrayList<Double> aux = new ArrayList<>(v.subList(inicio, fim + 1));
-
-        int i = 0;
-        int j = meio - inicio + 1;
-        int k = inicio;
-
-        while (i <= meio - inicio && j <= fim - inicio) {
-            if (aux.get(i) >= aux.get(j)) {
-                v.set(k, aux.get(i));
-                i++;
-            } else {
-                v.set(k, aux.get(j));
-                j++;
-            }
-            k++;
-        }
-
-        while (i <= meio - inicio) {
-            v.set(k, aux.get(i));
-            i++;
-            k++;
-        }
-
-        while (j <= fim - inicio) {
-            v.set(k, aux.get(j));
-            j++;
-            k++;
-        }
-    }
-
-    private void mergesort(ArrayList<Double> v, int inicio, int fim) {
-        if (inicio < fim) {
-            int meio = (inicio + fim) / 2;
-            mergesort(v, inicio, meio);
-            mergesort(v, meio + 1, fim);
-            merge(v, inicio, meio, fim);
-        }
-    }
-
-    public void ordenarPontos() {
-        if (!pontosAlunos.isEmpty()) {
-            mergesort(pontosAlunos, 0, pontosAlunos.size() - 1);
-        }
-    }
-    
-    public void exibirPontosOrdenados() {
+        
         JLabel[] lblsNomes = {lbl_nome1, lbl_nome2, lbl_nome3, lbl_nome4, lbl_nome5, lbl_nome6, lbl_nome7};
         JLabel[] lblsPontos = {lbl_pontos1, lbl_pontos2, lbl_pontos3, lbl_pontos4, lbl_pontos5, lbl_pontos6, lbl_pontos7};
+        JLabel[] lblsPts = {lbl_pts1, lbl_pts2, lbl_pts3,lbl_pts4, lbl_pts5, lbl_pts6, lbl_pts7};
         PanelRoundBorda[] panelsFotos = {panel_foto1, panel_foto2, panel_foto3};
-        int i  = 0;
-        for (double ponto : pontosAlunos) {
-            if (i >= lblsNomes.length) {
-                break; // Interrompe o loop após preencher todas as labels disponíveis
-            }
-            String sql = "SELECT idAluno, nome, pontosTotais, foto FROM alunos where pontosTotais = ?";
-            try {
-                pst = conexao.prepareStatement(sql);
-                pst.setDouble(1,  ponto);
-                rs = pst.executeQuery();
-
-                while (rs.next()) {
-                    int idAluno = rs.getInt("idAluno");
-                    String nomeAluno = rs.getString("nome");
-                    String fotoAluno = rs.getString("foto");
-                    lblsNomes[i].setText(nomeAluno);
-                    lblsPontos[i].setText(String.valueOf(ponto));
-                    if (i < panelsFotos.length) {
-                        panelsFotos[i].setImg(new ImageIcon("src/Imagens/" + fotoAluno));
-                    }
-                    String alteraRank;
-                    alteraRank = "update alunos set ranque = ? where idAluno = ?";
-                    try {
-                        pst = conexao.prepareStatement(alteraRank);
-                        pst.setInt(1, i+1);
-                        pst.setInt(2, idAluno);
-                        alunoLogado.setRanque(String.valueOf(i+1));
-
-                        pst.executeUpdate();
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null,e);
-                    }
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e);
-            }
-            i++;
-        }
-    }
+        
+        r.carregarPontos();
+        r.ordenarPontos();
+        r.exibirPontosOrdenados(lblsNomes, lblsPontos, lblsPts, panelsFotos);
+    }   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -205,19 +109,19 @@ public class FRanking extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         lbl_nome1 = new javax.swing.JLabel();
         lbl_pontos1 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        lbl_pts1 = new javax.swing.JLabel();
         panel_foto2 = new Visualizacao.PanelRoundBorda();
         panelRoundBorda12 = new Visualizacao.PanelRoundBorda();
         jLabel14 = new javax.swing.JLabel();
         lbl_nome2 = new javax.swing.JLabel();
         lbl_pontos2 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
+        lbl_pts2 = new javax.swing.JLabel();
         panel_foto3 = new Visualizacao.PanelRoundBorda();
         panelRoundBorda14 = new Visualizacao.PanelRoundBorda();
         jLabel15 = new javax.swing.JLabel();
         lbl_nome3 = new javax.swing.JLabel();
         lbl_pontos3 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
+        lbl_pts3 = new javax.swing.JLabel();
         panelRound2 = new Visualizacao.PanelRound();
         panel_ranking_opac = new Visualizacao.PanelRound();
         customSeparator1 = new Visualizacao.CustomSeparator();
@@ -225,23 +129,23 @@ public class FRanking extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         lbl_nome4 = new javax.swing.JLabel();
         lbl_pontos4 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
+        lbl_pts4 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         lbl_nome5 = new javax.swing.JLabel();
         lbl_pontos5 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        lbl_pts5 = new javax.swing.JLabel();
         customSeparator4 = new Visualizacao.CustomSeparator();
         panelRoundBorda15 = new Visualizacao.PanelRoundBorda();
         jLabel17 = new javax.swing.JLabel();
         lbl_nome6 = new javax.swing.JLabel();
         lbl_pontos6 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
+        lbl_pts6 = new javax.swing.JLabel();
         customSeparator5 = new Visualizacao.CustomSeparator();
         panelRoundBorda16 = new Visualizacao.PanelRoundBorda();
         lbl_nome7 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         lbl_pontos7 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
+        lbl_pts7 = new javax.swing.JLabel();
         panelRoundBorda17 = new Visualizacao.PanelRoundBorda();
         panelSombra6 = new Visualizacao.PanelSombra();
         lbl_ranque = new javax.swing.JLabel();
@@ -372,9 +276,9 @@ public class FRanking extends javax.swing.JFrame {
         lbl_pontos1.setForeground(new java.awt.Color(72, 72, 72));
         lbl_pontos1.setText("100");
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(72, 72, 72));
-        jLabel16.setText("pts");
+        lbl_pts1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl_pts1.setForeground(new java.awt.Color(72, 72, 72));
+        lbl_pts1.setText("pts");
 
         javax.swing.GroupLayout panelRoundBorda3Layout = new javax.swing.GroupLayout(panelRoundBorda3);
         panelRoundBorda3.setLayout(panelRoundBorda3Layout);
@@ -388,20 +292,22 @@ public class FRanking extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_pontos1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbl_pts1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         panelRoundBorda3Layout.setVerticalGroup(
             panelRoundBorda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRoundBorda3Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(panelRoundBorda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRoundBorda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lbl_nome1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRoundBorda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lbl_pontos1)
-                        .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(panelRoundBorda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelRoundBorda3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lbl_pts1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelRoundBorda3Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(panelRoundBorda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_nome1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_pontos1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18))
         );
 
@@ -439,9 +345,9 @@ public class FRanking extends javax.swing.JFrame {
         lbl_pontos2.setForeground(new java.awt.Color(72, 72, 72));
         lbl_pontos2.setText("100");
 
-        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(72, 72, 72));
-        jLabel21.setText("pts");
+        lbl_pts2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl_pts2.setForeground(new java.awt.Color(72, 72, 72));
+        lbl_pts2.setText("pts");
 
         javax.swing.GroupLayout panelRoundBorda12Layout = new javax.swing.GroupLayout(panelRoundBorda12);
         panelRoundBorda12.setLayout(panelRoundBorda12Layout);
@@ -455,7 +361,7 @@ public class FRanking extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_pontos2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbl_pts2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         panelRoundBorda12Layout.setVerticalGroup(
@@ -463,10 +369,10 @@ public class FRanking extends javax.swing.JFrame {
             .addGroup(panelRoundBorda12Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(panelRoundBorda12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_pontos2)
+                    .addComponent(lbl_pontos2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_nome2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lbl_pts2, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
                 .addGap(18, 18, 18))
         );
 
@@ -504,9 +410,9 @@ public class FRanking extends javax.swing.JFrame {
         lbl_pontos3.setForeground(new java.awt.Color(72, 72, 72));
         lbl_pontos3.setText("100");
 
-        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(72, 72, 72));
-        jLabel22.setText("pts");
+        lbl_pts3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl_pts3.setForeground(new java.awt.Color(72, 72, 72));
+        lbl_pts3.setText("pts");
 
         javax.swing.GroupLayout panelRoundBorda14Layout = new javax.swing.GroupLayout(panelRoundBorda14);
         panelRoundBorda14.setLayout(panelRoundBorda14Layout);
@@ -520,7 +426,7 @@ public class FRanking extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_pontos3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbl_pts3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         panelRoundBorda14Layout.setVerticalGroup(
@@ -528,10 +434,10 @@ public class FRanking extends javax.swing.JFrame {
             .addGroup(panelRoundBorda14Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(panelRoundBorda14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_pontos3)
+                    .addComponent(lbl_pontos3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_nome3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lbl_pts3, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
                 .addGap(18, 18, 18))
         );
 
@@ -575,9 +481,9 @@ public class FRanking extends javax.swing.JFrame {
         lbl_pontos4.setForeground(new java.awt.Color(255, 255, 255));
         lbl_pontos4.setText("100");
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setText("pts");
+        lbl_pts4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl_pts4.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_pts4.setText("pts");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -591,9 +497,9 @@ public class FRanking extends javax.swing.JFrame {
         lbl_pontos5.setForeground(new java.awt.Color(255, 255, 255));
         lbl_pontos5.setText("100");
 
-        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setText("pts");
+        lbl_pts5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl_pts5.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_pts5.setText("pts");
 
         customSeparator4.setColor(new java.awt.Color(255, 255, 255));
         customSeparator4.setThickness(3);
@@ -626,9 +532,9 @@ public class FRanking extends javax.swing.JFrame {
         lbl_pontos6.setForeground(new java.awt.Color(255, 255, 255));
         lbl_pontos6.setText("100");
 
-        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel23.setText("pts");
+        lbl_pts6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl_pts6.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_pts6.setText("pts");
 
         customSeparator5.setColor(new java.awt.Color(255, 255, 255));
         customSeparator5.setThickness(3);
@@ -661,9 +567,9 @@ public class FRanking extends javax.swing.JFrame {
         lbl_pontos7.setForeground(new java.awt.Color(255, 255, 255));
         lbl_pontos7.setText("100");
 
-        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel25.setText("pts");
+        lbl_pts7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl_pts7.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_pts7.setText("pts");
 
         panelRoundBorda17.setBackground(new java.awt.Color(255, 255, 255));
         panelRoundBorda17.setBorderWidth(5);
@@ -702,7 +608,7 @@ public class FRanking extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(lbl_pontos4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbl_pts4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panel_ranking_opacLayout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -710,7 +616,7 @@ public class FRanking extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(lbl_pontos5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbl_pts5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(customSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panel_ranking_opacLayout.createSequentialGroup()
                         .addComponent(jLabel17)
@@ -719,7 +625,7 @@ public class FRanking extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(lbl_pontos6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbl_pts6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(customSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panel_ranking_opacLayout.createSequentialGroup()
                         .addComponent(jLabel24)
@@ -728,7 +634,7 @@ public class FRanking extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(lbl_pontos7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lbl_pts7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(41, 41, 41))
         );
         panel_ranking_opacLayout.setVerticalGroup(
@@ -737,56 +643,43 @@ public class FRanking extends javax.swing.JFrame {
                 .addGap(46, 46, 46)
                 .addGroup(panel_ranking_opacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(panelRoundBorda7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panel_ranking_opacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panel_ranking_opacLayout.createSequentialGroup()
-                            .addGap(5, 5, 5)
-                            .addGroup(panel_ranking_opacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lbl_pontos4)))
-                        .addGroup(panel_ranking_opacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_nome4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(panel_ranking_opacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                        .addComponent(lbl_nome4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                        .addComponent(lbl_pts4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbl_pontos4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(customSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel_ranking_opacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panel_ranking_opacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panel_ranking_opacLayout.createSequentialGroup()
-                            .addGap(5, 5, 5)
-                            .addGroup(panel_ranking_opacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lbl_pontos5)))
+                    .addGroup(panel_ranking_opacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(panel_ranking_opacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_nome5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lbl_nome5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbl_pontos5, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                        .addComponent(lbl_pts5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(panelRoundBorda15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(customSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel_ranking_opacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panel_ranking_opacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panel_ranking_opacLayout.createSequentialGroup()
-                            .addGap(5, 5, 5)
-                            .addGroup(panel_ranking_opacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lbl_pontos6)))
+                    .addGroup(panel_ranking_opacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(panel_ranking_opacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_nome6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lbl_nome6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbl_pontos6, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                        .addComponent(lbl_pts6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(panelRoundBorda16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(customSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel_ranking_opacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panel_ranking_opacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panel_ranking_opacLayout.createSequentialGroup()
-                            .addGap(5, 5, 5)
-                            .addGroup(panel_ranking_opacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lbl_pontos7)))
+                    .addGroup(panel_ranking_opacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(panel_ranking_opacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_nome7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lbl_nome7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbl_pontos7, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                        .addComponent(lbl_pts7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(panelRoundBorda17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
@@ -998,7 +891,7 @@ public class FRanking extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel9jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9jLabel1MouseClicked
-        new FPerfil().setVisible(true);
+        new FPerfil(this).setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel9jLabel1MouseClicked
 
@@ -1027,7 +920,7 @@ public class FRanking extends javax.swing.JFrame {
     }//GEN-LAST:event_menuHamburguerMouseExited
 
     private void menuHamburguerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuHamburguerMouseClicked
-        new FOpcoes().setVisible(true);
+        new FOpcoes(this).setVisible(true);
         dispose();
     }//GEN-LAST:event_menuHamburguerMouseClicked
   
@@ -1093,16 +986,9 @@ public class FRanking extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
@@ -1125,6 +1011,13 @@ public class FRanking extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_pontos5;
     private javax.swing.JLabel lbl_pontos6;
     private javax.swing.JLabel lbl_pontos7;
+    private javax.swing.JLabel lbl_pts1;
+    private javax.swing.JLabel lbl_pts2;
+    private javax.swing.JLabel lbl_pts3;
+    private javax.swing.JLabel lbl_pts4;
+    private javax.swing.JLabel lbl_pts5;
+    private javax.swing.JLabel lbl_pts6;
+    private javax.swing.JLabel lbl_pts7;
     private javax.swing.JLabel lbl_ranque;
     private javax.swing.JPanel menu;
     private javax.swing.JLabel menuHamburguer;

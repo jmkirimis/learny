@@ -35,7 +35,10 @@ public class FEstatistica extends javax.swing.JFrame {
     Color vermelhoPastel = new Color(239,91,106);
     Color azulPastel = new Color(108,210,255);
     
-    public FEstatistica() {
+    private FPerfil telaDePerfil;
+    
+    public FEstatistica(FPerfil telaDePerfil) {
+        this.telaDePerfil = telaDePerfil;
         initComponents();
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
@@ -100,6 +103,13 @@ public class FEstatistica extends javax.swing.JFrame {
         VerificadorFases vfases = new VerificadorFases(conexao);
         String[] estadosFases = vfases.verificarFases(1, idAluno); // Verifica as fases da região 1
         
+    }
+    // Método para retornar à tela de perfil
+    public void voltarParaPerfil() {
+        if (telaDePerfil != null) {
+            telaDePerfil.setVisible(true);
+            this.dispose();
+        }
     }
 
     /**
@@ -662,8 +672,7 @@ public class FEstatistica extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        new FPerfil().setVisible(true);
-        dispose();
+        voltarParaPerfil();
     }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
@@ -699,7 +708,7 @@ public class FEstatistica extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FEstatistica().setVisible(true);
+                //new FEstatistica().setVisible(true);
             }
         });
     }

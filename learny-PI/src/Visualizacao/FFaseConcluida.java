@@ -6,6 +6,7 @@
 package Visualizacao;
 import Controle.Conexao;
 import Modelagem.Aluno;
+import Modelagem.Ranking;
 import Modelagem.Session;
 import Modelagem.VerificadorDiarias;
 import java.awt.Color;
@@ -33,6 +34,7 @@ public class FFaseConcluida extends javax.swing.JFrame {
     private int idAluno;
     
     VerificadorDiarias verifDiaria = new VerificadorDiarias();
+    Ranking r = new Ranking();
     
     public FFaseConcluida() {
         initComponents();
@@ -74,6 +76,9 @@ public class FFaseConcluida extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e);
         }
+        r.carregarPontos();
+        r.ordenarPontos();
+        r.atualizarRanking();
     }
 
     /**

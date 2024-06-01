@@ -37,7 +37,10 @@ public class FEditarPerfil extends javax.swing.JFrame {
     private String foto;
     private int idAluno;
     
-    public FEditarPerfil() {
+    private FPerfil telaDePerfil;
+    
+    public FEditarPerfil(FPerfil telaDePerfil) {
+        this.telaDePerfil = telaDePerfil;
         initComponents();
         alunoLogado = Session.getInstance().getAlunoLogado();
         if (alunoLogado == null) {
@@ -73,6 +76,14 @@ public class FEditarPerfil extends javax.swing.JFrame {
                 }
     }
     Aluno a = new Aluno();
+    
+    // Método para retornar à tela de perfil
+    public void voltarParaPerfil() {
+        if (telaDePerfil != null) {
+            telaDePerfil.setVisible(true);
+            this.dispose();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -440,8 +451,7 @@ public class FEditarPerfil extends javax.swing.JFrame {
     }//GEN-LAST:event_panelRound1MouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        new FPerfil().setVisible(true);
-        dispose();
+        voltarParaPerfil();
     }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
@@ -477,7 +487,7 @@ public class FEditarPerfil extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FEditarPerfil().setVisible(true);
+                //new FEditarPerfil().setVisible(true);
             }
         });
     }
