@@ -2,7 +2,10 @@
 package Modelagem;
 
 import Controle.Conexao;
+import Visualizacao.AlertaGeral;
 import java.sql.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class Aluno {
@@ -19,13 +22,15 @@ public class Aluno {
     private String medalhaAtiva;
     private String ranque;
     
+    private JFrame parentFrame;
     //importar classe conexao
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
 
-    public Aluno() {
+    public Aluno(JFrame parentFrame) {
         this(0,"","","","","",0,0.0,0,"","","");
+        this.parentFrame = parentFrame;
     }
 
     public Aluno(int idAluno, String nome,String usuario, String senha, String email, String dataNasc, int idade, double pontosTotais, int fasesConcluidas, String foto, String medalhaAtiva, String ranque) {
@@ -159,9 +164,13 @@ public class Aluno {
             int linhasAfetadas = pst.executeUpdate();
             
             if (linhasAfetadas > 0) {
-                JOptionPane.showMessageDialog(null, "Dados inseridos com sucesso!");
+                ImageIcon icon = new ImageIcon("src/Imagens/icon sair.png");
+                AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Inserir Dados", "Dados cadastrados com sucesso!");
+                alert.setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(null, "Nenhum dado foi inserido.");
+                ImageIcon icon = new ImageIcon("src/Imagens/icon sair.png");
+                AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Inserir Dados", "Nenhum dado foi inserido.");
+                alert.setVisible(true);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e);
@@ -185,9 +194,13 @@ public class Aluno {
             int linhasAfetadas = pst.executeUpdate();
             
             if (linhasAfetadas > 0) {
-                JOptionPane.showMessageDialog(null, "Dados alterados com sucesso!");
+                ImageIcon icon = new ImageIcon("src/Imagens/icon sair.png");
+                AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Alterar Dados", "Dados alterados com sucesso!");
+                alert.setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(null, "Nenhum dado foi inserido.");
+                ImageIcon icon = new ImageIcon("src/Imagens/icon sair.png");
+                AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Alterar Dados", "Nenhum dado foi alterado.");
+                alert.setVisible(true);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e);

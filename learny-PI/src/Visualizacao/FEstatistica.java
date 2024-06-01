@@ -28,7 +28,7 @@ public class FEstatistica extends javax.swing.JFrame {
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    Aluno a = new Aluno();
+    Aluno a = new Aluno(null);
     private Aluno alunoLogado;
     private int idAluno;
     

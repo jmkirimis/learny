@@ -6,11 +6,14 @@
 package Modelagem;
 
 import Controle.Conexao;
+import Visualizacao.AlertaGeral;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,144 +27,115 @@ public class VerificadorDiarias {
     ResultSet rs = null;
 
     private Aluno alunoLogado;
+    private JFrame parentFrame;
 
-    public VerificadorDiarias() {
+    public VerificadorDiarias(JFrame parentFrame) {
         alunoLogado = Session.getInstance().getAlunoLogado();
         conexao = Conexao.conecta();
+        this.parentFrame = parentFrame;
     }
 
     public void verificarDiarias() {
-        String sql = "select count(*), tipo from fasesConcluidas join fases using(idFase) where dataConclusao = ? and idAluno = ?";
-        try {
-            pst = conexao.prepareStatement(sql);
+        String sqlFasesConcluidas = "select count(*) as totalFases, tipo from fasesConcluidas join fases using(idFase) where dataConclusao = ? and idAluno = ? group by tipo";
+        try (PreparedStatement pstFasesConcluidas = conexao.prepareStatement(sqlFasesConcluidas)) {
             Date dataAtual = Date.valueOf(LocalDate.now());
-            pst.setDate(1, dataAtual);
-            pst.setInt(2, alunoLogado.getIdAluno());
-            rs = pst.executeQuery();
-
-            if (rs.next()) {
-                int numMissoes = rs.getInt(1);
-                String tipoFase = rs.getString(2);
-
-                String sqlMissoes = "select * from missoesDiarias join missoes using(idMissao)";
-                try {
-                    pst = conexao.prepareStatement(sqlMissoes);
-                    rs = pst.executeQuery();
-
-                    while (rs.next()) {
-                        int idMissao = rs.getInt("idMissao");
-                        String descMissao = rs.getString("descMissao");
-
-                        // Verifica o tipo de missão e esconde o painel correspondente
-                        if (numMissoes == 3 && descMissao.equals("Conclua 3 fases")) {
-                            contabilizarPontos();
-                            deletar(idMissao);
-                        } else if (numMissoes == 5 && descMissao.equals("Conclua 5 fases")) {
-                            contabilizarPontos();
-                            deletar(idMissao);
-                        }
-                    }
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex);
-                }
-
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-
-        String sql2 = "select tipo from fasesConcluidas fc join fases using(idFase) where fc.dataConclusao = ? and fc.idAluno = ?";
-        try {
-            pst = conexao.prepareStatement(sql2);
-            Date dataAtual = Date.valueOf(LocalDate.now());
-            pst.setDate(1, dataAtual);
-            System.out.println(alunoLogado.getIdAluno());
-            pst.setInt(2, alunoLogado.getIdAluno());
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                String tipoFase = rs.getString(1);
-
-                String sqlMissoes = "select * from missoesDiarias join missoes using(idMissao)";
-                try {
-                    pst = conexao.prepareStatement(sqlMissoes);
-                    rs = pst.executeQuery();
-
-                    while (rs.next()) {
-                        int idMissao = rs.getInt("idMissao");
-                        String descMissao = rs.getString("descMissao");
-
-                        if (tipoFase.equals("Visual") && idMissao == 4) {
-                            contabilizarPontos();
-                            deletar(4);
-                        } else if (tipoFase.equals("Observacao") && idMissao == 3) {
-                            contabilizarPontos();
-                            deletar(3);
-                        } else if (tipoFase.equals("Ouvir") && idMissao == 5) {
-                            contabilizarPontos();
-                            deletar(5);
-                        } else if (tipoFase.equals("Numeros") && idMissao == 6) {
-                            contabilizarPontos();
-                            deletar(6);
-                        }
-                    }
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex);
+            pstFasesConcluidas.setDate(1, dataAtual);
+            pstFasesConcluidas.setInt(2, alunoLogado.getIdAluno());
+            try (ResultSet rsFasesConcluidas = pstFasesConcluidas.executeQuery()) {
+                while (rsFasesConcluidas.next()) {
+                    int numMissoes = rsFasesConcluidas.getInt("totalFases");
+                    String tipoFase = rsFasesConcluidas.getString("tipo");
+                    verificarMissao(numMissoes, tipoFase);
                 }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
+    }
 
+    private void verificarMissao(int numMissoes, String tipoFase) {
+        String sqlMissoes = "select * from missoesDiarias join missoes using(idMissao)";
+        try (PreparedStatement pstMissoes = conexao.prepareStatement(sqlMissoes); ResultSet rsMissoes = pstMissoes.executeQuery()) {
+            while (rsMissoes.next()) {
+                int idMissao = rsMissoes.getInt("idMissao");
+                String descMissao = rsMissoes.getString("descMissao");
+
+                if (numMissoes == 3 && descMissao.equals("Conclua 3 fases")) {
+                    contabilizarPontos();
+                    deletar(idMissao);
+                } else if (numMissoes == 5 && descMissao.equals("Conclua 5 fases")) {
+                    contabilizarPontos();
+                    deletar(idMissao);
+                } else if (tipoFase.equals("Visual") && descMissao.equals("Conclua a fase visual")) {
+                    contabilizarPontos();
+                    deletar(idMissao);
+                } else if (tipoFase.equals("Observacao") && descMissao.equals("Conclua a fase observacao")) {
+                    contabilizarPontos();
+                    deletar(idMissao);
+                } else if (tipoFase.equals("Ouvir") && descMissao.equals("Conclua a fase de escuta")) {
+                    contabilizarPontos();
+                    deletar(idMissao);
+                } else if (tipoFase.equals("Numeros") && descMissao.equals("Conclua a fase de numeros")) {
+                    contabilizarPontos();
+                    deletar(idMissao);
+                }
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
     }
 
     private void deletar(int idMissao) {
         String sql = "delete from missoesDiarias where idMissao = ?";
-        try {
-            pst = conexao.prepareStatement(sql);
-            pst.setInt(1, idMissao);
-
-            pst.executeUpdate();
+        try (PreparedStatement pstDeletar = conexao.prepareStatement(sql)) {
+            pstDeletar.setInt(1, idMissao);
+            pstDeletar.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
-    
-    private void contabilizarPontos(){
-        String sql2 = "select count(*) from missoesDiarias";
-        try {
-            pst = conexao.prepareStatement(sql2);
-            rs = pst.executeQuery();
 
-            while (rs.next()) {
-                int numDiarias = rs.getInt(1);
+    private void contabilizarPontos() {
+        String sql2 = "select count(*) from missoesDiarias";
+        try (PreparedStatement pstContabilizar = conexao.prepareStatement(sql2); ResultSet rsContabilizar = pstContabilizar.executeQuery()) {
+            if (rsContabilizar.next()) {
+                int numDiarias = rsContabilizar.getInt(1);
+
+                int pontos = 0;
+                String mensagem = "";
 
                 if (numDiarias == 1) {
-                    JOptionPane.showMessageDialog(null,"Você terminou sua última missão diária! +200pts");
-                    inserirPontos(200);
+                    pontos = 200;
+                    mensagem = "Você concluiu sua ultima missão!";
                 } else if (numDiarias == 2) {
-                    JOptionPane.showMessageDialog(null,"Você terminou sua segunda missão diária! +150pts");
-                    inserirPontos(150);
+                    pontos = 150;
+                    mensagem = "Você concluiu sua segunda missão!";
                 } else if (numDiarias == 3) {
-                    JOptionPane.showMessageDialog(null,"Você terminou sua primeira missão diária! +100pts");
-                    inserirPontos(100);
+                    pontos = 100;
+                    mensagem = "Você concluiu sua primeira missão!";
+                }
+
+                if (pontos > 0) {
+                    inserirPontos(pontos);
+                    ImageIcon icon = new ImageIcon("src/Imagens/icon sair.png");
+                    AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Missões Diárias", mensagem);
+                    alert.setVisible(true);
                 }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
-    private void inserirPontos(int pontos){
+
+    private void inserirPontos(int pontos) {
         String sql = "update alunos set pontosTotais = pontosTotais + ? where idAluno = ?";
-        try {
-            pst = conexao.prepareStatement(sql);
-            pst.setInt(1, pontos);
-            pst.setInt(2, alunoLogado.getIdAluno());
-            alunoLogado.setPontosTotais(alunoLogado.getPontosTotais()+pontos);
-            pst.executeUpdate();
+        try (PreparedStatement pstInserirPontos = conexao.prepareStatement(sql)) {
+            pstInserirPontos.setInt(1, pontos);
+            pstInserirPontos.setInt(2, alunoLogado.getIdAluno());
+            alunoLogado.setPontosTotais(alunoLogado.getPontosTotais() + pontos);
+            pstInserirPontos.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace(); // Isso imprimirá o stack trace completo do erro
+            e.printStackTrace();
         }
     }
 

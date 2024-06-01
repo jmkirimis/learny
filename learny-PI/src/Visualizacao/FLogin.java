@@ -24,6 +24,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.io.File;
 import java.io.IOException;
+import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 
 /**
@@ -34,7 +35,7 @@ public class FLogin extends javax.swing.JFrame {
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    Aluno a = new Aluno();
+    Aluno a = new Aluno(null);
     Color preto = new Color(0,0,0,64);
 
     /**
@@ -267,7 +268,8 @@ public class FLogin extends javax.swing.JFrame {
             this.dispose();
         } else {
             //JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos");
-            CustomAlert alert = new CustomAlert(this);
+            ImageIcon icon = new ImageIcon("src/Imagens/icon-confirmar.png");
+            AlertaGeral alert = new AlertaGeral(this, icon, "Erro ao Logar", "Usuário e/ou senha inválidos!");
             alert.setVisible(true);
         }
     }

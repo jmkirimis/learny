@@ -75,7 +75,7 @@ public class FEditarPerfil extends javax.swing.JFrame {
                     // Você pode adicionar um código adicional aqui para lidar com a exceção, como mostrar uma mensagem de erro
                 }
     }
-    Aluno a = new Aluno();
+    Aluno a = new Aluno(this);
     
     // Método para retornar à tela de perfil
     public void voltarParaPerfil() {

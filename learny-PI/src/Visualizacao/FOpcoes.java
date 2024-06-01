@@ -88,6 +88,9 @@ public class FOpcoes extends NavegacaoFormulario {
                 } else if (nomeMissao.equals("Observacao")) {
                     panelsDiarias[cont].setGradientStartColor(verde);
                     panelsDiarias[cont].setGradientEndColor(verde);
+                } else if(nomeMissao.equals("Mundo")){
+                    panelsDiarias[cont].setGradientStartColor(verde);
+                    panelsDiarias[cont].setGradientEndColor(verde);
                 }
                 lblsMissoes[cont].setText(descMissao);
                 ImageIcon icon = new ImageIcon("src/Imagens/" + iconMissao);

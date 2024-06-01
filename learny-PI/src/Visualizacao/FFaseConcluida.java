@@ -33,7 +33,7 @@ public class FFaseConcluida extends javax.swing.JFrame {
     private Aluno alunoLogado;
     private int idAluno;
     
-    VerificadorDiarias verifDiaria = new VerificadorDiarias();
+    VerificadorDiarias verifDiaria = new VerificadorDiarias(this);
     Ranking r = new Ranking();
     
     public FFaseConcluida() {

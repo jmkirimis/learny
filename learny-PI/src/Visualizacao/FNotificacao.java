@@ -44,7 +44,7 @@ public class FNotificacao extends javax.swing.JFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
     
-    VerificadorDiarias verifDiaria = new VerificadorDiarias();
+    VerificadorDiarias verifDiaria = new VerificadorDiarias(null);
 
     private Map<Integer, PanelSombra> notificacoesMap; // Mapa para armazenar os painéis de notificação
     private Aluno alunoLogado;
@@ -258,6 +258,9 @@ public class FNotificacao extends javax.swing.JFrame {
                     panelsDiarias[cont].setGradientStartColor(amarelo);
                     panelsDiarias[cont].setGradientEndColor(amarelo);
                 } else if(nomeMissao.equals("Observacao")){
+                    panelsDiarias[cont].setGradientStartColor(verde);
+                    panelsDiarias[cont].setGradientEndColor(verde);
+                }else if(nomeMissao.equals("Mundo")){
                     panelsDiarias[cont].setGradientStartColor(verde);
                     panelsDiarias[cont].setGradientEndColor(verde);
                 }
