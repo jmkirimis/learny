@@ -362,6 +362,11 @@ public class FMundos extends javax.swing.JFrame {
         panel_natural_grande.setRoundBottomRight(30);
         panel_natural_grande.setRoundTopLeft(30);
         panel_natural_grande.setRoundTopRight(30);
+        panel_natural_grande.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_natural_grandeMouseClicked(evt);
+            }
+        });
 
         panelRoundBorda1.setBackground(new java.awt.Color(255, 255, 255));
         panelRoundBorda1.setBorderWidth(5);
@@ -577,6 +582,11 @@ public class FMundos extends javax.swing.JFrame {
         panelRound10.setRoundBottomRight(30);
         panelRound10.setRoundTopLeft(30);
         panelRound10.setRoundTopRight(30);
+        panelRound10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelRound10MouseClicked(evt);
+            }
+        });
 
         panelRound12.setBackground(new java.awt.Color(255, 255, 255));
         panelRound12.setRoundBottomLeft(100);
@@ -696,6 +706,11 @@ public class FMundos extends javax.swing.JFrame {
         panel_gelo_grande.setRoundBottomRight(30);
         panel_gelo_grande.setRoundTopLeft(30);
         panel_gelo_grande.setRoundTopRight(30);
+        panel_gelo_grande.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_gelo_grandeMouseClicked(evt);
+            }
+        });
 
         panelRoundBorda6.setBackground(new java.awt.Color(255, 255, 255));
         panelRoundBorda6.setBorderWidth(5);
@@ -760,7 +775,7 @@ public class FMundos extends javax.swing.JFrame {
         panel_gelo_grandeLayout.setVerticalGroup(
             panel_gelo_grandeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_gelo_grandeLayout.createSequentialGroup()
-                .addContainerGap(149, Short.MAX_VALUE)
+                .addContainerGap(143, Short.MAX_VALUE)
                 .addGroup(panel_gelo_grandeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
                     .addComponent(panelRoundBorda6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -774,6 +789,11 @@ public class FMundos extends javax.swing.JFrame {
         panel_fogo_grande.setRoundBottomRight(30);
         panel_fogo_grande.setRoundTopLeft(30);
         panel_fogo_grande.setRoundTopRight(30);
+        panel_fogo_grande.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_fogo_grandeMouseClicked(evt);
+            }
+        });
 
         panelRoundBorda7.setBackground(new java.awt.Color(255, 255, 255));
         panelRoundBorda7.setBorderWidth(5);
@@ -838,7 +858,7 @@ public class FMundos extends javax.swing.JFrame {
         panel_fogo_grandeLayout.setVerticalGroup(
             panel_fogo_grandeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_fogo_grandeLayout.createSequentialGroup()
-                .addContainerGap(134, Short.MAX_VALUE)
+                .addContainerGap(143, Short.MAX_VALUE)
                 .addGroup(panel_fogo_grandeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel8)
                     .addComponent(panelRoundBorda7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1241,6 +1261,23 @@ public class FMundos extends javax.swing.JFrame {
             fogoClicado = false;
         }
     }//GEN-LAST:event_panel_fogoMouseClicked
+
+    private void panel_natural_grandeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_natural_grandeMouseClicked
+        new FRegiao().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_panel_natural_grandeMouseClicked
+
+    private void panel_gelo_grandeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_gelo_grandeMouseClicked
+        JOptionPane.showMessageDialog(null,"Mundo em desenvolvimento");
+    }//GEN-LAST:event_panel_gelo_grandeMouseClicked
+
+    private void panel_fogo_grandeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_fogo_grandeMouseClicked
+        JOptionPane.showMessageDialog(null,"Mundo em desenvolvimento");
+    }//GEN-LAST:event_panel_fogo_grandeMouseClicked
+
+    private void panelRound10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound10MouseClicked
+        JOptionPane.showMessageDialog(null,"Mundos em desenvolvimento");
+    }//GEN-LAST:event_panelRound10MouseClicked
 
     /**
      * @param args the command line arguments

@@ -7,6 +7,7 @@ package Visualizacao;
 
 import Controle.Conexao;
 import Modelagem.Aluno;
+import Modelagem.NavegacaoFormulario;
 import Modelagem.Session;
 import Modelagem.VerificadorFases;
 import java.awt.Color;
@@ -35,10 +36,10 @@ public class FEstatistica extends javax.swing.JFrame {
     Color vermelhoPastel = new Color(239,91,106);
     Color azulPastel = new Color(108,210,255);
     
-    private FPerfil telaDePerfil;
+    private NavegacaoFormulario telaDeOrigem;
     
-    public FEstatistica(FPerfil telaDePerfil) {
-        this.telaDePerfil = telaDePerfil;
+    public FEstatistica(NavegacaoFormulario telaDeOrigem) {
+        this.telaDeOrigem = telaDeOrigem;
         initComponents();
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
@@ -104,10 +105,10 @@ public class FEstatistica extends javax.swing.JFrame {
         String[] estadosFases = vfases.verificarFases(1, idAluno); // Verifica as fases da região 1
         
     }
-    // Método para retornar à tela de perfil
-    public void voltarParaPerfil() {
-        if (telaDePerfil != null) {
-            telaDePerfil.setVisible(true);
+    // Método para retornar à tela de origem
+    private void voltarParaOrigem() {
+        if (telaDeOrigem != null) {
+            telaDeOrigem.setVisible(true);
             this.dispose();
         }
     }
@@ -672,7 +673,7 @@ public class FEstatistica extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        voltarParaPerfil();
+        voltarParaOrigem();
     }//GEN-LAST:event_jLabel2MouseClicked
 
     /**

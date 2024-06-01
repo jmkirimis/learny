@@ -145,7 +145,7 @@ public class FRegiao extends javax.swing.JFrame {
         lbl_ranque = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
 
-        menu.setBackground(new java.awt.Color(102, 102, 102));
+        menu.setBackground(new java.awt.Color(72, 72, 72));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icone perfil.png"))); // NOI18N
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -162,6 +162,9 @@ public class FRegiao extends javax.swing.JFrame {
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icone home.png"))); // NOI18N
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel7MouseEntered(evt);
             }
@@ -789,6 +792,11 @@ public class FRegiao extends javax.swing.JFrame {
         new FOpcoes(this).setVisible(true);
         dispose();
     }//GEN-LAST:event_panel_sombra_diariasMouseClicked
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        new FMundos().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jLabel7MouseClicked
 
     private void verPrimeiraMedalha(){
         String verConquistas = "select c.iconMedalha from alunosXconquistas axc " +

@@ -7,6 +7,7 @@ package Visualizacao;
 
 import Controle.Conexao;
 import Modelagem.Aluno;
+import Modelagem.NavegacaoFormulario;
 import Modelagem.Ranking;
 import Modelagem.Session;
 import java.awt.BorderLayout;
@@ -36,10 +37,10 @@ public class FRanking extends javax.swing.JFrame {
     
     Ranking r = new Ranking();
 
-    /**
-     * Creates new form FRanking
-     */
-    public FRanking() {
+    private NavegacaoFormulario telaDeOrigem;
+    
+    public FRanking(NavegacaoFormulario telaDeOrigem) {
+        this.telaDeOrigem = telaDeOrigem;
         initComponents();
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
@@ -85,6 +86,14 @@ public class FRanking extends javax.swing.JFrame {
         r.ordenarPontos();
         r.exibirPontosOrdenados(lblsNomes, lblsPontos, lblsPts, panelsFotos);
     }   
+    
+    // Método para retornar à tela de origem
+    private void voltarParaOrigem() {
+        if (telaDeOrigem != null) {
+            telaDeOrigem.setVisible(true);
+            this.dispose();
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -174,6 +183,9 @@ public class FRanking extends javax.swing.JFrame {
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icone home.png"))); // NOI18N
         jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel10MouseEntered(evt);
             }
@@ -886,13 +898,11 @@ public class FRanking extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        new FRegiao().setVisible(true);
-        dispose();
+        voltarParaOrigem();
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel9jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9jLabel1MouseClicked
-        new FPerfil(this).setVisible(true);
-        dispose();
+        voltarParaOrigem();
     }//GEN-LAST:event_jLabel9jLabel1MouseClicked
 
     private void jLabel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseEntered
@@ -923,6 +933,11 @@ public class FRanking extends javax.swing.JFrame {
         new FOpcoes(this).setVisible(true);
         dispose();
     }//GEN-LAST:event_menuHamburguerMouseClicked
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+        new FMundos().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jLabel10MouseClicked
   
     /**
      * @param args the command line arguments
@@ -971,7 +986,7 @@ public class FRanking extends javax.swing.JFrame {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FRanking().setVisible(true);
+                //new FRanking().setVisible(true);
             }
         });
     }

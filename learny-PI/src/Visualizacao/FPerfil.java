@@ -57,6 +57,18 @@ public class FPerfil extends NavegacaoFormulario {
         notificacoes.setVisible(true);
         this.setVisible(false);
     }
+    
+    private void abrirRanking() {
+        FRanking ranking = new FRanking(this);
+        ranking.setVisible(true);
+        this.setVisible(false);
+    }
+    
+    private void abrirEstatistica() {
+        FEstatistica estatisticas = new FEstatistica(this);
+        estatisticas.setVisible(true);
+        this.setVisible(false);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -570,13 +582,11 @@ public class FPerfil extends NavegacaoFormulario {
     }//GEN-LAST:event_jLabel13MouseExited
 
     private void panelSombra1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra1MouseClicked
-        new FEstatistica(this).setVisible(true);
-        dispose();
+        abrirEstatistica();
     }//GEN-LAST:event_panelSombra1MouseClicked
 
     private void panelSombra2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra2MouseClicked
-        new FRanking().setVisible(true);
-        dispose();
+        abrirRanking();
     }//GEN-LAST:event_panelSombra2MouseClicked
 
     private void panelSombra3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra3MouseClicked

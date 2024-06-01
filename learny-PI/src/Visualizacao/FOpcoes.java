@@ -104,6 +104,18 @@ public class FOpcoes extends NavegacaoFormulario {
         notificacoes.setVisible(true);
         this.setVisible(false);
     }
+    
+    private void abrirRanking() {
+        FRanking ranking = new FRanking(this);
+        ranking.setVisible(true);
+        this.setVisible(false);
+    }
+    
+    private void abrirEstatistica() {
+        FEstatistica estatisticas = new FEstatistica(this);
+        estatisticas.setVisible(true);
+        this.setVisible(false);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -733,8 +745,7 @@ public class FOpcoes extends NavegacaoFormulario {
     }//GEN-LAST:event_panel_icon2MouseClicked
 
     private void panel_icon3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_icon3MouseClicked
-        new FRanking().setVisible(true);
-        dispose();
+        abrirRanking();
     }//GEN-LAST:event_panel_icon3MouseClicked
 
     private void panelSombra5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra5MouseClicked
@@ -743,8 +754,7 @@ public class FOpcoes extends NavegacaoFormulario {
     }//GEN-LAST:event_panelSombra5MouseClicked
 
     private void panelSombra6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra6MouseClicked
-        new FEstatistica(null).setVisible(true);
-        dispose();
+        abrirEstatistica();
     }//GEN-LAST:event_panelSombra6MouseClicked
 
     private void panelSombra7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra7MouseClicked

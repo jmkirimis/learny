@@ -65,6 +65,13 @@ public class FFasesRecentes extends javax.swing.JFrame {
         painelFases.setLayout(new BoxLayout(painelFases, BoxLayout.Y_AXIS));
 
         carregarFases(); // Carregar as fases concluídas
+        Dimension fixedSize = new Dimension(0, 100); // Tamanho desejado quando vazio
+        if (painelFases.getComponentCount() == 0) {
+            painelFases.setPreferredSize(fixedSize);
+        } else {
+            painelFases.setPreferredSize(null);
+        }
+        painelFases.revalidate();
     }
 
     private void carregarFases() {
@@ -226,7 +233,7 @@ public class FFasesRecentes extends javax.swing.JFrame {
                         .addComponent(jLabel13))
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(62, 62, 62)
-                        .addComponent(painelFases, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(painelFases, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
@@ -238,7 +245,7 @@ public class FFasesRecentes extends javax.swing.JFrame {
                     .addComponent(jLabel13))
                 .addGap(55, 55, 55)
                 .addComponent(painelFases, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(456, 456, 456))
+                .addContainerGap(460, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -250,7 +257,7 @@ public class FFasesRecentes extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(149, 149, 149)
+                .addGap(0, 145, Short.MAX_VALUE)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 

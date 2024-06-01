@@ -77,6 +77,13 @@ public class FNotificacao extends javax.swing.JFrame {
         panel_diaria3.setVisible(false);
         carregarNotificacoes();
         carregarMissoes();
+        Dimension fixedSize = new Dimension(0, 100); // Tamanho desejado quando vazio
+        if (painelNotificacoes.getComponentCount() == 0) {
+            painelNotificacoes.setPreferredSize(fixedSize);
+        } else {
+            painelNotificacoes.setPreferredSize(null);
+        }
+        painelNotificacoes.revalidate();
 
         int maxId = getUltimoIdNotificacao(); // Obtenha o último ID de notificação
         int idNotificacao = 0; // O ID da notificação que você deseja buscar
