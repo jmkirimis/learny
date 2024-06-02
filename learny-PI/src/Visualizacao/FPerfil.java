@@ -53,7 +53,7 @@ public class FPerfil extends NavegacaoFormulario {
     }
 
     private void abrirNotificacoes() {
-        FNotificacao notificacoes = new FNotificacao(this);
+        FNotificacao notificacoes = new FNotificacao(this, null);
         notificacoes.setVisible(true);
         this.setVisible(false);
     }

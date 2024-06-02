@@ -34,12 +34,11 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
     
     private Aluno alunoLogado;
     private Timer timer;
-    private int seconds = 0;
     private int minutes;
     private int remainingSeconds;
     private int idAluno;
     private int acertos2;
-    private int seconds2 = 0;
+    private int seconds2;
     
     public FFaseNumeros2(int acertos, int seconds) {
         initComponents();
@@ -444,7 +443,7 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
         porcAcerto = ((double)acertos2/2)*100;
         
         double pontos;
-        pontos = ((double) porcAcerto * 0.7) + ((int) seconds * 0.3);
+        pontos = ((double) porcAcerto * 0.7) + ((int) seconds2 * 0.3);
         String medalha = alunoLogado.getMedalhaAtiva();
         if(medalha.equals("Iniciando!")){
             pontos = pontos + 50;
@@ -512,9 +511,7 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                int acertos = 0;
-                int seconds = 0;
-                new FFaseNumeros2(acertos, seconds).setVisible(true);
+                //new FFaseNumeros2().setVisible(true);
             }
         });
     }

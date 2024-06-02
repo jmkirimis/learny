@@ -29,6 +29,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -56,9 +57,11 @@ public class FNotificacao extends javax.swing.JFrame {
     Color amarelo = new Color(255,179,0);
     
     private NavegacaoFormulario telaDeOrigem;
+    private JFrame parentFrame;
 
-    public FNotificacao(NavegacaoFormulario telaDeOrigem) {
+    public FNotificacao(NavegacaoFormulario telaDeOrigem, JFrame parentFrame) {
         this.telaDeOrigem = telaDeOrigem;
+        this.parentFrame = parentFrame;
         initComponents();
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
@@ -127,7 +130,17 @@ public class FNotificacao extends javax.swing.JFrame {
                             rs = pst.executeQuery();
 
                             if (rs.next()) {
+                                String nomeNotificacao = rs.getString("notificacao");
                                 String descNotificacao = rs.getString(4);
+                                if(nomeNotificacao.equals("Fase Concluida")){
+                                    ImageIcon icon = new ImageIcon("src/Imagens/icon-fase-alerta.png");
+                                    AlertaGeral alert = new AlertaGeral(parentFrame, icon, nomeNotificacao, descNotificacao, 50, 50);
+                                    alert.setVisible(true);
+                                } else if(nomeNotificacao.equals("Conquista Desbloqueada")){
+                                    ImageIcon icon = new ImageIcon("src/Imagens/icon-conquista-alerta.png");
+                                    AlertaGeral alert = new AlertaGeral(parentFrame, icon, nomeNotificacao, descNotificacao, 50, 50);
+                                    alert.setVisible(true);
+                                }
                                 JOptionPane.showMessageDialog(null, descNotificacao);
                             }
                         } catch (Exception ex) {
@@ -227,9 +240,10 @@ public class FNotificacao extends javax.swing.JFrame {
     }
 
     private void carregarMissoes() {
-        String sql = "select * from missoesDiarias join missoes using(idMissao)";
+        String sql = "select * from missoesDiarias join missoes using(idMissao) where idAluno = ?";
         try {
             pst = conexao.prepareStatement(sql);
+            pst.setInt(1, alunoLogado.getIdAluno());
             rs = pst.executeQuery();
             // Lista de labels para fácil acesso no loop
             JLabel[] lblsMissoes = {lbl_missao1, lbl_missao2, lbl_missao3};

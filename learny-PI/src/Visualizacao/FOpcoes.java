@@ -6,7 +6,9 @@
 package Visualizacao;
 
 import Controle.Conexao;
+import Modelagem.Aluno;
 import Modelagem.NavegacaoFormulario;
+import Modelagem.Session;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.sql.Connection;
@@ -36,6 +38,7 @@ public class FOpcoes extends NavegacaoFormulario {
     Color verde = new Color(128, 210, 91);
     Color vermelho = new Color(239, 91, 106);
     Color amarelo = new Color(255, 179, 0);
+    private Aluno alunoLogado;
 
 
 
@@ -43,6 +46,13 @@ public class FOpcoes extends NavegacaoFormulario {
         super(telaDeOrigem, TelaOrigem.OPCOES);
         initComponents();
         conexao = Conexao.conecta();
+        alunoLogado = Session.getInstance().getAlunoLogado();
+        if (alunoLogado == null) {
+            // Se não houver aluno logado, redirecione para a tela de login
+            new FLogin().setVisible(true);
+            this.dispose();
+            return;
+        }
         panel_sombra.setBackground(pretoComOpacidade);
         panel_icon1.setBackground(pretoComOpacidade2);
         panel_icon2.setBackground(pretoComOpacidade2);
@@ -55,9 +65,10 @@ public class FOpcoes extends NavegacaoFormulario {
     }
 
     private void carregarMissoes() {
-        String sql = "select * from missoesDiarias join missoes using(idMissao)";
+        String sql = "select * from missoesDiarias join missoes using(idMissao) where idAluno = ?";
         try {
             pst = conexao.prepareStatement(sql);
+            pst.setInt(1, alunoLogado.getIdAluno());
             rs = pst.executeQuery();
             // Lista de labels para fácil acesso no loop
             JLabel[] lblsMissoes = {lbl_missao1, lbl_missao2, lbl_missao3};
@@ -103,7 +114,7 @@ public class FOpcoes extends NavegacaoFormulario {
     }
 
     private void abrirNotificacoes() {
-        FNotificacao notificacoes = new FNotificacao(this);
+        FNotificacao notificacoes = new FNotificacao(this, null);
         notificacoes.setVisible(true);
         this.setVisible(false);
     }
@@ -620,7 +631,7 @@ public class FOpcoes extends NavegacaoFormulario {
                     .addGroup(panelSombra2Layout.createSequentialGroup()
                         .addGap(94, 94, 94)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGap(28, 28, 28))
         );
         panelSombra2Layout.setVerticalGroup(
             panelSombra2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -673,7 +684,7 @@ public class FOpcoes extends NavegacaoFormulario {
                 .addGap(48, 48, 48)
                 .addComponent(panelGradiente2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
-                .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(36, 36, 36)
                 .addComponent(panelSombra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)

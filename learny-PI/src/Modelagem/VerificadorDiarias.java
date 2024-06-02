@@ -36,16 +36,14 @@ public class VerificadorDiarias {
     }
 
     public void verificarDiarias() {
-        String sqlFasesConcluidas = "select count(*) as totalFases, tipo from fasesConcluidas join fases using(idFase) where dataConclusao = ? and idAluno = ? group by tipo";
+        String sqlFasesConcluidas = "select tipo from fasesConcluidas "
+                + "join fases using(idFase) where dataConclusao = CURDATE() and idAluno = ?";
         try (PreparedStatement pstFasesConcluidas = conexao.prepareStatement(sqlFasesConcluidas)) {
-            Date dataAtual = Date.valueOf(LocalDate.now());
-            pstFasesConcluidas.setDate(1, dataAtual);
-            pstFasesConcluidas.setInt(2, alunoLogado.getIdAluno());
+            pstFasesConcluidas.setInt(1, alunoLogado.getIdAluno());
             try (ResultSet rsFasesConcluidas = pstFasesConcluidas.executeQuery()) {
                 while (rsFasesConcluidas.next()) {
-                    int numMissoes = rsFasesConcluidas.getInt("totalFases");
                     String tipoFase = rsFasesConcluidas.getString("tipo");
-                    verificarMissao(numMissoes, tipoFase);
+                    verificarMissao(tipoFase);
                 }
             }
         } catch (Exception e) {
@@ -53,31 +51,29 @@ public class VerificadorDiarias {
         }
     }
 
-    private void verificarMissao(int numMissoes, String tipoFase) {
-        String sqlMissoes = "select * from missoesDiarias join missoes using(idMissao)";
-        try (PreparedStatement pstMissoes = conexao.prepareStatement(sqlMissoes); ResultSet rsMissoes = pstMissoes.executeQuery()) {
-            while (rsMissoes.next()) {
-                int idMissao = rsMissoes.getInt("idMissao");
-                String descMissao = rsMissoes.getString("descMissao");
+    private void verificarMissao(String tipoFase) {
+        String sqlMissoes = "select * from missoesDiarias join missoes using(idMissao) "
+                + "where idAluno = ? and dataInsercao = CURDATE()";
+        try (PreparedStatement pstMissoes = conexao.prepareStatement(sqlMissoes)) {
+            pstMissoes.setInt(1, alunoLogado.getIdAluno());
+            try (ResultSet rsMissoes = pstMissoes.executeQuery()) {
+                while (rsMissoes.next()) {
+                    int idMissaoDiaria = rsMissoes.getInt("idMissaoDiaria");
+                    String descMissao = rsMissoes.getString("descMissao");
 
-                if (numMissoes == 3 && descMissao.equals("Conclua 3 fases")) {
-                    contabilizarPontos();
-                    deletar(idMissao);
-                } else if (numMissoes == 5 && descMissao.equals("Conclua 5 fases")) {
-                    contabilizarPontos();
-                    deletar(idMissao);
-                } else if (tipoFase.equals("Visual") && descMissao.equals("Conclua a fase visual")) {
-                    contabilizarPontos();
-                    deletar(idMissao);
-                } else if (tipoFase.equals("Observacao") && descMissao.equals("Conclua a fase observacao")) {
-                    contabilizarPontos();
-                    deletar(idMissao);
-                } else if (tipoFase.equals("Ouvir") && descMissao.equals("Conclua a fase de escuta")) {
-                    contabilizarPontos();
-                    deletar(idMissao);
-                } else if (tipoFase.equals("Numeros") && descMissao.equals("Conclua a fase de numeros")) {
-                    contabilizarPontos();
-                    deletar(idMissao);
+                    if (tipoFase.equals("Visual") && descMissao.equals("Conclua a fase visual")) {
+                        contabilizarPontos();
+                        deletar(idMissaoDiaria);
+                    } else if (tipoFase.equals("Observacao") && descMissao.equals("Conclua a fase observacao")) {
+                        contabilizarPontos();
+                        deletar(idMissaoDiaria);
+                    } else if (tipoFase.equals("Ouvir") && descMissao.equals("Conclua a fase de escuta")) {
+                        contabilizarPontos();
+                        deletar(idMissaoDiaria);
+                    } else if (tipoFase.equals("Numeros") && descMissao.equals("Conclua a fase de numeros")) {
+                        contabilizarPontos();
+                        deletar(idMissaoDiaria);
+                    }
                 }
             }
         } catch (Exception ex) {
@@ -85,10 +81,10 @@ public class VerificadorDiarias {
         }
     }
 
-    private void deletar(int idMissao) {
-        String sql = "delete from missoesDiarias where idMissao = ?";
+    private void deletar(int idMissaoDiaria) {
+        String sql = "delete from missoesDiarias where idMissaoDiaria = ?";
         try (PreparedStatement pstDeletar = conexao.prepareStatement(sql)) {
-            pstDeletar.setInt(1, idMissao);
+            pstDeletar.setInt(1, idMissaoDiaria);
             pstDeletar.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -96,30 +92,33 @@ public class VerificadorDiarias {
     }
 
     private void contabilizarPontos() {
-        String sql2 = "select count(*) from missoesDiarias";
-        try (PreparedStatement pstContabilizar = conexao.prepareStatement(sql2); ResultSet rsContabilizar = pstContabilizar.executeQuery()) {
-            if (rsContabilizar.next()) {
-                int numDiarias = rsContabilizar.getInt(1);
+        String sql = "select count(*) from missoesDiarias where idAluno = ? and dataInsercao = CURDATE()";
+        try (PreparedStatement pstContabilizar = conexao.prepareStatement(sql)) {
+            pstContabilizar.setInt(1, alunoLogado.getIdAluno());
+            try (ResultSet rsContabilizar = pstContabilizar.executeQuery()) {
+                if (rsContabilizar.next()) {
+                    int numDiarias = rsContabilizar.getInt(1);
 
-                int pontos = 0;
-                String mensagem = "";
+                    int pontos = 0;
+                    String mensagem = "";
 
-                if (numDiarias == 1) {
-                    pontos = 200;
-                    mensagem = "Você concluiu sua ultima missão!";
-                } else if (numDiarias == 2) {
-                    pontos = 150;
-                    mensagem = "Você concluiu sua segunda missão!";
-                } else if (numDiarias == 3) {
-                    pontos = 100;
-                    mensagem = "Você concluiu sua primeira missão!";
-                }
+                    if (numDiarias == 1) {
+                        pontos = 200;
+                        mensagem = "Você concluiu sua última missão! +200pts";
+                    } else if (numDiarias == 2) {
+                        pontos = 150;
+                        mensagem = "Você concluiu sua segunda missão! +150pts";
+                    } else if (numDiarias == 3) {
+                        pontos = 100;
+                        mensagem = "Você concluiu sua primeira missão! +100pts";
+                    }
 
-                if (pontos > 0) {
-                    inserirPontos(pontos);
-                    ImageIcon icon = new ImageIcon("src/Imagens/icon sair.png");
-                    AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Missões Diárias", mensagem);
-                    alert.setVisible(true);
+                    if (pontos > 0) {
+                        inserirPontos(pontos);
+                        ImageIcon icon = new ImageIcon("src/Imagens/icon-diarias-alerta.png");
+                        AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Missões Diárias", mensagem, 50, 50);
+                        alert.setVisible(true);
+                    }
                 }
             }
         } catch (Exception e) {

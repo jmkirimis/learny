@@ -133,7 +133,7 @@
                               <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                               <Component id="panelGradiente2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                              <Component id="panelRound3" min="-2" max="-2" attributes="0"/>
+                              <Component id="panelRound3" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                               <Component id="panelSombra2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
@@ -681,7 +681,7 @@
                                           <Component id="jLabel7" min="-2" pref="220" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="28" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>

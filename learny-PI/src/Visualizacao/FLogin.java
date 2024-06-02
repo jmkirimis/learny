@@ -36,7 +36,7 @@ public class FLogin extends javax.swing.JFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
     Aluno a = new Aluno(null);
-    Color preto = new Color(0,0,0,64);
+    Color preto = new Color(0,0,0,150);
 
     /**
      * Creates new form FLogin
@@ -57,7 +57,7 @@ public class FLogin extends javax.swing.JFrame {
 
         customScrollPane1 = new Visualizacao.CustomScrollPane();
         panelGradiente1 = new Visualizacao.PanelGradiente();
-        panelPretoOpac2 = new Visualizacao.PanelPretoOpac();
+        panelOpac = new Visualizacao.PanelPretoOpac();
         jLabel8 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -160,39 +160,39 @@ public class FLogin extends javax.swing.JFrame {
             .addComponent(txt_senha_entrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout panelPretoOpac2Layout = new javax.swing.GroupLayout(panelPretoOpac2);
-        panelPretoOpac2.setLayout(panelPretoOpac2Layout);
-        panelPretoOpac2Layout.setHorizontalGroup(
-            panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelPretoOpac2Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelOpacLayout = new javax.swing.GroupLayout(panelOpac);
+        panelOpac.setLayout(panelOpacLayout);
+        panelOpacLayout.setHorizontalGroup(
+            panelOpacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelOpacLayout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addGroup(panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelPretoOpac2Layout.createSequentialGroup()
+                .addGroup(panelOpacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelOpacLayout.createSequentialGroup()
                         .addGap(135, 135, 135)
                         .addComponent(jLabel3))
-                    .addGroup(panelPretoOpac2Layout.createSequentialGroup()
+                    .addGroup(panelOpacLayout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelPretoOpac2Layout.createSequentialGroup()
+                    .addGroup(panelOpacLayout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelPretoOpac2Layout.createSequentialGroup()
+                    .addGroup(panelOpacLayout.createSequentialGroup()
                         .addGap(165, 165, 165)
                         .addComponent(jLabel8))
-                    .addGroup(panelPretoOpac2Layout.createSequentialGroup()
+                    .addGroup(panelOpacLayout.createSequentialGroup()
                         .addGap(59, 59, 59)
                         .addComponent(jLabel6)
                         .addGap(9, 9, 9)
                         .addComponent(jLabel7))
-                    .addGroup(panelPretoOpac2Layout.createSequentialGroup()
+                    .addGroup(panelOpacLayout.createSequentialGroup()
                         .addGap(84, 84, 84)
                         .addComponent(lbl_desc_login))
                     .addComponent(lbl_desc_login2))
                 .addGap(30, 30, 30))
         );
-        panelPretoOpac2Layout.setVerticalGroup(
-            panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPretoOpac2Layout.createSequentialGroup()
+        panelOpacLayout.setVerticalGroup(
+            panelOpacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelOpacLayout.createSequentialGroup()
                 .addGap(165, 165, 165)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
@@ -206,7 +206,7 @@ public class FLogin extends javax.swing.JFrame {
                 .addGap(70, 70, 70)
                 .addComponent(jLabel8)
                 .addGap(43, 43, 43)
-                .addGroup(panelPretoOpac2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelOpacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
                 .addGap(120, 120, 120))
@@ -216,11 +216,11 @@ public class FLogin extends javax.swing.JFrame {
         panelGradiente1.setLayout(panelGradiente1Layout);
         panelGradiente1Layout.setHorizontalGroup(
             panelGradiente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPretoOpac2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelOpac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panelGradiente1Layout.setVerticalGroup(
             panelGradiente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPretoOpac2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelOpac, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         customScrollPane1.setViewportView(panelGradiente1);
@@ -229,11 +229,11 @@ public class FLogin extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+            .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE)
+            .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -268,8 +268,8 @@ public class FLogin extends javax.swing.JFrame {
             this.dispose();
         } else {
             //JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos");
-            ImageIcon icon = new ImageIcon("src/Imagens/icon-confirmar.png");
-            AlertaGeral alert = new AlertaGeral(this, icon, "Erro ao Logar", "Usuário e/ou senha inválidos!");
+            ImageIcon icon = new ImageIcon("src/Imagens/icon-login-alerta.png");
+            AlertaGeral alert = new AlertaGeral(this, icon, "Erro ao Logar", "Usuário e/ou senha inválidos!", 80, 60);
             alert.setVisible(true);
         }
     }
@@ -346,7 +346,7 @@ public class FLogin extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_desc_login;
     private javax.swing.JLabel lbl_desc_login2;
     private Visualizacao.PanelGradiente panelGradiente1;
-    private Visualizacao.PanelPretoOpac panelPretoOpac2;
+    private Visualizacao.PanelPretoOpac panelOpac;
     private Visualizacao.PanelRound panelRound1;
     private Visualizacao.PanelRound panelRound2;
     private Visualizacao.PlaceholderPasswordField txt_senha_entrar;

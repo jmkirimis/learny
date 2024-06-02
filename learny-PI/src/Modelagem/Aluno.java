@@ -164,12 +164,12 @@ public class Aluno {
             int linhasAfetadas = pst.executeUpdate();
             
             if (linhasAfetadas > 0) {
-                ImageIcon icon = new ImageIcon("src/Imagens/icon sair.png");
-                AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Inserir Dados", "Dados cadastrados com sucesso!");
+                ImageIcon icon = new ImageIcon("src/Imagens/icone confirmar.png");
+                AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Inserir Dados", "Dados cadastrados com sucesso!", 50, 50);
                 alert.setVisible(true);
             } else {
-                ImageIcon icon = new ImageIcon("src/Imagens/icon sair.png");
-                AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Inserir Dados", "Nenhum dado foi inserido.");
+                ImageIcon icon = new ImageIcon("src/Imagens/icone confirmar.png");
+                AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Inserir Dados", "Nenhum dado foi inserido.", 50, 50);
                 alert.setVisible(true);
             }
         } catch (Exception e) {
@@ -194,12 +194,12 @@ public class Aluno {
             int linhasAfetadas = pst.executeUpdate();
             
             if (linhasAfetadas > 0) {
-                ImageIcon icon = new ImageIcon("src/Imagens/icon sair.png");
-                AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Alterar Dados", "Dados alterados com sucesso!");
+                ImageIcon icon = new ImageIcon("src/Imagens/icone confirmar.png");
+                AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Alterar Dados", "Dados alterados com sucesso!", 50, 50);
                 alert.setVisible(true);
             } else {
-                ImageIcon icon = new ImageIcon("src/Imagens/icon sair.png");
-                AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Alterar Dados", "Nenhum dado foi alterado.");
+                ImageIcon icon = new ImageIcon("src/Imagens/icon-confirmar.png");
+                AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Alterar Dados", "Nenhum dado foi alterado.", 50, 50);
                 alert.setVisible(true);
             }
         } catch (Exception e) {

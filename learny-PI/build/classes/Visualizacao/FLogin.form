@@ -55,17 +55,17 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="panelPretoOpac2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="panelOpac" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="panelPretoOpac2" alignment="1" max="32767" attributes="0"/>
+                  <Component id="panelOpac" alignment="1" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="Visualizacao.PanelPretoOpac" name="panelPretoOpac2">
+            <Container class="Visualizacao.PanelPretoOpac" name="panelOpac">
 
               <Layout>
                 <DimensionLayout dim="0">

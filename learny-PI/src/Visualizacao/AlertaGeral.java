@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import javax.swing.border.EmptyBorder;
 
 public class AlertaGeral extends JDialog {
-    Color cinza = new Color(140, 140, 140);
+    Color cinza = new Color(120, 120, 120);
     Color cinza2 = new Color(190, 190, 190);
     Color cinzaClaro = new Color(240, 240, 240);
     Color verde = new Color(128,210,91);
@@ -22,7 +22,7 @@ public class AlertaGeral extends JDialog {
     private JLabel titleLabel;
     private JLabel descriptionLabel;
 
-    public AlertaGeral(Frame parent, ImageIcon icon, String title, String description) {
+    public AlertaGeral(Frame parent, ImageIcon icon, String title, String description, int espTopBot, int espRightLeft) {
         super(parent, "Custom Alert", true);
         
         // Remove a decoração da janela
@@ -32,7 +32,7 @@ public class AlertaGeral extends JDialog {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBackground(cinza);
-        mainPanel.setBorder(new EmptyBorder(10, 20, 10, 20)); // Define espaçamento entre o texto e as laterais do painel
+        mainPanel.setBorder(new EmptyBorder(espTopBot, espRightLeft, 20, espRightLeft)); // Define espaçamento entre o texto e as laterais do painel
         
         // Adicionando ícone
         iconLabel = new JLabel();
@@ -44,15 +44,15 @@ public class AlertaGeral extends JDialog {
         // Adicionando título
         titleLabel = new JLabel(title);
         titleLabel.setForeground(Color.WHITE);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 22));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 15))); // Espaço entre ícone e título
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 30))); // Espaço entre ícone e título
         mainPanel.add(titleLabel);
 
         // Adicionando descrição
-        descriptionLabel = new JLabel(description);
+        descriptionLabel = new JLabel("<html><div style='text-align: center; width: 250px;'>" + description + "</div></html>");
         descriptionLabel.setForeground(cinzaClaro);
-        descriptionLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+        descriptionLabel.setFont(new Font("Arial", Font.PLAIN, 18));
         descriptionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainPanel.add(Box.createRigidArea(new Dimension(0, 15))); // Espaço entre título e descrição
         mainPanel.add(descriptionLabel);
@@ -68,24 +68,22 @@ public class AlertaGeral extends JDialog {
         buttonPanel.setLayout(new GridLayout(1, 1, 10, 0)); // Layout para um botão
 
         // Definindo margens (espaçamento entre os botões e as bordas laterais do painel)
-        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 15, 15, 15)); // Top, Left, Bottom, Right
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, espRightLeft, espTopBot, espRightLeft)); // Top, Left, Bottom, Right
 
         // Botão "Ok" com sombra
-        PanelRound okPanel = new PanelRound();
+        PanelSombra okPanel = new PanelSombra();
         okPanel.setBackground(cinza2); // Ajuste a cor de fundo conforme necessário
-        okPanel.setRoundTopLeft(40);
-        okPanel.setRoundTopRight(40);
-        okPanel.setRoundBottomLeft(40);
-        okPanel.setRoundBottomRight(40);
+        okPanel.setCornerRadius(30);
+        okPanel.setShadowSize(3);
+        okPanel.setShadowOpacity(0.3f);
         okPanel.setLayout(new BorderLayout());
-        okPanel.setPreferredSize(new Dimension(100, 40)); // Definindo tamanho preferido
-        JLabel okLabel = new JLabel("Ok", JLabel.CENTER);
+        okPanel.setPreferredSize(new Dimension(100, 50)); // Definindo tamanho preferido
+        JLabel okLabel = new JLabel("OK", JLabel.CENTER);
         okLabel.setForeground(Color.WHITE);
-        okLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        okLabel.setFont(new Font("Arial", Font.BOLD, 16));
         okPanel.add(okLabel, BorderLayout.CENTER);
         okPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                System.out.println("Ok button clicked");
                 // Ação para o botão Ok
                 dispose();
             }

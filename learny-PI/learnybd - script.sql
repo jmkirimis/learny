@@ -88,20 +88,23 @@ create table missoes(
     iconMissao varchar(100)
 );
 insert into missoes(nomeMissao, descMissao, iconMissao) values 
-("Atividades 1", "Conclua 3 fases", "icon-diaria-fases.png"),
-("Atividades 2", "Conclua 5 fases", "icon-diaria-fases.png"),
+#("Atividades 1", "Conclua 3 fases", "icon-diaria-fases.png"),
+#("Atividades 2", "Conclua 5 fases", "icon-diaria-fases.png"),
 ("Observacao", "Conclua a fase observacao", "icon-diaria-observacao.png"),
 ("Visual", "Conclua a fase visual", "icon-diaria-visualizar.png"),
 ("Ouvir", "Conclua a fase de escuta", "icon-diaria-escuta.png"),
-("Numeros", "Conclua a fase de numeros", "icon-diaria-numeros.png"),
-("Mundo", "Conclua um mundo", "icon-diaria-mundo.png");
+("Numeros", "Conclua a fase de numeros", "icon-diaria-numeros.png");
+#("Mundo", "Conclua um mundo", "icon-diaria-mundo.png")
 
 create table missoesDiarias(
 	idMissaoDiaria int auto_increment primary key,
     idMissao int not null,
+    idAluno int not null,
     dataInsercao date,
+    CONSTRAINT fk_diaria_aluno FOREIGN KEY(idAluno) REFERENCES alunos(idAluno),
     constraint fk_diaria_missao foreign key(idMissao) references missoes(idMissao)
 );
+select * from missoesDiarias join missoes using(idMissao);
 
 create table notificacoes(
 	idNotificacao int auto_increment primary key,
@@ -150,16 +153,64 @@ DELIMITER ;
 -- Criação de um evento para pegas as missões da tabela missões e inserir nas missões diárias a cada 24 horas
 DELIMITER //
 
-CREATE EVENT inserir_missao_diaria
+CREATE EVENT inserir_missao_diaria_por_aluno
 ON SCHEDULE EVERY 1 DAY
 STARTS CURRENT_TIMESTAMP
 DO
 BEGIN
+    DECLARE done INT DEFAULT FALSE;
     DECLARE total_missao INT;
     DECLARE id_missao_1, id_missao_2, id_missao_3 INT;
+    DECLARE aluno_id INT;
 
-    -- Limpa a tabela missoesDiarias
-    DELETE FROM missoesDiarias;
+    -- Cursor para iterar por todos os alunos
+    DECLARE aluno_cursor CURSOR FOR SELECT idAluno FROM alunos;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+    -- Conta o total de missões existentes
+    SELECT COUNT(*) INTO total_missao FROM missoes;
+
+    -- Limpa as missões do dia anterior que não foram concluídas
+    DELETE FROM missoesDiarias WHERE dataInsercao < CURDATE();
+
+    OPEN aluno_cursor;
+    
+    read_loop: LOOP
+        FETCH aluno_cursor INTO aluno_id;
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+
+        -- Gera três números aleatórios distintos entre 1 e o total de missões
+        REPEAT
+            SET id_missao_1 = FLOOR(RAND() * total_missao) + 1;
+            SET id_missao_2 = FLOOR(RAND() * total_missao) + 1;
+            SET id_missao_3 = FLOOR(RAND() * total_missao) + 1;
+        UNTIL id_missao_1 <> id_missao_2 AND id_missao_1 <> id_missao_3 AND id_missao_2 <> id_missao_3 END REPEAT;
+
+        -- Insere as três missões diárias para o aluno atual
+        INSERT INTO missoesDiarias (idAluno, idMissao, dataInsercao)
+        VALUES (aluno_id, id_missao_1, NOW()), (aluno_id, id_missao_2, NOW()), (aluno_id, id_missao_3, NOW());
+    END LOOP;
+
+    CLOSE aluno_cursor;
+END //
+
+DELIMITER ;
+
+SET GLOBAL event_scheduler = ON;
+-- Ativa o evento criado
+ALTER EVENT inserir_missao_diaria_por_aluno ENABLE;
+
+-- Trigger que atribui missões diárias automaticamente quando um novo aluno é cadastrado
+DELIMITER //
+
+CREATE TRIGGER atribuir_missao_novo_aluno
+AFTER INSERT ON alunos
+FOR EACH ROW
+BEGIN
+    DECLARE total_missao INT;
+    DECLARE id_missao_1, id_missao_2, id_missao_3 INT;
 
     -- Conta o total de missões existentes
     SELECT COUNT(*) INTO total_missao FROM missoes;
@@ -169,16 +220,11 @@ BEGIN
         SET id_missao_1 = FLOOR(RAND() * total_missao) + 1;
         SET id_missao_2 = FLOOR(RAND() * total_missao) + 1;
         SET id_missao_3 = FLOOR(RAND() * total_missao) + 1;
-        -- Garante que não sejam selecionadas missões repetidas
     UNTIL id_missao_1 <> id_missao_2 AND id_missao_1 <> id_missao_3 AND id_missao_2 <> id_missao_3 END REPEAT;
 
-    -- Insere as três missões diárias com base nos números gerados
-    INSERT INTO missoesDiarias (idMissao, dataInsercao)
-    SELECT idMissao, NOW() FROM missoes WHERE idMissao IN (id_missao_1, id_missao_2, id_missao_3);
+    -- Insere as três missões diárias para o novo aluno
+    INSERT INTO missoesDiarias (idAluno, idMissao, dataInsercao)
+    VALUES (NEW.idAluno, id_missao_1, NOW()), (NEW.idAluno, id_missao_2, NOW()), (NEW.idAluno, id_missao_3, NOW());
 END //
 
 DELIMITER ;
-
-SET GLOBAL event_scheduler=ON;
--- Ativa o evento criado
-ALTER EVENT inserir_missao_diaria ENABLE;
