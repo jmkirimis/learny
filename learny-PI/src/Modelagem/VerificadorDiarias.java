@@ -45,6 +45,8 @@ public class VerificadorDiarias {
                     String tipoFase = rsFasesConcluidas.getString("tipo");
                     verificarMissao(tipoFase);
                 }
+                // Verificar missões baseadas na quantidade de fases concluídas
+                verificarMissaoPorQuantidade();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -79,6 +81,46 @@ public class VerificadorDiarias {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
+    }
+
+    private void verificarMissaoPorQuantidade() {
+        int fasesConcluidasHoje = contarFasesConcluidasHoje();
+        String sqlMissoes = "select * from missoesDiarias join missoes using(idMissao) "
+                + "where idAluno = ? and dataInsercao = CURDATE()";
+        try (PreparedStatement pstMissoes = conexao.prepareStatement(sqlMissoes)) {
+            pstMissoes.setInt(1, alunoLogado.getIdAluno());
+            try (ResultSet rsMissoes = pstMissoes.executeQuery()) {
+                while (rsMissoes.next()) {
+                    int idMissaoDiaria = rsMissoes.getInt("idMissaoDiaria");
+                    String descMissao = rsMissoes.getString("descMissao");
+
+                    if (descMissao.equals("Conclua 3 fases") && fasesConcluidasHoje >= 3) {
+                        contabilizarPontos();
+                        deletar(idMissaoDiaria);
+                    } else if (descMissao.equals("Conclua 5 fases") && fasesConcluidasHoje >= 5) {
+                        contabilizarPontos();
+                        deletar(idMissaoDiaria);
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+
+    private int contarFasesConcluidasHoje() {
+        String sql = "select count(*) as total from fasesConcluidas where dataConclusao = CURDATE() and idAluno = ?";
+        try (PreparedStatement pst = conexao.prepareStatement(sql)) {
+            pst.setInt(1, alunoLogado.getIdAluno());
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("total");
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return 0;
     }
 
     private void deletar(int idMissaoDiaria) {

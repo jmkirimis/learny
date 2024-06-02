@@ -25,10 +25,8 @@
               <EmptySpace pref="88" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Component id="lbl_mundo" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="lbl_tipo_mundo" max="32767" attributes="0"/>
-                      <Component id="lbl_mundo_img" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="lbl_tipo_mundo" max="32767" attributes="0"/>
+                  <Component id="lbl_mundo_img" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
           </Group>
@@ -43,7 +41,7 @@
               <Component id="lbl_tipo_mundo" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Component id="lbl_mundo_img" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="32" max="32767" attributes="0"/>
+              <EmptySpace pref="22" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -59,21 +57,21 @@
     <Component class="javax.swing.JLabel" name="lbl_mundo">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="18" style="1"/>
+          <Font name="Tahoma" size="22" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="66" green="66" red="66" type="rgb"/>
+          <Color blue="48" green="48" red="48" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Mundo 01"/>
+        <Property name="text" type="java.lang.String" value="Mundo - 1"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_tipo_mundo">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="18" style="1"/>
+          <Font name="Tahoma" size="22" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="66" green="66" red="66" type="rgb"/>
+          <Color blue="48" green="48" red="48" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Mundo Natural"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>

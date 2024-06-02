@@ -9,6 +9,7 @@ import Modelagem.Aluno;
 import Modelagem.Session;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -408,17 +409,29 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
     private void panelSombra5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra5MouseClicked
         acertos++;
         timer.stop();
-        JOptionPane.showMessageDialog(null, "Muito bem! vamos para a próxima conta");
+        ImageIcon icon = new ImageIcon("src/Imagens/icon-numeros-alerta.png");
+        AlertaGeral alert = new AlertaGeral(FFaseNumeros1.this, icon, "Fase Números", "Muito bem! vamos para a próxima conta", 25, 25);
+        alert.setVisible(true);
         new FFaseNumeros2(acertos, seconds).setVisible(true);
         dispose();
     }//GEN-LAST:event_panelSombra5MouseClicked
 
     private void panelSombra6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra6MouseClicked
-        JOptionPane.showMessageDialog(null, "Que pena! A resposta era 10");
+        timer.stop();
+        ImageIcon icon = new ImageIcon("src/Imagens/icon-numeros-alerta.png");
+        AlertaGeral alert = new AlertaGeral(FFaseNumeros1.this, icon, "Fase Números", "Que pena.. A resposta era 10", 25, 25);
+        alert.setVisible(true);
+        new FFaseNumeros2(acertos, seconds).setVisible(true);
+        dispose();
     }//GEN-LAST:event_panelSombra6MouseClicked
 
     private void panel_num3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_num3MouseClicked
-        JOptionPane.showMessageDialog(null, "Que pena! A resposta era 10");
+        timer.stop();
+        ImageIcon icon = new ImageIcon("src/Imagens/icon-numeros-alerta.png");
+        AlertaGeral alert = new AlertaGeral(FFaseNumeros1.this, icon, "Fase Números", "Que pena.. A resposta era 10", 25, 25);
+        alert.setVisible(true);
+        new FFaseNumeros2(acertos, seconds).setVisible(true);
+        dispose();
     }//GEN-LAST:event_panel_num3MouseClicked
 
     /**

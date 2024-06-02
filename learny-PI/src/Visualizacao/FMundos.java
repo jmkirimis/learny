@@ -71,7 +71,7 @@ public class FMundos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
         
-        panelSlide.init(new PanelMundos("Mundo 1", "Mundo Natural", new ImageIcon("src/Imagens/mundo-natureza2.png")), new PanelMundos("Mundo 2", "Mundo Congelado", new ImageIcon("src/Imagens/mundo-congelado.png")), new PanelMundos("Mundo 3", "Mundo Flamejante", new ImageIcon("src/Imagens/mundo-flamejante3.png")));
+        panelSlide.init(new PanelMundos("Mundo - 1", "Mundo Natural", new ImageIcon("src/Imagens/mundo-natureza2.png")), new PanelMundos("Mundo - 2", "Mundo Congelado", new ImageIcon("src/Imagens/mundo-congelado.png")), new PanelMundos("Mundo - 3", "Mundo Flamejante", new ImageIcon("src/Imagens/mundo-flamejante3.png")));
         panelSlide.setAnimate(5);
         this.setLayout(new BorderLayout());
         this.add(panelScrollMundos, BorderLayout.CENTER);
@@ -1185,7 +1185,9 @@ public class FMundos extends javax.swing.JFrame {
             new FRegiao().setVisible(true);
             dispose();
         } else{
-            JOptionPane.showMessageDialog(null,"Mundo em desenvolvimento");
+            ImageIcon icon = new ImageIcon("src/Imagens/icon-mundos-alerta.png");
+            AlertaGeral alert = new AlertaGeral(FMundos.this, icon, "Mundos", "Mundo em desenvolvimento...", 25, 25);
+            alert.setVisible(true);
         }
     }//GEN-LAST:event_panelSombra3MouseClicked
 
@@ -1268,15 +1270,21 @@ public class FMundos extends javax.swing.JFrame {
     }//GEN-LAST:event_panel_natural_grandeMouseClicked
 
     private void panel_gelo_grandeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_gelo_grandeMouseClicked
-        JOptionPane.showMessageDialog(null,"Mundo em desenvolvimento");
+        ImageIcon icon = new ImageIcon("src/Imagens/icon-mundos-alerta.png");
+        AlertaGeral alert = new AlertaGeral(FMundos.this, icon, "Mundos", "Mundo em desenvolvimento...", 25, 25);
+        alert.setVisible(true);
     }//GEN-LAST:event_panel_gelo_grandeMouseClicked
 
     private void panel_fogo_grandeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_fogo_grandeMouseClicked
-        JOptionPane.showMessageDialog(null,"Mundo em desenvolvimento");
+        ImageIcon icon = new ImageIcon("src/Imagens/icon-mundos-alerta.png");
+        AlertaGeral alert = new AlertaGeral(FMundos.this, icon, "Mundos", "Mundo em desenvolvimento...", 25, 25);
+        alert.setVisible(true);
     }//GEN-LAST:event_panel_fogo_grandeMouseClicked
 
     private void panelRound10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound10MouseClicked
-        JOptionPane.showMessageDialog(null,"Mundos em desenvolvimento");
+        ImageIcon icon = new ImageIcon("src/Imagens/icon-mundos-alerta.png");
+        AlertaGeral alert = new AlertaGeral(FMundos.this, icon, "Mundos", "Mundo em desenvolvimento...", 25, 25);
+        alert.setVisible(true);
     }//GEN-LAST:event_panelRound10MouseClicked
 
     /**

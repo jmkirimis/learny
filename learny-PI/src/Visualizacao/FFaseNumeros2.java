@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -424,17 +425,24 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void panel_num1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_num1MouseClicked
-        JOptionPane.showMessageDialog(null, "Que pena! A resposta era 13");
+        ImageIcon icon = new ImageIcon("src/Imagens/icon-numeros-alerta.png");
+        AlertaGeral alert = new AlertaGeral(FFaseNumeros2.this, icon, "Fase Números", "Que pena.. A resposta era 13", 25, 25);
+        alert.setVisible(true);
         calcularPontos();
     }//GEN-LAST:event_panel_num1MouseClicked
 
     private void panelSombra6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra6MouseClicked
         acertos2++;
+        ImageIcon icon = new ImageIcon("src/Imagens/icon-numeros-alerta.png");
+        AlertaGeral alert = new AlertaGeral(FFaseNumeros2.this, icon, "Fase Números", "Muito Bem!", 25, 25);
+        alert.setVisible(true);
         calcularPontos();
     }//GEN-LAST:event_panelSombra6MouseClicked
     
     private void panel_num3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_num3MouseClicked
-        JOptionPane.showMessageDialog(null, "Que pena! A resposta era 13");
+        ImageIcon icon = new ImageIcon("src/Imagens/icon-numeros-alerta.png");
+        AlertaGeral alert = new AlertaGeral(FFaseNumeros2.this, icon, "Fase Números", "Que pena.. A resposta era 13", 25, 25);
+        alert.setVisible(true);
         calcularPontos();
     }//GEN-LAST:event_panel_num3MouseClicked
 
@@ -458,7 +466,6 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
         fase.setPorcAcertos(porcAcerto);
         fase.cadastrar();
         timer.stop();
-        JOptionPane.showMessageDialog(null, "Muito bem!");
         inserirNotificacao();
         new FFaseConcluida().setVisible(true);
         dispose();

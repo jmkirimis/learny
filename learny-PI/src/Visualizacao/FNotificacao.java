@@ -83,8 +83,6 @@ public class FNotificacao extends javax.swing.JFrame {
         Dimension fixedSize = new Dimension(0, 100); // Tamanho desejado quando vazio
         if (painelNotificacoes.getComponentCount() == 0) {
             painelNotificacoes.setPreferredSize(fixedSize);
-        } else {
-            painelNotificacoes.setPreferredSize(null);
         }
         painelNotificacoes.revalidate();
 
@@ -114,7 +112,7 @@ public class FNotificacao extends javax.swing.JFrame {
                     }
                 }
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, ex);
+                //JOptionPane.showMessageDialog(null, ex);
             }
 
             if (painel != null) {
@@ -141,7 +139,6 @@ public class FNotificacao extends javax.swing.JFrame {
                                     AlertaGeral alert = new AlertaGeral(parentFrame, icon, nomeNotificacao, descNotificacao, 50, 50);
                                     alert.setVisible(true);
                                 }
-                                JOptionPane.showMessageDialog(null, descNotificacao);
                             }
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(null, ex);
@@ -183,6 +180,8 @@ public class FNotificacao extends javax.swing.JFrame {
                 painelNotificacoes.add(Box.createRigidArea(new Dimension(0, 15)));
 
                 painelNotificacoes.add(painelNotificacao);
+                
+                ajustarAlturaPaineis();
 
                 // Armazena o painel no mapa com o ID da notificação
                 notificacoesMap.put(id, (PanelSombra) painelNotificacao);
@@ -190,6 +189,27 @@ public class FNotificacao extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
+    }
+    
+    private void ajustarAlturaPaineis() {
+        // Obtenha a altura adicional desejada
+        int alturaAdicional = 65; // Altere conforme necessário
+        // Obtenha os tamanhos preferidos atuais dos outros painéis
+        Dimension tamanhoRound = panelRoundNotificacoes.getPreferredSize();
+        Dimension tamanhoSombra = panelSombraNotificacoes.getPreferredSize();
+        Dimension tamanhoGeral = panelGeral.getPreferredSize();
+        // Adicione a altura adicional aos tamanhos preferidos
+        tamanhoRound.height += alturaAdicional;
+        tamanhoSombra.height += alturaAdicional;
+        tamanhoGeral.height += alturaAdicional;
+        // Defina os novos tamanhos preferidos dos outros painéis
+        panelRoundNotificacoes.setPreferredSize(tamanhoRound);
+        panelSombraNotificacoes.setPreferredSize(tamanhoSombra);
+        panelGeral.setPreferredSize(tamanhoGeral);
+        // Revalide os painéis para que as mudanças tenham efeito
+        panelRoundNotificacoes.revalidate();
+        panelSombraNotificacoes.revalidate();
+        panelGeral.revalidate();
     }
 
     private JPanel criarPainelNotificacao(String descricao, String caminhoIcone) {
@@ -306,11 +326,11 @@ public class FNotificacao extends javax.swing.JFrame {
     private void initComponents() {
 
         customScrollPane1 = new Visualizacao.CustomScrollPane();
-        jPanel1 = new javax.swing.JPanel();
-        panelRound1 = new Visualizacao.PanelRound();
+        panelGeral = new javax.swing.JPanel();
+        panelRoundNotificacoes = new Visualizacao.PanelRound();
         jLabel1 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        panelSombra1 = new Visualizacao.PanelSombra();
+        panelSombraNotificacoes = new Visualizacao.PanelSombra();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -334,12 +354,12 @@ public class FNotificacao extends javax.swing.JFrame {
         customScrollPane1.setBorder(null);
         customScrollPane1.setPreferredSize(new java.awt.Dimension(485, 834));
 
-        jPanel1.setBackground(new java.awt.Color(72, 72, 72));
-        jPanel1.setPreferredSize(new java.awt.Dimension(475, 1243));
+        panelGeral.setBackground(new java.awt.Color(72, 72, 72));
+        panelGeral.setPreferredSize(new java.awt.Dimension(475, 1243));
 
-        panelRound1.setBackground(new java.awt.Color(255, 255, 255));
-        panelRound1.setRoundTopLeft(60);
-        panelRound1.setRoundTopRight(60);
+        panelRoundNotificacoes.setBackground(new java.awt.Color(255, 255, 255));
+        panelRoundNotificacoes.setRoundTopLeft(60);
+        panelRoundNotificacoes.setRoundTopRight(60);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(72, 72, 72));
@@ -358,9 +378,9 @@ public class FNotificacao extends javax.swing.JFrame {
             }
         });
 
-        panelSombra1.setBackground(new java.awt.Color(255, 255, 255));
-        panelSombra1.setShadowOpacity(0.3F);
-        panelSombra1.setShadowSize(4);
+        panelSombraNotificacoes.setBackground(new java.awt.Color(255, 255, 255));
+        panelSombraNotificacoes.setShadowOpacity(0.3F);
+        panelSombraNotificacoes.setShadowSize(4);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(72, 72, 72));
@@ -505,37 +525,37 @@ public class FNotificacao extends javax.swing.JFrame {
                 .addGap(21, 21, 21))
         );
 
-        javax.swing.GroupLayout panelSombra1Layout = new javax.swing.GroupLayout(panelSombra1);
-        panelSombra1.setLayout(panelSombra1Layout);
-        panelSombra1Layout.setHorizontalGroup(
-            panelSombra1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSombra1Layout.createSequentialGroup()
-                .addGroup(panelSombra1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelSombra1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelSombraNotificacoesLayout = new javax.swing.GroupLayout(panelSombraNotificacoes);
+        panelSombraNotificacoes.setLayout(panelSombraNotificacoesLayout);
+        panelSombraNotificacoesLayout.setHorizontalGroup(
+            panelSombraNotificacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSombraNotificacoesLayout.createSequentialGroup()
+                .addGroup(panelSombraNotificacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelSombraNotificacoesLayout.createSequentialGroup()
                         .addGap(173, 173, 173)
                         .addComponent(jLabel6))
-                    .addGroup(panelSombra1Layout.createSequentialGroup()
+                    .addGroup(panelSombraNotificacoesLayout.createSequentialGroup()
                         .addGap(40, 40, 40)
-                        .addGroup(panelSombra1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelSombra1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(panelSombraNotificacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelSombraNotificacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(panel_diaria3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(panel_diaria2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(panel_diaria1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(panelSombra1Layout.createSequentialGroup()
+                            .addGroup(panelSombraNotificacoesLayout.createSequentialGroup()
                                 .addGap(86, 86, 86)
                                 .addComponent(jLabel7))
-                            .addGroup(panelSombra1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(panelSombraNotificacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(customSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
                                 .addComponent(painelNotificacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGap(39, 39, 39))
         );
-        panelSombra1Layout.setVerticalGroup(
-            panelSombra1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSombra1Layout.createSequentialGroup()
+        panelSombraNotificacoesLayout.setVerticalGroup(
+            panelSombraNotificacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSombraNotificacoesLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
@@ -558,51 +578,51 @@ public class FNotificacao extends javax.swing.JFrame {
                 .addComponent(panel_diaria2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(panel_diaria3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addGap(83, 83, 83))
         );
 
-        javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
-        panelRound1.setLayout(panelRound1Layout);
-        panelRound1Layout.setHorizontalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelRoundNotificacoesLayout = new javax.swing.GroupLayout(panelRoundNotificacoes);
+        panelRoundNotificacoes.setLayout(panelRoundNotificacoesLayout);
+        panelRoundNotificacoesLayout.setHorizontalGroup(
+            panelRoundNotificacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRoundNotificacoesLayout.createSequentialGroup()
+                .addGroup(panelRoundNotificacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRoundNotificacoesLayout.createSequentialGroup()
                         .addGap(160, 160, 160)
                         .addComponent(jLabel1)
                         .addGap(54, 54, 54)
                         .addComponent(jLabel13))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
+                    .addGroup(panelRoundNotificacoesLayout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addComponent(panelSombra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(panelSombraNotificacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, 10))
         );
-        panelRound1Layout.setVerticalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound1Layout.createSequentialGroup()
+        panelRoundNotificacoesLayout.setVerticalGroup(
+            panelRoundNotificacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRoundNotificacoesLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(panelRoundNotificacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel13)
                     .addComponent(jLabel1))
                 .addGap(32, 32, 32)
-                .addComponent(panelSombra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addComponent(panelSombraNotificacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(76, 76, 76))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout panelGeralLayout = new javax.swing.GroupLayout(panelGeral);
+        panelGeral.setLayout(panelGeralLayout);
+        panelGeralLayout.setHorizontalGroup(
+            panelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelRoundNotificacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 143, Short.MAX_VALUE)
-                .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        panelGeralLayout.setVerticalGroup(
+            panelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGeralLayout.createSequentialGroup()
+                .addGap(143, 143, 143)
+                .addComponent(panelRoundNotificacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        customScrollPane1.setViewportView(jPanel1);
+        customScrollPane1.setViewportView(panelGeral);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -680,13 +700,13 @@ public class FNotificacao extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_missao1;
     private javax.swing.JLabel lbl_missao2;
     private javax.swing.JLabel lbl_missao3;
     private javax.swing.JPanel painelNotificacoes;
-    private Visualizacao.PanelRound panelRound1;
-    private Visualizacao.PanelSombra panelSombra1;
+    private javax.swing.JPanel panelGeral;
+    private Visualizacao.PanelRound panelRoundNotificacoes;
+    private Visualizacao.PanelSombra panelSombraNotificacoes;
     private Visualizacao.PanelRoundBorda panel_diaria1;
     private Visualizacao.PanelRoundBorda panel_diaria2;
     private Visualizacao.PanelRoundBorda panel_diaria3;
