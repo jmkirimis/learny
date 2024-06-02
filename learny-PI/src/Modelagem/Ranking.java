@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Modelagem;
 
 import Controle.Conexao;
@@ -11,14 +7,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author João
- */
 public class Ranking {
     
     Connection conexao = null;
@@ -96,6 +90,8 @@ public class Ranking {
     
     public void exibirPontosOrdenados(JLabel[] lblsNomes, JLabel[] lblsPontos, JLabel[] lblsPts, PanelRoundBorda[] panelsFotos) {
         int i  = 0;
+        Set<Integer> exibidos = new HashSet<>(); // Conjunto para armazenar IDs dos alunos já exibidos
+        
         for (double ponto : pontosAlunos) {
             if (i >= lblsNomes.length) {
                 break; // Interrompe o loop após preencher todas as labels disponíveis
@@ -108,6 +104,9 @@ public class Ranking {
 
                 while (rs.next()) {
                     int idAluno = rs.getInt("idAluno");
+                    if (exibidos.contains(idAluno)) {
+                        continue; // Pula se o aluno já foi exibido
+                    }
                     String nomeAluno = rs.getString("nome");
                     String fotoAluno = rs.getString("foto");
                     lblsNomes[i].setText(nomeAluno);
@@ -115,6 +114,7 @@ public class Ranking {
                     if (i < panelsFotos.length) {
                         panelsFotos[i].setImg(new ImageIcon("src/Imagens/" + fotoAluno));
                     }
+                    exibidos.add(idAluno); // Marca o aluno como exibido
                     i++;
                 }
             } catch (Exception e) {

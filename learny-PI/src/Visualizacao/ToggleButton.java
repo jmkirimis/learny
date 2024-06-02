@@ -1,14 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Visualizacao;
 
-/**
- *
- * @author João
- */
 import Modelagem.Config;
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +14,7 @@ public class ToggleButton extends JComponent {
     Color verde = new Color(128,210,91);
 
     public ToggleButton() {
-        this.setPreferredSize(new Dimension(80, 40)); // Ajuste proporcional das dimensões
+        this.setPreferredSize(new Dimension(80, 40));
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

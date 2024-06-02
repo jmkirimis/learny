@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Visualizacao;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.border.EmptyBorder;
 
 public class AlertaGeral extends JDialog {
@@ -70,9 +64,9 @@ public class AlertaGeral extends JDialog {
         // Definindo margens (espaçamento entre os botões e as bordas laterais do painel)
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, espRightLeft, espTopBot, espRightLeft)); // Top, Left, Bottom, Right
 
-        // Botão "Ok" com sombra
+        // Botão "OK" com sombra
         PanelSombra okPanel = new PanelSombra();
-        okPanel.setBackground(cinza2); // Ajuste a cor de fundo conforme necessário
+        okPanel.setBackground(cinza2); // cor de fundo
         okPanel.setCornerRadius(30);
         okPanel.setShadowSize(3);
         okPanel.setShadowOpacity(0.3f);
@@ -84,7 +78,7 @@ public class AlertaGeral extends JDialog {
         okPanel.add(okLabel, BorderLayout.CENTER);
         okPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                // Ação para o botão Ok
+                // Ação para o botão OK
                 dispose();
             }
         });

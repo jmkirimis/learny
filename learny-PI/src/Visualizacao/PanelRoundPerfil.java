@@ -106,7 +106,7 @@ public class PanelRoundPerfil extends JPanel {
             grphcs.drawImage(image, x, y, newWidth, newHeight, this);
         } else {
             // Se não houver imagem, desenha a imagem padrão sem redimensionamento e centralizada
-            ImageIcon defaultImage = new ImageIcon("src/Imagens/camera.png"); // Substitua pelo caminho da sua imagem padrão
+            ImageIcon defaultImage = new ImageIcon("src/Imagens/camera.png");
             int panelWidth = getWidth();
             int panelHeight = getHeight();
             int imageWidth = defaultImage.getIconWidth();

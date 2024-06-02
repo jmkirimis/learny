@@ -19,10 +19,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author fatec-dsm2
- */
 public class FOpcoes extends NavegacaoFormulario {
 
     Connection conexao = null;
@@ -47,12 +43,7 @@ public class FOpcoes extends NavegacaoFormulario {
         initComponents();
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
-        if (alunoLogado == null) {
-            // Se não houver aluno logado, redirecione para a tela de login
-            new FLogin().setVisible(true);
-            this.dispose();
-            return;
-        }
+        
         panel_sombra.setBackground(pretoComOpacidade);
         panel_icon1.setBackground(pretoComOpacidade2);
         panel_icon2.setBackground(pretoComOpacidade2);

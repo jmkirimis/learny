@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Visualizacao;
 
 import Controle.Conexao;
@@ -12,7 +8,6 @@ import Modelagem.FaseConcluida;
 import Modelagem.Session;
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -94,18 +89,11 @@ public class FFaseLigar extends javax.swing.JFrame {
         initComponents();
         alunoLogado = Session.getInstance().getAlunoLogado();
         conexao = Conexao.conecta();
-        if (alunoLogado == null) {
-            // Se não houver aluno logado, redirecione para a tela de login
-            new FLogin().setVisible(true);
-            this.dispose();
-            return;
-        }
         this.acertos = 0;
         
         idAluno = alunoLogado.getIdAluno();
         linha_bonus.setColor(Color.white);
         
-        // Adiciona um ouvinte de eventos ao rótulo lbl_cobra
         lbl_cobra.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -122,10 +110,9 @@ public class FFaseLigar extends javax.swing.JFrame {
                     desenharLinha(lbl_cobra, lbl_cobra_dir, panel_cobra, azul);
                     linhaVisivelCobra = true;
                 } else {
-                    apagarLinha(panel_cobra); // Se não, apague a linha no painel correspondente
+                    apagarLinha(panel_cobra);
                     linhaVisivelCobra = false;
                 }
-                // Toca o áudio
                 tocarAudio("src/audios/snake.wav");
             }
         });
@@ -147,10 +134,9 @@ public class FFaseLigar extends javax.swing.JFrame {
                     desenharLinha(lbl_cobra, lbl_cobra_dir, panel_cobra, azul);
                     linhaVisivelCobra = true;
                 } else {
-                    apagarLinha(panel_cobra); // Se não, apague a linha no painel correspondente
+                    apagarLinha(panel_cobra);
                     linhaVisivelCobra = false;
                 }
-                // Toca o áudio
                 tocarAudio("src/audios/snake.wav");
             }
         });
@@ -172,10 +158,9 @@ public class FFaseLigar extends javax.swing.JFrame {
                     desenharLinha(lbl_cavalo, lbl_cavalo_dir, panel_cavalo, verde);
                     linhaVisivelCavalo = true;
                 } else {
-                    apagarLinha(panel_cavalo); // Se não, apague a linha no painel correspondente
+                    apagarLinha(panel_cavalo);
                     linhaVisivelCavalo = false;
                 }
-                // Toca o áudio
                 tocarAudio("src/audios/horse.wav");
             }
         });
@@ -197,10 +182,9 @@ public class FFaseLigar extends javax.swing.JFrame {
                     desenharLinha(lbl_cavalo, lbl_cavalo_dir, panel_cavalo, verde);
                     linhaVisivelCavalo = true;
                 } else {
-                    apagarLinha(panel_cavalo); // Se não, apague a linha no painel correspondente
+                    apagarLinha(panel_cavalo);
                     linhaVisivelCavalo = false;
                 }
-                // Toca o áudio
                 tocarAudio("src/audios/horse.wav");
             }
         });
@@ -222,10 +206,9 @@ public class FFaseLigar extends javax.swing.JFrame {
                     desenharLinha(lbl_passaro, lbl_passaro_dir, panel_passaro, vermelho);
                     linhaVisivelPassaro = true;
                 } else {
-                    apagarLinha(panel_passaro); // Se não, apague a linha no painel correspondente
+                    apagarLinha(panel_passaro);
                     linhaVisivelPassaro = false;
                 }
-                // Toca o áudio
                 tocarAudio("src/audios/bird.wav");
             }
         });
@@ -247,10 +230,9 @@ public class FFaseLigar extends javax.swing.JFrame {
                     desenharLinha(lbl_passaro, lbl_passaro_dir, panel_passaro, vermelho);
                     linhaVisivelPassaro = true;
                 } else {
-                    apagarLinha(panel_passaro); // Se não, apague a linha no painel correspondente
+                    apagarLinha(panel_passaro);
                     linhaVisivelPassaro = false;
                 }
-                // Toca o áudio
                 tocarAudio("src/audios/bird.wav");
             }
         });
@@ -272,10 +254,9 @@ public class FFaseLigar extends javax.swing.JFrame {
                     desenharLinha(lbl_macaco, lbl_macaco_dir, panel_macaco, amarelo);
                     linhaVisivelMacaco = true;
                 } else {
-                    apagarLinha(panel_macaco); // Se não, apague a linha no painel correspondente
+                    apagarLinha(panel_macaco);
                     linhaVisivelMacaco = false;
                 }
-                // Toca o áudio
                 tocarAudio("src/audios/monkey.wav");
             }
         });
@@ -296,16 +277,14 @@ public class FFaseLigar extends javax.swing.JFrame {
                     desenharLinha(lbl_macaco, lbl_macaco_dir, panel_macaco, amarelo);
                     linhaVisivelMacaco = true;
                 } else {
-                    apagarLinha(panel_macaco); // Se não, apague a linha no painel correspondente
+                    apagarLinha(panel_macaco);
                     linhaVisivelMacaco = false;
                 }
-                // Toca o áudio
                 tocarAudio("src/audios/monkey.wav");
             }
         });
         
         String medalha = alunoLogado.getMedalhaAtiva();
-        System.out.println(medalha);
         if(medalha.equals("Mundo Concluido!")){
             lbl_macaco.setIcon(iconMacacoClick);
             lbl_macaco.removeMouseListener(lbl_macaco.getMouseListeners()[0]);
@@ -315,7 +294,7 @@ public class FFaseLigar extends javax.swing.JFrame {
             acertos++;
         }
         
-        // Configuranod o timer
+        // Configurando o timer
         timer = new Timer(1000, new ActionListener() {
 
             @Override
@@ -323,8 +302,6 @@ public class FFaseLigar extends javax.swing.JFrame {
                 seconds++;
                 minutes = seconds / 60;
                 remainingSeconds = seconds % 60;
-            
-                System.out.println("O JFrame está aberto há " + minutes + " minutos e " + remainingSeconds + " segundos.");
             }
         });
         
@@ -724,13 +701,10 @@ public class FFaseLigar extends javax.swing.JFrame {
         double pontos;
         pontos = ((double) porcAcerto * 0.7) + ((int) seconds * 0.3);
         String medalha = alunoLogado.getMedalhaAtiva();
-        System.out.println(medalha);
         if(medalha.equals("Iniciando!")){
             pontos = pontos + 50;
-            System.out.println(pontos);
         } else if(medalha.equals("A todo vapor!")){
             pontos = pontos * 2;
-            System.out.println(pontos);
         }
         
         fase.setIdFase(1);

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Visualizacao;
 
 import Controle.Conexao;
@@ -18,16 +14,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-/**
- *
- * @author João
- */
 public class FFaseNumeros2 extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FFaseNumeros1
-     */
-    
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
@@ -45,19 +33,12 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
         initComponents();
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
-        if (alunoLogado == null) {
-            // Se não houver aluno logado, redirecione para a tela de login
-            new FLogin().setVisible(true);
-            this.dispose();
-            return;
-        }
         this.acertos2 = acertos;
         this.seconds2 = seconds;
         
         idAluno = alunoLogado.getIdAluno();
         
         String medalha = alunoLogado.getMedalhaAtiva();
-        System.out.println(medalha);
         if(medalha.equals("Mundo Concluido!")){
             panel_num1.setVisible(false);
         }
@@ -69,8 +50,6 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
                 seconds2++;
                 minutes = seconds2 / 60;
                 remainingSeconds = seconds2 % 60;
-            
-                System.out.println("O JFrame está aberto há " + minutes + " minutos e " + remainingSeconds + " segundos.");
             }
         });
         

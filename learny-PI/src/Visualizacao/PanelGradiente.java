@@ -14,13 +14,13 @@ public class PanelGradiente extends JPanel {
         HORIZONTAL, VERTICAL, DIAGONAL_DOWN, DIAGONAL_UP
     }
 
-    private int radius = 0; // Radius of the corners
+    private int radius = 0; // Arredondamento dos cantos
     private GradientDirection gradientDirection = GradientDirection.HORIZONTAL;
-    private float verticalProportion = 0.5f; // Proportion for vertical gradient
+    private float verticalProportion = 0.5f; // Proporção para o gradiente vertical
     Color azulPastel = new Color(108, 210, 255);
     Color vermelhoPastel = new Color(239, 91, 106);
-    private Color gradientStartColor = vermelhoPastel; // Start color of the gradient
-    private Color gradientEndColor = azulPastel; // End color of the gradient
+    private Color gradientStartColor = vermelhoPastel; // Cor de inicio do gradiente
+    private Color gradientEndColor = azulPastel; // Cor de fim do gradiente
 
     public PanelGradiente() {
         setOpaque(false);
@@ -96,7 +96,7 @@ public class PanelGradiente extends JPanel {
         int arcWidth = Math.min(width, radius);
         int arcHeight = Math.min(height, radius);
 
-        // Determine the gradient direction
+        // Determina a direção do gradiente
         GradientPaint gradient;
         switch (gradientDirection) {
             case VERTICAL:
@@ -114,7 +114,7 @@ public class PanelGradiente extends JPanel {
                 break;
         }
 
-        // Fill the rounded area
+        // Preenche a área arredondada
         g2.setPaint(gradient);
         g2.fill(new RoundRectangle2D.Double(0, 0, width, height, arcWidth, arcHeight));
 

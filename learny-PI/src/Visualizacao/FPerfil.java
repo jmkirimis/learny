@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Visualizacao;
 
 import Controle.Conexao;
@@ -10,20 +6,12 @@ import Modelagem.Aluno;
 import Modelagem.Config;
 import Modelagem.NavegacaoFormulario;
 import Modelagem.Session;
-import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
-/**
- *
- * @author João
- */
 public class FPerfil extends NavegacaoFormulario {
 
     Connection conexao = null;
@@ -35,12 +23,6 @@ public class FPerfil extends NavegacaoFormulario {
         super(telaDeOrigem, TelaOrigem.PERFIL);
         initComponents();
         alunoLogado = Session.getInstance().getAlunoLogado();
-        if (alunoLogado == null) {
-            // Se não houver aluno logado, redirecione para a tela de login
-            //new FLogin().setVisible(true);
-            this.dispose();
-            return;
-        }
         String nome = alunoLogado.getNome();
         double pontos = alunoLogado.getPontosTotais();
         int nivel = (int) (pontos / 100);
@@ -196,8 +178,8 @@ public class FPerfil extends NavegacaoFormulario {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        lbl_nome_perfil.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lbl_nome_perfil.setForeground(new java.awt.Color(102, 102, 102));
+        lbl_nome_perfil.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lbl_nome_perfil.setForeground(new java.awt.Color(83, 194, 242));
         lbl_nome_perfil.setText("Nome");
 
         panelSombra6.setBackground(new java.awt.Color(255, 255, 255));
@@ -294,7 +276,7 @@ public class FPerfil extends NavegacaoFormulario {
                         .addGap(20, 20, 20))))
         );
 
-        lbl_anos.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_anos.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         lbl_anos.setForeground(new java.awt.Color(102, 102, 102));
         lbl_anos.setText("Nível");
 
@@ -491,25 +473,28 @@ public class FPerfil extends NavegacaoFormulario {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(panelRoundBorda1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelSombra1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelSombra2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelSombra3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelSombra4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelSombra8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(panel_foto_perfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_nome_perfil)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lbl_idade_perfil)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_anos))))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel13)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(panelRoundBorda1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelSombra1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelSombra2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelSombra3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelSombra4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelSombra8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(219, 219, 219)
+                                .addComponent(jLabel13))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_nome_perfil)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lbl_idade_perfil)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbl_anos)))))))
                 .addGap(30, 30, 30))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -523,16 +508,15 @@ public class FPerfil extends NavegacaoFormulario {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(panel_foto_perfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(lbl_nome_perfil)
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lbl_idade_perfil)
-                                .addComponent(lbl_anos))
-                            .addGap(40, 40, 40))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(10, 10, 10)
+                        .addComponent(lbl_nome_perfil)
+                        .addGap(8, 8, 8)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_idade_perfil)
+                            .addComponent(lbl_anos)))
+                    .addComponent(panel_foto_perfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(panelRoundBorda1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)

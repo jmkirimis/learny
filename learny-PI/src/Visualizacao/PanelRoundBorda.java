@@ -3,18 +3,17 @@ package Visualizacao;
 
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
-import java.awt.image.BufferedImage;
 import javax.swing.*;
 
 public class PanelRoundBorda extends JPanel {
 
     private ImageIcon img;
-    private int radius = 0; // Radius of the corners
-    private int borderWidth = 2; // Width of the border
+    private int radius = 0; // Arredondamento dos cantos
+    private int borderWidth = 2; // Tamanho da borda
     Color azul = new Color(83, 194, 242);
     Color vermelho = new Color(239,91,106);
-    private Color gradientStartColor = vermelho; // Start color of the gradient
-    private Color gradientEndColor = azul; // End color of the gradient
+    private Color gradientStartColor = vermelho; // Cor de inicio do gradiente
+    private Color gradientEndColor = azul; // Cor de fim do gradiente
 
     public PanelRoundBorda() {
         setOpaque(false);
@@ -67,23 +66,23 @@ public class PanelRoundBorda extends JPanel {
         int arcWidth = Math.min(width, radius);
         int arcHeight = Math.min(height, radius);
 
-        // Create a gradient paint for the border
+        // Cria uma pintura de gradiente para a borda
         GradientPaint gradient = new GradientPaint(0, 0, gradientStartColor, 0, height, gradientEndColor);
 
-        // Fill the rounded area
+        // Preenche a area arredondada
         g2.setColor(getBackground());
         g2.fill(new RoundRectangle2D.Double(borderWidth / 2.0, borderWidth / 2.0, width - borderWidth, height - borderWidth, arcWidth, arcHeight));
 
-        // Draw the gradient border
+        // Desenha a borda com o gradiente
         g2.setPaint(gradient);
         g2.setStroke(new BasicStroke(borderWidth));
         g2.draw(new RoundRectangle2D.Double(borderWidth / 2.0, borderWidth / 2.0, width - borderWidth, height - borderWidth, arcWidth, arcHeight));
 
-        // Clip to the rounded area
+        // Corta para encaixar na area arredondada
         Shape clip = new RoundRectangle2D.Double(borderWidth, borderWidth, width - 2 * borderWidth, height - 2 * borderWidth, arcWidth, arcHeight);
         g2.setClip(clip);
 
-        // Draw the image
+        // Desenha a imagem
         if (img != null && img.getImage() != null) {
             g2.drawImage(img.getImage(), borderWidth, borderWidth, width - 2 * borderWidth, height - 2 * borderWidth, this);
         }

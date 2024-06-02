@@ -46,7 +46,7 @@ public class PanelSlide extends javax.swing.JPanel {
                 c.setVisible(false);
                 this.add(c);
             }
-            //  get first componect to show on panel when init
+            //  Pega o primeiro componente para mostrar quando inicia
             Component show = list.get(0);
             show.setVisible(true);
             show.setLocation(0, 0);
@@ -77,7 +77,7 @@ public class PanelSlide extends javax.swing.JPanel {
                 comShow.setLocation(comShow.getLocation().x + animate, 0);
                 comExit.setLocation(comExit.getLocation().x + animate, 0);
             } else {
-                //  Stop animate
+                //  Para a animação
                 comShow.setLocation(0, 0);
                 timer.stop();
                 comExit.setVisible(false);

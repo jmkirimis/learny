@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Visualizacao;
 
 import Controle.Conexao;
@@ -21,10 +17,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author fatec-dsm2
- */
 public class FRanking extends javax.swing.JFrame {
     
     Connection conexao = null;
@@ -44,12 +36,6 @@ public class FRanking extends javax.swing.JFrame {
         initComponents();
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
-        if (alunoLogado == null) {
-            // Se não houver aluno logado, redirecione para a tela de login
-            new FLogin().setVisible(true);
-            this.dispose();
-            return;
-        }
         idAluno = alunoLogado.getIdAluno();
         double pontos = alunoLogado.getPontosTotais();
         String ranque = alunoLogado.getRanque();
@@ -808,9 +794,9 @@ public class FRanking extends javax.swing.JFrame {
             panelSombra7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSombra7Layout.createSequentialGroup()
                 .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(lbl_pontos)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         panelSombra7Layout.setVerticalGroup(
             panelSombra7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

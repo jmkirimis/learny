@@ -1,4 +1,3 @@
-
 package Modelagem;
 
 import Controle.Conexao;
@@ -9,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class Aluno {
+
     private int idAluno;
     private String nome;
     private String usuario;
@@ -21,7 +21,7 @@ public class Aluno {
     private String foto;
     private String medalhaAtiva;
     private String ranque;
-    
+
     private JFrame parentFrame;
     //importar classe conexao
     Connection conexao = null;
@@ -29,11 +29,11 @@ public class Aluno {
     ResultSet rs = null;
 
     public Aluno(JFrame parentFrame) {
-        this(0,"","","","","",0,0.0,0,"","","");
+        this(0, "", "", "", "", "", 0, 0.0, 0, "", "", "");
         this.parentFrame = parentFrame;
     }
 
-    public Aluno(int idAluno, String nome,String usuario, String senha, String email, String dataNasc, int idade, double pontosTotais, int fasesConcluidas, String foto, String medalhaAtiva, String ranque) {
+    public Aluno(int idAluno, String nome, String usuario, String senha, String email, String dataNasc, int idade, double pontosTotais, int fasesConcluidas, String foto, String medalhaAtiva, String ranque) {
         this.idAluno = idAluno;
         this.nome = nome;
         this.usuario = usuario;
@@ -47,7 +47,7 @@ public class Aluno {
         this.medalhaAtiva = medalhaAtiva;
         this.ranque = ranque;
     }
-    
+
     public int getIdAluno() {
         return idAluno;
     }
@@ -55,7 +55,7 @@ public class Aluno {
     public void setIdAluno(int idAluno) {
         this.idAluno = idAluno;
     }
-    
+
     public String getNome() {
         return nome;
     }
@@ -87,7 +87,7 @@ public class Aluno {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     public String getDataNasc() {
         return dataNasc;
     }
@@ -95,7 +95,7 @@ public class Aluno {
     public void setDataNasc(String dataNasc) {
         this.dataNasc = dataNasc;
     }
-    
+
     public int getIdade() {
         return idade;
     }
@@ -103,7 +103,7 @@ public class Aluno {
     public void setIdade(int idade) {
         this.idade = idade;
     }
-    
+
     public double getPontosTotais() {
         return pontosTotais;
     }
@@ -119,7 +119,7 @@ public class Aluno {
     public void setFasesConcluidas(int fasesConcluidas) {
         this.fasesConcluidas = fasesConcluidas;
     }
-    
+
     public String getFoto() {
         return foto;
     }
@@ -127,7 +127,7 @@ public class Aluno {
     public void setFoto(String foto) {
         this.foto = foto;
     }
-    
+
     public String getMedalhaAtiva() {
         return medalhaAtiva;
     }
@@ -135,7 +135,7 @@ public class Aluno {
     public void setMedalhaAtiva(String medalhaAtiva) {
         this.medalhaAtiva = medalhaAtiva;
     }
-    
+
     public String getRanque() {
         return ranque;
     }
@@ -143,41 +143,57 @@ public class Aluno {
     public void setRanque(String ranque) {
         this.ranque = ranque;
     }
-   
-    public void cadastrar(){
+
+    public String cadastrar() {
         conexao = Conexao.conecta();
-        String sql;
-        sql = "insert into alunos(nome, usuario, senha, email, dataNasc, pontosTotais, fasesConcluidas, foto, medalha, ranque) values"
-                + "(?,?,?,?,?,?,?,?,?,?)";
+        String verificaSql = "SELECT COUNT(*) FROM alunos WHERE usuario = ?";
+        String insertSql = "INSERT INTO alunos(nome, usuario, senha, email, dataNasc, pontosTotais, fasesConcluidas, foto, medalha, ranque) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
         try {
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1, getNome());
-            pst.setString(2, getUsuario());
-            pst.setString(3, getSenha());
-            pst.setString(4, getEmail());
-            pst.setString(5, getDataNasc());
-            pst.setDouble(6, 0);
-            pst.setInt(7, 0);
-            pst.setString(8, getFoto());
-            pst.setString(9, "");
-            pst.setString(10, "");
-            int linhasAfetadas = pst.executeUpdate();
-            
-            if (linhasAfetadas > 0) {
-                ImageIcon icon = new ImageIcon("src/Imagens/icone confirmar.png");
-                AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Inserir Dados", "Dados cadastrados com sucesso!", 50, 50);
+            // Verifica se o usuário já existe
+            pst = conexao.prepareStatement(verificaSql);
+            pst.setString(1, getUsuario());
+            rs = pst.executeQuery();
+            rs.next();
+            int count = rs.getInt(1);
+
+            if (count > 0) {
+                ImageIcon icon = new ImageIcon("src/Imagens/icon-erro-cadastro.png");
+                AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Erro de Cadastro", "Usuário já cadastrado!", 50, 50);
                 alert.setVisible(true);
             } else {
-                ImageIcon icon = new ImageIcon("src/Imagens/icone confirmar.png");
-                AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Inserir Dados", "Nenhum dado foi inserido.", 50, 50);
-                alert.setVisible(true);
+                // Insere os dados do novo aluno
+                pst = conexao.prepareStatement(insertSql);
+                pst.setString(1, getNome());
+                pst.setString(2, getUsuario());
+                pst.setString(3, getSenha());
+                pst.setString(4, getEmail());
+                pst.setString(5, getDataNasc());
+                pst.setDouble(6, 0);
+                pst.setInt(7, 0);
+                pst.setString(8, getFoto());
+                pst.setString(9, "");
+                pst.setString(10, "");
+                int linhasAfetadas = pst.executeUpdate();
+
+                if (linhasAfetadas > 0) {
+                    ImageIcon icon = new ImageIcon("src/Imagens/icone confirmar.png");
+                    AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Inserir Dados", "Dados cadastrados com sucesso!", 50, 50);
+                    alert.setVisible(true);
+                } else {
+                    ImageIcon icon = new ImageIcon("src/Imagens/icone confirmar.png");
+                    AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Inserir Dados", "Nenhum dado foi inserido.", 50, 50);
+                    alert.setVisible(true);
+                }
+                return "ok";
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
+            JOptionPane.showMessageDialog(null, e);
         }
+        return "";
     }
-    
-    public void alterar(){
+
+    public void alterar() {
         conexao = Conexao.conecta();
         String sql;
         sql = "update alunos set nome = ?, usuario = ?, senha = ?, email = ?, dataNasc = ?, foto = ? where idAluno = ?";
@@ -190,9 +206,9 @@ public class Aluno {
             pst.setString(5, getDataNasc());
             pst.setString(6, getFoto());
             pst.setInt(7, getIdAluno());
-        
+
             int linhasAfetadas = pst.executeUpdate();
-            
+
             if (linhasAfetadas > 0) {
                 ImageIcon icon = new ImageIcon("src/Imagens/icone confirmar.png");
                 AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Alterar Dados", "Dados alterados com sucesso!", 50, 50);
@@ -203,11 +219,11 @@ public class Aluno {
                 alert.setVisible(true);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
+            JOptionPane.showMessageDialog(null, e);
         }
     }
-    
-    public void salvarMedalha(){
+
+    public void salvarMedalha() {
         conexao = Conexao.conecta();
         String sql;
         sql = "update alunos set medalha = ? where idAluno = ?";
@@ -215,11 +231,11 @@ public class Aluno {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, getMedalhaAtiva());
             pst.setInt(2, getIdAluno());
-        
+
             pst.executeUpdate();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
+            JOptionPane.showMessageDialog(null, e);
         }
     }
-    
+
 }

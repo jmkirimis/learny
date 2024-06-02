@@ -10,9 +10,6 @@ import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 
 public class PanelRound extends JPanel {
     

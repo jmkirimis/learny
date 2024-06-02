@@ -1,23 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Visualizacao;
 
-/**
- *
- * @author João
- */
+package Visualizacao;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class PanelPretoOpac extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PanelPretoOpac
-     */
     public PanelPretoOpac() {
         initComponents();
         setOpaque(false);

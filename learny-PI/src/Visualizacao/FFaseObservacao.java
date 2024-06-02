@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Visualizacao;
 
-/**
- *
- * @author João
- */
+package Visualizacao;
 
 import Controle.Conexao;
 import Modelagem.Aluno;
@@ -36,10 +27,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 public class FFaseObservacao extends javax.swing.JFrame {
-    /**
-     * Creates new form FFase2
-     */
-    
+
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
@@ -74,16 +62,9 @@ public class FFaseObservacao extends javax.swing.JFrame {
         initComponents();
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
-        if (alunoLogado == null) {
-            // Se não houver aluno logado, redirecione para a tela de login
-            new FLogin().setVisible(true);
-            this.dispose();
-            return;
-        }
         
         idAluno = alunoLogado.getIdAluno();
         
-        // Adiciona um ouvinte de eventos ao rótulo lbl_jacare
         lbl_jacare.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -96,7 +77,6 @@ public class FFaseObservacao extends javax.swing.JFrame {
                     lbl_jacare.setIcon(fotoJacare);
                     jacareClicado = false;
                 }
-                // Toca o áudio
                 tocarAudio("src/audios/alligator.wav");
             }
         });
@@ -112,7 +92,6 @@ public class FFaseObservacao extends javax.swing.JFrame {
                     lbl_macaco.setIcon(fotoMacaco);
                     macacoClicado = false;
                 }
-                // Toca o áudio
                 tocarAudio("src/audios/ape.wav");
             }
         });
@@ -128,7 +107,6 @@ public class FFaseObservacao extends javax.swing.JFrame {
                     lbl_formiga.setIcon(fotoFormiga);
                     formigaClicada = false;
                 }
-                // Toca o áudio
                 tocarAudio("src/audios/ant.wav");
             }
         });
@@ -144,12 +122,11 @@ public class FFaseObservacao extends javax.swing.JFrame {
                     lbl_alpaca.setIcon(fotoAlpaca);
                     alpacaClicada = false;
                 }
-                // Toca o áudio
                 tocarAudio("src/audios/alpaca.wav");
             }
         });
         
-         // Configuranod o timer
+         // Configurando o timer
         timer = new Timer(1000, new ActionListener() {
 
             @Override
@@ -157,8 +134,6 @@ public class FFaseObservacao extends javax.swing.JFrame {
                 seconds++;
                 minutes = seconds / 60;
                 remainingSeconds = seconds % 60;
-            
-                System.out.println("O JFrame está aberto há " + minutes + " minutos e " + remainingSeconds + " segundos.");
             }
         });
         

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Visualizacao;
 
 import Controle.Conexao;
@@ -15,14 +11,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-/**
- *
- * @author fatec-dsm2
- */
 public class FEstatistica extends javax.swing.JFrame {
 
     Connection conexao = null;
@@ -43,12 +34,6 @@ public class FEstatistica extends javax.swing.JFrame {
         initComponents();
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
-        if (alunoLogado == null) {
-            // Se não houver aluno logado, redirecione para a tela de login
-            new FLogin().setVisible(true);
-            this.dispose();
-            return;
-        }
         
         panel_check1.setVisible(false);
         panel_check2.setVisible(false);
@@ -76,7 +61,7 @@ public class FEstatistica extends javax.swing.JFrame {
             pst.setInt(1, idAluno);
             rs = pst.executeQuery();
 
-            // Iterar sobre o ResultSet para recuperar todos os resultados
+            // Itera sobre o ResultSet para recuperar todos os resultados
             while (rs.next()) {
                 String nomeConquista = rs.getString(1);
                 String descConquista = rs.getString(2);
@@ -86,11 +71,10 @@ public class FEstatistica extends javax.swing.JFrame {
                 conquista.add(nomeConquista);
                 conquista.add(descConquista);
 
-                // Adicionar a lista de conquista na lista de conquistas totais
+                // Adiciona a lista de conquista na lista de conquistas totais
                 conquistasTotais.add(conquista);
             }
 
-            // Exemplo de uso das conquistas totais para exibir nos JLabels
             JPanel[] checkPanels = {panel_check1, panel_check2, panel_check3};
 
             for (int i = 0; i < conquistasTotais.size() && i < checkPanels.length; i++) {
@@ -282,14 +266,14 @@ public class FEstatistica extends javax.swing.JFrame {
             .addGroup(panelRound4Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel14)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
         panelRound4Layout.setVerticalGroup(
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(11, 11, 11)
                 .addComponent(jLabel14)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(11, 11, 11))
         );
 
         customSeparator1.setForeground(new java.awt.Color(255, 255, 255));
@@ -318,7 +302,7 @@ public class FEstatistica extends javax.swing.JFrame {
                         .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(customSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(40, 40, 40))
         );
         panelRound3Layout.setVerticalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,7 +314,7 @@ public class FEstatistica extends javax.swing.JFrame {
                     .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(panelRound3Layout.createSequentialGroup()
                             .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap())
+                            .addGap(11, 11, 11))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
                             .addComponent(customSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(30, 30, 30)))
@@ -665,7 +649,7 @@ public class FEstatistica extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE)
+            .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

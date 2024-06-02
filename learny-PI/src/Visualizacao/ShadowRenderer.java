@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Visualizacao;
 
 import java.awt.Color;
@@ -42,7 +38,6 @@ public class ShadowRenderer {
     }
 
     public BufferedImage createShadow(final BufferedImage image) {
-        // Written by Sesbastien Petrucci
         int shadowSize = size * 2;
 
         int srcWidth = image.getWidth();

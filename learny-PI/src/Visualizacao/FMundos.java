@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Visualizacao;
 
 import Controle.Conexao;
@@ -44,12 +40,6 @@ public class FMundos extends javax.swing.JFrame {
         initComponents();
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
-        if (alunoLogado == null) {
-            // Se não houver aluno logado, redirecione para a tela de login
-            new FLogin().setVisible(true);
-            this.dispose();
-            return;
-        }
         idAluno = alunoLogado.getIdAluno();
         double pontos = alunoLogado.getPontosTotais();
         String ranque = alunoLogado.getRanque();
@@ -701,7 +691,7 @@ public class FMundos extends javax.swing.JFrame {
         );
 
         panel_gelo_grande.setBackground(new java.awt.Color(76, 76, 76));
-        panel_gelo_grande.setImg(new ImageIcon("src/Imagens/img-natureza-fundo.png"));
+        panel_gelo_grande.setImg(new ImageIcon("src/Imagens/img-gelo-fundo.png"));
         panel_gelo_grande.setRoundBottomLeft(30);
         panel_gelo_grande.setRoundBottomRight(30);
         panel_gelo_grande.setRoundTopLeft(30);
@@ -784,7 +774,7 @@ public class FMundos extends javax.swing.JFrame {
         );
 
         panel_fogo_grande.setBackground(new java.awt.Color(76, 76, 76));
-        panel_fogo_grande.setImg(new ImageIcon("src/Imagens/img-natureza-fundo.png"));
+        panel_fogo_grande.setImg(new ImageIcon("src/Imagens/img-fogo-fundo.png"));
         panel_fogo_grande.setRoundBottomLeft(30);
         panel_fogo_grande.setRoundBottomRight(30);
         panel_fogo_grande.setRoundTopLeft(30);
@@ -840,7 +830,7 @@ public class FMundos extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Ice Kingdom");
+        jLabel8.setText("Volcano Islands");
 
         javax.swing.GroupLayout panel_fogo_grandeLayout = new javax.swing.GroupLayout(panel_fogo_grande);
         panel_fogo_grande.setLayout(panel_fogo_grandeLayout);
@@ -1090,9 +1080,9 @@ public class FMundos extends javax.swing.JFrame {
             panelSombra7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSombra7Layout.createSequentialGroup()
                 .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(lbl_pontos)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         panelSombra7Layout.setVerticalGroup(
             panelSombra7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -19,14 +19,14 @@ public class PanelSombra extends JPanel {
     private int shadowSize = 6;
     private float shadowOpacity = 0.5f;
     private Color shadowColor = Color.BLACK;
-    private int cornerRadius = 30; // Default corner radius
+    private int cornerRadius = 30; // Arredondamento padrão dos cantos
 
     public PanelSombra() {
         setOpaque(false);
         img = new ImageIcon();
     }
 
-    // Getters and setters for shadow properties
+    // Getters and setters para as propriedades da sombra
     public ShadowType getShadowType() {
         return shadowType;
     }
@@ -112,7 +112,7 @@ public class PanelSombra extends JPanel {
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.fillRoundRect(0, 0, width, height, cornerRadius, cornerRadius);
         //g.fillOval(0, 0, width, width);
-        //  Create Shadow
+        //  Cria a sombra
         ShadowRenderer render = new ShadowRenderer(shadowSize, shadowOpacity, shadowColor);
         g2.drawImage(render.createShadow(img), 0, 0, null);
         g2.drawImage(img, x, y, null);

@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Visualizacao;
 
 import Modelagem.Aluno;
-import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,12 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import javax.swing.ImageIcon;
 
-/**
- *
- * @author fatec-dsm2
- */
 public class FCadastro extends javax.swing.JFrame {
 
     private String foto = "";
@@ -388,9 +376,11 @@ public class FCadastro extends javax.swing.JFrame {
             String dataNascBanco = sdfOriginal.format(dataOriginal);
     
             a.setDataNasc(dataNascBanco);
-            a.cadastrar();
-            new FLogin().setVisible(true);
-            dispose();
+            String cadastro = a.cadastrar();
+            if(cadastro.equals("ok")){
+                new FLogin().setVisible(true);
+                dispose();
+            }
         } catch (ParseException e) {
             // Tratamento de erro de formatação de data
             JOptionPane.showMessageDialog(null, "Erro ao formatar a data: " + e.getMessage());
@@ -404,7 +394,7 @@ public class FCadastro extends javax.swing.JFrame {
             File selectedFile = ch.getSelectedFile();
             String filePath = selectedFile.getAbsolutePath();
 
-            // Diretório de destino para onde você quer copiar o arquivo
+            // Diretório de destino
             String destinationDirectory = "src/Imagens/";
 
             try {
@@ -415,7 +405,6 @@ public class FCadastro extends javax.swing.JFrame {
                 // Exibe a imagem selecionada no painel
                 panel_foto_cadastro.setImagem("src/Imagens/" + selectedFile.getName());
                 foto = selectedFile.getName();
-                JOptionPane.showMessageDialog(this, "Arquivo copiado com sucesso para o pacote do projeto.");
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(this, "Erro ao copiar o arquivo para o pacote do projeto: " + e.getMessage());
             }

@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Visualizacao;
 
 import Controle.Conexao;
 import Modelagem.Aluno;
 import Modelagem.Session;
-import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,12 +17,7 @@ import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import javax.swing.ImageIcon;
 
-/**
- *
- * @author fatec-dsm2
- */
 public class FEditarPerfil extends javax.swing.JFrame {
 
     Connection conexao = null;
@@ -36,47 +26,40 @@ public class FEditarPerfil extends javax.swing.JFrame {
     private Aluno alunoLogado;
     private String foto;
     private int idAluno;
-    
+
     private FPerfil telaDePerfil;
-    
+
     public FEditarPerfil(FPerfil telaDePerfil) {
         this.telaDePerfil = telaDePerfil;
         initComponents();
         alunoLogado = Session.getInstance().getAlunoLogado();
-        if (alunoLogado == null) {
-            // Se não houver aluno logado, redirecione para a tela de login
-            new FLogin().setVisible(true);
-            this.dispose();
-            return;
+        String dataNasc = alunoLogado.getDataNasc();
+        foto = alunoLogado.getFoto();
+
+        txt_nome.setText(alunoLogado.getNome());
+        txt_usuario.setText(alunoLogado.getUsuario());
+        txt_senha.setText(alunoLogado.getSenha());
+        txt_email.setText(alunoLogado.getEmail());
+        panel_foto_editar.setImagem("src/Imagens/" + foto);
+
+        // Formato original da data recebida
+        SimpleDateFormat sdfOriginal = new SimpleDateFormat("yyyy-MM-dd");
+        // Formato desejado para exibição
+        SimpleDateFormat sdfFormatada = new SimpleDateFormat("dd/MM/yyyy");
+
+        try {
+            // Converte a string para um objeto Date usando o formato original
+            Date dataOriginal = sdfOriginal.parse(dataNasc);
+            // Converte o objeto Date de volta para uma string no formato desejado
+            String dataFormatada = sdfFormatada.format(dataOriginal);
+            // Define a string formatada no JTextField
+            txt_dataNasc.setText(dataFormatada);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-                String dataNasc = alunoLogado.getDataNasc();
-                foto = alunoLogado.getFoto();
-                
-                txt_nome.setText(alunoLogado.getNome());
-                txt_usuario.setText(alunoLogado.getUsuario());
-                txt_senha.setText(alunoLogado.getSenha());
-                txt_email.setText(alunoLogado.getEmail());
-                panel_foto_editar.setImagem("src/Imagens/" + foto);
-
-                // Formato original da data recebida
-                SimpleDateFormat sdfOriginal = new SimpleDateFormat("yyyy-MM-dd");
-                // Formato desejado para exibição
-                SimpleDateFormat sdfFormatada = new SimpleDateFormat("dd/MM/yyyy");
-
-                try {
-                    // Converte a string para um objeto Date usando o formato original
-                    Date dataOriginal = sdfOriginal.parse(dataNasc);
-                    // Converte o objeto Date de volta para uma string no formato desejado
-                    String dataFormatada = sdfFormatada.format(dataOriginal);
-                    // Define a string formatada no JTextField
-                    txt_dataNasc.setText(dataFormatada);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                    // Você pode adicionar um código adicional aqui para lidar com a exceção, como mostrar uma mensagem de erro
-                }
     }
     Aluno a = new Aluno(this);
-    
+
     // Método para retornar à tela de perfil
     public void voltarParaPerfil() {
         if (telaDePerfil != null) {
@@ -84,6 +67,7 @@ public class FEditarPerfil extends javax.swing.JFrame {
             this.dispose();
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -412,9 +396,9 @@ public class FEditarPerfil extends javax.swing.JFrame {
         try {
             // Convertendo a string da data para o formato original
             Date dataOriginal = sdfFormatada.parse(dataNasc);
-    
+
             String dataNascBanco = sdfOriginal.format(dataOriginal);
-    
+
             a.setDataNasc(dataNascBanco);
             a.alterar();
             new FLogin().setVisible(true);
@@ -428,11 +412,11 @@ public class FEditarPerfil extends javax.swing.JFrame {
     private void panelRound1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound1MouseClicked
         JnaFileChooser ch = new JnaFileChooser();
         boolean action = ch.showOpenDialog(this);
-        if(action){
+        if (action) {
             File selectedFile = ch.getSelectedFile();
             String filePath = selectedFile.getAbsolutePath();
 
-            // Diretório de destino para onde você quer copiar o arquivo
+            // Diretório de destino
             String destinationDirectory = "src/Imagens/";
 
             try {
@@ -443,7 +427,6 @@ public class FEditarPerfil extends javax.swing.JFrame {
                 // Exibe a imagem selecionada no painel
                 panel_foto_editar.setImagem("src/Imagens/" + selectedFile.getName());
                 foto = selectedFile.getName();
-                JOptionPane.showMessageDialog(this, "Arquivo copiado com sucesso para o pacote do projeto.");
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(this, "Erro ao copiar o arquivo para o pacote do projeto: " + e.getMessage());
             }

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Visualizacao;
 
 import Modelagem.Aluno;
@@ -10,7 +6,6 @@ import Modelagem.Session;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
@@ -33,12 +28,6 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
     public FFaseNumeros1() {
         initComponents();    
         alunoLogado = Session.getInstance().getAlunoLogado();
-        if (alunoLogado == null) {
-            // Se não houver aluno logado, redirecione para a tela de login
-            new FLogin().setVisible(true);
-            this.dispose();
-            return;
-        }
         String medalha = alunoLogado.getMedalhaAtiva();
         System.out.println(medalha);
         if(medalha.equals("Mundo Concluido!")){
@@ -52,8 +41,6 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
                 seconds++;
                 minutes = seconds / 60;
                 remainingSeconds = seconds % 60;
-            
-                System.out.println("O JFrame está aberto há " + minutes + " minutos e " + remainingSeconds + " segundos.");
             }
         });
         

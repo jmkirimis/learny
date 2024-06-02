@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Visualizacao;
 
 import Controle.Conexao;
@@ -16,10 +12,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-/**
- *
- * @author João
- */
 public class FRegiao extends javax.swing.JFrame {
     
     Connection conexao = null;
@@ -32,12 +24,6 @@ public class FRegiao extends javax.swing.JFrame {
         initComponents();
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
-        if (alunoLogado == null) {
-            // Se não houver aluno logado, redirecione para a tela de login
-            new FLogin().setVisible(true);
-            this.dispose();
-            return;
-        }
         
         idAluno = alunoLogado.getIdAluno();
         double pontos = alunoLogado.getPontosTotais();
@@ -92,10 +78,6 @@ public class FRegiao extends javax.swing.JFrame {
         String[] estadosFases = vfases.verificarFases(1, idAluno); // Verifica as fases da região 1
         verPrimeiraMedalha();
             
-       /* System.out.println("Fase Visual: " + estadosFases[0]);
-        System.out.println("Fase Números: " + estadosFases[1]);
-        System.out.println("Fase Ouvir: " + estadosFases[2]);
-        System.out.println("Fase Observacao: " + estadosFases[3]);*/
     }
 
     /**
@@ -606,9 +588,9 @@ public class FRegiao extends javax.swing.JFrame {
             panelSombra1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSombra1Layout.createSequentialGroup()
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(lbl_pontos)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         panelSombra1Layout.setVerticalGroup(
             panelSombra1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -821,14 +803,13 @@ public class FRegiao extends javax.swing.JFrame {
     }
 
     private void openItemSelectionDialog() {
-        // Crie o diálogo de seleção de itens
+        // Cria o diálogo de seleção de itens
         JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(itemLabel), "Selecionar Item", true);
-        //dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        dialog.setUndecorated(true); // Remover decorações da janela 
+        dialog.setUndecorated(true); // Remove decorações da janela 
         dialog.setBackground(new Color(0, 0, 0, 0)); // Fundo transparente
         dialog.getContentPane().setBackground(new Color(0, 0, 0, 0)); // Fundo transparente do contentPane
 
-        // Painel para adicionar itens de exemplo ao diálogo
+        // Painel para adicionar itens ao diálogo
         PanelRoundBorda itemSelectionPanel = new PanelRoundBorda();
         itemSelectionPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 15));
         itemSelectionPanel.setRadius(40);
@@ -856,11 +837,11 @@ public class FRegiao extends javax.swing.JFrame {
 
                 item.addMouseListener(new MouseAdapter() {
                     public void mouseClicked(MouseEvent e) {
-                        // Quando um item é selecionado, atualize o item no painel principal
+                        // Quando um item é selecionado, atualiza o item no painel principal
                         alunoLogado.setMedalhaAtiva(nomeConquista);
                         alunoLogado.salvarMedalha();
                         itemLabel.setIcon(iconMedalha);
-                        dialog.dispose(); // Feche o diálogo
+                        dialog.dispose(); // Fecha o diálogo
                     }
                 });
 
@@ -872,16 +853,18 @@ public class FRegiao extends javax.swing.JFrame {
         }
 
         if (temItems) {
-            // Adicione o painel de seleção de itens ao diálogo
+            // Adiciona o painel de seleção de itens ao diálogo
             dialog.add(itemSelectionPanel);
 
-            // Defina o tamanho e torne o diálogo visível
+            // Define o tamanho e torne o diálogo visível
             dialog.pack();
             dialog.setLocationRelativeTo(itemLabel);
             dialog.setVisible(true);
         } else {
             // Exibe uma mensagem caso não existam conquistas
-            JOptionPane.showMessageDialog(null, "Você ainda não possui medalhas.", "Nenhuma Medalha", JOptionPane.INFORMATION_MESSAGE);
+            ImageIcon icon = new ImageIcon("src/Imagens/icon-conquista-alerta.png");
+            AlertaGeral alert = new AlertaGeral(FRegiao.this, icon, "Nenhuma Medalha", "Você ainda não possui medalhas.", 25, 25);
+            alert.setVisible(true);
         }
     }
     

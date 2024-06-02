@@ -1,36 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Visualizacao;
 
 import Controle.Conexao;
 import Modelagem.Aluno;
 import Modelagem.Session;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.sql.*;
 import java.sql.PreparedStatement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.io.File;
-import java.io.IOException;
 import javax.swing.ImageIcon;
-import javax.swing.UIManager;
 
-/**
- *
- * @author João
- */
 public class FLogin extends javax.swing.JFrame {
     Connection conexao = null;
     PreparedStatement pst = null;
@@ -38,9 +18,6 @@ public class FLogin extends javax.swing.JFrame {
     Aluno a = new Aluno(null);
     Color preto = new Color(0,0,0,150);
 
-    /**
-     * Creates new form FLogin
-     */
     public FLogin() {
         initComponents();
         conexao = Conexao.conecta();
@@ -267,7 +244,6 @@ public class FLogin extends javax.swing.JFrame {
             new FMundos().setVisible(true);
             this.dispose();
         } else {
-            //JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos");
             ImageIcon icon = new ImageIcon("src/Imagens/icon-login-alerta.png");
             AlertaGeral alert = new AlertaGeral(this, icon, "Erro ao Logar", "Usuário e/ou senha inválidos!", 80, 60);
             alert.setVisible(true);

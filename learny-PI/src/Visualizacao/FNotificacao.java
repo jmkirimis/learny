@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Visualizacao;
 
 import Controle.Conexao;
@@ -32,15 +28,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-/**
- *
- * @author fatec-dsm2
- */
 public class FNotificacao extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FNotificacao
-     */
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
@@ -65,13 +54,7 @@ public class FNotificacao extends javax.swing.JFrame {
         initComponents();
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
-        if (alunoLogado == null) {
-            // Se não houver aluno logado, redirecione para a tela de login
-            new FLogin().setVisible(true);
-            this.dispose();
-            return;
-        }
-        // Inicialize a estrutura de dados
+        // Inicializa a estrutura de dados
         notificacoesMap = new HashMap<>();
         idAluno = alunoLogado.getIdAluno();
         painelNotificacoes.setLayout(new BoxLayout(painelNotificacoes, BoxLayout.Y_AXIS));
@@ -86,8 +69,8 @@ public class FNotificacao extends javax.swing.JFrame {
         }
         painelNotificacoes.revalidate();
 
-        int maxId = getUltimoIdNotificacao(); // Obtenha o último ID de notificação
-        int idNotificacao = 0; // O ID da notificação que você deseja buscar
+        int maxId = getUltimoIdNotificacao(); // Obtem o último ID de notificação
+        int idNotificacao = 0; // O ID da notificação para buscar
 
         // Obtenha o painel correspondente
         while (idNotificacao <= maxId) {
@@ -120,7 +103,6 @@ public class FNotificacao extends javax.swing.JFrame {
                 int finalIdNotificacao = idNotificacao; // variável final para uso no listener
                 painel.addMouseListener(new MouseAdapter() {
                     public void mouseClicked(MouseEvent e) {
-                        // Aqui você pode adicionar o código que deseja executar ao clicar no painel
                         String sql = "select * from notificacoes where idNotificacao = ?";
                         try {
                             pst = conexao.prepareStatement(sql);
@@ -162,7 +144,7 @@ public class FNotificacao extends javax.swing.JFrame {
     }
 
     private void carregarNotificacoes() {
-        String sql = "select * from notificacoes where idAluno = ?"; // Ajuste a consulta conforme necessário
+        String sql = "select * from notificacoes where idAluno = ?";
 
         try {
             pst = conexao.prepareStatement(sql);
@@ -192,21 +174,21 @@ public class FNotificacao extends javax.swing.JFrame {
     }
     
     private void ajustarAlturaPaineis() {
-        // Obtenha a altura adicional desejada
+        // Obtem a altura adicional desejada
         int alturaAdicional = 65; // Altere conforme necessário
-        // Obtenha os tamanhos preferidos atuais dos outros painéis
+        // Obtem os tamanhos preferidos atuais dos outros painéis
         Dimension tamanhoRound = panelRoundNotificacoes.getPreferredSize();
         Dimension tamanhoSombra = panelSombraNotificacoes.getPreferredSize();
         Dimension tamanhoGeral = panelGeral.getPreferredSize();
-        // Adicione a altura adicional aos tamanhos preferidos
+        // Adiciona a altura adicional aos tamanhos preferidos
         tamanhoRound.height += alturaAdicional;
         tamanhoSombra.height += alturaAdicional;
         tamanhoGeral.height += alturaAdicional;
-        // Defina os novos tamanhos preferidos dos outros painéis
+        // Define os novos tamanhos preferidos dos outros painéis
         panelRoundNotificacoes.setPreferredSize(tamanhoRound);
         panelSombraNotificacoes.setPreferredSize(tamanhoSombra);
         panelGeral.setPreferredSize(tamanhoGeral);
-        // Revalide os painéis para que as mudanças tenham efeito
+        // Revalida os painéis para que as mudanças tenham efeito
         panelRoundNotificacoes.revalidate();
         panelSombraNotificacoes.revalidate();
         panelGeral.revalidate();
@@ -222,7 +204,7 @@ public class FNotificacao extends javax.swing.JFrame {
         painel.setBackground(Color.WHITE);
 
         JLabel lblIcone = new JLabel();
-        ImageIcon icon = new ImageIcon("src/Imagens/" + caminhoIcone); // Ajuste o caminho conforme necessário
+        ImageIcon icon = new ImageIcon("src/Imagens/" + caminhoIcone);
         lblIcone.setIcon(icon);
         lblIcone.setPreferredSize(new Dimension(50, 50));
 
@@ -233,7 +215,6 @@ public class FNotificacao extends javax.swing.JFrame {
         painel.add(lblIcone, BorderLayout.WEST);
         painel.add(lblDescricao, BorderLayout.CENTER);
 
-        // Ajuste o estilo do painel conforme necessário (cores, bordas, etc.)
         Color verde = new Color(0, 204, 51);
         painel.setBackground(verde); // Exemplo de cor de fundo
 

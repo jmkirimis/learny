@@ -1,31 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Visualizacao;
+
 import Controle.Conexao;
 import Modelagem.Aluno;
 import Modelagem.Ranking;
 import Modelagem.Session;
 import Modelagem.VerificadorDiarias;
-import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
-/**
- *
- * @author fatec-dsm2
- */
+
 public class FFaseConcluida extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FFaseConcluida
-     */
-    
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
@@ -39,12 +28,6 @@ public class FFaseConcluida extends javax.swing.JFrame {
     public FFaseConcluida() {
         initComponents();
         alunoLogado = Session.getInstance().getAlunoLogado();
-        if (alunoLogado == null) {
-            // Se não houver aluno logado, redirecione para a tela de login
-            new FLogin().setVisible(true);
-            this.dispose();
-            return;
-        }
         idAluno = alunoLogado.getIdAluno();
         
         verifDiaria.verificarDiarias();
@@ -59,9 +42,10 @@ public class FFaseConcluida extends javax.swing.JFrame {
                 double pontos = rs.getDouble(4);
                 Time time = rs.getTime(5);
                 double porcAcertos = rs.getDouble(6);
-        
+                int porcAcertosInteiro = (int) porcAcertos;
+                System.out.println(porcAcertosInteiro);
                 lbl_pontos.setText(Double.toString(pontos));
-                lbl_porc.setText(Double.toString(porcAcertos));
+                lbl_porc.setText(Integer.toString(porcAcertosInteiro)+"%");
 
                 // Formatando o valor de tempo
                 SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
@@ -150,7 +134,7 @@ public class FFaseConcluida extends javax.swing.JFrame {
         panelRoundBorda1Layout.setHorizontalGroup(
             panelRoundBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda1Layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
                 .addGroup(panelRoundBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel11)
@@ -160,19 +144,19 @@ public class FFaseConcluida extends javax.swing.JFrame {
                     .addGroup(panelRoundBorda1Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(lbl_porc)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(33, 33, 33)))
                 .addGap(23, 23, 23))
         );
         panelRoundBorda1Layout.setVerticalGroup(
             panelRoundBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda1Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(11, 11, 11)
                 .addComponent(lbl_porc)
-                .addContainerGap())
+                .addGap(11, 11, 11))
         );
 
         panelRoundBorda2.setBackground(new java.awt.Color(255, 255, 255));
@@ -187,7 +171,7 @@ public class FFaseConcluida extends javax.swing.JFrame {
 
         lbl_pontos.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         lbl_pontos.setForeground(new java.awt.Color(102, 102, 102));
-        lbl_pontos.setText("100");
+        lbl_pontos.setText("100.5");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(128, 210, 91));
@@ -197,26 +181,30 @@ public class FFaseConcluida extends javax.swing.JFrame {
         panelRoundBorda2.setLayout(panelRoundBorda2Layout);
         panelRoundBorda2Layout.setHorizontalGroup(
             panelRoundBorda2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda2Layout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
+            .addGroup(panelRoundBorda2Layout.createSequentialGroup()
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addGroup(panelRoundBorda2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRoundBorda2Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lbl_pontos))
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel4))
-                .addGap(33, 33, 33))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda2Layout.createSequentialGroup()
+                        .addComponent(lbl_pontos, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda2Layout.createSequentialGroup()
+                        .addGroup(panelRoundBorda2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda2Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(20, 20, 20)))
+                        .addGap(25, 25, 25))))
         );
         panelRoundBorda2Layout.setVerticalGroup(
             panelRoundBorda2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda2Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbl_pontos)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_pontos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11))
         );
 
         panelRoundBorda3.setBackground(new java.awt.Color(255, 255, 255));
@@ -244,23 +232,21 @@ public class FFaseConcluida extends javax.swing.JFrame {
             .addGroup(panelRoundBorda3Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(panelRoundBorda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel16)
                     .addComponent(jLabel14)
-                    .addGroup(panelRoundBorda3Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(lbl_tempo)))
-                .addContainerGap(39, Short.MAX_VALUE))
+                    .addComponent(jLabel16)
+                    .addComponent(lbl_tempo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39))
         );
         panelRoundBorda3Layout.setVerticalGroup(
             panelRoundBorda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda3Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbl_tempo)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_tempo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -268,44 +254,45 @@ public class FFaseConcluida extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(91, 91, 91)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel1))
-                    .addComponent(jLabel2))
-                .addGap(80, 80, 80))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(77, 77, 77)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(panelRoundBorda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(panelRoundBorda3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(81, 81, 81)
+                                .addComponent(panelRoundBorda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(panelRoundBorda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(panelRoundBorda3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(95, 95, 95)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(jLabel1))
+                            .addComponent(jLabel2)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(panelRoundBorda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
+                        .addGap(213, 213, 213)
                         .addComponent(jLabel3)))
-                .addGap(60, 60, 60))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(78, 78, 78)
+                .addGap(79, 79, 79)
                 .addComponent(jLabel1)
                 .addGap(37, 37, 37)
                 .addComponent(jLabel2)
-                .addGap(47, 47, 47)
+                .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(panelRoundBorda3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelRoundBorda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(panelRoundBorda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addGap(42, 42, 42))
+                .addGap(43, 43, 43))
         );
 
         customScrollPane1.setViewportView(jPanel1);

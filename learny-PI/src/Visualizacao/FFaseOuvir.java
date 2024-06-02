@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Visualizacao;
 
 import Controle.Conexao;
@@ -28,15 +24,9 @@ import java.io.IOException;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-/**
- *
- * @author fatec-dsm2
- */
+
 public class FFaseOuvir extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FFaseOuvir
-     */
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
@@ -55,12 +45,6 @@ public class FFaseOuvir extends javax.swing.JFrame {
         initComponents();
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
-        if (alunoLogado == null) {
-            // Se não houver aluno logado, redirecione para a tela de login
-            new FLogin().setVisible(true);
-            this.dispose();
-            return;
-        }
         
         idAluno = alunoLogado.getIdAluno();
         
@@ -73,7 +57,6 @@ public class FFaseOuvir extends javax.swing.JFrame {
         });
         
         String medalha = alunoLogado.getMedalhaAtiva();
-        System.out.println(medalha);
         if(medalha.equals("Mundo Concluido!")){
             panel_heard.setVisible(false);
         }
@@ -85,8 +68,6 @@ public class FFaseOuvir extends javax.swing.JFrame {
                 seconds++;
                 minutes = seconds / 60;
                 remainingSeconds = seconds % 60;
-            
-                System.out.println("O JFrame está aberto há " + minutes + " minutos e " + remainingSeconds + " segundos.");
             }
         });
         
