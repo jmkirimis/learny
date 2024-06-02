@@ -11,7 +11,8 @@ public class ToggleButton extends JComponent {
 
     private boolean isOn = Config.audioAtivado;
     private static final int PADDING = 6; // Reduzido para ajustar o tamanho
-    Color verde = new Color(128,210,91);
+    Color azul = new Color(83, 194, 242);
+    Color vermelho = new Color(239,91,106);
 
     public ToggleButton() {
         this.setPreferredSize(new Dimension(80, 40));
@@ -40,8 +41,9 @@ public class ToggleButton extends JComponent {
         int circleY = PADDING + (height - ovalDiameter) / 2;
 
         if (isOn) {
-            // Desenhar o fundo verde
-            g2.setColor(verde);
+            // Desenhar o fundo de gradiente
+            GradientPaint gradiente = new GradientPaint(0, 0, vermelho, width, 0, azul);
+            g2.setPaint(gradiente);
             g2.fillRoundRect(0, PADDING, width, height, height, height);
 
             // Desenhar o círculo cinza à direita
