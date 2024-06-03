@@ -679,7 +679,7 @@
                           <Color blue="48" green="48" red="48" type="rgb"/>
                         </Property>
                         <Property name="img" type="javax.swing.ImageIcon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                          <Connection code="new ImageIcon(&quot;src/Imagens/natureza.png&quot;)" type="code"/>
+                          <Connection code="new ImageIcon(&quot;src/Imagens/img-natureza-fundo.png&quot;)" type="code"/>
                         </Property>
                         <Property name="roundBottomLeft" type="int" value="23"/>
                         <Property name="roundBottomRight" type="int" value="23"/>

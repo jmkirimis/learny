@@ -15,6 +15,7 @@ create table alunos(
     medalha varchar(100),
     ranque varchar(50)
 );
+select * from alunos;
 
 create table mundos(
 	idMundo int auto_increment primary key,

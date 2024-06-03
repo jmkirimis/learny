@@ -119,7 +119,7 @@ public class FFaseConcluida extends javax.swing.JFrame {
 
         lbl_porc.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         lbl_porc.setForeground(new java.awt.Color(102, 102, 102));
-        lbl_porc.setText("83%");
+        lbl_porc.setText("100%");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(83, 194, 242));
@@ -133,19 +133,19 @@ public class FFaseConcluida extends javax.swing.JFrame {
         panelRoundBorda1.setLayout(panelRoundBorda1Layout);
         panelRoundBorda1Layout.setHorizontalGroup(
             panelRoundBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda1Layout.createSequentialGroup()
+            .addGroup(panelRoundBorda1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(panelRoundBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel11)
-                        .addGroup(panelRoundBorda1Layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(jLabel13)))
-                    .addGroup(panelRoundBorda1Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda1Layout.createSequentialGroup()
+                        .addGroup(panelRoundBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addGroup(panelRoundBorda1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel13)))
+                        .addGap(23, 23, 23))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda1Layout.createSequentialGroup()
                         .addComponent(lbl_porc)
-                        .addGap(33, 33, 33)))
-                .addGap(23, 23, 23))
+                        .addGap(52, 52, 52))))
         );
         panelRoundBorda1Layout.setVerticalGroup(
             panelRoundBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,7 +171,7 @@ public class FFaseConcluida extends javax.swing.JFrame {
 
         lbl_pontos.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         lbl_pontos.setForeground(new java.awt.Color(102, 102, 102));
-        lbl_pontos.setText("100.5");
+        lbl_pontos.setText("100");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(128, 210, 91));
@@ -184,16 +184,15 @@ public class FFaseConcluida extends javax.swing.JFrame {
             .addGroup(panelRoundBorda2Layout.createSequentialGroup()
                 .addContainerGap(31, Short.MAX_VALUE)
                 .addGroup(panelRoundBorda2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda2Layout.createSequentialGroup()
-                        .addComponent(lbl_pontos, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda2Layout.createSequentialGroup()
                         .addGroup(panelRoundBorda2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda2Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addGap(20, 20, 20)))
-                        .addGap(25, 25, 25))))
+                            .addGroup(panelRoundBorda2Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(lbl_pontos))
+                            .addComponent(jLabel10))
+                        .addGap(20, 20, 20)))
+                .addGap(25, 25, 25))
         );
         panelRoundBorda2Layout.setVerticalGroup(
             panelRoundBorda2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,7 +218,7 @@ public class FFaseConcluida extends javax.swing.JFrame {
 
         lbl_tempo.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         lbl_tempo.setForeground(new java.awt.Color(102, 102, 102));
-        lbl_tempo.setText("1:50");
+        lbl_tempo.setText("00:10");
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 179, 0));
@@ -230,11 +229,15 @@ public class FFaseConcluida extends javax.swing.JFrame {
         panelRoundBorda3Layout.setHorizontalGroup(
             panelRoundBorda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRoundBorda3Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
                 .addGroup(panelRoundBorda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel16)
-                    .addComponent(lbl_tempo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelRoundBorda3Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(panelRoundBorda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel16)))
+                    .addGroup(panelRoundBorda3Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(lbl_tempo)))
                 .addGap(39, 39, 39))
         );
         panelRoundBorda3Layout.setVerticalGroup(

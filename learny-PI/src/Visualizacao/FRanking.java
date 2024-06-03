@@ -152,7 +152,7 @@ public class FRanking extends javax.swing.JFrame {
         lbl_medalhas = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
 
-        menu.setBackground(new java.awt.Color(102, 102, 102));
+        menu.setBackground(new java.awt.Color(72, 72, 72));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icone perfil.png"))); // NOI18N
         jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {

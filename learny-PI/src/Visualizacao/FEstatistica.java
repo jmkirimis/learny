@@ -200,11 +200,11 @@ public class FEstatistica extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel4.setText("Atividades");
+        jLabel4.setText("Fases");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel5.setText("Completas");
+        jLabel5.setText("Concluidas");
 
         lbl_fases_concluidas.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lbl_fases_concluidas.setForeground(new java.awt.Color(102, 102, 102));
@@ -214,16 +214,18 @@ public class FEstatistica extends javax.swing.JFrame {
         panelRound2.setLayout(panelRound2Layout);
         panelRound2Layout.setHorizontalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound2Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
+                .addContainerGap(40, Short.MAX_VALUE)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbl_fases_concluidas))
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addContainerGap(47, Short.MAX_VALUE))
+                    .addComponent(jLabel5)
+                    .addGroup(panelRound2Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel4)))
+                .addGap(36, 36, 36))
         );
         panelRound2Layout.setVerticalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,7 +238,7 @@ public class FEstatistica extends javax.swing.JFrame {
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
                     .addComponent(lbl_fases_concluidas))
-                .addGap(13, 13, 13))
+                .addGap(11, 11, 11))
         );
 
         panelRound3.setBackground(new java.awt.Color(255, 255, 255));

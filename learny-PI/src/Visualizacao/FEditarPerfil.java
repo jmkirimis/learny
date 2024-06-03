@@ -90,7 +90,7 @@ public class FEditarPerfil extends javax.swing.JFrame {
         panelRound6 = new Visualizacao.PanelRound();
         txt_dataNasc = new javax.swing.JTextField();
         panelRound7 = new Visualizacao.PanelRound();
-        txt_senha = new javax.swing.JTextField();
+        txt_senha = new javax.swing.JPasswordField();
         panelRound8 = new Visualizacao.PanelRound();
         txt_nome = new javax.swing.JTextField();
         panelRound9 = new Visualizacao.PanelRound();
@@ -223,8 +223,6 @@ public class FEditarPerfil extends javax.swing.JFrame {
         panelRound7.setRoundTopLeft(40);
         panelRound7.setRoundTopRight(40);
 
-        txt_senha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txt_senha.setForeground(new java.awt.Color(72, 72, 72));
         txt_senha.setBorder(null);
 
         javax.swing.GroupLayout panelRound7Layout = new javax.swing.GroupLayout(panelRound7);
@@ -233,8 +231,8 @@ public class FEditarPerfil extends javax.swing.JFrame {
             panelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound7Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(txt_senha, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addComponent(txt_senha, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         panelRound7Layout.setVerticalGroup(
             panelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -370,12 +368,12 @@ public class FEditarPerfil extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+                .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE)
+            .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -493,7 +491,7 @@ public class FEditarPerfil extends javax.swing.JFrame {
     private javax.swing.JTextField txt_dataNasc;
     private javax.swing.JTextField txt_email;
     private javax.swing.JTextField txt_nome;
-    private javax.swing.JTextField txt_senha;
+    private javax.swing.JPasswordField txt_senha;
     private javax.swing.JTextField txt_usuario;
     // End of variables declaration//GEN-END:variables
 }

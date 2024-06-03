@@ -470,7 +470,7 @@ public class FRegiao extends javax.swing.JFrame {
         });
 
         panelRound2.setBackground(new java.awt.Color(72, 72, 72));
-        panelRound2.setImg(new ImageIcon("src/Imagens/natureza.png"));
+        panelRound2.setImg(new ImageIcon("src/Imagens/img-natureza-fundo.png"));
         panelRound2.setRoundBottomLeft(23);
         panelRound2.setRoundBottomRight(23);
         panelRound2.setRoundTopLeft(23);
