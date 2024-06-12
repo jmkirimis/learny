@@ -888,7 +888,8 @@ public class FRanking extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel9jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9jLabel1MouseClicked
-        voltarParaOrigem();
+        new FPerfil(this).setVisible(true);
+        dispose();
     }//GEN-LAST:event_jLabel9jLabel1MouseClicked
 
     private void jLabel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseEntered
