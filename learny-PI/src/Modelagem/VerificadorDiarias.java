@@ -41,6 +41,9 @@ public class VerificadorDiarias {
                 }
                 // Verificar missões baseadas na quantidade de fases concluídas
                 verificarMissaoPorQuantidade();
+                
+                // Verificar se todas as quatro fases foram concluídas
+                verificarQuatroFasesConcluidas();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -102,6 +105,37 @@ public class VerificadorDiarias {
         }
     }
 
+    private void verificarQuatroFasesConcluidas() {
+        String sql = "SELECT COUNT(DISTINCT tipo) AS totalFases FROM fasesConcluidas "
+                   + "JOIN fases USING(idFase) WHERE dataConclusao = CURDATE() AND idAluno = ? "
+                   + "AND tipo IN ('Visual', 'Observacao', 'Ouvir', 'Numeros')";
+        try (PreparedStatement pst = conexao.prepareStatement(sql)) {
+            pst.setInt(1, alunoLogado.getIdAluno());
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    int totalFasesConcluidas = rs.getInt("totalFases");
+                    if (totalFasesConcluidas >= 4) {
+                        String sqlMissoes = "SELECT idMissaoDiaria FROM missoesDiarias "
+                                           + "JOIN missoes USING(idMissao) WHERE idAluno = ? "
+                                           + "AND dataInsercao = CURDATE() AND descMissao = 'Conclua um mundo'";
+                        try (PreparedStatement pstMissoes = conexao.prepareStatement(sqlMissoes)) {
+                            pstMissoes.setInt(1, alunoLogado.getIdAluno());
+                            try (ResultSet rsMissoes = pstMissoes.executeQuery()) {
+                                while (rsMissoes.next()) {
+                                    int idMissaoDiaria = rsMissoes.getInt("idMissaoDiaria");
+                                    contabilizarPontos();
+                                    deletar(idMissaoDiaria);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
     private int contarFasesConcluidasHoje() {
         String sql = "select count(*) as total from fasesConcluidas where dataConclusao = CURDATE() and idAluno = ?";
         try (PreparedStatement pst = conexao.prepareStatement(sql)) {

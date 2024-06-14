@@ -182,7 +182,7 @@ public class FNotificacao extends javax.swing.JFrame {
         Dimension tamanhoGeral = panelGeral.getPreferredSize();
         // Adiciona a altura adicional aos tamanhos preferidos
         tamanhoRound.height += alturaAdicional;
-        tamanhoSombra.height += alturaAdicional;
+        tamanhoSombra.height += (alturaAdicional + 15);
         tamanhoGeral.height += alturaAdicional;
         // Define os novos tamanhos preferidos dos outros painéis
         panelRoundNotificacoes.setPreferredSize(tamanhoRound);
@@ -380,7 +380,7 @@ public class FNotificacao extends javax.swing.JFrame {
         jLabel5.setText("aplicativo Learny");
 
         customSeparator1.setForeground(new java.awt.Color(255, 255, 255));
-        customSeparator1.setColor(new java.awt.Color(72, 72, 72));
+        customSeparator1.setColor(new java.awt.Color(90, 90, 90));
         customSeparator1.setThickness(5);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N

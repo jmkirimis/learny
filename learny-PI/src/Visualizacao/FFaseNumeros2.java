@@ -1,15 +1,19 @@
-
 package Visualizacao;
 
 import Controle.Conexao;
 import Modelagem.Aluno;
 import Modelagem.FaseConcluida;
 import Modelagem.Session;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -20,7 +24,7 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
     FaseConcluida fase = new FaseConcluida();
-    
+
     private Aluno alunoLogado;
     private Timer timer;
     private int minutes;
@@ -28,20 +32,23 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
     private int idAluno;
     private int acertos2;
     private int seconds2;
-    
+    private boolean dicaClicada = false;
+
+    //icone dica
+    Icon iconDicaAtivada = new ImageIcon("src/Imagens/icon-dica-ativada.png");
+    Icon iconDicaDesativada = new ImageIcon("src/Imagens/icon-dica-desativada.png");
+
     public FFaseNumeros2(int acertos, int seconds) {
         initComponents();
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
         this.acertos2 = acertos;
         this.seconds2 = seconds;
-        
+
         idAluno = alunoLogado.getIdAluno();
-        
-        String medalha = alunoLogado.getMedalhaAtiva();
-        if(medalha.equals("Mundo Concluido!")){
-            panel_num1.setVisible(false);
-        }
+
+        // Adiciona o MouseListener ao panel_heard
+        panel_num3.addMouseListener(panel_num3MouseListener);
         
         timer = new Timer(1000, new ActionListener() {
 
@@ -52,7 +59,7 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
                 remainingSeconds = seconds2 % 60;
             }
         });
-        
+
         timer.start();
     }
 
@@ -85,6 +92,7 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
         panel_num3 = new Visualizacao.PanelSombra();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        btn_dica = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -282,11 +290,6 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
         panel_num3.setShadowOpacity(0.3F);
         panel_num3.setShadowSize(3);
         panel_num3.setShadowType(Visualizacao.ShadowType.BOT_RIGHT);
-        panel_num3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panel_num3MouseClicked(evt);
-            }
-        });
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -313,6 +316,13 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setText("Escolha o resultado");
 
+        btn_dica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-dica-desativada.png"))); // NOI18N
+        btn_dica.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_dicaMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -320,31 +330,29 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(59, 59, 59)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(panelSombra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabel1)
-                            .addGap(44, 44, 44)
-                            .addComponent(jLabel2))
-                        .addComponent(panelSombra2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(panelSombra3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(jLabel4)
-                                .addGap(30, 30, 30)
-                                .addComponent(panelSombra4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel11)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(panel_num1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(panelSombra6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(panel_num3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(panelSombra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1)
+                        .addGap(44, 44, 44)
+                        .addComponent(jLabel2))
+                    .addComponent(panelSombra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(panelSombra3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel4)
+                        .addGap(30, 30, 30)
+                        .addComponent(panelSombra4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(panel_num1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(panelSombra6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(panel_num3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btn_dica, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel11)))
                 .addGap(51, 51, 51))
         );
         jPanel1Layout.setVerticalGroup(
@@ -358,7 +366,6 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
                             .addComponent(panelSombra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1)
                         .addGap(47, 47, 47)))
                 .addComponent(panelSombra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -369,7 +376,9 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addComponent(jLabel4))
                     .addComponent(panelSombra4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(130, 130, 130)
+                .addGap(59, 59, 59)
+                .addComponent(btn_dica, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
                 .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -417,31 +426,63 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
         alert.setVisible(true);
         calcularPontos();
     }//GEN-LAST:event_panelSombra6MouseClicked
-    
-    private void panel_num3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_num3MouseClicked
-        ImageIcon icon = new ImageIcon("src/Imagens/icon-numeros-alerta.png");
-        AlertaGeral alert = new AlertaGeral(FFaseNumeros2.this, icon, "Fase Números", "Que pena.. A resposta era 13", 25, 25);
-        alert.setVisible(true);
-        calcularPontos();
-    }//GEN-LAST:event_panel_num3MouseClicked
 
-    private void calcularPontos(){
+    private MouseListener panel_num3MouseListener = new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent evt) {
+            ImageIcon icon = new ImageIcon("src/Imagens/icon-numeros-alerta.png");
+            AlertaGeral alert = new AlertaGeral(FFaseNumeros2.this, icon, "Fase Números", "Que pena.. A resposta era 13", 25, 25);
+            alert.setVisible(true);
+            calcularPontos();
+        }
+    };
+
+    private void btn_dicaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_dicaMouseClicked
+        if (!dicaClicada) {
+            String medalha = alunoLogado.getMedalhaAtiva();
+            if (medalha.equals("Mundo Concluido!")) {
+                // Define o ícone de clique se ainda não foi clicado
+                btn_dica.setIcon(iconDicaAtivada);
+                panel_num3.setBackground(new Color(210, 210, 210));
+                panel_num3.setShadowColor(Color.white);
+                panel_num3.setShadowSize(1);
+                panel_num3.setShadowType(ShadowType.CENTER);
+                panel_num3.removeMouseListener(panel_num3MouseListener);
+            } else {
+                ImageIcon icon = new ImageIcon("src/Imagens/icon-dica-alerta.png");
+                AlertaGeral alert = new AlertaGeral(this, icon, "Dica Indisponível", "Ative ou consiga a medalha de mundo concluido para liberar", 50, 50);
+                alert.setVisible(true);
+            }
+            dicaClicada = true;
+        } else {
+            btn_dica.setIcon(iconDicaDesativada);
+            panel_num3.setBackground(new Color(0, 204, 51));
+            panel_num3.setShadowColor(new Color(0, 0, 0));
+            panel_num3.setShadowSize(3);
+            panel_num3.setShadowType(ShadowType.BOT_RIGHT);
+            // Adiciona o MouseListener ao panel_heard
+            panel_num3.addMouseListener(panel_num3MouseListener);
+            dicaClicada = false;
+        }
+    }//GEN-LAST:event_btn_dicaMouseClicked
+
+    private void calcularPontos() {
         double porcAcerto;
-        porcAcerto = ((double)acertos2/2)*100;
-        
+        porcAcerto = ((double) acertos2 / 2) * 100;
+
         double pontos;
         pontos = ((double) porcAcerto * 0.7) + ((int) seconds2 * 0.3);
         String medalha = alunoLogado.getMedalhaAtiva();
-        if(medalha.equals("Iniciando!")){
+        if (medalha.equals("Iniciando!")) {
             pontos = pontos + 50;
-        } else if(medalha.equals("A todo vapor!")){
+        } else if (medalha.equals("A todo vapor!")) {
             pontos = pontos * 2;
         }
-        
+
         fase.setIdFase(2);
         fase.setIdAluno(idAluno);
         fase.setPontos(pontos);
-        fase.setTempoConclusao(minutes,remainingSeconds);
+        fase.setTempoConclusao(minutes, remainingSeconds);
         fase.setPorcAcertos(porcAcerto);
         fase.cadastrar();
         timer.stop();
@@ -449,8 +490,8 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
         new FFaseConcluida().setVisible(true);
         dispose();
     }
-    
-    private void inserirNotificacao(){
+
+    private void inserirNotificacao() {
         String sql;
         sql = "insert into notificacoes(idAluno, notificacao, descNotificacao, iconNotificacao) values"
                 + "(?,?,?,?)";
@@ -461,11 +502,12 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
             pst.setString(3, "Voce concluiu a fase de numeros!");
             pst.setString(4, "icon-medalha-notificacao.png");
             pst.executeUpdate();
-            
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
+            JOptionPane.showMessageDialog(null, e);
         }
     }
+
     /**
      * @param args the command line arguments
      */
@@ -503,6 +545,7 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btn_dica;
     private Visualizacao.CustomScrollPane customScrollPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

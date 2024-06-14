@@ -3,8 +3,13 @@ package Visualizacao;
 
 import Modelagem.Aluno;
 import Modelagem.Session;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
@@ -24,15 +29,17 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
     private int remainingSeconds;
     private int acertos;
     private Aluno alunoLogado;
+    private boolean dicaClicada = false;
+    //icone dica
+    Icon iconDicaAtivada = new ImageIcon("src/Imagens/icon-dica-ativada.png");
+    Icon iconDicaDesativada = new ImageIcon("src/Imagens/icon-dica-desativada.png");
     
     public FFaseNumeros1() {
         initComponents();    
         alunoLogado = Session.getInstance().getAlunoLogado();
-        String medalha = alunoLogado.getMedalhaAtiva();
-        System.out.println(medalha);
-        if(medalha.equals("Mundo Concluido!")){
-            panel_num3.setVisible(false);
-        }
+        
+        // Adiciona o MouseListener ao panel_heard
+        panel_num3.addMouseListener(panel_num3MouseListener);
         
         timer = new Timer(1000, new ActionListener() {
 
@@ -69,13 +76,14 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         panelSombra4 = new Visualizacao.PanelSombra();
         jLabel6 = new javax.swing.JLabel();
-        panelSombra5 = new Visualizacao.PanelSombra();
+        panel_num1 = new Visualizacao.PanelSombra();
         jLabel8 = new javax.swing.JLabel();
-        panelSombra6 = new Visualizacao.PanelSombra();
+        panel_num2 = new Visualizacao.PanelSombra();
         jLabel9 = new javax.swing.JLabel();
         panel_num3 = new Visualizacao.PanelSombra();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        btn_dica = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -203,14 +211,14 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        panelSombra5.setBackground(new java.awt.Color(255, 102, 102));
-        panelSombra5.setPreferredSize(new java.awt.Dimension(104, 104));
-        panelSombra5.setShadowOpacity(0.3F);
-        panelSombra5.setShadowSize(3);
-        panelSombra5.setShadowType(Visualizacao.ShadowType.BOT_RIGHT);
-        panelSombra5.addMouseListener(new java.awt.event.MouseAdapter() {
+        panel_num1.setBackground(new java.awt.Color(255, 102, 102));
+        panel_num1.setPreferredSize(new java.awt.Dimension(104, 104));
+        panel_num1.setShadowOpacity(0.3F);
+        panel_num1.setShadowSize(3);
+        panel_num1.setShadowType(Visualizacao.ShadowType.BOT_RIGHT);
+        panel_num1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelSombra5MouseClicked(evt);
+                panel_num1MouseClicked(evt);
             }
         });
 
@@ -218,31 +226,31 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("10");
 
-        javax.swing.GroupLayout panelSombra5Layout = new javax.swing.GroupLayout(panelSombra5);
-        panelSombra5.setLayout(panelSombra5Layout);
-        panelSombra5Layout.setHorizontalGroup(
-            panelSombra5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSombra5Layout.createSequentialGroup()
+        javax.swing.GroupLayout panel_num1Layout = new javax.swing.GroupLayout(panel_num1);
+        panel_num1.setLayout(panel_num1Layout);
+        panel_num1Layout.setHorizontalGroup(
+            panel_num1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_num1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel8)
                 .addContainerGap(21, Short.MAX_VALUE))
         );
-        panelSombra5Layout.setVerticalGroup(
-            panelSombra5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSombra5Layout.createSequentialGroup()
+        panel_num1Layout.setVerticalGroup(
+            panel_num1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_num1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel8)
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        panelSombra6.setBackground(new java.awt.Color(51, 204, 255));
-        panelSombra6.setPreferredSize(new java.awt.Dimension(104, 104));
-        panelSombra6.setShadowOpacity(0.3F);
-        panelSombra6.setShadowSize(3);
-        panelSombra6.setShadowType(Visualizacao.ShadowType.BOT_RIGHT);
-        panelSombra6.addMouseListener(new java.awt.event.MouseAdapter() {
+        panel_num2.setBackground(new java.awt.Color(51, 204, 255));
+        panel_num2.setPreferredSize(new java.awt.Dimension(104, 104));
+        panel_num2.setShadowOpacity(0.3F);
+        panel_num2.setShadowSize(3);
+        panel_num2.setShadowType(Visualizacao.ShadowType.BOT_RIGHT);
+        panel_num2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelSombra6MouseClicked(evt);
+                panel_num2MouseClicked(evt);
             }
         });
 
@@ -250,18 +258,18 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("15");
 
-        javax.swing.GroupLayout panelSombra6Layout = new javax.swing.GroupLayout(panelSombra6);
-        panelSombra6.setLayout(panelSombra6Layout);
-        panelSombra6Layout.setHorizontalGroup(
-            panelSombra6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSombra6Layout.createSequentialGroup()
+        javax.swing.GroupLayout panel_num2Layout = new javax.swing.GroupLayout(panel_num2);
+        panel_num2.setLayout(panel_num2Layout);
+        panel_num2Layout.setHorizontalGroup(
+            panel_num2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_num2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel9)
                 .addContainerGap(21, Short.MAX_VALUE))
         );
-        panelSombra6Layout.setVerticalGroup(
-            panelSombra6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSombra6Layout.createSequentialGroup()
+        panel_num2Layout.setVerticalGroup(
+            panel_num2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_num2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel9)
                 .addContainerGap(25, Short.MAX_VALUE))
@@ -272,11 +280,6 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
         panel_num3.setShadowOpacity(0.3F);
         panel_num3.setShadowSize(3);
         panel_num3.setShadowType(Visualizacao.ShadowType.BOT_RIGHT);
-        panel_num3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panel_num3MouseClicked(evt);
-            }
-        });
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -303,6 +306,13 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setText("Escolha o resultado");
 
+        btn_dica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-dica-desativada.png"))); // NOI18N
+        btn_dica.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_dicaMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -310,32 +320,30 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(57, 57, 57)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(panelSombra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabel1)
-                            .addGap(44, 44, 44)
-                            .addComponent(jLabel2))
-                        .addComponent(panelSombra2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(panelSombra3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(jLabel4)
-                                .addGap(30, 30, 30)
-                                .addComponent(panelSombra4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel11)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(panelSombra5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(panelSombra6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(panel_num3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(1, 1, 1)))
-                .addGap(55, 55, 55))
+                        .addComponent(panelSombra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1)
+                        .addGap(44, 44, 44)
+                        .addComponent(jLabel2))
+                    .addComponent(panelSombra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(panelSombra3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel4)
+                        .addGap(30, 30, 30)
+                        .addComponent(panelSombra4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(panel_num1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(panel_num2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(panel_num3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btn_dica, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel11)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,7 +356,6 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
                             .addComponent(panelSombra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1)
                         .addGap(47, 47, 47)))
                 .addComponent(panelSombra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -359,12 +366,14 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addComponent(jLabel4))
                     .addComponent(panelSombra4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(142, 142, 142)
+                .addGap(71, 71, 71)
+                .addComponent(btn_dica, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
                 .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelSombra5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelSombra6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panel_num1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panel_num2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panel_num3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48))
         );
@@ -375,12 +384,12 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+            .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE)
+                .addComponent(customScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -393,7 +402,7 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jLabel2MouseClicked
 
-    private void panelSombra5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra5MouseClicked
+    private void panel_num1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_num1MouseClicked
         acertos++;
         timer.stop();
         ImageIcon icon = new ImageIcon("src/Imagens/icon-numeros-alerta.png");
@@ -401,25 +410,58 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
         alert.setVisible(true);
         new FFaseNumeros2(acertos, seconds).setVisible(true);
         dispose();
-    }//GEN-LAST:event_panelSombra5MouseClicked
+    }//GEN-LAST:event_panel_num1MouseClicked
 
-    private void panelSombra6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra6MouseClicked
+    private void panel_num2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_num2MouseClicked
         timer.stop();
         ImageIcon icon = new ImageIcon("src/Imagens/icon-numeros-alerta.png");
         AlertaGeral alert = new AlertaGeral(FFaseNumeros1.this, icon, "Fase Números", "Que pena.. A resposta era 10", 25, 25);
         alert.setVisible(true);
         new FFaseNumeros2(acertos, seconds).setVisible(true);
         dispose();
-    }//GEN-LAST:event_panelSombra6MouseClicked
+    }//GEN-LAST:event_panel_num2MouseClicked
 
-    private void panel_num3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_num3MouseClicked
-        timer.stop();
-        ImageIcon icon = new ImageIcon("src/Imagens/icon-numeros-alerta.png");
-        AlertaGeral alert = new AlertaGeral(FFaseNumeros1.this, icon, "Fase Números", "Que pena.. A resposta era 10", 25, 25);
-        alert.setVisible(true);
-        new FFaseNumeros2(acertos, seconds).setVisible(true);
-        dispose();
-    }//GEN-LAST:event_panel_num3MouseClicked
+    private MouseListener panel_num3MouseListener = new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent evt) {
+            timer.stop();
+            ImageIcon icon = new ImageIcon("src/Imagens/icon-numeros-alerta.png");
+            AlertaGeral alert = new AlertaGeral(FFaseNumeros1.this, icon, "Fase Números", "Que pena.. A resposta era 10", 25, 25);
+            alert.setVisible(true);
+            new FFaseNumeros2(acertos, seconds).setVisible(true);
+            dispose();
+        }
+    };
+    
+    private void btn_dicaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_dicaMouseClicked
+        if (!dicaClicada) {
+            String medalha = alunoLogado.getMedalhaAtiva();
+            if (medalha.equals("Mundo Concluido!")) {
+                // Define o ícone de clique se ainda não foi clicado
+                btn_dica.setIcon(iconDicaAtivada);
+                panel_num3.setBackground(new Color(210,210,210));
+                panel_num3.setShadowColor(Color.white);
+                panel_num3.setShadowSize(1);
+                panel_num3.setShadowType(ShadowType.CENTER);
+                panel_num3.removeMouseListener(panel_num3MouseListener);
+            }
+            else{
+                ImageIcon icon = new ImageIcon("src/Imagens/icon-dica-alerta.png");
+                AlertaGeral alert = new AlertaGeral(this, icon, "Dica Indisponível", "Ative ou consiga a medalha de mundo concluido para liberar", 50, 50);
+                alert.setVisible(true);
+            }
+            dicaClicada = true;
+        } else {
+            btn_dica.setIcon(iconDicaDesativada);
+            panel_num3.setBackground(new Color(0,204,51));
+            panel_num3.setShadowColor(new Color(0,0,0));
+            panel_num3.setShadowSize(3);
+            panel_num3.setShadowType(ShadowType.BOT_RIGHT);
+            // Adiciona o MouseListener ao panel_heard
+            panel_num3.addMouseListener(panel_num3MouseListener);
+            dicaClicada = false;
+        }
+    }//GEN-LAST:event_btn_dicaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -457,6 +499,7 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btn_dica;
     private Visualizacao.CustomScrollPane customScrollPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -474,8 +517,8 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
     private Visualizacao.PanelSombra panelSombra2;
     private Visualizacao.PanelSombra panelSombra3;
     private Visualizacao.PanelSombra panelSombra4;
-    private Visualizacao.PanelSombra panelSombra5;
-    private Visualizacao.PanelSombra panelSombra6;
+    private Visualizacao.PanelSombra panel_num1;
+    private Visualizacao.PanelSombra panel_num2;
     private Visualizacao.PanelSombra panel_num3;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,4 +1,3 @@
-
 package Visualizacao;
 
 import Controle.Conexao;
@@ -16,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -23,7 +23,8 @@ import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 public class FFaseOuvir extends javax.swing.JFrame {
 
@@ -31,23 +32,28 @@ public class FFaseOuvir extends javax.swing.JFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
     FaseConcluida fase = new FaseConcluida();
-    
+
     private Timer timer;
     private int seconds = 0;
     private int minutes;
     private int remainingSeconds;
     private String acerto = "";
-    
+
     private Aluno alunoLogado;
     private int idAluno;
-    
+    private boolean dicaClicada = false;
+
+    //icone dica
+    Icon iconDicaAtivada = new ImageIcon("src/Imagens/icon-dica-ativada.png");
+    Icon iconDicaDesativada = new ImageIcon("src/Imagens/icon-dica-desativada.png");
+
     public FFaseOuvir() {
         initComponents();
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
-        
+
         idAluno = alunoLogado.getIdAluno();
-        
+
         lbl_tocar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -55,12 +61,15 @@ public class FFaseOuvir extends javax.swing.JFrame {
                 tocarAudio("src/audios/red.wav");
             }
         });
-        
-        String medalha = alunoLogado.getMedalhaAtiva();
-        if(medalha.equals("Mundo Concluido!")){
-            panel_heard.setVisible(false);
-        }
-        
+
+        panel_red.setBackground(new Color(240, 240, 240));
+        panel_head.setBackground(new Color(240, 240, 240));
+        panel_read.setBackground(new Color(240, 240, 240));
+        panel_heard.setBackground(new Color(240, 240, 240));
+
+        // Adiciona o MouseListener ao panel_heard
+        panel_heard.addMouseListener(panel_heardMouseListener);
+
         timer = new Timer(1000, new ActionListener() {
 
             @Override
@@ -70,17 +79,17 @@ public class FFaseOuvir extends javax.swing.JFrame {
                 remainingSeconds = seconds % 60;
             }
         });
-        
+
         timer.start();
     }
-    
+
     public void dispose() {
         super.dispose();
         if (timer != null) {
             timer.stop();
         }
     }
-    
+
     public void tocarAudio(String caminhoDoArquivo) {
         if (!Config.audioAtivado) {
             return;
@@ -94,6 +103,7 @@ public class FFaseOuvir extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,6 +134,7 @@ public class FFaseOuvir extends javax.swing.JFrame {
         lbl_read = new javax.swing.JLabel();
         panel_heard = new Visualizacao.PanelRound();
         lbl_heard = new javax.swing.JLabel();
+        btn_dica = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -169,7 +180,7 @@ public class FFaseOuvir extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-confirmar.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-confirmar2.png"))); // NOI18N
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel4MouseClicked(evt);
@@ -341,11 +352,6 @@ public class FFaseOuvir extends javax.swing.JFrame {
         panel_heard.setRoundBottomRight(50);
         panel_heard.setRoundTopLeft(50);
         panel_heard.setRoundTopRight(50);
-        panel_heard.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panel_heardMouseClicked(evt);
-            }
-        });
 
         lbl_heard.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
         lbl_heard.setForeground(new java.awt.Color(102, 102, 102));
@@ -368,36 +374,46 @@ public class FFaseOuvir extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btn_dica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-dica-desativada.png"))); // NOI18N
+        btn_dica.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_dicaMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(panelSombra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(60, 60, 60)
-                                    .addComponent(jLabel2))
-                                .addComponent(jLabel3)))
-                        .addComponent(panelSombra3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(182, 182, 182)
-                            .addComponent(jLabel4)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
+                        .addGap(66, 66, 66)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(panel_red, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(panel_read, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(29, 29, 29)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(panel_heard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panel_head, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(panel_head, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(panelSombra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(60, 60, 60)
+                                        .addComponent(jLabel2))
+                                    .addComponent(jLabel3)))
+                            .addComponent(panelSombra3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(119, 119, 119)
+                                .addComponent(btn_dica, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel4)))))
                 .addGap(30, 30, 30))
         );
         jPanel1Layout.setVerticalGroup(
@@ -422,8 +438,10 @@ public class FFaseOuvir extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panel_heard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panel_read, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(73, 73, 73)
-                .addComponent(jLabel4)
+                .addGap(62, 62, 62)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_dica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(38, 38, 38))
         );
 
@@ -453,23 +471,23 @@ public class FFaseOuvir extends javax.swing.JFrame {
         double porcAcerto, pontos;
         porcAcerto = 0;
         pontos = 0;
-        if(acerto.equals("ok")){
+        if (acerto.equals("ok")) {
             porcAcerto = 100;
             pontos = 100;
-        } else{
+        } else {
             porcAcerto = 0;
             pontos = 0;
         }
         String medalha = alunoLogado.getMedalhaAtiva();
-        if(medalha.equals("Iniciando!")){
+        if (medalha.equals("Iniciando!")) {
             pontos = pontos + 50;
-        } else if(medalha.equals("A todo vapor!")){
+        } else if (medalha.equals("A todo vapor!")) {
             pontos = pontos * 2;
         }
         fase.setIdFase(3);
         fase.setIdAluno(idAluno);
         fase.setPontos(pontos);
-        fase.setTempoConclusao(minutes,remainingSeconds);
+        fase.setTempoConclusao(minutes, remainingSeconds);
         fase.setPorcAcertos(porcAcerto);
         fase.cadastrar();
         inserirNotificacao();
@@ -477,7 +495,7 @@ public class FFaseOuvir extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
 
-    private void inserirNotificacao(){
+    private void inserirNotificacao() {
         String sql;
         sql = "insert into notificacoes(idAluno, notificacao, descNotificacao, iconNotificacao) values"
                 + "(?,?,?,?)";
@@ -488,56 +506,126 @@ public class FFaseOuvir extends javax.swing.JFrame {
             pst.setString(3, "Voce concluiu a fase de escuta!");
             pst.setString(4, "icon-medalha-notificacao.png");
             pst.executeUpdate();
-            
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
+            JOptionPane.showMessageDialog(null, e);
         }
     }
-    
+
     private void panel_redMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_redMouseClicked
         acerto = "ok";
-        panel_red.setBackground(new Color(153,153,153));
-        lbl_red.setForeground(new Color(255, 255, 255));
-        panel_head.setBackground(new Color(240,240,240));
-        lbl_head.setForeground(new Color(102, 102, 102));
-        panel_read.setBackground(new Color(240,240,240));
-        lbl_read.setForeground(new Color(102, 102, 102));
-        panel_heard.setBackground(new Color(240,240,240));
-        lbl_heard.setForeground(new Color(102, 102, 102));
+        if (dicaClicada) {
+            panel_red.setBackground(new Color(153, 153, 153));
+            lbl_red.setForeground(new Color(255, 255, 255));
+            panel_head.setBackground(new Color(240, 240, 240));
+            lbl_head.setForeground(new Color(102, 102, 102));
+            panel_read.setBackground(new Color(240, 240, 240));
+            lbl_read.setForeground(new Color(102, 102, 102));
+            panel_heard.setBackground(new Color(240, 240, 240));
+            lbl_heard.setForeground(new Color(204, 204, 204));
+        } else {
+            panel_red.setBackground(new Color(153, 153, 153));
+            lbl_red.setForeground(new Color(255, 255, 255));
+            panel_head.setBackground(new Color(240, 240, 240));
+            lbl_head.setForeground(new Color(102, 102, 102));
+            panel_read.setBackground(new Color(240, 240, 240));
+            lbl_read.setForeground(new Color(102, 102, 102));
+            panel_heard.setBackground(new Color(240, 240, 240));
+            lbl_heard.setForeground(new Color(102, 102, 102));
+        }
     }//GEN-LAST:event_panel_redMouseClicked
 
     private void panel_headMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_headMouseClicked
-        panel_red.setBackground(new Color(240,240,240));
-        lbl_red.setForeground(new Color(102, 102, 102));
-        panel_head.setBackground(new Color(153,153,153));
-        lbl_head.setForeground(new Color(255, 255, 255));
-        panel_read.setBackground(new Color(240,240,240));
-        lbl_read.setForeground(new Color(102, 102, 102));
-        panel_heard.setBackground(new Color(240,240,240));
-        lbl_heard.setForeground(new Color(102, 102, 102));
+        if (dicaClicada) {
+            panel_red.setBackground(new Color(240, 240, 240));
+            lbl_red.setForeground(new Color(102, 102, 102));
+            panel_head.setBackground(new Color(153, 153, 153));
+            lbl_head.setForeground(new Color(255, 255, 255));
+            panel_read.setBackground(new Color(240, 240, 240));
+            lbl_read.setForeground(new Color(102, 102, 102));
+            panel_heard.setBackground(new Color(240, 240, 240));
+            lbl_heard.setForeground(new Color(204, 204, 204));
+        } else{
+            panel_red.setBackground(new Color(240, 240, 240));
+            lbl_red.setForeground(new Color(102, 102, 102));
+            panel_head.setBackground(new Color(153, 153, 153));
+            lbl_head.setForeground(new Color(255, 255, 255));
+            panel_read.setBackground(new Color(240, 240, 240));
+            lbl_read.setForeground(new Color(102, 102, 102));
+            panel_heard.setBackground(new Color(240, 240, 240));
+            lbl_heard.setForeground(new Color(102, 102, 102));
+        }
     }//GEN-LAST:event_panel_headMouseClicked
 
     private void panel_readMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_readMouseClicked
-        panel_red.setBackground(new Color(240,240,240));
-        lbl_red.setForeground(new Color(102, 102, 102));
-        panel_head.setBackground(new Color(240,240,240));
-        lbl_head.setForeground(new Color(102, 102, 102));
-        panel_read.setBackground(new Color(153,153,153));
-        lbl_read.setForeground(new Color(255, 255, 255));
-        panel_heard.setBackground(new Color(240,240,240));
-        lbl_heard.setForeground(new Color(102, 102, 102));
+        if (dicaClicada) {
+            panel_red.setBackground(new Color(240, 240, 240));
+            lbl_red.setForeground(new Color(102, 102, 102));
+            panel_head.setBackground(new Color(240, 240, 240));
+            lbl_head.setForeground(new Color(102, 102, 102));
+            panel_read.setBackground(new Color(153, 153, 153));
+            lbl_read.setForeground(new Color(255, 255, 255));
+            panel_heard.setBackground(new Color(240, 240, 240));
+            lbl_heard.setForeground(new Color(204, 204, 204));
+        } else {
+            panel_red.setBackground(new Color(240, 240, 240));
+            lbl_red.setForeground(new Color(102, 102, 102));
+            panel_head.setBackground(new Color(240, 240, 240));
+            lbl_head.setForeground(new Color(102, 102, 102));
+            panel_read.setBackground(new Color(153, 153, 153));
+            lbl_read.setForeground(new Color(255, 255, 255));
+            panel_heard.setBackground(new Color(240, 240, 240));
+            lbl_heard.setForeground(new Color(102, 102, 102));
+        }
     }//GEN-LAST:event_panel_readMouseClicked
 
-    private void panel_heardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_heardMouseClicked
-        panel_red.setBackground(new Color(240,240,240));
-        lbl_red.setForeground(new Color(102, 102, 102));
-        panel_head.setBackground(new Color(240,240,240));
-        lbl_head.setForeground(new Color(102, 102, 102));
-        panel_read.setBackground(new Color(240,240,240));
-        lbl_read.setForeground(new Color(102, 102, 102));
-        panel_heard.setBackground(new Color(153,153,153));
-        lbl_heard.setForeground(new Color(255, 255, 255));
-    }//GEN-LAST:event_panel_heardMouseClicked
+    private MouseListener panel_heardMouseListener = new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent evt) {
+            if (dicaClicada) {
+                panel_red.setBackground(new Color(240, 240, 240));
+                lbl_red.setForeground(new Color(102, 102, 102));
+                panel_head.setBackground(new Color(240, 240, 240));
+                lbl_head.setForeground(new Color(102, 102, 102));
+                panel_read.setBackground(new Color(240, 240, 240));
+                lbl_read.setForeground(new Color(102, 102, 102));
+                panel_heard.setBackground(new Color(240, 240, 240));
+                lbl_heard.setForeground(new Color(204, 204, 204));
+            } else {
+                panel_red.setBackground(new Color(240, 240, 240));
+                lbl_red.setForeground(new Color(102, 102, 102));
+                panel_head.setBackground(new Color(240, 240, 240));
+                lbl_head.setForeground(new Color(102, 102, 102));
+                panel_read.setBackground(new Color(240, 240, 240));
+                lbl_read.setForeground(new Color(102, 102, 102));
+                panel_heard.setBackground(new Color(153, 153, 153));
+                lbl_heard.setForeground(new Color(255, 255, 255));
+            }
+        }
+    };
+
+    private void btn_dicaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_dicaMouseClicked
+        if (!dicaClicada) {
+            String medalha = alunoLogado.getMedalhaAtiva();
+            if (medalha.equals("Mundo Concluido!")) {
+                // Define o ícone de clique se ainda não foi clicado
+                btn_dica.setIcon(iconDicaAtivada);
+                panel_heard.setBackground(new Color(240, 240, 240));
+                lbl_heard.setForeground(new Color(204, 204, 204));
+                panel_heard.removeMouseListener(panel_heardMouseListener);
+            } else {
+                ImageIcon icon = new ImageIcon("src/Imagens/icon-dica-alerta.png");
+                AlertaGeral alert = new AlertaGeral(this, icon, "Dica Indisponível", "Ative ou consiga a medalha de mundo concluido para liberar", 50, 50);
+                alert.setVisible(true);
+            }
+            dicaClicada = true;
+        } else {
+            btn_dica.setIcon(iconDicaDesativada);
+            lbl_heard.setForeground(new Color(102, 102, 102));
+            panel_heard.addMouseListener(panel_heardMouseListener);
+            dicaClicada = false;
+        }
+    }//GEN-LAST:event_btn_dicaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -575,6 +663,7 @@ public class FFaseOuvir extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btn_dica;
     private Visualizacao.CustomScrollPane customScrollPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;

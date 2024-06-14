@@ -69,10 +69,17 @@ public class VerificadorFases {
 
         // Verificar se a conquista "A todo vapor!" já foi concedida
         boolean conquistaJaConcedida = verificarConquista(idAlunoLogado, "A todo vapor!");
+        
+        // Verificar se a conquista "Mundo Concluido!" já foi concedida
+        boolean conquistaJaConcedida2 = verificarConquista(idAlunoLogado, "Mundo Concluido!");
 
         // Se todas as fases estiverem concluídas e a conquista ainda não foi concedida, conceda a conquista
         if (todasFasesConcluidas && !conquistaJaConcedida) {
             inserirConquista(idAlunoLogado, "A todo vapor!"); // Nome da conquista a ser inserida
+        }
+        
+        if (todasFasesConcluidas && !conquistaJaConcedida2) {
+            inserirConquista(idAlunoLogado, "Mundo Concluido!"); // Nome da conquista a ser inserida
         }
 
         return estadosFases;

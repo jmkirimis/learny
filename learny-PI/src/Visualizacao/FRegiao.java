@@ -48,31 +48,11 @@ public class FRegiao extends javax.swing.JFrame {
         
         Color pretoComOpacidade = new Color(0, 0, 0, 55);
         Color Opacidade = new Color(0, 0, 0, 0);
-        panel_sombra_diarias.setBackground(pretoComOpacidade);
         panelRoundBorda2.setBackground(Opacidade);
-        panel_fixo.setBackground(Color.WHITE);
         
-        // Define o layout como GridBagLayout
-        this.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        
-        // Adiciona o customScrollPane1 no centro
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.fill = GridBagConstraints.BOTH;
-        this.add(customScrollPane1, gbc);
-        
-        // Adiciona o fixedComponent logo acima do menu
-        gbc.gridy = 1;
-        gbc.weighty = 0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        this.add(panel_fixo, gbc);
-
-        // Adiciona o menu na parte inferior
-        gbc.gridy = 2;
-        this.add(menu, gbc);
+        this.setLayout(new BorderLayout());
+        this.add(customScrollPane1, BorderLayout.CENTER);
+        this.add(menu, BorderLayout.SOUTH);
             
         VerificadorFases vfases = new VerificadorFases(conexao);
         String[] estadosFases = vfases.verificarFases(1, idAluno); // Verifica as fases da região 1
@@ -93,11 +73,6 @@ public class FRegiao extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         menuHamburguer = new javax.swing.JLabel();
-        panel_fixo = new javax.swing.JPanel();
-        panel_diarias = new Visualizacao.PanelGradiente();
-        panel_sombra_diarias = new Visualizacao.PanelRound();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         customScrollPane1 = new Visualizacao.CustomScrollPane();
         jPanel1 = new javax.swing.JPanel();
         panelRound1 = new Visualizacao.PanelRound();
@@ -190,78 +165,6 @@ public class FRegiao extends javax.swing.JFrame {
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addContainerGap())
-        );
-
-        panel_fixo.setBackground(new Color(0, 0, 0, 0));
-
-        panel_diarias.setMaximumSize(new java.awt.Dimension(233, 32));
-        panel_diarias.setRadius(25);
-
-        panel_sombra_diarias.setBackground(new java.awt.Color(204, 204, 204));
-        panel_sombra_diarias.setRoundBottomLeft(25);
-        panel_sombra_diarias.setRoundBottomRight(25);
-        panel_sombra_diarias.setRoundTopLeft(25);
-        panel_sombra_diarias.setRoundTopRight(25);
-        panel_sombra_diarias.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panel_sombra_diariasMouseClicked(evt);
-            }
-        });
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Missões diárias");
-
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-plus.png"))); // NOI18N
-        jLabel11.setPreferredSize(new java.awt.Dimension(28, 32));
-
-        javax.swing.GroupLayout panel_sombra_diariasLayout = new javax.swing.GroupLayout(panel_sombra_diarias);
-        panel_sombra_diarias.setLayout(panel_sombra_diariasLayout);
-        panel_sombra_diariasLayout.setHorizontalGroup(
-            panel_sombra_diariasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_sombra_diariasLayout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
-        );
-        panel_sombra_diariasLayout.setVerticalGroup(
-            panel_sombra_diariasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_sombra_diariasLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(panel_sombra_diariasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
-
-        javax.swing.GroupLayout panel_diariasLayout = new javax.swing.GroupLayout(panel_diarias);
-        panel_diarias.setLayout(panel_diariasLayout);
-        panel_diariasLayout.setHorizontalGroup(
-            panel_diariasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_sombra_diarias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        panel_diariasLayout.setVerticalGroup(
-            panel_diariasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_diariasLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(panel_sombra_diarias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        javax.swing.GroupLayout panel_fixoLayout = new javax.swing.GroupLayout(panel_fixo);
-        panel_fixo.setLayout(panel_fixoLayout);
-        panel_fixoLayout.setHorizontalGroup(
-            panel_fixoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_fixoLayout.createSequentialGroup()
-                .addContainerGap(189, Short.MAX_VALUE)
-                .addComponent(panel_diarias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53))
-        );
-        panel_fixoLayout.setVerticalGroup(
-            panel_fixoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_fixoLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(panel_diarias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -770,11 +673,6 @@ public class FRegiao extends javax.swing.JFrame {
         openItemSelectionDialog();
     }//GEN-LAST:event_panelSelecionarMouseClicked
 
-    private void panel_sombra_diariasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_sombra_diariasMouseClicked
-        new FOpcoes(this).setVisible(true);
-        dispose();
-    }//GEN-LAST:event_panel_sombra_diariasMouseClicked
-
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         new FMundos().setVisible(true);
         dispose();
@@ -916,13 +814,11 @@ public class FRegiao extends javax.swing.JFrame {
     private javax.swing.JLabel itemLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -941,8 +837,5 @@ public class FRegiao extends javax.swing.JFrame {
     private Visualizacao.PanelSombra panelSombra1;
     private Visualizacao.PanelSombra panelSombra2;
     private Visualizacao.PanelSombra panelSombra4;
-    private Visualizacao.PanelGradiente panel_diarias;
-    private javax.swing.JPanel panel_fixo;
-    private Visualizacao.PanelRound panel_sombra_diarias;
     // End of variables declaration//GEN-END:variables
 }
