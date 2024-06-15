@@ -701,7 +701,7 @@ public class FFaseLigar extends javax.swing.JFrame {
         porcAcerto = ((double) acertos / 4) * 100;
 
         double pontos;
-        pontos = ((double) porcAcerto * 0.7) + ((int) seconds * 0.3);
+        pontos = ((double) porcAcerto) - ((int) seconds * 0.4);
         String medalha = alunoLogado.getMedalhaAtiva();
         if (medalha.equals("Iniciando!")) {
             pontos = pontos + 50;

@@ -475,7 +475,7 @@ public class FFaseOuvir extends javax.swing.JFrame {
         pontos = 0;
         if (acerto.equals("ok")) {
             porcAcerto = 100;
-            pontos = 100;
+            pontos = 100 - ((int) seconds * 0.4);
         } else {
             porcAcerto = 0;
             pontos = 0;

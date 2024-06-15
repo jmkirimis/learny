@@ -473,7 +473,7 @@ public class FFaseNumeros2 extends javax.swing.JFrame {
         porcAcerto = ((double) acertos2 / 2) * 100;
 
         double pontos;
-        pontos = ((double) porcAcerto * 0.7) + ((int) seconds2 * 0.3);
+        pontos = ((double) porcAcerto) - ((int) seconds2 * 0.4);
         String medalha = alunoLogado.getMedalhaAtiva();
         if (medalha.equals("Iniciando!")) {
             pontos = pontos + 50;
