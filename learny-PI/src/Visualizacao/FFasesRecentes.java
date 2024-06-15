@@ -43,6 +43,8 @@ public class FFasesRecentes extends javax.swing.JFrame {
     public FFasesRecentes(FOpcoes telaDeOpcoes) {
         this.telaDeOpcoes = telaDeOpcoes;
         initComponents();
+        ImageIcon icon = new ImageIcon("src/Imagens/logo-icon.png");
+        this.setIconImage(icon.getImage());
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
         // Inicializa a estrutura de dados

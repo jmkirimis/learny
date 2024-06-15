@@ -41,6 +41,8 @@ public class FOpcoes extends NavegacaoFormulario {
     public FOpcoes(JFrame telaDeOrigem) {
         super(telaDeOrigem, TelaOrigem.OPCOES);
         initComponents();
+        ImageIcon icon = new ImageIcon("src/Imagens/logo-icon.png");
+        this.setIconImage(icon.getImage());
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
         

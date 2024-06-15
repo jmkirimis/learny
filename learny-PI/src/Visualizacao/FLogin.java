@@ -21,6 +21,8 @@ public class FLogin extends javax.swing.JFrame {
     public FLogin() {
         initComponents();
         conexao = Conexao.conecta();
+        ImageIcon icon = new ImageIcon("src/Imagens/logo-icon.png");
+        this.setIconImage(icon.getImage());
     }
 
     /**

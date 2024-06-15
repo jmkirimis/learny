@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import javax.swing.ImageIcon;
 
 public class FCadastro extends javax.swing.JFrame {
 
@@ -19,6 +20,8 @@ public class FCadastro extends javax.swing.JFrame {
     
     public FCadastro() {
         initComponents();
+        ImageIcon icon = new ImageIcon("src/Imagens/logo-icon.png");
+        this.setIconImage(icon.getImage());
     }
     Aluno a = new Aluno(this);
     /**

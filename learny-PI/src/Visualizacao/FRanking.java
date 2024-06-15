@@ -34,6 +34,8 @@ public class FRanking extends javax.swing.JFrame {
     public FRanking(NavegacaoFormulario telaDeOrigem) {
         this.telaDeOrigem = telaDeOrigem;
         initComponents();
+        ImageIcon icon = new ImageIcon("src/Imagens/logo-icon.png");
+        this.setIconImage(icon.getImage());
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
         idAluno = alunoLogado.getIdAluno();

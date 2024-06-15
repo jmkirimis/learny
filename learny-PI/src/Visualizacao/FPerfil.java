@@ -10,6 +10,7 @@ import java.awt.Cursor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class FPerfil extends NavegacaoFormulario {
@@ -22,6 +23,8 @@ public class FPerfil extends NavegacaoFormulario {
     public FPerfil(JFrame telaDeOrigem) {
         super(telaDeOrigem, TelaOrigem.PERFIL);
         initComponents();
+        ImageIcon icon = new ImageIcon("src/Imagens/logo-icon.png");
+        this.setIconImage(icon.getImage());
         alunoLogado = Session.getInstance().getAlunoLogado();
         String nome = alunoLogado.getNome();
         double pontos = alunoLogado.getPontosTotais();

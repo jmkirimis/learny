@@ -35,7 +35,9 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
     Icon iconDicaDesativada = new ImageIcon("src/Imagens/icon-dica-desativada.png");
     
     public FFaseNumeros1() {
-        initComponents();    
+        initComponents();
+        ImageIcon icon = new ImageIcon("src/Imagens/logo-icon.png");
+        this.setIconImage(icon.getImage());
         alunoLogado = Session.getInstance().getAlunoLogado();
         
         // Adiciona o MouseListener ao panel_heard

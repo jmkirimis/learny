@@ -60,6 +60,8 @@ public class FFaseObservacao extends javax.swing.JFrame {
     
     public FFaseObservacao() {
         initComponents();
+        ImageIcon icon = new ImageIcon("src/Imagens/logo-icon.png");
+        this.setIconImage(icon.getImage());
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
         

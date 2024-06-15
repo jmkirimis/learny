@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class FFaseConcluida extends javax.swing.JFrame {
@@ -27,6 +28,8 @@ public class FFaseConcluida extends javax.swing.JFrame {
     
     public FFaseConcluida() {
         initComponents();
+        ImageIcon icon = new ImageIcon("src/Imagens/logo-icon.png");
+        this.setIconImage(icon.getImage());
         alunoLogado = Session.getInstance().getAlunoLogado();
         idAluno = alunoLogado.getIdAluno();
         

@@ -49,6 +49,8 @@ public class FFaseOuvir extends javax.swing.JFrame {
 
     public FFaseOuvir() {
         initComponents();
+        ImageIcon icon = new ImageIcon("src/Imagens/logo-icon.png");
+        this.setIconImage(icon.getImage());
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
 

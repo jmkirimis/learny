@@ -89,6 +89,8 @@ public class FFaseLigar extends javax.swing.JFrame {
 
     public FFaseLigar() {
         initComponents();
+        ImageIcon icon = new ImageIcon("src/Imagens/logo-icon.png");
+        this.setIconImage(icon.getImage());
         alunoLogado = Session.getInstance().getAlunoLogado();
         conexao = Conexao.conecta();
         this.acertos = 0;

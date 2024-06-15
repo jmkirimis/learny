@@ -22,6 +22,8 @@ public class FRegiao extends javax.swing.JFrame {
     public FRegiao() {
         initComponents();
         conexao = Conexao.conecta();
+        ImageIcon icon = new ImageIcon("src/Imagens/logo-icon.png");
+        this.setIconImage(icon.getImage());
         alunoLogado = Session.getInstance().getAlunoLogado();
 
         idAluno = alunoLogado.getIdAluno();

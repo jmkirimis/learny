@@ -17,6 +17,7 @@ import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.ImageIcon;
 
 public class FEditarPerfil extends javax.swing.JFrame {
 
@@ -32,6 +33,8 @@ public class FEditarPerfil extends javax.swing.JFrame {
     public FEditarPerfil(FPerfil telaDePerfil) {
         this.telaDePerfil = telaDePerfil;
         initComponents();
+        ImageIcon icon = new ImageIcon("src/Imagens/logo-icon.png");
+        this.setIconImage(icon.getImage());
         alunoLogado = Session.getInstance().getAlunoLogado();
         String dataNasc = alunoLogado.getDataNasc();
         foto = alunoLogado.getFoto();

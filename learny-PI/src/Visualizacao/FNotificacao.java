@@ -52,6 +52,8 @@ public class FNotificacao extends javax.swing.JFrame {
         this.telaDeOrigem = telaDeOrigem;
         this.parentFrame = parentFrame;
         initComponents();
+        ImageIcon icon = new ImageIcon("src/Imagens/logo-icon.png");
+        this.setIconImage(icon.getImage());
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
         // Inicializa a estrutura de dados
@@ -132,7 +134,6 @@ public class FNotificacao extends javax.swing.JFrame {
                             pst.setInt(1, finalIdNotificacao);
 
                             int rowsAffected = pst.executeUpdate();
-                            System.out.println("Linhas afetadas: " + rowsAffected);
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
