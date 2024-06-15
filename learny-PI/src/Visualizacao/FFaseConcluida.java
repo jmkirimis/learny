@@ -46,7 +46,6 @@ public class FFaseConcluida extends javax.swing.JFrame {
                 Time time = rs.getTime(5);
                 double porcAcertos = rs.getDouble(6);
                 int porcAcertosInteiro = (int) porcAcertos;
-                System.out.println(porcAcertosInteiro);
                 lbl_pontos.setText(Double.toString(pontos));
                 lbl_porc.setText(Integer.toString(porcAcertosInteiro)+"%");
 

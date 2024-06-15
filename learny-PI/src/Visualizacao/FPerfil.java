@@ -28,13 +28,14 @@ public class FPerfil extends NavegacaoFormulario {
         alunoLogado = Session.getInstance().getAlunoLogado();
         String nome = alunoLogado.getNome();
         double pontos = alunoLogado.getPontosTotais();
-        int nivel = (int) (pontos / 100);
-        double progressoNivel = pontos % 100;
+        int nivel = (int) (pontos / 150);
+        double progressoNivel = pontos % 150;
         String foto = alunoLogado.getFoto();
         barra_nivel.setValue((int) progressoNivel);
         lbl_nome_perfil.setText(nome);
         lbl_anos.setText(Integer.toString(nivel));
         panel_foto_perfil.setImagem("src/Imagens/" + foto);
+        btn_mudar_cores.setOn(true);
     }
 
     private void abrirNotificacoes() {
@@ -92,10 +93,10 @@ public class FPerfil extends NavegacaoFormulario {
         panelSombra8 = new Visualizacao.PanelSombra();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        toggleButton1 = new Visualizacao.ToggleButton();
+        btn_ativar_audio = new Visualizacao.ToggleButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        toggleButton2 = new Visualizacao.ToggleButton();
+        btn_mudar_cores = new Visualizacao.ToggleButton();
         lbl_nome_perfil = new Visualizacao.GradientLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -331,7 +332,8 @@ public class FPerfil extends NavegacaoFormulario {
         panelRoundBorda1.setRadius(50);
 
         barra_nivel.setBorder(null);
-        barra_nivel.setValue(300);
+        barra_nivel.setMaximum(150);
+        barra_nivel.setValue(150);
         barra_nivel.setColorString(new java.awt.Color(255, 255, 255));
         barra_nivel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
@@ -401,10 +403,10 @@ public class FPerfil extends NavegacaoFormulario {
         jLabel2.setForeground(new java.awt.Color(153, 153, 153));
         jLabel2.setText("Ativar áudio");
 
-        toggleButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        toggleButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_ativar_audio.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btn_ativar_audio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                toggleButton1MouseClicked(evt);
+                btn_ativar_audioMouseClicked(evt);
             }
         });
 
@@ -414,7 +416,7 @@ public class FPerfil extends NavegacaoFormulario {
         jLabel4.setForeground(new java.awt.Color(153, 153, 153));
         jLabel4.setText("Mudar Cores");
 
-        toggleButton2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btn_mudar_cores.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout panelSombra8Layout = new javax.swing.GroupLayout(panelSombra8);
         panelSombra8.setLayout(panelSombra8Layout);
@@ -430,11 +432,11 @@ public class FPerfil extends NavegacaoFormulario {
                     .addGroup(panelSombra8Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(132, 132, 132)
-                        .addComponent(toggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_ativar_audio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelSombra8Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(127, 127, 127)
-                        .addComponent(toggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_mudar_cores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(54, 54, 54))
         );
         panelSombra8Layout.setVerticalGroup(
@@ -446,13 +448,13 @@ public class FPerfil extends NavegacaoFormulario {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(28, 28, 28)
                 .addGroup(panelSombra8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(toggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_ativar_audio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelSombra8Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jLabel2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelSombra8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(toggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_mudar_cores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelSombra8Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jLabel4)))
@@ -582,9 +584,9 @@ public class FPerfil extends NavegacaoFormulario {
         dispose();
     }//GEN-LAST:event_panelSombra6MouseClicked
 
-    private void toggleButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_toggleButton1MouseClicked
+    private void btn_ativar_audioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ativar_audioMouseClicked
         Config.audioAtivado = !Config.audioAtivado;
-    }//GEN-LAST:event_toggleButton1MouseClicked
+    }//GEN-LAST:event_btn_ativar_audioMouseClicked
 
     /**
      * @param args the command line arguments
@@ -623,6 +625,8 @@ public class FPerfil extends NavegacaoFormulario {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Visualizacao.ProgressBar barra_nivel;
+    private Visualizacao.ToggleButton btn_ativar_audio;
+    private Visualizacao.ToggleButton btn_mudar_cores;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
@@ -654,7 +658,5 @@ public class FPerfil extends NavegacaoFormulario {
     private Visualizacao.PanelSombra panelSombra7;
     private Visualizacao.PanelSombra panelSombra8;
     private Visualizacao.PanelRoundPerfil panel_foto_perfil;
-    private Visualizacao.ToggleButton toggleButton1;
-    private Visualizacao.ToggleButton toggleButton2;
     // End of variables declaration//GEN-END:variables
 }
