@@ -1,4 +1,3 @@
-
 package Visualizacao;
 
 import java.awt.Graphics;
@@ -16,11 +15,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class PanelRoundPerfil extends JPanel {
-    
-    //imagem
+
     private BufferedImage image;
-   
-    // borda arredondada
+
     public int getRoundTopLeft() {
         return roundTopLeft;
     }
@@ -57,10 +54,10 @@ public class PanelRoundPerfil extends JPanel {
         repaint();
     }
 
-    private int roundTopLeft = 0;
-    private int roundTopRight = 0;
-    private int roundBottomLeft = 0;
-    private int roundBottomRight = 0;
+    private int roundTopLeft = 50;
+    private int roundTopRight = 50;
+    private int roundBottomLeft = 50;
+    private int roundBottomRight = 50;
 
     public PanelRoundPerfil() {
         setOpaque(false);
@@ -83,45 +80,38 @@ public class PanelRoundPerfil extends JPanel {
         }
         g2.fill(area);
         g2.dispose();
-        super.paintComponent(grphcs);  
-        // Verifica se há uma imagem para desenhar
+        super.paintComponent(grphcs);
+
         if (image != null) {
             int panelWidth = getWidth();
             int panelHeight = getHeight();
 
-            // Calcula a escala para redimensionar a imagem
             double scaleX = (double) panelWidth / image.getWidth();
             double scaleY = (double) panelHeight / image.getHeight();
             double scale = Math.min(scaleX, scaleY);
 
-            // Calcula as novas dimensões da imagem
             int newWidth = (int) (image.getWidth() * scale);
             int newHeight = (int) (image.getHeight() * scale);
 
-            // Calcula as coordenadas para centralizar a imagem no painel
             int x = (panelWidth - newWidth) / 2;
             int y = (panelHeight - newHeight) / 2;
 
-            // Desenha a imagem redimensionada no painel
-            grphcs.drawImage(image, x, y, newWidth, newHeight, this);
+            BufferedImage roundedImage = getRoundedImage(image, newWidth, newHeight, roundTopLeft, roundTopRight, roundBottomLeft, roundBottomRight);
+            grphcs.drawImage(roundedImage, x, y, this);
         } else {
-            // Se não houver imagem, desenha a imagem padrão sem redimensionamento e centralizada
             ImageIcon defaultImage = new ImageIcon("src/Imagens/camera.png");
             int panelWidth = getWidth();
             int panelHeight = getHeight();
             int imageWidth = defaultImage.getIconWidth();
             int imageHeight = defaultImage.getIconHeight();
 
-            // Calcula as coordenadas para centralizar a imagem padrão no painel
             int x = (panelWidth - imageWidth) / 2;
             int y = (panelHeight - imageHeight) / 2;
 
-            // Desenha a imagem padrão sem redimensionamento e centralizada no painel
             grphcs.drawImage(defaultImage.getImage(), x, y, this);
         }
     }
 
-    // borda arredondada
     private Shape createRoundTopLeft() {
         int width = getWidth();
         int height = getHeight();
@@ -165,13 +155,37 @@ public class PanelRoundPerfil extends JPanel {
         area.add(new Area(new Rectangle2D.Double(0, 0, width, height - roundY / 2)));
         return area;
     }
-    
-    // imagem
-    
+
+    private BufferedImage getRoundedImage(BufferedImage image, int width, int height, int roundTL, int roundTR, int roundBL, int roundBR) {
+        BufferedImage rounded = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = rounded.createGraphics();
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setClip(createRoundShape(width, height, roundTL, roundTR, roundBL, roundBR));
+        g2.drawImage(image, 0, 0, width, height, null);
+        g2.dispose();
+        return rounded;
+    }
+
+    private Shape createRoundShape(int width, int height, int roundTL, int roundTR, int roundBL, int roundBR) {
+        int topLeftArc = Math.min(roundTL, Math.min(width, height));
+        int topRightArc = Math.min(roundTR, Math.min(width, height));
+        int bottomLeftArc = Math.min(roundBL, Math.min(width, height));
+        int bottomRightArc = Math.min(roundBR, Math.min(width, height));
+        return new RoundRectangle2D.Double(0, 0, width, height, topLeftArc, topLeftArc);
+    }
+
     public void setImagem(String path) {
         try {
-            image = ImageIO.read(new File(path));
-            repaint(); // Redesenha o painel para exibir a nova imagem
+            BufferedImage originalImage = ImageIO.read(new File(path));
+
+            int width = originalImage.getWidth();
+            int height = originalImage.getHeight();
+            int newDim = Math.min(width, height);
+            int x = (width - newDim) / 2;
+            int y = (height - newDim) / 2;
+            image = originalImage.getSubimage(x, y, newDim, newDim);
+
+            repaint();
         } catch (IOException e) {
             e.printStackTrace();
         }

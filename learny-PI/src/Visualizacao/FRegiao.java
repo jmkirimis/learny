@@ -1,4 +1,3 @@
-
 package Visualizacao;
 
 import Controle.Conexao;
@@ -13,7 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class FRegiao extends javax.swing.JFrame {
-    
+
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
@@ -24,14 +23,14 @@ public class FRegiao extends javax.swing.JFrame {
         initComponents();
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
-        
+
         idAluno = alunoLogado.getIdAluno();
         double pontos = alunoLogado.getPontosTotais();
         String ranque = alunoLogado.getRanque();
-        
+
         lbl_pontos.setText(Double.toString(pontos));
         lbl_ranque.setText(ranque);
-        
+
         String verConquistas = "select count(*) from alunosXconquistas where idAluno = ?";
         try {
             pst = conexao.prepareStatement(verConquistas);
@@ -45,19 +44,38 @@ public class FRegiao extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-        
+
         Color pretoComOpacidade = new Color(0, 0, 0, 55);
         Color Opacidade = new Color(0, 0, 0, 0);
         panelRoundBorda2.setBackground(Opacidade);
-        
+
         this.setLayout(new BorderLayout());
         this.add(customScrollPane1, BorderLayout.CENTER);
         this.add(menu, BorderLayout.SOUTH);
-            
+
+        panel_linha1.setLineColor(Color.WHITE);
+        panel_linha2.setLineColor(Color.WHITE);
+        panel_linha3.setLineColor(Color.WHITE);
+        panel_linha4.setLineColor(Color.WHITE);
+
         VerificadorFases vfases = new VerificadorFases(conexao);
         String[] estadosFases = vfases.verificarFases(1, idAluno); // Verifica as fases da região 1
+        
+        if (estadosFases[0].equals("ok")) {
+            panel_linha1.setLineColor(new Color(72, 72, 72));
+        }
+        if (estadosFases[1].equals("ok")) {
+            panel_linha2.setLineColor(new Color(72, 72, 72));
+        }
+        if (estadosFases[2].equals("ok")) {
+            panel_linha3.setLineColor(new Color(72, 72, 72));
+        }
+        if (estadosFases[3].equals("ok")) {
+            panel_linha4.setLineColor(new Color(72, 72, 72));
+        }
+        
         verPrimeiraMedalha();
-            
+
     }
 
     /**
@@ -92,6 +110,10 @@ public class FRegiao extends javax.swing.JFrame {
         panelRound2 = new Visualizacao.PanelRound();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        panel_linha1 = new Visualizacao.DiagonalDashedLinePanel();
+        panel_linha4 = new Visualizacao.DiagonalDashedLinePanel();
+        panel_linha2 = new Visualizacao.DiagonalDashedLinePanel();
+        panel_linha3 = new Visualizacao.DiagonalDashedLinePanel();
         panelSombra1 = new Visualizacao.PanelSombra();
         lbl_pontos = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -425,32 +447,111 @@ public class FRegiao extends javax.swing.JFrame {
                 .addGap(5, 5, 5))
         );
 
+        panel_linha1.setBackground(new java.awt.Color(255, 255, 255));
+        panel_linha1.setDirection(1);
+        panel_linha1.setLineColor(new java.awt.Color(72, 72, 72));
+        panel_linha1.setPreferredSize(new java.awt.Dimension(40, 40));
+        panel_linha1.setStrokeWidth(6.0F);
+
+        javax.swing.GroupLayout panel_linha1Layout = new javax.swing.GroupLayout(panel_linha1);
+        panel_linha1.setLayout(panel_linha1Layout);
+        panel_linha1Layout.setHorizontalGroup(
+            panel_linha1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+        panel_linha1Layout.setVerticalGroup(
+            panel_linha1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        panel_linha4.setBackground(new java.awt.Color(255, 255, 255));
+        panel_linha4.setLineColor(new java.awt.Color(72, 72, 72));
+        panel_linha4.setPreferredSize(new java.awt.Dimension(40, 40));
+        panel_linha4.setStrokeWidth(6.0F);
+
+        javax.swing.GroupLayout panel_linha4Layout = new javax.swing.GroupLayout(panel_linha4);
+        panel_linha4.setLayout(panel_linha4Layout);
+        panel_linha4Layout.setHorizontalGroup(
+            panel_linha4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+        panel_linha4Layout.setVerticalGroup(
+            panel_linha4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        panel_linha2.setBackground(new java.awt.Color(255, 255, 255));
+        panel_linha2.setDirection(1);
+        panel_linha2.setLineColor(new java.awt.Color(72, 72, 72));
+        panel_linha2.setPreferredSize(new java.awt.Dimension(40, 40));
+        panel_linha2.setStrokeWidth(6.0F);
+
+        javax.swing.GroupLayout panel_linha2Layout = new javax.swing.GroupLayout(panel_linha2);
+        panel_linha2.setLayout(panel_linha2Layout);
+        panel_linha2Layout.setHorizontalGroup(
+            panel_linha2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+        panel_linha2Layout.setVerticalGroup(
+            panel_linha2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        panel_linha3.setBackground(new java.awt.Color(255, 255, 255));
+        panel_linha3.setLineColor(new java.awt.Color(72, 72, 72));
+        panel_linha3.setPreferredSize(new java.awt.Dimension(40, 40));
+        panel_linha3.setStrokeWidth(6.0F);
+
+        javax.swing.GroupLayout panel_linha3Layout = new javax.swing.GroupLayout(panel_linha3);
+        panel_linha3.setLayout(panel_linha3Layout);
+        panel_linha3Layout.setHorizontalGroup(
+            panel_linha3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+        panel_linha3Layout.setVerticalGroup(
+            panel_linha3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                            .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(inicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(panelRound1Layout.createSequentialGroup()
-                                    .addGap(124, 124, 124)
-                                    .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(fase4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(fase2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGap(61, 61, 61))
-                        .addComponent(fase3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(fase5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(84, 84, 84))
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(panelSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(panelRoundBorda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelRound1Layout.createSequentialGroup()
+                                .addComponent(inicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panel_linha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(187, 187, 187))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(panel_linha3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(fase3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                                            .addComponent(panel_linha2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(69, 69, 69))))))
+                        .addGroup(panelRound1Layout.createSequentialGroup()
+                            .addComponent(fase5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(panel_linha4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fase2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fase4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(105, 105, 105)))
+                .addGap(56, 56, 56))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -462,17 +563,30 @@ public class FRegiao extends javax.swing.JFrame {
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(panelRoundBorda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(49, 49, 49)
-                .addComponent(fase5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addComponent(panel_linha4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(fase5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fase4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panel_linha3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fase3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panel_linha2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fase2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(inicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addComponent(panel_linha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(87, 87, 87))
+                    .addComponent(inicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         panelSombra1.setBackground(new java.awt.Color(255, 255, 255));
@@ -573,23 +687,23 @@ public class FRegiao extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(27, 27, 27)
                 .addComponent(panelSombra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
                 .addComponent(panelSombra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
                 .addComponent(panelSombra4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelSombra2, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
                     .addComponent(panelSombra4, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
                     .addComponent(panelSombra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -678,11 +792,11 @@ public class FRegiao extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jLabel7MouseClicked
 
-    private void verPrimeiraMedalha(){
-        String verConquistas = "select c.iconMedalha from alunosXconquistas axc " +
-                "join conquistas c using(idConquista) " +
-                "join alunos a using(idAluno) " +
-                "where a.idAluno = ? and nomeConquista = ?;";
+    private void verPrimeiraMedalha() {
+        String verConquistas = "select c.iconMedalha from alunosXconquistas axc "
+                + "join conquistas c using(idConquista) "
+                + "join alunos a using(idAluno) "
+                + "where a.idAluno = ? and nomeConquista = ?;";
         try {
             pst = conexao.prepareStatement(verConquistas);
             pst.setInt(1, idAluno);
@@ -715,10 +829,10 @@ public class FRegiao extends javax.swing.JFrame {
         itemSelectionPanel.setBackground(Color.WHITE);
         itemSelectionPanel.setPreferredSize(new Dimension(170, 80));
 
-        String verConquistas = "select c.nomeConquista, c.iconMedalha from alunosXconquistas axc " +
-                "join conquistas c using(idConquista) " +
-                "join alunos a using(idAluno) " +
-                "where a.idAluno = ?;";
+        String verConquistas = "select c.nomeConquista, c.iconMedalha from alunosXconquistas axc "
+                + "join conquistas c using(idConquista) "
+                + "join alunos a using(idAluno) "
+                + "where a.idAluno = ?;";
         boolean temItems = false;
         try {
             pst = conexao.prepareStatement(verConquistas);
@@ -765,7 +879,7 @@ public class FRegiao extends javax.swing.JFrame {
             alert.setVisible(true);
         }
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -837,5 +951,9 @@ public class FRegiao extends javax.swing.JFrame {
     private Visualizacao.PanelSombra panelSombra1;
     private Visualizacao.PanelSombra panelSombra2;
     private Visualizacao.PanelSombra panelSombra4;
+    private Visualizacao.DiagonalDashedLinePanel panel_linha1;
+    private Visualizacao.DiagonalDashedLinePanel panel_linha2;
+    private Visualizacao.DiagonalDashedLinePanel panel_linha3;
+    private Visualizacao.DiagonalDashedLinePanel panel_linha4;
     // End of variables declaration//GEN-END:variables
 }

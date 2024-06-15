@@ -152,7 +152,6 @@ public class FPerfil extends NavegacaoFormulario {
         });
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-ranking-perfil.png"))); // NOI18N
-        jLabel5.setPreferredSize(new java.awt.Dimension(45, 45));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
@@ -164,7 +163,7 @@ public class FPerfil extends NavegacaoFormulario {
             panelSombra2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSombra2Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
                 .addGap(236, 236, 236))
@@ -311,10 +310,6 @@ public class FPerfil extends NavegacaoFormulario {
 
         panel_foto_perfil.setBackground(new java.awt.Color(255, 255, 255));
         panel_foto_perfil.setPreferredSize(new java.awt.Dimension(150, 140));
-        panel_foto_perfil.setRoundBottomLeft(50);
-        panel_foto_perfil.setRoundBottomRight(50);
-        panel_foto_perfil.setRoundTopLeft(50);
-        panel_foto_perfil.setRoundTopRight(50);
 
         javax.swing.GroupLayout panel_foto_perfilLayout = new javax.swing.GroupLayout(panel_foto_perfil);
         panel_foto_perfil.setLayout(panel_foto_perfilLayout);
