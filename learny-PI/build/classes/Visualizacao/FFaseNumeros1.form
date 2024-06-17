@@ -265,6 +265,9 @@
                   <Value id="BOT_RIGHT"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="panelSombra3MouseClicked"/>
+              </Events>
 
               <Layout>
                 <DimensionLayout dim="0">
@@ -321,6 +324,9 @@
                   <Value id="BOT_RIGHT"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="panelSombra4MouseClicked"/>
+              </Events>
 
               <Layout>
                 <DimensionLayout dim="0">

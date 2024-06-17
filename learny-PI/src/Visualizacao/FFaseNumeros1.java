@@ -2,6 +2,7 @@
 package Visualizacao;
 
 import Modelagem.Aluno;
+import Modelagem.Config;
 import Modelagem.Session;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -9,6 +10,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
@@ -162,6 +170,11 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
         panelSombra3.setShadowOpacity(0.3F);
         panelSombra3.setShadowSize(3);
         panelSombra3.setShadowType(Visualizacao.ShadowType.BOT_RIGHT);
+        panelSombra3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelSombra3MouseClicked(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 102, 102));
@@ -191,6 +204,11 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
         panelSombra4.setShadowOpacity(0.3F);
         panelSombra4.setShadowSize(3);
         panelSombra4.setShadowType(Visualizacao.ShadowType.BOT_RIGHT);
+        panelSombra4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelSombra4MouseClicked(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
@@ -405,6 +423,7 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void panel_num1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_num1MouseClicked
+        tocarAudio("src/audios/ten.wav");
         acertos++;
         timer.stop();
         ImageIcon icon = new ImageIcon("src/Imagens/icon-numeros-alerta.png");
@@ -415,6 +434,7 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
     }//GEN-LAST:event_panel_num1MouseClicked
 
     private void panel_num2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_num2MouseClicked
+        tocarAudio("src/audios/fifteen.wav");
         timer.stop();
         ImageIcon icon = new ImageIcon("src/Imagens/icon-numeros-alerta.png");
         AlertaGeral alert = new AlertaGeral(FFaseNumeros1.this, icon, "Fase Números", "Que pena.. A resposta era 10", 25, 25);
@@ -426,6 +446,7 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
     private MouseListener panel_num3MouseListener = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent evt) {
+            tocarAudio("src/audios/eight.wav");
             timer.stop();
             ImageIcon icon = new ImageIcon("src/Imagens/icon-numeros-alerta.png");
             AlertaGeral alert = new AlertaGeral(FFaseNumeros1.this, icon, "Fase Números", "Que pena.. A resposta era 10", 25, 25);
@@ -465,6 +486,28 @@ public class FFaseNumeros1 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_dicaMouseClicked
 
+    private void panelSombra3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra3MouseClicked
+        tocarAudio("src/audios/five.wav");
+    }//GEN-LAST:event_panelSombra3MouseClicked
+
+    private void panelSombra4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSombra4MouseClicked
+        tocarAudio("src/audios/five.wav");
+    }//GEN-LAST:event_panelSombra4MouseClicked
+
+    public void tocarAudio(String caminhoDoArquivo) {
+        if (!Config.audioAtivado) {
+            return;
+        }
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(caminhoDoArquivo));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
