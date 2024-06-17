@@ -200,13 +200,13 @@ public class FRanking extends javax.swing.JFrame {
         menuLayout.setHorizontalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(66, 66, 66)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addComponent(jLabel10)
-                .addGap(104, 104, 104)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addComponent(menuHamburguer)
-                .addGap(49, 49, 49))
+                .addGap(66, 66, 66))
         );
         menuLayout.setVerticalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
