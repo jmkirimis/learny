@@ -615,12 +615,12 @@ public class FFaseOuvir extends javax.swing.JFrame {
                 panel_heard.setBackground(new Color(240, 240, 240));
                 lbl_heard.setForeground(new Color(204, 204, 204));
                 panel_heard.removeMouseListener(panel_heardMouseListener);
+                dicaClicada = true;
             } else {
                 ImageIcon icon = new ImageIcon("src/Imagens/icon-dica-alerta.png");
                 AlertaGeral alert = new AlertaGeral(this, icon, "Dica Indisponível", "Ative ou consiga a medalha de mundo concluido para liberar", 50, 50);
                 alert.setVisible(true);
             }
-            dicaClicada = true;
         } else {
             btn_dica.setIcon(iconDicaDesativada);
             lbl_heard.setForeground(new Color(102, 102, 102));

@@ -421,13 +421,22 @@ public class FEditarPerfil extends javax.swing.JFrame {
             String destinationDirectory = "src/Imagens/";
 
             try {
-                // Copia o arquivo para o diretório de destino
+                // Caminhos dos arquivos
                 Path sourcePath = Paths.get(filePath);
                 Path destinationPath = Paths.get(destinationDirectory + selectedFile.getName());
-                Files.copy(sourcePath, destinationPath);
-                // Exibe a imagem selecionada no painel
-                panel_foto_editar.setImagem("src/Imagens/" + selectedFile.getName());
-                foto = selectedFile.getName();
+
+                // Verifica se o arquivo já existe no diretório de destino
+                if (Files.exists(destinationPath)) {
+                    // Se o arquivo já existe, apenas carrega a foto existente
+                    panel_foto_editar.setImagem(destinationPath.toString());
+                    foto = selectedFile.getName();
+                } else {
+                    // Copia o arquivo para o diretório de destino
+                    Files.copy(sourcePath, destinationPath);
+                    // Exibe a imagem selecionada no painel
+                    panel_foto_editar.setImagem(destinationPath.toString());
+                    foto = selectedFile.getName();
+                }
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(this, "Erro ao copiar o arquivo para o pacote do projeto: " + e.getMessage());
             }
