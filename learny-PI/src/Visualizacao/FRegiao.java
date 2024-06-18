@@ -64,7 +64,7 @@ public class FRegiao extends javax.swing.JFrame {
         String[] estadosFases = vfases.verificarFases(1, idAluno); // Verifica as fases da região 1
         
         if (estadosFases[0].equals("ok")) {
-            panel_linha1.setLineColor(new Color(72, 72, 72));
+            panel_linha4.setLineColor(new Color(72, 72, 72));
         }
         if (estadosFases[1].equals("ok")) {
             panel_linha2.setLineColor(new Color(72, 72, 72));
@@ -73,7 +73,7 @@ public class FRegiao extends javax.swing.JFrame {
             panel_linha3.setLineColor(new Color(72, 72, 72));
         }
         if (estadosFases[3].equals("ok")) {
-            panel_linha4.setLineColor(new Color(72, 72, 72));
+            panel_linha1.setLineColor(new Color(72, 72, 72));
         }
         
         verPrimeiraMedalha();
@@ -756,7 +756,7 @@ public class FRegiao extends javax.swing.JFrame {
     }//GEN-LAST:event_menuHamburguerMouseExited
 
     private void fase5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fase5MouseClicked
-        new FFaseObservacao().setVisible(true);
+        new FFaseLigar().setVisible(true);
         dispose();
     }//GEN-LAST:event_fase5MouseClicked
 
@@ -771,7 +771,7 @@ public class FRegiao extends javax.swing.JFrame {
     }//GEN-LAST:event_fase3MouseClicked
 
     private void fase2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fase2MouseClicked
-        new FFaseLigar().setVisible(true);
+        new FFaseObservacao().setVisible(true);
         dispose();
     }//GEN-LAST:event_fase2MouseClicked
 
