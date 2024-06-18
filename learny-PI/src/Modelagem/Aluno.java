@@ -195,28 +195,44 @@ public class Aluno {
 
     public void alterar() {
         conexao = Conexao.conecta();
-        String sql;
-        sql = "update alunos set nome = ?, usuario = ?, senha = ?, email = ?, dataNasc = ?, foto = ? where idAluno = ?";
+        String verificaSql = "SELECT COUNT(*) FROM alunos WHERE usuario = ? AND idAluno != ?";
+        String updateSql = "UPDATE alunos SET nome = ?, usuario = ?, senha = ?, email = ?, dataNasc = ?, foto = ? WHERE idAluno = ?";
+
         try {
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1, getNome());
-            pst.setString(2, getUsuario());
-            pst.setString(3, getSenha());
-            pst.setString(4, getEmail());
-            pst.setString(5, getDataNasc());
-            pst.setString(6, getFoto());
-            pst.setInt(7, getIdAluno());
+            // Verifica se o novo usuário já existe, excluindo o atual aluno que está sendo alterado
+            pst = conexao.prepareStatement(verificaSql);
+            pst.setString(1, getUsuario());
+            pst.setInt(2, getIdAluno());
+            rs = pst.executeQuery();
+            rs.next();
+            int count = rs.getInt(1);
 
-            int linhasAfetadas = pst.executeUpdate();
-
-            if (linhasAfetadas > 0) {
-                ImageIcon icon = new ImageIcon("src/Imagens/icone confirmar.png");
-                AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Alterar Dados", "Dados alterados com sucesso!", 50, 50);
+            if (count > 0) {
+                ImageIcon icon = new ImageIcon("src/Imagens/icon-erro-cadastro.png");
+                AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Erro de Alteração", "Usuário já cadastrado!", 50, 50);
                 alert.setVisible(true);
             } else {
-                ImageIcon icon = new ImageIcon("src/Imagens/icon-confirmar.png");
-                AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Alterar Dados", "Nenhum dado foi alterado.", 50, 50);
-                alert.setVisible(true);
+                // Atualiza os dados do aluno
+                pst = conexao.prepareStatement(updateSql);
+                pst.setString(1, getNome());
+                pst.setString(2, getUsuario());
+                pst.setString(3, getSenha());
+                pst.setString(4, getEmail());
+                pst.setString(5, getDataNasc());
+                pst.setString(6, getFoto());
+                pst.setInt(7, getIdAluno());
+
+                int linhasAfetadas = pst.executeUpdate();
+
+                if (linhasAfetadas > 0) {
+                    ImageIcon icon = new ImageIcon("src/Imagens/icone confirmar.png");
+                    AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Alterar Dados", "Dados alterados com sucesso!", 50, 50);
+                    alert.setVisible(true);
+                } else {
+                    ImageIcon icon = new ImageIcon("src/Imagens/icon-confirmar.png");
+                    AlertaGeral alert = new AlertaGeral(parentFrame, icon, "Alterar Dados", "Nenhum dado foi alterado.", 50, 50);
+                    alert.setVisible(true);
+                }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
