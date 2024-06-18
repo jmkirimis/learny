@@ -1,4 +1,3 @@
-
 package Visualizacao;
 
 import Modelagem.Aluno;
@@ -17,13 +16,14 @@ import javax.swing.ImageIcon;
 public class FCadastro extends javax.swing.JFrame {
 
     private String foto = "";
-    
+
     public FCadastro() {
         initComponents();
         ImageIcon icon = new ImageIcon("src/Imagens/logo-icon.png");
         this.setIconImage(icon.getImage());
     }
     Aluno a = new Aluno(this);
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -375,12 +375,12 @@ public class FCadastro extends javax.swing.JFrame {
         try {
             // Convertendo a string da data para o formato original
             Date dataOriginal = sdfFormatada.parse(dataNasc);
-    
+
             String dataNascBanco = sdfOriginal.format(dataOriginal);
-    
+
             a.setDataNasc(dataNascBanco);
             String cadastro = a.cadastrar();
-            if(cadastro.equals("ok")){
+            if (cadastro.equals("ok")) {
                 new FLogin().setVisible(true);
                 dispose();
             }
@@ -393,7 +393,7 @@ public class FCadastro extends javax.swing.JFrame {
     private void panelRound1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound1MouseClicked
         JnaFileChooser ch = new JnaFileChooser();
         boolean action = ch.showOpenDialog(this);
-        if(action){
+        if (action) {
             File selectedFile = ch.getSelectedFile();
             String filePath = selectedFile.getAbsolutePath();
 
@@ -401,13 +401,22 @@ public class FCadastro extends javax.swing.JFrame {
             String destinationDirectory = "src/Imagens/";
 
             try {
-                // Copia o arquivo para o diretório de destino
+                // Caminhos dos arquivos
                 Path sourcePath = Paths.get(filePath);
                 Path destinationPath = Paths.get(destinationDirectory + selectedFile.getName());
-                Files.copy(sourcePath, destinationPath);
-                // Exibe a imagem selecionada no painel
-                panel_foto_cadastro.setImagem("src/Imagens/" + selectedFile.getName());
-                foto = selectedFile.getName();
+
+                // Verifica se o arquivo já existe no diretório de destino
+                if (Files.exists(destinationPath)) {
+                    // Se o arquivo já existe, apenas carrega a foto existente
+                    panel_foto_cadastro.setImagem(destinationPath.toString());
+                    foto = selectedFile.getName();
+                } else {
+                    // Copia o arquivo para o diretório de destino
+                    Files.copy(sourcePath, destinationPath);
+                    // Exibe a imagem selecionada no painel
+                    panel_foto_cadastro.setImagem(destinationPath.toString());
+                    foto = selectedFile.getName();
+                }
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(this, "Erro ao copiar o arquivo para o pacote do projeto: " + e.getMessage());
             }
