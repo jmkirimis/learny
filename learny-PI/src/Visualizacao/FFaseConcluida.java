@@ -1,4 +1,3 @@
-
 package Visualizacao;
 
 import Controle.Conexao;
@@ -11,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -19,22 +19,22 @@ public class FFaseConcluida extends javax.swing.JFrame {
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    
+
     private Aluno alunoLogado;
     private int idAluno;
-    
+
     VerificadorDiarias verifDiaria = new VerificadorDiarias(this);
     Ranking r = new Ranking();
-    
+
     public FFaseConcluida() {
         initComponents();
         ImageIcon icon = new ImageIcon("src/Imagens/logo-icon.png");
         this.setIconImage(icon.getImage());
         alunoLogado = Session.getInstance().getAlunoLogado();
         idAluno = alunoLogado.getIdAluno();
-        
+
         verifDiaria.verificarDiarias();
-        
+
         conexao = Conexao.conecta();
         String sql = "select * from fasesConcluidas where idAluno = ? order by idFaseConcluida desc limit 1";
         try {
@@ -47,20 +47,23 @@ public class FFaseConcluida extends javax.swing.JFrame {
                 double porcAcertos = rs.getDouble(6);
                 int porcAcertosInteiro = (int) porcAcertos;
                 lbl_pontos.setText(Double.toString(pontos));
-                lbl_porc.setText(Integer.toString(porcAcertosInteiro)+"%");
+                lbl_porc.setText(Integer.toString(porcAcertosInteiro) + "%");
 
                 // Formatando o valor de tempo
                 SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
                 String tempoFormatado = sdf.format(time);
 
                 lbl_tempo.setText(tempoFormatado);
-                
-                alunoLogado.setPontosTotais(alunoLogado.getPontosTotais() + pontos);
+
+                double pontosTotaisAtualizados = alunoLogado.getPontosTotais() + pontos;
+                String pontosTotaisFormatados = String.format(Locale.US, "%.1f", pontosTotaisAtualizados);
+                double pontosTotaisArredondados = Double.parseDouble(pontosTotaisFormatados);
+                alunoLogado.setPontosTotais(pontosTotaisArredondados);
                 alunoLogado.setFasesConcluidas(alunoLogado.getFasesConcluidas() + 1);
             }
-            
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
+            JOptionPane.showMessageDialog(null, e);
         }
         r.carregarPontos();
         r.ordenarPontos();

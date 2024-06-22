@@ -48,6 +48,7 @@ public class FMundos extends javax.swing.JFrame {
         
         lbl_pontos.setText(Double.toString(pontos));
         lbl_ranque.setText(ranque);
+        lbl_medalhas.setHorizontalAlignment(lbl_medalhas.CENTER);
         
         String verConquistas = "select count(*) from alunosXconquistas where idAluno = ?";
         try {
@@ -63,7 +64,7 @@ public class FMundos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
         
-        panelSlide.init(new PanelMundos("Mundo - 1", "Mundo Natural", new ImageIcon("src/Imagens/mundo-natureza2.png")), new PanelMundos("Mundo - 2", "Mundo Congelado", new ImageIcon("src/Imagens/mundo-congelado.png")), new PanelMundos("Mundo - 3", "Mundo Flamejante", new ImageIcon("src/Imagens/mundo-flamejante3.png")));
+        panelSlide.init(new PanelMundos("Mundo - 1", "Nature World", new ImageIcon("src/Imagens/mundo-natureza2.png")), new PanelMundos("Mundo - 2", "Frozen World", new ImageIcon("src/Imagens/mundo-congelado.png")), new PanelMundos("Mundo - 3", "Burning World", new ImageIcon("src/Imagens/mundo-flamejante3.png")));
         panelSlide.setAnimate(5);
         this.setLayout(new BorderLayout());
         this.add(panelScrollMundos, BorderLayout.CENTER);
@@ -1012,8 +1013,9 @@ public class FMundos extends javax.swing.JFrame {
         lbl_medalhas.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lbl_medalhas.setForeground(new java.awt.Color(72, 72, 72));
         lbl_medalhas.setText("10");
+        lbl_medalhas.setPreferredSize(new java.awt.Dimension(25, 22));
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-moeda.png"))); // NOI18N
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon-medalha-menu.png"))); // NOI18N
 
         javax.swing.GroupLayout panelSombra5Layout = new javax.swing.GroupLayout(panelSombra5);
         panelSombra5.setLayout(panelSombra5Layout);
@@ -1022,14 +1024,14 @@ public class FMundos extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSombra5Layout.createSequentialGroup()
                 .addComponent(jLabel14)
                 .addGap(18, 18, 18)
-                .addComponent(lbl_medalhas)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addComponent(lbl_medalhas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         panelSombra5Layout.setVerticalGroup(
             panelSombra5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSombra5Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(lbl_medalhas)
+                .addComponent(lbl_medalhas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(panelSombra5Layout.createSequentialGroup()
                 .addComponent(jLabel14)

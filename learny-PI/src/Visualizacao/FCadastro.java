@@ -92,10 +92,6 @@ public class FCadastro extends javax.swing.JFrame {
 
         panel_foto_cadastro.setBackground(new java.awt.Color(255, 255, 255));
         panel_foto_cadastro.setPreferredSize(new java.awt.Dimension(160, 160));
-        panel_foto_cadastro.setRoundBottomLeft(50);
-        panel_foto_cadastro.setRoundBottomRight(50);
-        panel_foto_cadastro.setRoundTopLeft(50);
-        panel_foto_cadastro.setRoundTopRight(50);
 
         javax.swing.GroupLayout panel_foto_cadastroLayout = new javax.swing.GroupLayout(panel_foto_cadastro);
         panel_foto_cadastro.setLayout(panel_foto_cadastroLayout);

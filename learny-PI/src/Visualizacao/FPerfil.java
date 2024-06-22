@@ -91,12 +91,12 @@ public class FPerfil extends NavegacaoFormulario {
         jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         panelSombra8 = new Visualizacao.PanelSombra();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btn_ativar_audio = new Visualizacao.ToggleButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btn_mudar_cores = new Visualizacao.ToggleButton();
+        lbl_nome_perfil1 = new Visualizacao.GradientLabel();
         lbl_nome_perfil = new Visualizacao.GradientLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -395,10 +395,6 @@ public class FPerfil extends NavegacaoFormulario {
         panelSombra8.setCornerRadius(70);
         panelSombra8.setShadowOpacity(0.2F);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel1.setText("Acessibilidade");
-
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(153, 153, 153));
         jLabel2.setText("Ativar áudio");
@@ -418,6 +414,11 @@ public class FPerfil extends NavegacaoFormulario {
 
         btn_mudar_cores.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
+        lbl_nome_perfil1.setText("Acessibilidade");
+        lbl_nome_perfil1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lbl_nome_perfil1.setGradientEnd(new java.awt.Color(90, 149, 181));
+        lbl_nome_perfil1.setGradientStart(new java.awt.Color(148, 97, 115));
+
         javax.swing.GroupLayout panelSombra8Layout = new javax.swing.GroupLayout(panelSombra8);
         panelSombra8.setLayout(panelSombra8Layout);
         panelSombra8Layout.setHorizontalGroup(
@@ -427,8 +428,8 @@ public class FPerfil extends NavegacaoFormulario {
                 .addGroup(panelSombra8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelSombra8Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(28, 28, 28)
-                        .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addComponent(lbl_nome_perfil1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelSombra8Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(132, 132, 132)
@@ -445,8 +446,8 @@ public class FPerfil extends NavegacaoFormulario {
                 .addGap(28, 28, 28)
                 .addGroup(panelSombra8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(28, 28, 28)
+                    .addComponent(lbl_nome_perfil1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(panelSombra8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_ativar_audio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelSombra8Layout.createSequentialGroup()
@@ -627,7 +628,6 @@ public class FPerfil extends NavegacaoFormulario {
     private Visualizacao.ProgressBar barra_nivel;
     private Visualizacao.ToggleButton btn_ativar_audio;
     private Visualizacao.ToggleButton btn_mudar_cores;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -648,6 +648,7 @@ public class FPerfil extends NavegacaoFormulario {
     private javax.swing.JLabel lbl_anos;
     private javax.swing.JLabel lbl_idade_perfil;
     private Visualizacao.GradientLabel lbl_nome_perfil;
+    private Visualizacao.GradientLabel lbl_nome_perfil1;
     private Visualizacao.PanelRoundBorda panelRoundBorda1;
     private Visualizacao.CustomScrollPane panelScrollGeral;
     private Visualizacao.PanelSombra panelSombra1;

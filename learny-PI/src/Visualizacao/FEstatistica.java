@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -38,9 +39,9 @@ public class FEstatistica extends javax.swing.JFrame {
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
         
-        panel_check1.setVisible(false);
-        panel_check2.setVisible(false);
-        panel_check3.setVisible(false);
+        iconCheck.setVisible(false);
+        iconCheck2.setVisible(false);
+        iconCheck3.setVisible(false);
         
         idAluno = alunoLogado.getIdAluno();
         double pontos = alunoLogado.getPontosTotais();
@@ -78,10 +79,10 @@ public class FEstatistica extends javax.swing.JFrame {
                 conquistasTotais.add(conquista);
             }
 
-            JPanel[] checkPanels = {panel_check1, panel_check2, panel_check3};
+            JLabel[] checkLabels = {iconCheck, iconCheck2, iconCheck3};
 
-            for (int i = 0; i < conquistasTotais.size() && i < checkPanels.length; i++) {
-                checkPanels[i].setVisible(true);
+            for (int i = 0; i < conquistasTotais.size() && i < checkLabels.length; i++) {
+                checkLabels[i].setVisible(true);
             }
 
         } catch (Exception e) {
@@ -345,6 +346,11 @@ public class FEstatistica extends javax.swing.JFrame {
         conquista4.setRoundBottomRight(40);
         conquista4.setRoundTopLeft(40);
         conquista4.setRoundTopRight(40);
+        conquista4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                conquista4MouseClicked(evt);
+            }
+        });
 
         lbl_nome2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbl_nome2.setForeground(new java.awt.Color(255, 255, 255));
@@ -393,9 +399,9 @@ public class FEstatistica extends javax.swing.JFrame {
                 .addGroup(conquista4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_desc2)
                     .addComponent(lbl_nome2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
                 .addComponent(panel_check2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(31, 31, 31))
         );
         conquista4Layout.setVerticalGroup(
             conquista4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -419,6 +425,11 @@ public class FEstatistica extends javax.swing.JFrame {
         conquista6.setRoundBottomRight(40);
         conquista6.setRoundTopLeft(40);
         conquista6.setRoundTopRight(40);
+        conquista6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                conquista6MouseClicked(evt);
+            }
+        });
 
         lbl_nome1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbl_nome1.setForeground(new java.awt.Color(255, 255, 255));
@@ -467,9 +478,9 @@ public class FEstatistica extends javax.swing.JFrame {
                 .addGroup(conquista6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_nome1)
                     .addComponent(lbl_desc1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addGap(46, 46, 46)
                 .addComponent(panel_check1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGap(33, 33, 33))
         );
         conquista6Layout.setVerticalGroup(
             conquista6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -493,6 +504,11 @@ public class FEstatistica extends javax.swing.JFrame {
         conquista7.setRoundBottomRight(40);
         conquista7.setRoundTopLeft(40);
         conquista7.setRoundTopRight(40);
+        conquista7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                conquista7MouseClicked(evt);
+            }
+        });
 
         lbl_nome3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbl_nome3.setForeground(new java.awt.Color(255, 255, 255));
@@ -541,7 +557,7 @@ public class FEstatistica extends javax.swing.JFrame {
                 .addGroup(conquista7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_nome3)
                     .addComponent(lbl_desc3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(34, 34, 34)
                 .addComponent(panel_check3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
         );
@@ -571,9 +587,9 @@ public class FEstatistica extends javax.swing.JFrame {
                     .addGroup(panel_conquistasLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(panel_conquistasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(conquista6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(conquista7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(conquista4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(conquista4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(conquista6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panel_conquistasLayout.createSequentialGroup()
                         .addGap(135, 135, 135)
                         .addComponent(jLabel7)))
@@ -582,9 +598,9 @@ public class FEstatistica extends javax.swing.JFrame {
         panel_conquistasLayout.setVerticalGroup(
             panel_conquistasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_conquistasLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel7)
-                .addGap(38, 38, 38)
+                .addGap(29, 29, 29)
                 .addComponent(conquista6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(conquista4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -664,6 +680,24 @@ public class FEstatistica extends javax.swing.JFrame {
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         voltarParaOrigem();
     }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void conquista6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_conquista6MouseClicked
+        ImageIcon icon = new ImageIcon("src/Imagens/icon-medalha-alerta-verde.png");
+        AlertaGeral alert = new AlertaGeral(this, icon, "Medalhas", "+50 pontos a cada tarefa realizada", 45, 45);
+        alert.setVisible(true);
+    }//GEN-LAST:event_conquista6MouseClicked
+
+    private void conquista4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_conquista4MouseClicked
+        ImageIcon icon = new ImageIcon("src/Imagens/icon-medalha-alerta-vermelha.png");
+        AlertaGeral alert = new AlertaGeral(this, icon, "Medalhas", "2x pontos a cada tarefa realizada", 45, 45);
+        alert.setVisible(true);
+    }//GEN-LAST:event_conquista4MouseClicked
+
+    private void conquista7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_conquista7MouseClicked
+        ImageIcon icon = new ImageIcon("src/Imagens/icon-medalha-alerta-azul.png");
+        AlertaGeral alert = new AlertaGeral(this, icon, "Medalhas", "Libera o acesso as dicas", 45, 45);
+        alert.setVisible(true);
+    }//GEN-LAST:event_conquista7MouseClicked
 
     /**
      * @param args the command line arguments
