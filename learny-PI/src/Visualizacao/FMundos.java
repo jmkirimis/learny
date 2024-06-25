@@ -214,6 +214,9 @@ public class FMundos extends javax.swing.JFrame {
 
         panelScrollMundos.setBorder(null);
 
+        panelGradiente.setGradientEndColor(new java.awt.Color(97, 145, 175));
+        panelGradiente.setGradientStartColor(new java.awt.Color(175, 73, 85));
+
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
         panelRound1.setRoundTopLeft(50);
         panelRound1.setRoundTopRight(50);
@@ -326,7 +329,7 @@ public class FMundos extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        panelRound3.setBackground(new java.awt.Color(239, 91, 106));
+        panelRound3.setBackground(new java.awt.Color(238, 92, 107));
         panelRound3.setRoundTopLeft(50);
         panelRound3.setRoundTopRight(50);
 
@@ -342,6 +345,8 @@ public class FMundos extends javax.swing.JFrame {
         );
 
         panelGradiente1.setGradientDirection(Visualizacao.PanelGradiente.GradientDirection.VERTICAL);
+        panelGradiente1.setGradientEndColor(new java.awt.Color(140, 182, 220));
+        panelGradiente1.setGradientStartColor(new java.awt.Color(238, 92, 107));
 
         panelRound4.setBackground(new java.awt.Color(255, 255, 255));
         panelRound4.setRoundBottomLeft(50);

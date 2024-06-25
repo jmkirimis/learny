@@ -53,8 +53,8 @@ public class FLogin extends javax.swing.JFrame {
         customScrollPane1.setPreferredSize(new java.awt.Dimension(485, 834));
 
         panelGradiente1.setGradientDirection(Visualizacao.PanelGradiente.GradientDirection.VERTICAL);
-        panelGradiente1.setGradientEndColor(new java.awt.Color(74, 135, 164));
-        panelGradiente1.setGradientStartColor(new java.awt.Color(153, 60, 71));
+        panelGradiente1.setGradientEndColor(new java.awt.Color(74, 133, 162));
+        panelGradiente1.setGradientStartColor(new java.awt.Color(153, 62, 72));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icone confirmar.png"))); // NOI18N
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {

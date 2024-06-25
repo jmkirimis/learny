@@ -118,6 +118,14 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
         <Container class="Visualizacao.PanelGradiente" name="panelGradiente">
+          <Properties>
+            <Property name="gradientEndColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="af" green="91" red="61" type="rgb"/>
+            </Property>
+            <Property name="gradientStartColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="55" green="49" red="af" type="rgb"/>
+            </Property>
+          </Properties>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -389,7 +397,7 @@
                 <Container class="Visualizacao.PanelRound" name="panelRound3">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="6a" green="5b" red="ef" type="rgb"/>
+                      <Color blue="6b" green="5c" red="ee" type="rgb"/>
                     </Property>
                     <Property name="roundTopLeft" type="int" value="50"/>
                     <Property name="roundTopRight" type="int" value="50"/>
@@ -412,6 +420,12 @@
                   <Properties>
                     <Property name="gradientDirection" type="Visualizacao.PanelGradiente$GradientDirection" editor="org.netbeans.modules.form.editors.EnumEditor">
                       <Value id="VERTICAL"/>
+                    </Property>
+                    <Property name="gradientEndColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="dc" green="b6" red="8c" type="rgb"/>
+                    </Property>
+                    <Property name="gradientStartColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="6b" green="5c" red="ee" type="rgb"/>
                     </Property>
                   </Properties>
 

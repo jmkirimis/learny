@@ -28,8 +28,8 @@ public class FPerfil extends NavegacaoFormulario {
         alunoLogado = Session.getInstance().getAlunoLogado();
         String nome = alunoLogado.getNome();
         double pontos = alunoLogado.getPontosTotais();
-        int nivel = (int) (pontos / 150);
-        double progressoNivel = pontos % 150;
+        int nivel = (int) (pontos / 300);
+        double progressoNivel = pontos % 300;
         String foto = alunoLogado.getFoto();
         barra_nivel.setValue((int) progressoNivel);
         lbl_nome_perfil.setText(nome);
@@ -329,11 +329,10 @@ public class FPerfil extends NavegacaoFormulario {
         panelRoundBorda1.setBackground(new java.awt.Color(255, 255, 255));
         panelRoundBorda1.setBorderWidth(3);
         panelRoundBorda1.setPreferredSize(new java.awt.Dimension(406, 45));
-        panelRoundBorda1.setRadius(50);
+        panelRoundBorda1.setRadius(40);
 
         barra_nivel.setBorder(null);
-        barra_nivel.setMaximum(150);
-        barra_nivel.setValue(150);
+        barra_nivel.setValue(300);
         barra_nivel.setColorString(new java.awt.Color(255, 255, 255));
         barra_nivel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
@@ -342,14 +341,14 @@ public class FPerfil extends NavegacaoFormulario {
         panelRoundBorda1Layout.setHorizontalGroup(
             panelRoundBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRoundBorda1Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addComponent(barra_nivel, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addGap(10, 10, 10)
+                .addComponent(barra_nivel, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10))
         );
         panelRoundBorda1Layout.setVerticalGroup(
             panelRoundBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundBorda1Layout.createSequentialGroup()
-                .addGap(11, 11, 11)
+                .addGap(9, 9, 9)
                 .addComponent(barra_nivel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11))
         );
@@ -475,12 +474,14 @@ public class FPerfil extends NavegacaoFormulario {
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(panelRoundBorda1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
                         .addComponent(panelSombra1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
                         .addComponent(panelSombra2, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
                         .addComponent(panelSombra3, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
                         .addComponent(panelSombra4, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
-                        .addComponent(panelSombra8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(panelSombra8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(14, 14, 14)
+                            .addComponent(panelRoundBorda1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(panel_foto_perfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
@@ -516,8 +517,8 @@ public class FPerfil extends NavegacaoFormulario {
                             .addComponent(lbl_anos)))
                     .addComponent(panel_foto_perfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(panelRoundBorda1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addComponent(panelRoundBorda1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addComponent(panelSombra8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(panelSombra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

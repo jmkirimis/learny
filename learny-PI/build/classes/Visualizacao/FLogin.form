@@ -51,10 +51,10 @@
               <Value id="VERTICAL"/>
             </Property>
             <Property name="gradientEndColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="a4" green="87" red="4a" type="rgb"/>
+              <Color blue="a2" green="85" red="4a" type="rgb"/>
             </Property>
             <Property name="gradientStartColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="47" green="3c" red="99" type="rgb"/>
+              <Color blue="48" green="3e" red="99" type="rgb"/>
             </Property>
           </Properties>
 

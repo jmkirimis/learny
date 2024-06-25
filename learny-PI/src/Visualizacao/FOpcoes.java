@@ -25,8 +25,7 @@ public class FOpcoes extends NavegacaoFormulario {
     PreparedStatement pst = null;
     ResultSet rs = null;
 
-    Color pretoComOpacidade = new Color(0, 0, 0, 55);
-    Color pretoComOpacidade2 = new Color(72, 72, 72, 120);
+    Color pretoComOpacidade = new Color(72, 72, 72, 120);
     Color vermelhoPastel = new Color(239, 91, 106);
     Color azulPastel = new Color(108, 210, 255);
 
@@ -46,10 +45,9 @@ public class FOpcoes extends NavegacaoFormulario {
         conexao = Conexao.conecta();
         alunoLogado = Session.getInstance().getAlunoLogado();
         
-        panel_sombra.setBackground(pretoComOpacidade);
-        panel_icon1.setBackground(pretoComOpacidade2);
-        panel_icon2.setBackground(pretoComOpacidade2);
-        panel_icon3.setBackground(pretoComOpacidade2);
+        panel_icon1.setBackground(pretoComOpacidade);
+        panel_icon2.setBackground(pretoComOpacidade);
+        panel_icon3.setBackground(pretoComOpacidade);
 
         panel_diaria1.setVisible(false);
         panel_diaria2.setVisible(false);
@@ -134,7 +132,6 @@ public class FOpcoes extends NavegacaoFormulario {
 
         customScrollPane1 = new Visualizacao.CustomScrollPane();
         panelGradienteHorizontal1 = new Visualizacao.PanelGradiente();
-        panelPretoOpac1 = new Visualizacao.PanelPretoOpac();
         panelRound1 = new Visualizacao.PanelRound();
         jLabel1 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -142,7 +139,6 @@ public class FOpcoes extends NavegacaoFormulario {
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         panelGradiente2 = new Visualizacao.PanelGradiente();
-        panel_sombra = new Visualizacao.PanelRound();
         panel_icon1 = new Visualizacao.PanelSombra();
         jLabel3 = new javax.swing.JLabel();
         panel_icon2 = new Visualizacao.PanelSombra();
@@ -175,6 +171,9 @@ public class FOpcoes extends NavegacaoFormulario {
 
         customScrollPane1.setBorder(null);
         customScrollPane1.setPreferredSize(new java.awt.Dimension(485, 834));
+
+        panelGradienteHorizontal1.setGradientEndColor(new java.awt.Color(97, 145, 175));
+        panelGradienteHorizontal1.setGradientStartColor(new java.awt.Color(175, 73, 85));
 
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
         panelRound1.setRoundTopLeft(70);
@@ -230,14 +229,10 @@ public class FOpcoes extends NavegacaoFormulario {
         );
 
         panelGradiente2.setGradientDirection(Visualizacao.PanelGradiente.GradientDirection.DIAGONAL_DOWN);
+        panelGradiente2.setGradientEndColor(new java.awt.Color(86, 168, 204));
+        panelGradiente2.setGradientStartColor(new java.awt.Color(171, 91, 108));
         panelGradiente2.setRadius(50);
-        panelGradiente2.setVerticalProportion(1.5F);
-
-        panel_sombra.setBackground(new java.awt.Color(204, 204, 204));
-        panel_sombra.setRoundBottomLeft(50);
-        panel_sombra.setRoundBottomRight(50);
-        panel_sombra.setRoundTopLeft(50);
-        panel_sombra.setRoundTopRight(50);
+        panelGradiente2.setVerticalProportion(1.2F);
 
         panel_icon1.setBackground(new java.awt.Color(102, 102, 102));
         panel_icon1.setCornerRadius(100);
@@ -338,39 +333,28 @@ public class FOpcoes extends NavegacaoFormulario {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout panel_sombraLayout = new javax.swing.GroupLayout(panel_sombra);
-        panel_sombra.setLayout(panel_sombraLayout);
-        panel_sombraLayout.setHorizontalGroup(
-            panel_sombraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_sombraLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
+        javax.swing.GroupLayout panelGradiente2Layout = new javax.swing.GroupLayout(panelGradiente2);
+        panelGradiente2.setLayout(panelGradiente2Layout);
+        panelGradiente2Layout.setHorizontalGroup(
+            panelGradiente2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGradiente2Layout.createSequentialGroup()
+                .addContainerGap(45, Short.MAX_VALUE)
                 .addComponent(panel_icon1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addComponent(panel_icon2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addComponent(panel_icon3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
-        );
-        panel_sombraLayout.setVerticalGroup(
-            panel_sombraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_sombraLayout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addGroup(panel_sombraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panel_icon1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panel_icon2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panel_icon3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22))
-        );
-
-        javax.swing.GroupLayout panelGradiente2Layout = new javax.swing.GroupLayout(panelGradiente2);
-        panelGradiente2.setLayout(panelGradiente2Layout);
-        panelGradiente2Layout.setHorizontalGroup(
-            panelGradiente2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_sombra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(40, 40, 40))
         );
         panelGradiente2Layout.setVerticalGroup(
             panelGradiente2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_sombra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGradiente2Layout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addGroup(panelGradiente2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panel_icon1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panel_icon2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panel_icon3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23))
         );
 
         panelSombra5.setBackground(new java.awt.Color(83, 194, 242));
@@ -657,15 +641,16 @@ public class FOpcoes extends NavegacaoFormulario {
                             .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panelGradiente2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(panelSombra2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(panelSombra5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panelSombra6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panelSombra7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(36, 36, 36))
+                        .addGap(33, 33, 33)
+                        .addComponent(panelSombra2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(28, 28, 28))
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panelSombra5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelSombra6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelSombra7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -680,37 +665,26 @@ public class FOpcoes extends NavegacaoFormulario {
                 .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(36, 36, 36)
                 .addComponent(panelSombra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(35, 35, 35)
                 .addComponent(panelSombra5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(panelSombra6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(panelSombra7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout panelPretoOpac1Layout = new javax.swing.GroupLayout(panelPretoOpac1);
-        panelPretoOpac1.setLayout(panelPretoOpac1Layout);
-        panelPretoOpac1Layout.setHorizontalGroup(
-            panelPretoOpac1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        panelPretoOpac1Layout.setVerticalGroup(
-            panelPretoOpac1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPretoOpac1Layout.createSequentialGroup()
-                .addGap(0, 103, Short.MAX_VALUE)
-                .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelGradienteHorizontal1Layout = new javax.swing.GroupLayout(panelGradienteHorizontal1);
         panelGradienteHorizontal1.setLayout(panelGradienteHorizontal1Layout);
         panelGradienteHorizontal1Layout.setHorizontalGroup(
             panelGradienteHorizontal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPretoOpac1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panelGradienteHorizontal1Layout.setVerticalGroup(
             panelGradienteHorizontal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPretoOpac1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGradienteHorizontal1Layout.createSequentialGroup()
+                .addGap(0, 103, Short.MAX_VALUE)
+                .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         customScrollPane1.setViewportView(panelGradienteHorizontal1);
@@ -834,7 +808,6 @@ public class FOpcoes extends NavegacaoFormulario {
     private javax.swing.JLabel lbl_missao3;
     private Visualizacao.PanelGradiente panelGradiente2;
     private Visualizacao.PanelGradiente panelGradienteHorizontal1;
-    private Visualizacao.PanelPretoOpac panelPretoOpac1;
     private Visualizacao.PanelRound panelRound1;
     private Visualizacao.PanelRound panelRound3;
     private Visualizacao.PanelSombra panelSombra2;
@@ -847,6 +820,5 @@ public class FOpcoes extends NavegacaoFormulario {
     private Visualizacao.PanelSombra panel_icon1;
     private Visualizacao.PanelSombra panel_icon2;
     private Visualizacao.PanelSombra panel_icon3;
-    private Visualizacao.PanelRound panel_sombra;
     // End of variables declaration//GEN-END:variables
 }

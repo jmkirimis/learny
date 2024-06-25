@@ -70,9 +70,9 @@ public class ProgressBar extends JProgressBar {
             int amountFull = getAmountFull(insets, barRectWidth, barRectHeight);
 
             // Criar o gradiente de pintura
-            Color startColor = azul;
-            Color endColor = vermelho;
-            GradientPaint gradientPaint = new GradientPaint(0, 0, startColor, width, 0, endColor);
+            Color startColor = vermelho;
+            Color endColor = azul;
+            GradientPaint gradientPaint = new GradientPaint(0, 0, startColor, 0, height, endColor);
 
             // Preencher a barra de progresso com gradiente
             g2d.setPaint(gradientPaint);

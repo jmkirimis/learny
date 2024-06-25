@@ -82,7 +82,6 @@ public class FEditarPerfil extends javax.swing.JFrame {
 
         customScrollPane1 = new Visualizacao.CustomScrollPane();
         panelGradiente = new Visualizacao.PanelGradiente();
-        panelPretoOpac1 = new Visualizacao.PanelPretoOpac();
         jLabel1 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         panel_foto_editar = new Visualizacao.PanelRoundPerfil();
@@ -108,9 +107,9 @@ public class FEditarPerfil extends javax.swing.JFrame {
 
         panelGradiente.setBackground(new java.awt.Color(204, 204, 204));
         panelGradiente.setGradientDirection(Visualizacao.PanelGradiente.GradientDirection.VERTICAL);
+        panelGradiente.setGradientEndColor(new java.awt.Color(74, 133, 162));
+        panelGradiente.setGradientStartColor(new java.awt.Color(153, 62, 72));
         panelGradiente.setPreferredSize(new java.awt.Dimension(475, 834));
-
-        panelPretoOpac1.setPreferredSize(new java.awt.Dimension(475, 834));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 28)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -125,10 +124,6 @@ public class FEditarPerfil extends javax.swing.JFrame {
 
         panel_foto_editar.setBackground(new java.awt.Color(255, 255, 255));
         panel_foto_editar.setPreferredSize(new java.awt.Dimension(160, 160));
-        panel_foto_editar.setRoundBottomLeft(50);
-        panel_foto_editar.setRoundBottomRight(50);
-        panel_foto_editar.setRoundTopLeft(50);
-        panel_foto_editar.setRoundTopRight(50);
 
         javax.swing.GroupLayout panel_foto_editarLayout = new javax.swing.GroupLayout(panel_foto_editar);
         panel_foto_editar.setLayout(panel_foto_editarLayout);
@@ -297,45 +292,44 @@ public class FEditarPerfil extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout panelPretoOpac1Layout = new javax.swing.GroupLayout(panelPretoOpac1);
-        panelPretoOpac1.setLayout(panelPretoOpac1Layout);
-        panelPretoOpac1Layout.setHorizontalGroup(
-            panelPretoOpac1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelPretoOpac1Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(panelPretoOpac1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelPretoOpac1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelGradienteLayout = new javax.swing.GroupLayout(panelGradiente);
+        panelGradiente.setLayout(panelGradienteLayout);
+        panelGradienteLayout.setHorizontalGroup(
+            panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGradienteLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelGradienteLayout.createSequentialGroup()
                         .addComponent(panelRound6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
                         .addComponent(jLabel9))
                     .addComponent(panelRound7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelRound8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelRound9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelPretoOpac1Layout.createSequentialGroup()
+                    .addGroup(panelGradienteLayout.createSequentialGroup()
                         .addGap(102, 102, 102)
                         .addComponent(panel_foto_editar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelPretoOpac1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(panelPretoOpac1Layout.createSequentialGroup()
+                    .addGroup(panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(panelGradienteLayout.createSequentialGroup()
                             .addComponent(jLabel1)
                             .addGap(75, 75, 75)
                             .addComponent(jLabel2))
                         .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
-        panelPretoOpac1Layout.setVerticalGroup(
-            panelPretoOpac1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelPretoOpac1Layout.createSequentialGroup()
-                .addGroup(panelPretoOpac1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelPretoOpac1Layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
+        panelGradienteLayout.setVerticalGroup(
+            panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGradienteLayout.createSequentialGroup()
+                .addGap(67, 67, 67)
+                .addGroup(panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelGradienteLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
                         .addComponent(jLabel1))
-                    .addGroup(panelPretoOpac1Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel2)))
+                    .addComponent(jLabel2))
                 .addGap(45, 45, 45)
-                .addGroup(panelPretoOpac1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(panel_foto_editar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49)
@@ -347,21 +341,10 @@ public class FEditarPerfil extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addComponent(panelRound9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
-                .addGroup(panelPretoOpac1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelRound6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(85, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout panelGradienteLayout = new javax.swing.GroupLayout(panelGradiente);
-        panelGradiente.setLayout(panelGradienteLayout);
-        panelGradienteLayout.setHorizontalGroup(
-            panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPretoOpac1, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
-        );
-        panelGradienteLayout.setVerticalGroup(
-            panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPretoOpac1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         customScrollPane1.setViewportView(panelGradiente);
@@ -492,7 +475,6 @@ public class FEditarPerfil extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private Visualizacao.PanelGradiente panelGradiente;
-    private Visualizacao.PanelPretoOpac panelPretoOpac1;
     private Visualizacao.PanelRound panelRound1;
     private Visualizacao.PanelRound panelRound2;
     private Visualizacao.PanelRound panelRound6;
