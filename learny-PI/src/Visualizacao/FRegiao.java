@@ -867,7 +867,7 @@ public class FRegiao extends javax.swing.JFrame {
         itemSelectionPanel.setRadius(120);
         itemSelectionPanel.setBorderWidth(5);
         itemSelectionPanel.setBackground(Color.WHITE);
-        itemSelectionPanel.setPreferredSize(new Dimension(440, 130));
+        itemSelectionPanel.setPreferredSize(new Dimension(440, 135));
 
         String verConquistas = "select c.nomeConquista, c.iconMedalha from alunosXconquistas axc "
                 + "join conquistas c using(idConquista) "
@@ -927,7 +927,7 @@ public class FRegiao extends javax.swing.JFrame {
             // Calcula a posição X para centralizar horizontalmente
             int x = (screenSize.width - dialogSize.width) / 2;
             // Define a posição Y para a parte superior da tela (ajuste conforme necessário)
-            int y = 245; // Exemplo: 50 pixels a partir do topo da tela
+            int y = 240; // Exemplo: 50 pixels a partir do topo da tela
 
             // Define a localização do diálogo
             dialog.setLocation(x, y);

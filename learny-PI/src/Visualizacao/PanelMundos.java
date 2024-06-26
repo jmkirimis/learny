@@ -30,11 +30,11 @@ public class PanelMundos extends javax.swing.JPanel {
 
         lbl_mundo_img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/mundo-natureza2.png"))); // NOI18N
 
-        lbl_mundo.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
+        lbl_mundo.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         lbl_mundo.setForeground(new java.awt.Color(72, 72, 72));
         lbl_mundo.setText("Mundo - 1");
 
-        lbl_tipo_mundo.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
+        lbl_tipo_mundo.setFont(new java.awt.Font("Tahoma", 1, 26)); // NOI18N
         lbl_tipo_mundo.setForeground(new java.awt.Color(72, 72, 72));
         lbl_tipo_mundo.setText("Mundo Natural");
         lbl_tipo_mundo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -60,7 +60,7 @@ public class PanelMundos extends javax.swing.JPanel {
                 .addComponent(lbl_tipo_mundo)
                 .addGap(34, 34, 34)
                 .addComponent(lbl_mundo_img)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

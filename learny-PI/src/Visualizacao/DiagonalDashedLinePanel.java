@@ -7,12 +7,16 @@ package Visualizacao;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.Line2D;
 
 public class DiagonalDashedLinePanel extends JPanel {
 
     public static final int DIRECTION_DESCENDING = 0;
     public static final int DIRECTION_ASCENDING = 1;
+    public static final int DIRECTION_HORIZONTAL = 2;
+    public static final int DIRECTION_VERTICAL = 3;
 
     private float[] dashPattern;
     private float strokeWidth;
@@ -45,17 +49,32 @@ public class DiagonalDashedLinePanel extends JPanel {
         int height = getHeight();
 
         // Calcular os pontos finais da linha
-        int x1, y1, x2, y2;
-        if (direction == DIRECTION_DESCENDING) {
-            x1 = 0;
-            y1 = 0;
-            x2 = width;
-            y2 = height;
-        } else { // DIRECTION_ASCENDING
-            x1 = 0;
-            y1 = height;
-            x2 = width;
-            y2 = 0;
+        int x1 = 0, y1 = 0, x2 = 0, y2 = 0;
+        switch (direction) {
+            case DIRECTION_DESCENDING:
+                x1 = 0;
+                y1 = 0;
+                x2 = width;
+                y2 = height;
+                break;
+            case DIRECTION_ASCENDING:
+                x1 = 0;
+                y1 = height;
+                x2 = width;
+                y2 = 0;
+                break;
+            case DIRECTION_HORIZONTAL:
+                x1 = 0;
+                y1 = height / 2;
+                x2 = width;
+                y2 = height / 2;
+                break;
+            case DIRECTION_VERTICAL:
+                x1 = width / 2;
+                y1 = 0;
+                x2 = width / 2;
+                y2 = height;
+                break;
         }
 
         g2d.draw(new Line2D.Float(x1, y1, x2, y2));

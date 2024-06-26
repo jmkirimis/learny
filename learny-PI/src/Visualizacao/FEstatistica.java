@@ -125,8 +125,8 @@ public class FEstatistica extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         panelRound4 = new Visualizacao.PanelRound();
         jLabel14 = new javax.swing.JLabel();
-        customSeparator1 = new Visualizacao.CustomSeparator();
-        customSeparator2 = new Visualizacao.CustomSeparator();
+        diagonalDashedLinePanel1 = new Visualizacao.DiagonalDashedLinePanel();
+        diagonalDashedLinePanel2 = new Visualizacao.DiagonalDashedLinePanel();
         panel_conquistas = new Visualizacao.PanelRound();
         jLabel7 = new javax.swing.JLabel();
         conquista4 = new Visualizacao.PanelRound();
@@ -283,51 +283,77 @@ public class FEstatistica extends javax.swing.JFrame {
                 .addGap(11, 11, 11))
         );
 
-        customSeparator1.setForeground(new java.awt.Color(255, 255, 255));
-        customSeparator1.setColor(new java.awt.Color(128, 210, 91));
-        customSeparator1.setDashed(true);
-        customSeparator1.setThickness(5);
+        diagonalDashedLinePanel1.setBackground(new java.awt.Color(255, 255, 255));
+        diagonalDashedLinePanel1.setDirection(2);
+        diagonalDashedLinePanel1.setLineColor(new java.awt.Color(128, 210, 91));
+        diagonalDashedLinePanel1.setStrokeWidth(5.0F);
 
-        customSeparator2.setForeground(new java.awt.Color(255, 255, 255));
-        customSeparator2.setColor(new java.awt.Color(128, 210, 91));
-        customSeparator2.setDashed(true);
-        customSeparator2.setThickness(5);
+        javax.swing.GroupLayout diagonalDashedLinePanel1Layout = new javax.swing.GroupLayout(diagonalDashedLinePanel1);
+        diagonalDashedLinePanel1.setLayout(diagonalDashedLinePanel1Layout);
+        diagonalDashedLinePanel1Layout.setHorizontalGroup(
+            diagonalDashedLinePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 51, Short.MAX_VALUE)
+        );
+        diagonalDashedLinePanel1Layout.setVerticalGroup(
+            diagonalDashedLinePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 12, Short.MAX_VALUE)
+        );
+
+        diagonalDashedLinePanel2.setBackground(new java.awt.Color(255, 255, 255));
+        diagonalDashedLinePanel2.setDirection(2);
+        diagonalDashedLinePanel2.setLineColor(new java.awt.Color(128, 210, 91));
+        diagonalDashedLinePanel2.setStrokeWidth(5.0F);
+
+        javax.swing.GroupLayout diagonalDashedLinePanel2Layout = new javax.swing.GroupLayout(diagonalDashedLinePanel2);
+        diagonalDashedLinePanel2.setLayout(diagonalDashedLinePanel2Layout);
+        diagonalDashedLinePanel2Layout.setHorizontalGroup(
+            diagonalDashedLinePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 55, Short.MAX_VALUE)
+        );
+        diagonalDashedLinePanel2Layout.setVerticalGroup(
+            diagonalDashedLinePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 12, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
         panelRound3Layout.setHorizontalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound3Layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelRound3Layout.createSequentialGroup()
                 .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound3Layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(jLabel6))
+                        .addGap(87, 87, 87)
+                        .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRound3Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(customSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(customSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(40, 40, 40))
+                        .addGap(26, 26, 26)
+                        .addComponent(diagonalDashedLinePanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(diagonalDashedLinePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelRound3Layout.setVerticalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel6)
-                .addGap(18, 18, 18)
                 .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelRound3Layout.createSequentialGroup()
-                            .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(11, 11, 11))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
-                            .addComponent(customSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(30, 30, 30)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
-                        .addComponent(customSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31))))
+                        .addGap(7, 7, 7)
+                        .addComponent(diagonalDashedLinePanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33))
+                    .addGroup(panelRound3Layout.createSequentialGroup()
+                        .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelRound3Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelRound3Layout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addComponent(diagonalDashedLinePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(11, 11, 11))))
         );
 
         panel_conquistas.setBackground(new java.awt.Color(255, 255, 255));
@@ -353,7 +379,7 @@ public class FEstatistica extends javax.swing.JFrame {
             }
         });
 
-        lbl_nome2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lbl_nome2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lbl_nome2.setForeground(new java.awt.Color(255, 255, 255));
         lbl_nome2.setText("A todo o vapor!");
 
@@ -432,7 +458,7 @@ public class FEstatistica extends javax.swing.JFrame {
             }
         });
 
-        lbl_nome1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lbl_nome1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lbl_nome1.setForeground(new java.awt.Color(255, 255, 255));
         lbl_nome1.setText("Iniciando!");
 
@@ -476,9 +502,9 @@ public class FEstatistica extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(jLabel11)
                 .addGap(26, 26, 26)
-                .addGroup(conquista6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_nome1)
-                    .addComponent(lbl_desc1))
+                .addGroup(conquista6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lbl_desc1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbl_nome1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(46, 46, 46)
                 .addComponent(panel_check1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
@@ -488,16 +514,18 @@ public class FEstatistica extends javax.swing.JFrame {
             .addGroup(conquista6Layout.createSequentialGroup()
                 .addGap(11, 11, 11)
                 .addGroup(conquista6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, conquista6Layout.createSequentialGroup()
+                        .addComponent(lbl_nome1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbl_desc1)
+                        .addGap(18, 18, 18))
                     .addGroup(conquista6Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addGroup(conquista6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(panel_check1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(conquista6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
                             .addGroup(conquista6Layout.createSequentialGroup()
-                                .addComponent(lbl_nome1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbl_desc1)))))
-                .addGap(11, 11, 11))
+                                .addGap(14, 14, 14)
+                                .addComponent(panel_check1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(11, 11, 11))))
         );
 
         conquista7.setBackground(new java.awt.Color(83, 194, 242));
@@ -511,7 +539,7 @@ public class FEstatistica extends javax.swing.JFrame {
             }
         });
 
-        lbl_nome3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lbl_nome3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lbl_nome3.setForeground(new java.awt.Color(255, 255, 255));
         lbl_nome3.setText("Mundo concluído!");
 
@@ -556,9 +584,9 @@ public class FEstatistica extends javax.swing.JFrame {
                 .addComponent(jLabel12)
                 .addGap(26, 26, 26)
                 .addGroup(conquista7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_nome3)
-                    .addComponent(lbl_desc3))
-                .addGap(34, 34, 34)
+                    .addComponent(lbl_desc3)
+                    .addComponent(lbl_nome3, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panel_check3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
         );
@@ -567,16 +595,18 @@ public class FEstatistica extends javax.swing.JFrame {
             .addGroup(conquista7Layout.createSequentialGroup()
                 .addGap(11, 11, 11)
                 .addGroup(conquista7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, conquista7Layout.createSequentialGroup()
+                        .addComponent(lbl_nome3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbl_desc3)
+                        .addGap(17, 17, 17))
                     .addGroup(conquista7Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addGroup(conquista7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(panel_check3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(conquista7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
                             .addGroup(conquista7Layout.createSequentialGroup()
-                                .addComponent(lbl_nome3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbl_desc3)))))
-                .addGap(11, 11, 11))
+                                .addGap(14, 14, 14)
+                                .addComponent(panel_check3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(11, 11, 11))))
         );
 
         javax.swing.GroupLayout panel_conquistasLayout = new javax.swing.GroupLayout(panel_conquistas);
@@ -615,21 +645,23 @@ public class FEstatistica extends javax.swing.JFrame {
         panelGradienteLayout.setHorizontalGroup(
             panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGradienteLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGradienteLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)
-                        .addGap(125, 125, 125))
-                    .addGroup(panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel2)
+                .addGroup(panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelGradienteLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
                         .addGroup(panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelGradienteLayout.createSequentialGroup()
                                 .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(panel_conquistas, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(panel_conquistas, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelGradienteLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGradienteLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(125, 125, 125))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
         panelGradienteLayout.setVerticalGroup(
@@ -733,8 +765,8 @@ public class FEstatistica extends javax.swing.JFrame {
     private Visualizacao.PanelRound conquista6;
     private Visualizacao.PanelRound conquista7;
     private Visualizacao.CustomScrollPane customScrollPane1;
-    private Visualizacao.CustomSeparator customSeparator1;
-    private Visualizacao.CustomSeparator customSeparator2;
+    private Visualizacao.DiagonalDashedLinePanel diagonalDashedLinePanel1;
+    private Visualizacao.DiagonalDashedLinePanel diagonalDashedLinePanel2;
     private javax.swing.JLabel iconCheck;
     private javax.swing.JLabel iconCheck2;
     private javax.swing.JLabel iconCheck3;

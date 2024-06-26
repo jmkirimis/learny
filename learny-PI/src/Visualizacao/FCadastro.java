@@ -51,7 +51,7 @@ public class FCadastro extends javax.swing.JFrame {
         panelRound5 = new Visualizacao.PanelRound();
         txt_email = new Visualizacao.PlaceholderTextField();
         panelRound6 = new Visualizacao.PanelRound();
-        txt_dataNasc = new Visualizacao.PlaceholderTextField();
+        txt_dataNasc = new Visualizacao.PlaceholderData();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
@@ -242,7 +242,6 @@ public class FCadastro extends javax.swing.JFrame {
         txt_dataNasc.setBorder(null);
         txt_dataNasc.setText("Data de nascimento");
         txt_dataNasc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txt_dataNasc.setPlaceholder("Data de nascimento");
 
         javax.swing.GroupLayout panelRound6Layout = new javax.swing.GroupLayout(panelRound6);
         panelRound6.setLayout(panelRound6Layout);
@@ -455,7 +454,7 @@ public class FCadastro extends javax.swing.JFrame {
     private Visualizacao.PanelRound panelRound6;
     private Visualizacao.CustomScrollPane panelScrollCadastro;
     private Visualizacao.PanelRoundPerfil panel_foto_cadastro;
-    private Visualizacao.PlaceholderTextField txt_dataNasc;
+    private Visualizacao.PlaceholderData txt_dataNasc;
     private Visualizacao.PlaceholderTextField txt_email;
     private Visualizacao.PlaceholderTextField txt_nome;
     private Visualizacao.PlaceholderPasswordField txt_senha;

@@ -89,8 +89,6 @@ public class FEditarPerfil extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         panelRound2 = new Visualizacao.PanelRound();
         txt_usuario = new javax.swing.JTextField();
-        panelRound6 = new Visualizacao.PanelRound();
-        txt_dataNasc = new javax.swing.JTextField();
         panelRound7 = new Visualizacao.PanelRound();
         txt_senha = new javax.swing.JPasswordField();
         panelRound8 = new Visualizacao.PanelRound();
@@ -98,6 +96,8 @@ public class FEditarPerfil extends javax.swing.JFrame {
         panelRound9 = new Visualizacao.PanelRound();
         txt_email = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        panelRound6 = new Visualizacao.PanelRound();
+        txt_dataNasc = new Visualizacao.TextData();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
@@ -191,30 +191,6 @@ public class FEditarPerfil extends javax.swing.JFrame {
             .addComponent(txt_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        panelRound6.setBackground(new java.awt.Color(255, 255, 255));
-        panelRound6.setRoundBottomLeft(40);
-        panelRound6.setRoundBottomRight(40);
-        panelRound6.setRoundTopLeft(40);
-        panelRound6.setRoundTopRight(40);
-
-        txt_dataNasc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txt_dataNasc.setForeground(new java.awt.Color(72, 72, 72));
-        txt_dataNasc.setBorder(null);
-
-        javax.swing.GroupLayout panelRound6Layout = new javax.swing.GroupLayout(panelRound6);
-        panelRound6.setLayout(panelRound6Layout);
-        panelRound6Layout.setHorizontalGroup(
-            panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound6Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(txt_dataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
-        panelRound6Layout.setVerticalGroup(
-            panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txt_dataNasc, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-        );
-
         panelRound7.setBackground(new java.awt.Color(255, 255, 255));
         panelRound7.setRoundBottomLeft(40);
         panelRound7.setRoundBottomRight(40);
@@ -292,6 +268,30 @@ public class FEditarPerfil extends javax.swing.JFrame {
             }
         });
 
+        panelRound6.setBackground(new java.awt.Color(255, 255, 255));
+        panelRound6.setRoundBottomLeft(40);
+        panelRound6.setRoundBottomRight(40);
+        panelRound6.setRoundTopLeft(40);
+        panelRound6.setRoundTopRight(40);
+
+        txt_dataNasc.setBorder(null);
+        txt_dataNasc.setForeground(new java.awt.Color(72, 72, 72));
+        txt_dataNasc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        javax.swing.GroupLayout panelRound6Layout = new javax.swing.GroupLayout(panelRound6);
+        panelRound6.setLayout(panelRound6Layout);
+        panelRound6Layout.setHorizontalGroup(
+            panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound6Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(txt_dataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+        panelRound6Layout.setVerticalGroup(
+            panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txt_dataNasc, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout panelGradienteLayout = new javax.swing.GroupLayout(panelGradiente);
         panelGradiente.setLayout(panelGradienteLayout);
         panelGradienteLayout.setHorizontalGroup(
@@ -341,9 +341,9 @@ public class FEditarPerfil extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addComponent(panelRound9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
-                .addGroup(panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelRound6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(panelGradienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel9)
+                    .addComponent(panelRound6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
 
@@ -482,7 +482,7 @@ public class FEditarPerfil extends javax.swing.JFrame {
     private Visualizacao.PanelRound panelRound8;
     private Visualizacao.PanelRound panelRound9;
     private Visualizacao.PanelRoundPerfil panel_foto_editar;
-    private javax.swing.JTextField txt_dataNasc;
+    private Visualizacao.TextData txt_dataNasc;
     private javax.swing.JTextField txt_email;
     private javax.swing.JTextField txt_nome;
     private javax.swing.JPasswordField txt_senha;

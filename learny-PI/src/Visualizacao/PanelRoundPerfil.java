@@ -187,7 +187,7 @@ public class PanelRoundPerfil extends JPanel {
 
             repaint();
         } catch (IOException e) {
-            e.printStackTrace();
+            
         }
     }
 }
