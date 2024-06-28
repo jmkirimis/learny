@@ -1,4 +1,3 @@
-
 package Visualizacao;
 
 import Controle.Conexao;
@@ -28,9 +27,14 @@ public class FPerfil extends NavegacaoFormulario {
         alunoLogado = Session.getInstance().getAlunoLogado();
         String nome = alunoLogado.getNome();
         double pontos = alunoLogado.getPontosTotais();
-        int nivel = (int) (pontos / 300);
-        double progressoNivel = pontos % 300;
+        int baseXP = 100;
+        double fator = 1.5;
+        int nivel = (int) (Math.log(pontos / baseXP) / Math.log(fator));
+        double xpProximoNivel = baseXP * Math.pow(fator, nivel + 1);
+        double xpNivelAtual = baseXP * Math.pow(fator, nivel);
+        double progressoNivel = pontos - xpNivelAtual;
         String foto = alunoLogado.getFoto();
+        barra_nivel.setMaximum((int) (xpProximoNivel - xpNivelAtual));
         barra_nivel.setValue((int) progressoNivel);
         lbl_nome_perfil.setText(nome);
         lbl_anos.setText(Integer.toString(nivel));
@@ -43,18 +47,19 @@ public class FPerfil extends NavegacaoFormulario {
         notificacoes.setVisible(true);
         this.setVisible(false);
     }
-    
+
     private void abrirRanking() {
         FRanking ranking = new FRanking(this);
         ranking.setVisible(true);
         this.setVisible(false);
     }
-    
+
     private void abrirEstatistica() {
         FEstatistica estatisticas = new FEstatistica(this);
         estatisticas.setVisible(true);
         this.setVisible(false);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

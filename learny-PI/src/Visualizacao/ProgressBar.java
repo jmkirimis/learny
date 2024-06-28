@@ -28,7 +28,6 @@ public class ProgressBar extends JProgressBar {
 
         // Definir o intervalo personalizado de 0 a 300
         setMinimum(0);
-        setMaximum(300);
     }
 
     public Color getColorString() {
@@ -42,7 +41,7 @@ public class ProgressBar extends JProgressBar {
     @Override
     public String getString() {
         // Retornar o valor atual com o prefixo "exp: "
-        return "exp: " + getValue();
+        return "exp: " + getValue() + " / " + getMaximum();
     }
 
     class RoundedProgressBarUI extends BasicProgressBarUI {
