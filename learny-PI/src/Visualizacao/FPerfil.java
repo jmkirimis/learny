@@ -29,9 +29,22 @@ public class FPerfil extends NavegacaoFormulario {
         double pontos = alunoLogado.getPontosTotais();
         int baseXP = 100;
         double fator = 1.5;
-        int nivel = (int) (Math.log(pontos / baseXP) / Math.log(fator));
-        double xpProximoNivel = baseXP * Math.pow(fator, nivel + 1);
-        double xpNivelAtual = baseXP * Math.pow(fator, nivel);
+
+        // Calcular o nível e o progresso usando uma abordagem diferente para o nível 0
+        int nivel = 0;
+        double xpNivelAtual = 0;
+        double xpProximoNivel = baseXP;
+
+        while (pontos >= xpProximoNivel) {
+            nivel++;
+            xpNivelAtual = xpProximoNivel;
+            if (nivel == 1) {
+                xpProximoNivel = xpNivelAtual + 106; // Aumentar um pouco mais que 100 para o nível 1
+            } else {
+                xpProximoNivel = baseXP * Math.pow(fator, nivel - 1);
+            }
+        }
+
         double progressoNivel = pontos - xpNivelAtual;
         String foto = alunoLogado.getFoto();
         barra_nivel.setMaximum((int) (xpProximoNivel - xpNivelAtual));
