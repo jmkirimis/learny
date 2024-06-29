@@ -27,27 +27,24 @@ public class FPerfil extends NavegacaoFormulario {
         alunoLogado = Session.getInstance().getAlunoLogado();
         String nome = alunoLogado.getNome();
         double pontos = alunoLogado.getPontosTotais();
-        int baseXP = 100;
-        double fator = 1.5;
+        int xpInicial = 100;
+        double fatorCrescimento = 1.25; // Ajustar este valor para controlar a taxa de crescimento
+        int incrementoFixo = 10; // Ajustar este valor para controlar o incremento fixo por nível
 
-        // Calcular o nível e o progresso usando uma abordagem diferente para o nível 0
+        // Calcula o nível do aluno com base na experiência acumulada
         int nivel = 0;
-        double xpNivelAtual = 0;
-        double xpProximoNivel = baseXP;
+        double xpNecessariaParaProximoNivel = experienciaParaNivel(nivel, xpInicial, fatorCrescimento, incrementoFixo);
+        double pontosRestantes = pontos;
 
-        while (pontos >= xpProximoNivel) {
+        while (pontosRestantes >= xpNecessariaParaProximoNivel) {
+            pontosRestantes -= xpNecessariaParaProximoNivel;
             nivel++;
-            xpNivelAtual = xpProximoNivel;
-            if (nivel == 1) {
-                xpProximoNivel = xpNivelAtual + 106; // Aumentar um pouco mais que 100 para o nível 1
-            } else {
-                xpProximoNivel = baseXP * Math.pow(fator, nivel - 1);
-            }
+            xpNecessariaParaProximoNivel = experienciaParaNivel(nivel, xpInicial, fatorCrescimento, incrementoFixo);
         }
 
-        double progressoNivel = pontos - xpNivelAtual;
+        double progressoNivel = pontosRestantes;
         String foto = alunoLogado.getFoto();
-        barra_nivel.setMaximum((int) (xpProximoNivel - xpNivelAtual));
+        barra_nivel.setMaximum((int) xpNecessariaParaProximoNivel);
         barra_nivel.setValue((int) progressoNivel);
         lbl_nome_perfil.setText(nome);
         lbl_anos.setText(Integer.toString(nivel));
@@ -55,6 +52,11 @@ public class FPerfil extends NavegacaoFormulario {
         btn_mudar_cores.setOn(true);
     }
 
+    // Método para calcular a experiência necessária para alcançar um nível específico
+    public static int experienciaParaNivel(int nivel, int xpInicial, double fatorCrescimento, int incrementoFixo) {
+        return (int) (xpInicial * Math.pow(fatorCrescimento, nivel) + incrementoFixo * nivel);
+    }
+    
     private void abrirNotificacoes() {
         FNotificacao notificacoes = new FNotificacao(this, null);
         notificacoes.setVisible(true);
