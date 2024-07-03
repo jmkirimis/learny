@@ -59,29 +59,22 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="panelRound1" alignment="1" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="panelRound2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="panelRound3" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="panel_conquistas" alignment="1" min="-2" pref="404" max="-2" attributes="0"/>
+                          <Group type="103" alignment="1" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="panelRound1" alignment="1" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="panelRound2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="panelRound3" max="32767" attributes="0"/>
                               </Group>
+                              <Component id="panel_conquistas" alignment="1" min="-2" pref="404" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="41" max="32767" attributes="0"/>
                   </Group>

@@ -44,10 +44,25 @@ public class FEstatistica extends javax.swing.JFrame {
         iconCheck3.setVisible(false);
         
         idAluno = alunoLogado.getIdAluno();
-        double pontos = alunoLogado.getPontosTotais();
-        int nivel = (int)(pontos/100);
-        double progressoNivel = pontos % 100;
+       double pontos = alunoLogado.getPontosTotais();
+        int xpInicial = 100;
+        double fatorCrescimento = 1.25; // Ajustar este valor para controlar a taxa de crescimento
+        int incrementoFixo = 10; // Ajustar este valor para controlar o incremento fixo por nível
+
+        // Calcula o nível do aluno com base na experiência acumulada
+        int nivel = 0;
+        double xpNecessariaParaProximoNivel = experienciaParaNivel(nivel, xpInicial, fatorCrescimento, incrementoFixo);
+        double pontosRestantes = pontos;
+
+        while (pontosRestantes >= xpNecessariaParaProximoNivel) {
+            pontosRestantes -= xpNecessariaParaProximoNivel;
+            nivel++;
+            xpNecessariaParaProximoNivel = experienciaParaNivel(nivel, xpInicial, fatorCrescimento, incrementoFixo);
+        }
+
+        double progressoNivel = pontosRestantes;
         String foto = alunoLogado.getFoto();
+        barra_xp.setMaximum((int) xpNecessariaParaProximoNivel);
         barra_xp.setValue((int) progressoNivel);
         int fasesConcluidas = alunoLogado.getFasesConcluidas();
         lbl_fases_concluidas.setText(Integer.toString(fasesConcluidas));
@@ -101,6 +116,10 @@ public class FEstatistica extends javax.swing.JFrame {
         }
     }
 
+     // Método para calcular a experiência necessária para alcançar um nível específico
+    public static int experienciaParaNivel(int nivel, int xpInicial, double fatorCrescimento, int incrementoFixo) {
+        return (int) (xpInicial * Math.pow(fatorCrescimento, nivel) + incrementoFixo * nivel);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
